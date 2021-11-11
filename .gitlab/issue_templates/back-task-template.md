@@ -1,10 +1,5 @@
----
-name: Back Task Template
-about: Template for a server side task
-title: '[TASK: BACK]'
-labels: Back
-assignees: ''
----
+머리말: [TASK: BACK]
+위의 머리말을 사용하고 삭제해주세요.
 
 # Task
 

@@ -1,10 +1,5 @@
----
-name: Feature template
-about: Template to create Feature-type issues
-title: '[FEATURE]'
-labels: feature
-assignees: ''
----
+머리말: [FEATURE]
+위의 머리말을 사용하고 삭제해주세요.
 
 # Feature
 

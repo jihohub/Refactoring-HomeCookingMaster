@@ -1,10 +1,5 @@
----
-name: Front Task Template
-about: Task issue for FE work
-title: '[TASK: FRONT]'
-labels: Front
-assignees: ''
----
+머리말: [TASK: FRONT]
+위의 머리말을 사용하고 삭제해주세요.
 
 # Task
 

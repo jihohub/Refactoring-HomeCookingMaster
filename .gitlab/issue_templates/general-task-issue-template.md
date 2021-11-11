@@ -1,10 +1,5 @@
----
-name: General Task Issue Template
-about: Template to create a new Task type issue
-title: '[TASK]'
-labels: task
-assignees: ''
----
+머리말: [TASK]
+위의 머리말을 사용하고 삭제해주세요.
 
 # Task
 
