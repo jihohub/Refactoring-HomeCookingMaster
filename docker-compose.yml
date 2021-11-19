@@ -1,13 +1,11 @@
-# 파일 규격 버전
 version: '3'
-# 이 항목 밑에 실행하려는 컨테이너 들을 정의
+
 services:
-  # 서비스 명
-  db:
+  database:
     # 사용할 이미지
-    image: ecac195d15af
+    image: mysql
     # 컨테이너 이름 설정
-    container_name: jason-mysql
+    container_name: HCMK-mysql
     # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
     ports:
       - '3306:3306'
@@ -19,6 +17,22 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --secure-file-priv=/app/data
     volumes:
       # -v 옵션 (다렉토리 마운트 설정)
-      - ./db/data:/var/lib/mysql
+      - ./database/data:/var/lib/mysql
+      - ./data:/app/data
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      # venv 파일은 참초하지 않도록 세팅 (본인 로컬에 맞게 절대경로로 세팅 필요)
+      - /Users/hanbyul/Desktop/Elice AI Track/2차 팀 프로젝트/Home Cook Master/server/venv
+      - ./server:/server
+    ports:
+      - 5000:5000
+    depends_on:
+      - HCMK-mysql
