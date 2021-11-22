@@ -8,7 +8,7 @@ services:
     container_name: HCMK-mysql
     # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
     ports:
-      - '3306:3306'
+      - '3307:3307'
     # -e 옵션
     environment:
       # MYSQL 패스워드 설정 옵션
@@ -30,7 +30,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       # venv 파일은 참초하지 않도록 세팅 (본인 로컬에 맞게 절대경로로 세팅 필요)
-      - /Users/hanbyul/Desktop/Elice AI Track/2차 팀 프로젝트/Home Cook Master/server/venv
+      # - C:\\Users\\gmlwo\\Desktop\\곰돌희\\취뽀\\elice\\프로젝트\\3. 인공지능 프로젝트\\project-template\\server\\venv
       - ./server:/server
     ports:
       - 5000:5000
