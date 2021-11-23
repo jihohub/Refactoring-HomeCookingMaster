@@ -14,10 +14,10 @@ class Recipe(db.model):
     '''
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     name = db.Column(db.String(128), nullable=False)
-    like = db.Column(db.Integer, nullable=True)
-    servings = db.Column(db.String(32), nullable=True)
-    difficulty = db.Column(db.String(32), nullable=True)
-    cooking_time = db.Column(db.String(32), nullable=True)
+    like = db.Column(db.Integer, nullable=False)
+    servings = db.Column(db.String(32), nullable=False)
+    difficulty = db.Column(db.String(32), nullable=False)
+    cooking_time = db.Column(db.String(32), nullable=False)
     food_id = db.Column(db.Integer, db.ForeignKey('food.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
 
     def __init__(self, name, like, servings, difficulty, cooking_time, food_id):

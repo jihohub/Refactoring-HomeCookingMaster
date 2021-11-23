@@ -18,9 +18,9 @@ class User(db.Model):
     email = db.Column(db.String(256), nullable=False, unique=True)
     password = db.Column(db.String(64), nullable=False)
     name = db.Column(db.String(32), nullable=False)
-    nickname = db.Column(db.String(128), nullable=False)
-    img = db.Column(db.String(1024), nullable=False)
-    intro = db.Column(db.Text, nullable=False)
+    nickname = db.Column(db.String(128))
+    img = db.Column(db.String(1024))
+    intro = db.Column(db.Text)
     exp = db.Column(db.Integer, nullable=False)
 
     def __init__(self, email, password, name, nickname, img, intro):

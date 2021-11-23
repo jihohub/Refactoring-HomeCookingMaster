@@ -11,7 +11,7 @@ class RecipeIngredient(db.model):
     '''
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     name = db.Column(db.String(64), nullable=False)
-    amount = db.Column(db.String(64), nullable=True)
+    amount = db.Column(db.String(64))
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
 
     def __init__(self, name, amount, recipe_id):
