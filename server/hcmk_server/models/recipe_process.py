@@ -13,7 +13,7 @@ class RecipeProcess(db.model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     recipe = db.Column(db.Text, nullable=False)
     step = db.Column(db.Integer, nullable=False)
-    img = db.Column(db.String(1024), nullable=True)
+    img = db.Column(db.String(1024))
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
 
     def __init__(self, recipe, step, img, recipe_id):
