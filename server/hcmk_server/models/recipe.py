@@ -18,7 +18,7 @@ class Recipe(db.Model):
     name = db.Column(db.String(128), nullable=False)
     img = db.Column(db.String(1024))
     views = db.Column(db.Integer, nullable=False)
-    like = db.Column(db.Integer, nullable=False)
+    likes = db.Column(db.Integer, nullable=False)
     servings = db.Column(db.String(32), nullable=False)
     difficulty = db.Column(db.String(32), nullable=False)
     cooking_time = db.Column(db.String(32), nullable=False)
@@ -31,14 +31,14 @@ class Recipe(db.Model):
         self.difficulty = difficulty
         self.cooking_time = cooking_time
         self.food_id = food_id
-        self.views = 0
-        self.like = 0
+        # self.views = 0
+        # self.like = 0
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
-            "like": self.like,
+            # "like": self.like,
             "servings": self.servings,
             "difficulty": self.difficulty,
             "cooking_time": self.cooking_time,

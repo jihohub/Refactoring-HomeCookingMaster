@@ -28,52 +28,6 @@ for key, val in env_variables.items():
     else:
         print(f"{key} variable loaded.")
 
-# # db 접속
-# conn = pymysql.connect(
-#     host=env_variables["DB_HOST"],
-#     user=env_variables["DB_USER"],
-#     password=env_variables["DB_PASSWORD"],
-#     db=env_variables["DB_NAME"],
-#     charset="utf8",
-# )
-# curs = conn.cursor()
-
-# # 파일 불러오기 
-# file_path = '../csv_file/food_label_data.csv'
-# f = open(file_path, "r", encoding="UTF-8")
-# csv_data = csv.reader(f)
-# header = next(csv_data)
-
-# # csv to mysql
-# for row in csv_data:
-#     name = row[2]
-#     category_l = row[0]
-#     category_m = row[1]
-#     category_s = row[2]
-#     sql = """insert into food (
-#         name, category_l, category_m, category_s
-#         )
-#         values (%s, %s, %s, %s)"""
-#     curs.execute(
-#         sql,
-#         [
-#             name,
-#             category_l,
-#             category_m,
-#             category_s,
-#         ],
-#     )
-
-# # db 저장
-# conn.commit()
-# # 파일 닫기
-# f.close()
-
-# # db 접속 해제
-# conn.close()
-
-# print("Added food data.")
-
 # db 접속
 conn = pymysql.connect(
     host=env_variables["DB_HOST"],
@@ -84,93 +38,155 @@ conn = pymysql.connect(
 )
 curs = conn.cursor()
 
+'''
+food db 넣기
+'''
 
-sql = """insert into recipe (name, views, like, servings, difficulty, cooking_time, food_id )
-        values (%s, %s, %s, %s, %s, %s, %s)"""
-curs.execute(sql, ['콩밥', 0,0,'1인분', '어려움','2시간이내', 1])
-# # recipe db 넣기
-# # 파일 불러오기 
-# file_path = '../csv_file/test.csv'
-# f = open(file_path, "r", encoding="UTF-8")
-# csv_data = csv.reader(f)
-# header = next(csv_data)
+# 파일 불러오기 
+file_path = '../csv_file/food_label_data.csv'
+f = open(file_path, "r", encoding="UTF-8")
+csv_data = csv.reader(f)
+header = next(csv_data)
 
-# # csv to mysql
-# for row in csv_data:
-#     name = row[0]
-#     views = row[1]
-#     like = row[2]
-#     servings = row[3]
-#     difficulty = row[4]
-#     cooking_time = row[5]
-#     food_id = row[6]
-#     sql = """insert into recipe ( 
-#         name, views, like, servings, difficulty, cooking_time, food_id
-#         )
-#         values (%s, %s, %s, %s, %s, %s, %s)"""
-#     curs.execute(
-#         sql,
-#         [
-#             name,
-#             views,
-#             like,
-#             servings,
-#             difficulty,
-#             cooking_time,
-#             food_id
-#         ],
-#     )
+# csv to mysql
+for row in csv_data:
+    name = row[2]
+    category_l = row[0]
+    category_m = row[1]
+    category_s = row[2]
+    sql = """insert into food (
+        name, category_l, category_m, category_s
+        )
+        values (%s, %s, %s, %s)"""
+    curs.execute(
+        sql,
+        [
+            name,
+            category_l,
+            category_m,
+            category_s,
+        ],
+    )
 
 # db 저장
 conn.commit()
 # 파일 닫기
-# f.close()
+f.close()
 
-# db 접속 해제
-conn.close()
+print("Added food data.")
+
+'''
+recipe db 넣기
+'''
+# 파일 불러오기 
+file_path = '../csv_file/recipe_result_211124.csv'
+f = open(file_path, "r", encoding="UTF-8")
+csv_data = csv.reader(f)
+header = next(csv_data)
+
+# csv to mysql
+for row in csv_data:
+    name = row[5]
+    views = 0
+    likes = 0
+    servings = row[9]
+    difficulty = row[10]
+    cooking_time = row[11]
+    food_id = row[1]
+    sql = """insert into recipe ( 
+        name, views, likes, servings, difficulty, cooking_time, food_id
+        )
+        values (%s, %s, %s, %s, %s, %s, %s)"""
+    curs.execute(
+        sql,
+        [
+            name,
+            views,
+            likes,
+            servings,
+            difficulty,
+            cooking_time,
+            food_id
+        ],
+    )
+
+# db 저장
+conn.commit()
+# 파일 닫기
+f.close()
 
 print("Added recipe data.")
 
+'''
+recipe_ingredent db 넣기
+'''
 
-# # db 접속
-# conn = pymysql.connect(
-#     host=env_variables["DB_HOST"],
-#     user=env_variables["DB_USER"],
-#     password=env_variables["DB_PASSWORD"],
-#     db=env_variables["DB_NAME"],
-#     charset="utf8",
-# )
-# curs = conn.cursor()
+# 파일 불러오기
+file_path = '../csv_file/recipe_ingredient_211124.csv'
+f = open(file_path, "r", encoding="UTF-8")
+csv_data = csv.reader(f)
+header = next(csv_data)
 
-# # 파일 불러오기
-# file_path = '../csv_file/recipe_ingredient_211123.csv'
-# f = open(file_path, "r", encoding="UTF-8")
-# csv_data = csv.reader(f)
-# header = next(csv_data)
+# csv to mysql
+for row in csv_data:
+    recipe_id = row[0]
+    name = row[1]
+    amount = row[2]
+    sql = """insert into recipe_ingredent (
+        name, amount, recipe_id
+        )
+        values (%s, %s, %s)"""
+    curs.execute(
+        sql,
+        [
+            name,
+            amount,
+            recipe_id,
+        ],
+    )
 
-# # csv to mysql
-# for row in csv_data:
-#     recipe_id = row[0]
-#     name = row[1]
-#     amount = row[2]
-#     sql = """insert into recipe_ingredent (
-#         name, amount, recipe_id
-#         )
-#         values (%s, %s, %s)"""
-#     curs.execute(
-#         sql,
-#         [
-#             name,
-#             amount,
-#             recipe_id,
-#         ],
-#     )
+# db 저장
+conn.commit()
+# 파일 닫기
+f.close()
 
-# # db 저장
-# conn.commit()
-# # 파일 닫기
-# f.close()
-# # db 접속 해제
-# conn.close()
+print("Added recipe_ingredent data.")
 
-# print("Added recipe_ingredent data.")
+
+'''
+recipe_ingredent db 넣기
+'''
+
+# 파일 불러오기
+file_path = '../csv_file/recipe_process_211124.csv'
+f = open(file_path, "r", encoding="UTF-8")
+csv_data = csv.reader(f)
+header = next(csv_data)
+
+# csv to mysql
+for row in csv_data:
+    recipe_id = row[0]
+    step = row[1]
+    recipe = row[2]
+    sql = """insert into recipe_process (
+        recipe_id, step, recipe
+        )
+        values (%s, %s, %s)"""
+    curs.execute(
+        sql,
+        [
+            recipe_id,
+            step,
+            recipe,
+        ],
+    )
+
+# db 저장
+conn.commit()
+# 파일 닫기
+f.close()
+
+print("Added recipe_process data.")
+
+# db 접속 해제
+conn.close()
