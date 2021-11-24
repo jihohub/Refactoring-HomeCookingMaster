@@ -3,7 +3,7 @@ from hcmk_server.db_connect import db
 '''
 댓글 DB
 '''
-class Post(db.model):
+class Post(db.Model):
     __tablename__ = "post"
     '''
     post = 댓글 내용

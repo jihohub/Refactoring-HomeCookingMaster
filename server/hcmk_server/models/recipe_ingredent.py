@@ -2,7 +2,7 @@ from hcmk_server.db_connect import db
 '''
 레시피 재료 DB
 '''
-class RecipeIngredient(db.model):
+class RecipeIngredient(db.Model):
     __tablename__ = "recipe_ingredent"
     '''
     name = 재료 이름

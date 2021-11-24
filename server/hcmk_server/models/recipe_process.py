@@ -2,7 +2,7 @@ from hcmk_server.db_connect import db
 '''
 레시피 순서 DB
 '''
-class RecipeProcess(db.model):
+class RecipeProcess(db.Model):
     __tablename__ = "recipe_process"
     '''
     recipe = 순서 별 레시피

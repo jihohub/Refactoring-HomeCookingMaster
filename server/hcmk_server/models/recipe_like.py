@@ -2,7 +2,7 @@ from hcmk_server.db_connect import db
 '''
 좋아요 한 레시피 DB
 '''
-class RecipeLike(db.model):
+class RecipeLike(db.Model):
     __tablename__ = "recipe_like"
     '''
     recipe_id = 좋아요 한 레시피 id
