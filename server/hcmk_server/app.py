@@ -35,6 +35,9 @@ def create_app():
     
     print("migration added")
 
+    # models import
+    from hcmk_server.models import user, recipe, recipe_ingredent, recipe_process, recipe_like, post, food
+
     rest_api.init_app(app)
 
     from .api.auth_api import auth_ns
