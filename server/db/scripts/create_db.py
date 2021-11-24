@@ -14,6 +14,8 @@ env_variables = {
     "DB_HOST": os.getenv("DATABASE_HOST"),
     "DB_USER": os.getenv("DATABASE_USER"),
     "DB_PASSWORD": os.getenv("DATABASE_PASSWORD"),
+    "DB_PORT" : os.getenv("DATABASE_PORT")
+
 }
 
 # Check all required env vargiiables are set.
@@ -28,6 +30,7 @@ mydb = mysql.connector.connect(
     host=env_variables["DB_HOST"],
     user=env_variables["DB_USER"],
     passwd=env_variables["DB_PASSWORD"],
+    port=env_variables["DB_PORT"],
 )
 print("connected!")
 
