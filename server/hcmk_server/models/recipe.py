@@ -32,14 +32,16 @@ class Recipe(db.Model):
         self.difficulty = difficulty
         self.cooking_time = cooking_time
         self.food_id = food_id
-        # self.views = 0
-        # self.like = 0
+        self.views = 0
+        self.likes = 0
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
-            # "like": self.like,
+            "likes": self.likes,
+            "views": self.views,
+            "img": self.img,
             "servings": self.servings,
             "difficulty": self.difficulty,
             "cooking_time": self.cooking_time,

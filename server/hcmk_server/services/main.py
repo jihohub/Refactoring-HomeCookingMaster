@@ -13,3 +13,10 @@ def get_food_list(data):
             tmp.append(recipe.to_dict())
         result[food.name] = tmp
     return result
+
+def get_ranking():
+    result = []
+    ranks = Recipe.query.order_by(Recipe.likes.desc(), Recipe.views.desc())
+    for rank in ranks:
+        result.append(rank.to_dict())
+    return result

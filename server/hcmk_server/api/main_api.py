@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
-from hcmk_server.services.main import get_food_list
+from hcmk_server.services.main import get_food_list, get_ranking
 
 main_ns = Namespace(
     name="main",
@@ -16,5 +16,14 @@ class SearchbyString(Resource):
         data =request.args["data"].strip()
         result = get_food_list(data)
         
+        return jsonify(result = result)
+
+@main_ns.route('/ranking')
+@main_ns.response(200, "success")
+@main_ns.response(500, "Failed")
+class TodayRanking(Resource):
+    def get(self):
+        """현재 가장 인기있는 음식의 레시피를 반환합니다."""
+        result = get_ranking()
         return jsonify(result = result)
 
