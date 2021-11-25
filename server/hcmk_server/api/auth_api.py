@@ -9,12 +9,26 @@ from hcmk_server.services.auth import (
     get_user_by_nickname,
 )
 
+from flask_jwt_extended import (
+    create_access_token,
+    get_jwt_identity,
+    jwt_required,
+    get_jwt,
+    decode_token,
+    create_refresh_token,
+)
+from flask_jwt_extended.utils import decode_token
+
 bcrypt = Bcrypt()
 
 auth_ns = Namespace(
     name="auth",
     description="회원정보를 관리하는 API.",
 )
+
+'''
+회원가입 API
+'''
 
 signin_fields = auth_ns.model(
     "user",
@@ -48,14 +62,18 @@ class Signup(Resource):
         # 패스워드 hash 변환
         password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
         # 필수 정보 db에 입력 및 현재 유저 정보 읽기
-        current_user = get_user_by_id(insert_user(email, password_hash, nickname, img, intro))
+        user = get_user_by_id(insert_user(email, password_hash, nickname, img, intro))
 
         result = {
-            'nickname': current_user.nickname
+            'nickname': user.nickname
         }
 
-        return result
+        return result, 200
 
+
+'''
+이메일 중복 확인 API
+'''
 
 val_email_fields = auth_ns.model(
     "validate_email",
@@ -88,6 +106,10 @@ class ValidateEmail(Resource):
 
         return result
 
+'''
+닉네임 중복 확인 API
+'''
+
 val_nickname_fields = auth_ns.model(
     "validate_nickname",
     {
@@ -118,3 +140,46 @@ class ValidateEmail(Resource):
             result = { 'overlaps': True }
 
         return result
+
+
+'''
+로그인 API
+'''
+
+login_fields = auth_ns.model(
+    "login",
+    {
+        "result": fields.String,
+        "message": fields.String,
+        "access_token" : fields.String,
+    }
+)
+
+@auth_ns.route("/login")
+@auth_ns.response(200, "success")
+@auth_ns.response(404, "이메일이 존재하지 않습니다.")
+class ValidateEmail(Resource):
+    """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
+
+    @auth_ns.doc("POST User login")
+    @auth_ns.marshal_with(login_fields)
+    def post(self):
+
+        user_data = request.json
+
+        email = user_data.get("email")
+        password = user_data.get("password")
+        
+        user = get_user_by_email(email)
+
+        if user is None:
+            return {"result": "failed", "message": "이메일이 존재하지 않습니다."}, 404
+        if not bcrypt.check_password_hash(user.password, password):
+            return {"result": "failed", "message": "비밀번호가 일치하지 않습니다."}, 404
+
+        access_token = create_access_token(
+            identity=user.id, additional_claims={"email": user.email, "nickname": user.nickname}
+        )
+        refresh_token = create_refresh_token(identity=user.id)
+
+        return {"result": "success", "message": "로그인 되었습니다." , "access_token" : access_token}, 200

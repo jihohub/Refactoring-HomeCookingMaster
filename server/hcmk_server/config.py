@@ -1,6 +1,7 @@
 import os
 import sys
 from dotenv import load_dotenv
+from datetime import timedelta
 
 # =======================================
 # Load & Check environment variables
@@ -32,3 +33,8 @@ for key, val in env_variables.items():
 print(env_variables["DB_PORT"])
 SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{env_variables['DB_USER']}:{env_variables['DB_PWD']}@{env_variables['DB_HOST']}:{env_variables['DB_PORT']}/{env_variables['DB_NAME']}"
 
+
+# jwt option
+key = "hey"
+access = timedelta(hours=1)
+refresh = timedelta(days=14)

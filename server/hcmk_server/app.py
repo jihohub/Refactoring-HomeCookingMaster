@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_restx import Api
-# from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager
 
 from hcmk_server import config
 from hcmk_server.db_connect import db
@@ -29,6 +29,13 @@ def create_app():
     # Configure Database
     app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    # JWT option setting
+    app.config["JWT_SECRET_KEY"] = config.key
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = config.access
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = config.refresh
+
+    jwt = JWTManager(app)
 
     db.init_app(app)
     Migrate().init_app(app, db)
