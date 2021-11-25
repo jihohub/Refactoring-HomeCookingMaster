@@ -1,8 +1,6 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
-
-from hcmk_server.models.food import Food, db
-from hcmk_server.models.recipe import Recipe
+from hcmk_server.services.main import get_food_list
 
 main_ns = Namespace(
     name="main",
@@ -15,17 +13,8 @@ main_ns = Namespace(
 class SearchbyString(Resource):
     def get(self):
         """검색어와 일치하는 음식의 레시피를 반환합니다."""
-        result = {}
         data =request.args["data"].strip()
+        result = get_food_list(data)
         
-        _like = "%"+data+"%"
-        foods = Food.query.filter(Food.name.like(_like)).order_by(Food.name.asc())
-
-        for food in foods:
-            recipes = Recipe.query.filter(Recipe.food_id == food.id).all()
-            tmp = []
-            for recipe in recipes:
-                tmp.append(recipe.to_dict())
-            result[food.name] = tmp
-        print(result)
         return jsonify(result = result)
+
