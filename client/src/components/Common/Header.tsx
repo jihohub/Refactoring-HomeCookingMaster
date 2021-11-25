@@ -11,11 +11,18 @@ const headerStyle = css`
     }
 
     .navbar {
-        height: 60px;
+        height: 5vh;
         display: flex;
-        line-height: 60px;
+        line-height: 5vh;
+        // height: 60px;
+        // display: flex;
+        // line-height: 60px;
         padding: 0 30px;
         box-shadow: -1px -5px 16px 8px rgb(0 0 0 / 24%);
+
+        img {
+            height: 5vh;
+        }
 
         a {
             color: #000000;
@@ -85,7 +92,7 @@ const headerStyle = css`
             position: absolute;
             text-align: center;
             width: 100%;
-            top: 120px;
+            top: 10vh;
             left: -100%;
             transition: 0.5s all;
         }
@@ -95,7 +102,7 @@ const headerStyle = css`
             position: absolute;
             text-align: center;
             width: 100%;
-            top: 60px;
+            top: 5vh;
             left: -100%;
             transition: 0.5s all;
         }

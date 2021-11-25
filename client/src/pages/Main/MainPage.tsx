@@ -2,26 +2,70 @@
 import { css, jsx } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setHideTrue, setHideFalse } from "../../components/Common/hideHeaderSlice";
+import { setImageFile, setPreviewUrl } from "../../components/Result/searchedImageSlice";
 import background from "../../assets/main.jpg";
+import { SearchBar } from "../../components/Common/SearchBar";
+
+import { Paper, Input, InputBase, Divider, IconButton, Button } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 
 const mainWrapperStyle = css`
+    .background-div {
+        width: 100%;
+        height: 100%;
+        background-image: url(${background});
+        background-size: cover;
+        // position: relative;
+    }
+
+    .search-div {
+        margin: 0 auto;
+        display: block;
+        position: relative;
+        max-width: 810px;
+
+        .form {
+            border-radius: 100px;
+        }
+
+        top: 10vh;
+
+        .paper {
+            width: 100%;
+        }
+
+        .searchButton {
+            :hover {
+                opacity: 1;
+            }
+        }
+    }
+
     .scroll-container {
-        height: 100vh;
+        height: 95vh;
         scroll-snap-type: y mandatory;
         overflow-y: scroll;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        // scrollbar-width: none;
+        // -ms-overflow-style: none;
+
+        @media screen and (max-width: 768px) {
+            height: 100vh;
+        }
     }
 
     .scroll-container::-webkit-scrollbar {
-        width: 0;
-        background-color: transparent;
+        // width: 0;
+        // background-color: transparent;
     }
 
     .page-section {
         scroll-snap-align: start;
-        height: 100vh;
+        height: 100%;
     }
 
     // .page-section {
@@ -66,64 +110,74 @@ const mainWrapperStyle = css`
     }
 `
 
+const MainSearch = () => {
+    return (
+        <div id="sec1" className="page-section">
+            <div className="background-div">
+                <div className="search-div">
+                    <SearchBar />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const Div2 = () => {
+    return (
+        <div id="sec2" className="page-section">
+            {/* <img src={background} alt="ef" /> */}
+            2
+        </div>
+    )
+}
+
+const Div3 = () => {
+    return (
+        <div id="sec3" className="page-section">
+            {/* <img src={background} alt="ef" /> */}
+            3
+        </div>
+    )
+}
+
+const Div4 = () => {
+    return (
+        <div id="sec4" className="page-section">
+            {/* <img src={background} alt="ef" /> */}
+            4
+        </div>
+    )
+}
+
+const Div5 = () => {
+    return (
+        <div id="sec5" className="page-section">
+            {/* <img src={background} alt="ef" /> */}
+            5
+        </div>
+    )
+}
+
+const Div6 = () => {
+    return (
+        <div id="sec6" className="page-section">
+            {/* <img src={background} alt="ef" /> */}
+            6
+        </div>
+    )
+}
+
 function MainPage() {
-    const dispatch = useDispatch();
-    const [touchPosition, setTouchPosition] = useState({ x: 0, y: 0 });
-
-    onwheel = (e) => {
-        if (e.deltaY > 0) {
-            dispatch(setHideTrue(true));
-        } else if (e.deltaY < 0) {
-            dispatch(setHideFalse(false));
-        }
-    }
-
-    if (window.innerWidth < 768) {
-        ontouchstart = (e) => {
-            setTouchPosition(
-                {
-                    x: e.changedTouches[0].pageX,
-                    y: e.changedTouches[0].pageY
-                }
-            )
-            console.log("1", e.changedTouches[0].pageY);
-            ontouchend = touchEnd;
-        }
-
-        const touchEnd = (e: any) => {
-            const distanceY = touchPosition.y - e.changedTouches[0].pageY;
-            console.log("2", touchPosition.y);
-            console.log("3", e.changedTouches[0].pageY);
-            if (distanceY > 0) {
-                dispatch(setHideTrue(true));
-            } else if (distanceY < 0) {
-                dispatch(setHideFalse(false));
-            }
-        }
-    }
 
     return (
         <div css={mainWrapperStyle}>
             <div className="scroll-container">
-                <div id="sec1" className="page-section">
-                    {/* <img src={background} alt="ef" /> */}
-                    1
-                </div>
-                <div id="sec2" className="page-section">
-                    2
-                </div>
-                <div id="sec3" className="page-section">
-                    3
-                </div>
-                <div id="sec4" className="page-section">
-                    4
-                </div>
-                <div id="sec5" className="page-section">
-                    5
-                </div>
-                <div id="sec6" className="page-section">
-                    6
-                </div>
+                <MainSearch />
+                <Div2 />
+                <Div3 />
+                <Div4 />
+                <Div5 />
+                <Div6 />
             </div>
         </div>
     );
