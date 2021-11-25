@@ -9,7 +9,6 @@ def get_recipe(recipe_id):
         recipe = Recipe.query.filter(Recipe.food_id == recipe_id).first()
         if recipe is None:
             return None
-        # 해당 레시피 조회수 1 증가
         recipe.views += 1
         db.session.add(recipe)
         db.session.commit()
@@ -20,6 +19,19 @@ def get_recipe(recipe_id):
         food = Food.query.filter(Food.id == recipe.food_id).first()
         f_dict = food.to_dict()
         result['food_info'] = f_dict
+
+        try:
+            posts = Post.query.filter(Post.recipe_id == recipe_id).first()
+            if posts is None:
+                result['post_info'] = {}
+                return result
+            
+            p_dict = food.to_dict()
+            result['post_info'] = p_dict
+
+        except Exception:
+            db.session.rollback()
+            raise
 
         return result
     except Exception:
