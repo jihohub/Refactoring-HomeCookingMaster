@@ -12,11 +12,9 @@ export const hideHeaderSlice = createSlice({
     reducers: {
         setHideTrue: (state, action: PayloadAction<Boolean>) => {
             state.hide = action.payload;
-            console.log(state.hide);
         },
         setHideFalse: (state, action: PayloadAction<Boolean>) => {
             state.hide = action.payload;
-            console.log(state.hide);
         }
     }
 });

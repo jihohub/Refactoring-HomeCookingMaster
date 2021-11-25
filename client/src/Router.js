@@ -13,13 +13,15 @@ import SuggestionPage from "./pages/Suggestion/SuggestionPage";
 import RecipePage from "./pages/Recipe/RecipePage";
 import MyPage from "./pages/Mypage/MyPage";
 import ScrollToTop from "./components/Common/ScrollToTop";
+import HideNavBar from "./components/Common/HideNavBar";
 
 function Router() {
     const hide = useSelector((state) => state.hideHeaderSlice.hide);
-    
+
     return (
         <BrowserRouter>
             <ScrollToTop />
+            <HideNavBar />
             {!hide && <Header />}
             <Routes>
                 <Route exact={true} path="/" element={<MainPage />} />
