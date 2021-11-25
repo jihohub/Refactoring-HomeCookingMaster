@@ -21,12 +21,10 @@ class User(db.Model):
     intro = db.Column(db.Text)
     exp = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, email, password, nickname, img, intro):
+    def __init__(self, email: str, password: str, nickname: str):
         self.email = email
         self.password = password
         self.nickname = nickname
-        self.img = img
-        self.intro = intro
         self.exp = 0
 
 # 사용 편의에 따라 추후 변경 가능
