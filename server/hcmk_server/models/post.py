@@ -22,7 +22,7 @@ class Post(db.Model):
     def __init__(self, post, img, user_id, recipe_id):
         self.post = post
         self.img = img
-        self.timestamp = datetime.now()
+        self.timestamp = datetime.now().isoformat(timespec='seconds')
         self.user_id = user_id
         self.recipe_id = recipe_id
 
