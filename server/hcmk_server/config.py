@@ -31,3 +31,4 @@ for key, val in env_variables.items():
 
 print(env_variables["DB_PORT"])
 SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{env_variables['DB_USER']}:{env_variables['DB_PWD']}@{env_variables['DB_HOST']}:{env_variables['DB_PORT']}/{env_variables['DB_NAME']}"
+
