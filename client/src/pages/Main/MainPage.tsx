@@ -8,11 +8,8 @@ import { setImageFile, setPreviewUrl } from "../../components/Result/searchedIma
 import background from "../../assets/main.jpg";
 import { SearchBar } from "../../components/Common/SearchBar";
 
-import { Paper, Input, InputBase, Divider, IconButton, Button } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import ImageSearchIcon from '@mui/icons-material/ImageSearch';
+import { sample } from "../../assets/Sample";
+import { iteratorSymbol } from "immer/dist/internal";
 
 const mainWrapperStyle = css`
     .background-div {
@@ -122,11 +119,12 @@ const MainSearch = () => {
     )
 }
 
-const Div2 = () => {
+const MainRanking = () => {
     return (
         <div id="sec2" className="page-section">
-            {/* <img src={background} alt="ef" /> */}
-            2
+            {sample.map((item) => {
+                return <img src={item.img} alt="imgrecipe" />
+            })}
         </div>
     )
 }
@@ -134,7 +132,6 @@ const Div2 = () => {
 const Div3 = () => {
     return (
         <div id="sec3" className="page-section">
-            {/* <img src={background} alt="ef" /> */}
             3
         </div>
     )
@@ -143,7 +140,6 @@ const Div3 = () => {
 const Div4 = () => {
     return (
         <div id="sec4" className="page-section">
-            {/* <img src={background} alt="ef" /> */}
             4
         </div>
     )
@@ -152,7 +148,6 @@ const Div4 = () => {
 const Div5 = () => {
     return (
         <div id="sec5" className="page-section">
-            {/* <img src={background} alt="ef" /> */}
             5
         </div>
     )
@@ -161,7 +156,6 @@ const Div5 = () => {
 const Div6 = () => {
     return (
         <div id="sec6" className="page-section">
-            {/* <img src={background} alt="ef" /> */}
             6
         </div>
     )
@@ -173,7 +167,7 @@ function MainPage() {
         <div css={mainWrapperStyle}>
             <div className="scroll-container">
                 <MainSearch />
-                <Div2 />
+                <MainRanking />
                 <Div3 />
                 <Div4 />
                 <Div5 />
