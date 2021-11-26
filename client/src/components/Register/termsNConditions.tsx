@@ -153,7 +153,7 @@ function TermsNConditions() {
                     </div>
                     <div>
                         <Link to="/register/userInfo" css={agree_btn}>
-                            <Button id="nextBtn" variant="contained" color="warning" css={btn}>
+                        <Button id="nextBtn" variant="contained" color="warning" disabled={check2 && check3 ? false : true} css={btn}>
                                 다음
                             </Button>
                         </Link>
