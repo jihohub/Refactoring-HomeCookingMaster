@@ -11,6 +11,7 @@ function UserInfo() {
     const [check, setCheck] = useState<boolean>(true);
     const [pwTerms, setPwTerms] = useState<boolean>(false);
     const [nickname, setNickname] = useState<boolean>(true)
+    const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
 
     // 유효성검사
     const emailForm = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
@@ -55,6 +56,15 @@ function UserInfo() {
         }else{
             setNickname(false)
         }
+    }
+
+    const handleImage = (e: any) => {
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = () => {
+            setProfileImage(reader.result);
+        }
+        reader.readAsDataURL(file);
     }
 
     const handleComplete = () => {
@@ -128,11 +138,12 @@ function UserInfo() {
                 <div>
                     <h4 css={option_sub_title}>프로필 사진</h4>
                     <div css={profile_img}>
-                        <Avatar alt="profile img" src="" sx={{ width: 112, height: 112 }}/>
+                        <Avatar alt="profile img" src={typeof profileImage == "string" ? profileImage : ""} sx={{ width: 112, height: 112 }}/>
                         <input 
                             type="file" id="profile" name="profile" 
                             accept="image/*" 
                             css={file_select}
+                            onChange={handleImage}
                         />
                     </div>
                     <br />

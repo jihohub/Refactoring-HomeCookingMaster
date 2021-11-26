@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from "@emotion/react";
 import React, { useEffect, useState } from "react";
+
+import { Grid, Card, CardHeader, CardMedia, CardContent, Avatar, IconButton, Typography } from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert"
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setHideTrue, setHideFalse } from "../../components/Common/hideHeaderSlice";
@@ -9,7 +12,6 @@ import background from "../../assets/main.jpg";
 import { SearchBar } from "../../components/Common/SearchBar";
 
 import { sample } from "../../assets/Sample";
-import { iteratorSymbol } from "immer/dist/internal";
 
 const mainWrapperStyle = css`
     .background-div {
@@ -122,9 +124,30 @@ const MainSearch = () => {
 const MainRanking = () => {
     return (
         <div id="sec2" className="page-section">
-            {sample.map((item) => {
-                return <img src={item.img} alt="imgrecipe" />
-            })}
+            <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {sample.map((item) => {
+                    return (
+                        <Grid item xs={2} sm={3} md={3} display="flex" justifyContent="center">
+                            <Card sx={{ width: 250 }}>
+                                <CardMedia
+                                    component="img"
+                                    height="200"
+                                    image={item.img}
+                                    alt="Paella dish"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {item.name}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                    {"좋아요: " + item.likes}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    )
+                })}
+            </Grid>
         </div>
     )
 }

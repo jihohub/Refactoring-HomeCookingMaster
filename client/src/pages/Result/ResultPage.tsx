@@ -8,7 +8,7 @@ function ResultPage() {
 
     return (
         <div>
-            <img src={previewUrl} />
+            <img src={previewUrl} alt="preview" />
         </div>
     );
 }
