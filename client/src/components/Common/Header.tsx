@@ -175,7 +175,7 @@ function Header() {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/register" className="nav-link" onClick={() => setOpen(false)}>
+                            <NavLink to="register/termsNConditions" className="nav-link" onClick={() => setOpen(false)}>
                                 회원가입
                             </NavLink>
                         </li>
