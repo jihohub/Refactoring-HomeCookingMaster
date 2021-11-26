@@ -62,23 +62,29 @@ function TermsNConditions() {
                 <p css={service_sub_title}>서비스 약관에 동의해주세요.</p>
                     <div css={all_agree}>
                         <div>
-                            <Checkbox id="check_all" color="warning" onChange={handleCheckAll}/>
-                            <strong>약관에 모두 동의합니다.</strong>
+                            <label style={{cursor: "pointer"}}>
+                                <Checkbox id="check_all" color="warning" onChange={handleCheckAll}/>
+                                <strong>약관에 모두 동의합니다.</strong>
+                            </label>
                         </div>
                     </div>
                     <div css={select_cnt}>
                         <div css={all_agree}>
                             <div >
                                 {/* <input type="checkbox" id="check2" />  */}
-                                <Checkbox id="check_one" color="warning" checked={check1} onChange={handleCheck1}/>
-                                <strong>만 14세 이상입니다.</strong>
+                                <label style={{cursor: "pointer"}}>
+                                    <Checkbox id="check_one" color="warning" checked={check1} onChange={handleCheck1}/>
+                                    <strong>만 14세 이상입니다.</strong>
+                                </label>
                             </div>
                         </div>
                         <div css={all_agree}>
                             <div >
                                 {/* <input type="checkbox" id="check3" />  */}
-                                <Checkbox id="check_one" color="warning" checked={check2} onChange={handleCheck2}/>
-                                <strong>[필수] 이용약관</strong>
+                                <label style={{cursor: "pointer"}}>
+                                    <Checkbox id="check_one" color="warning" checked={check2} onChange={handleCheck2} />
+                                    <strong>[필수] 이용약관</strong>
+                                </label>
                                 <Button 
                                     variant="text" 
                                     onClick={changeBtn1} 
@@ -125,8 +131,10 @@ function TermsNConditions() {
                         <div css={all_agree}>
                             <div >
                                 {/* <input type="checkbox" id="check4" /> */}
-                                <Checkbox id="check_one" color="warning" checked={check3} onChange={handleCheck3}/>
-                                <strong>[필수] 개인정보 수집 및 이용 동의</strong>
+                                <label style={{cursor: "pointer"}}>
+                                    <Checkbox id="check_one" color="warning" checked={check3} onChange={handleCheck3} />
+                                    <strong>[필수] 개인정보 수집 및 이용 동의</strong>
+                                </label>
                                 <Button 
                                     variant="text" 
                                     onClick={changeBtn2} 
