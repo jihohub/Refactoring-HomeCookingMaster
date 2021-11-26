@@ -13,7 +13,7 @@ main_ns = Namespace(
 class SearchbyString(Resource):
     def get(self):
         """검색어와 일치하는 음식의 레시피를 반환합니다."""
-        data =request.args["data"].strip()
+        data =request.args["data"].replace(" ", "")
         result = get_food_list(data)
         
         return jsonify(result = result)
