@@ -28,6 +28,14 @@ const mainWrapperStyle = css`
         position: relative;
         max-width: 810px;
 
+        @media screen and (min-width: 768px) and (max-width: 1080px) {
+            max-width: 500px;
+        }
+
+        @media screen and (max-width: 768px) {
+            max-width: 80vw;
+        }
+
         .form {
             border-radius: 100px;
         }
