@@ -46,19 +46,27 @@ def add_like(recipe_id):
         recipe.likes += 1
         db.session.add(recipe)
         db.session.commit()
+        return "success"
 
     except Exception:
         db.session.rollback()
         raise
 
-def add_liked_recipe(recipe_id, user_id):
+def check_likes(recipe_id, user_id):
+    data = RecipeLike.query.filter((RecipeLike.recipe_id == recipe_id) & (RecipeLike.user_id == user_id)).first()
+    if data is not None:
+        db.session.delete(data)
+        db.session.commit()
+        return "delete like"
     new_value = RecipeLike(
         recipe_id=recipe_id,
         user_id=user_id,
     )
     db.session.add(new_value)
     db.session.commit()
-        
+    add_like(recipe_id)
+    return "add like"
+
 def add_post(user_id, recipe_id, post, img):
     new_value = Post(
         post = post,
