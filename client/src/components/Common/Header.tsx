@@ -79,7 +79,7 @@ function Header() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/register">
+                        <NavLink to="/register/termsNConditions">
                             회원가입
                         </NavLink>
                     </li>
