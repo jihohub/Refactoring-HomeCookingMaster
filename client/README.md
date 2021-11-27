@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# 집밥 꼬꼬선생
+만들어보고자 하는 음식을 사진을 통해 검색하여 레시피, 영양정보, 관련 영상을 제공하는 서비스
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 구성 안내
+## 1. 프로젝트 소개
+  <p>매일 먹는 배달음식에 지친 사람들을 위한 집밥 레시피 사전 서비스</p>
+  만들어 먹고 싶은 음식을 이미지로 검색하여 레시피를 찾아보세요!
 
-## Available Scripts
+## 2. 프로젝트 목표
+  - 사용자가 이미지 검색 기능을 사용하여 음식의 레시피, 영양정보, 관련 영상에 대한 정보를 알아낼 수 있다.
+  - 다른 사용자들과 음식 결과를 공유하며 서로의 결과물에 대한 코맨트를 받을 수 있다.
 
-In the project directory, you can run:
+## 3. 프로젝트 기능 설명
 
-### `yarn start`
+**메인 기능**
+: 집밥 음식 사진을 올리면 레시피를 보여주는 서비스 (레시피 사전)
+  - 사진 검색 / 텍스트 검색
+  - 레시피 결과 음식 사진 업로드 (좋아요, 댓글 기능)
+  - 텍스트 레시피 및 레시피 영상 (유튜브 영상) 확인
+  - 레시피 수정 기능(위키백과처럼?) - 고민
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**서브 기능**
+  1. 랭킹페이지(조회 수, 좋아요)
+  2. 마이페이지(좋아요한 글  / 작성한 글), 로그인 / 회원가입
+  3. 레시피 아래에 댓글 기능(자유롭게 소통하는 공간)
+  4. 결과 출력 시 1회 제공량당 칼로리
+  5. 메뉴 추천 ( 랜덤 / 재료 기반)
+  6. 완성된 음식 사진을 올리면 어떤 음식과 얼마나 일치하는지 보여주는 기능
+      - ex) 만든 김치찌개 사진 → 꽁치김치찌개일 확률(77%)
+  7. 해당 레시피를 찾은 사용자들이 주로 찾은 레시피 연관 추천
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**웹서비스의 유용성, 편의성 및 시각화의 실용성에 대한 설명**
+  - 주요 기능 (주된 활용성) 및 서브 기능
+  - 프로젝트만의 차별점, 기대 효과
 
-### `yarn test`
+## 4. 프로젝트 구성도
+  - [와이어프레임/스토리보드](https://www.figma.com/file/msrhnc0kPClrNoHFeKGPgL/%EC%9D%8C%EC%8B%9D-%EB%A0%88%EC%8B%9C%ED%94%BC-%EC%84%9C%EB%B9%84%EC%8A%A4?node-id=0%3A1)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 5. 프로젝트 팀원 역할 분담
+| 이름 | 담당 업무 |
+| ------ | ------ |
+| 김한별 | 백앤드 개발 |
+| 김희재 | 백앤드 개발 |
+| 나석균 | 백앤드 개발 및 인공지능 |
+| 남경민 | 프론트앤드 개발 |
+| 박지호 | 프론트앤드 개발 |
+| 조승희 | 인공지능 |
