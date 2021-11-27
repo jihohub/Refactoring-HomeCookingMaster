@@ -1,8 +1,9 @@
+# from db_connect import db
 from hcmk_server.db_connect import db
 '''
 음식 정보 DB
 '''
-class Food(db.model):
+class Food(db.Model):
     __tablename__ = "food"
     '''
     name = 음식 이름

@@ -1,8 +1,9 @@
+# from db_connect import db
 from hcmk_server.db_connect import db
 '''
 레시피 정보 DB
 '''
-class Recipe(db.model):
+class Recipe(db.Model):
     __tablename__ = "recipe"
     '''
     name = 레시피 제목(이름)
@@ -18,27 +19,29 @@ class Recipe(db.model):
     name = db.Column(db.String(128), nullable=False)
     img = db.Column(db.String(1024))
     views = db.Column(db.Integer, nullable=False)
-    like = db.Column(db.Integer, nullable=False)
+    likes = db.Column(db.Integer, nullable=False)
     servings = db.Column(db.String(32), nullable=False)
     difficulty = db.Column(db.String(32), nullable=False)
     cooking_time = db.Column(db.String(32), nullable=False)
     food_id = db.Column(db.Integer, db.ForeignKey('food.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
 
-    def __init__(self, name, img, like, servings, difficulty, cooking_time, food_id):
+    def __init__(self, name, img, servings, difficulty, cooking_time, food_id):
         self.name = name
         self.img = img
-        self.like = like
         self.servings = servings
         self.difficulty = difficulty
         self.cooking_time = cooking_time
         self.food_id = food_id
         self.views = 0
+        self.likes = 0
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
-            "like": self.like,
+            "likes": self.likes,
+            "views": self.views,
+            "img": self.img,
             "servings": self.servings,
             "difficulty": self.difficulty,
             "cooking_time": self.cooking_time,

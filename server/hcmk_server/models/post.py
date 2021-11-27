@@ -3,7 +3,7 @@ from hcmk_server.db_connect import db
 '''
 댓글 DB
 '''
-class Post(db.model):
+class Post(db.Model):
     __tablename__ = "post"
     '''
     post = 댓글 내용
@@ -22,7 +22,7 @@ class Post(db.model):
     def __init__(self, post, img, user_id, recipe_id):
         self.post = post
         self.img = img
-        self.timestamp = datetime.now()
+        self.timestamp = datetime.now().isoformat(timespec='seconds').replace("T", " ")
         self.user_id = user_id
         self.recipe_id = recipe_id
 
@@ -31,7 +31,7 @@ class Post(db.model):
             "id": self.id,
             "post": self.post,
             "img": self.img,
-            "timestamp": self.timestamp,
+            "timestamp": str(self.timestamp),
             "user_id": self.user_id,
             "recipe_id": self.recipe_id,
         }

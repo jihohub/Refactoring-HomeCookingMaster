@@ -7,9 +7,6 @@ from hcmk_server import config
 from hcmk_server.db_connect import db
 from hcmk_server.api import auth_api, recipe_api
 
-# import config
-# from db_connect import db
-
 rest_api = Api(
     version="1.0",
     title="Home Cook Master Kkokko's API Server",
@@ -35,14 +32,19 @@ def create_app():
     
     print("migration added")
 
+    # models import
+    # from models import user, recipe, recipe_ingredent, recipe_process, recipe_like, post, food
+
     rest_api.init_app(app)
 
     from .api.auth_api import auth_ns
     from .api.recipe_api import recipe_ns
-
+    from .api.main_api import main_ns
 
     rest_api.add_namespace(auth_ns, "/api/auth")
     rest_api.add_namespace(recipe_ns, "/api/recipe")
+    rest_api.add_namespace(main_ns, "/api/main")
+
 
     return app
 
@@ -51,5 +53,5 @@ def create_app():
 
 # if __name__ == "__main__":
 #     HOST = "0.0.0.0"
-#     PORT = 5000
+#     PORT = 5001
 #     application.run(host=HOST, port=PORT, debug=True)
