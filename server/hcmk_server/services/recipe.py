@@ -4,9 +4,12 @@ from hcmk_server.models.recipe_like import RecipeLike
 from hcmk_server.models.post import Post
 
 def get_recipe(recipe_id):
+    '''
+    
+    '''
     result = {}
     try:
-        recipe = Recipe.query.filter(Recipe.food_id == recipe_id).first()
+        recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
         if recipe is None:
             return None
         recipe.views += 1
@@ -40,7 +43,7 @@ def get_recipe(recipe_id):
 
 def add_like(recipe_id):
     try:
-        recipe = Recipe.query.filter(Recipe.food_id == recipe_id).first()
+        recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
         if recipe is None:
             return None
         recipe.likes += 1
