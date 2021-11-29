@@ -5,16 +5,6 @@ from hcmk_server.models.post import Post
 from hcmk_server.models.recipe_ingredient import RecipeIngredient
 from hcmk_server.models.recipe_process import RecipeProcess
 
-def get_recipe_ingredient(recipe_id):
-        result = {}
-        ingredients = RecipeIngredient.query.filter(RecipeIngredient.recipe_id == recipe_id).all()
-        
-        for ingredient in ingredients:
-            i_dict = ingredient.to_dict()
-            result.append(i_dict)
-        return i_dict
-
-
 def get_recipe(recipe_id):
     result = {}
     try:
