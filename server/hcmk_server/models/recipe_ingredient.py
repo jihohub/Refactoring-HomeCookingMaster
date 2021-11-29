@@ -3,7 +3,7 @@ from hcmk_server.db_connect import db
 레시피 재료 DB
 '''
 class RecipeIngredient(db.Model):
-    __tablename__ = "recipe_ingredent"
+    __tablename__ = "recipe_ingredient"
     '''
     name = 재료 이름
     amount = 재료 양
