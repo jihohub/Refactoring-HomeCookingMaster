@@ -20,6 +20,8 @@ class User(db.Model):
     img = db.Column(db.String(1024))
     intro = db.Column(db.Text)
     exp = db.Column(db.Integer, nullable=False)
+    access_token = db.Column(db.String(1024), nullable=True)
+    refresh_token = db.Column(db.String(1024), nullable=True)
 
     def __init__(self, email: str, password: str, nickname: str):
         self.email = email
