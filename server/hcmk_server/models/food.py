@@ -1,3 +1,4 @@
+# from db_connect import db
 from hcmk_server.db_connect import db
 '''
 음식 정보 DB

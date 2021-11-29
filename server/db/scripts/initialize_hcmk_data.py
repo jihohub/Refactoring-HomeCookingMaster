@@ -81,7 +81,7 @@ print("Added food data.")
 recipe db 넣기
 '''
 # 파일 불러오기 
-file_path = '../csv_file/recipe_result_211124.csv'
+file_path = '../csv_file/recipe_result_211126.csv'
 f = open(file_path, "r", encoding="UTF-8")
 csv_data = csv.reader(f)
 header = next(csv_data)
@@ -95,10 +95,11 @@ for row in csv_data:
     difficulty = row[10]
     cooking_time = row[11]
     food_id = row[1]
+    img = row[12]
     sql = """insert into recipe ( 
-        name, views, likes, servings, difficulty, cooking_time, food_id
+        name, views, likes, servings, difficulty, cooking_time, food_id, img
         )
-        values (%s, %s, %s, %s, %s, %s, %s)"""
+        values (%s, %s, %s, %s, %s, %s, %s, %s)"""
     curs.execute(
         sql,
         [
@@ -108,7 +109,8 @@ for row in csv_data:
             servings,
             difficulty,
             cooking_time,
-            food_id
+            food_id,
+            img
         ],
     )
 
@@ -160,7 +162,7 @@ recipe_ingredent db 넣기
 '''
 
 # 파일 불러오기
-file_path = '../csv_file/recipe_process_211124.csv'
+file_path = '../csv_file/recipe_process_211126.csv'
 f = open(file_path, "r", encoding="UTF-8")
 csv_data = csv.reader(f)
 header = next(csv_data)
@@ -170,16 +172,18 @@ for row in csv_data:
     recipe_id = row[0]
     step = row[1]
     recipe = row[2]
+    img = row[3]
     sql = """insert into recipe_process (
-        recipe_id, step, recipe
+        recipe_id, step, recipe, img
         )
-        values (%s, %s, %s)"""
+        values (%s, %s, %s, %s)"""
     curs.execute(
         sql,
         [
             recipe_id,
             step,
             recipe,
+            img
         ],
     )
 
