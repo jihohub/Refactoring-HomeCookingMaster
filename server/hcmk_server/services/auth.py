@@ -1,4 +1,7 @@
 from hcmk_server.models.user import db, User
+from flask_jwt_extended import (
+    decode_token,
+)
 
 def get_user_by_email(email):
     result = User.query.filter_by(email=email).one_or_none()
@@ -28,3 +31,19 @@ def insert_user(email, password, nickname, img, intro):
     except Exception:
         db.session.rollback()
         raise
+
+def validate_token(token):
+    user_id = token.get('sub')
+    type = token.get('type')
+    user = User.query.filter_by(id=user_id).one_or_none()
+    if type == 'access':
+        if user.access_token == None:
+            return False
+        if decode_token(user.access_token) != token:
+            return False
+    else :
+        if user.refresh_token == None:
+            return False
+        if decode_token(user.refresh_token) != token:
+            return False
+    return True

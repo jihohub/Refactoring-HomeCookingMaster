@@ -36,5 +36,8 @@ SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{env_variables['DB_USER']}:{env_vari
 
 # jwt option
 key = "hey"
+# access = timedelta(minutes=10)
+# refresh = timedelta(minutes=1)
+
 access = timedelta(hours=1)
 refresh = timedelta(days=14)
