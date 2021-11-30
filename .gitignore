@@ -35,3 +35,6 @@ user_data/
 
 # database
 database/
+
+# migration folder
+migrations
