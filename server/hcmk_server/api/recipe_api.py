@@ -43,4 +43,4 @@ class AddPost(Resource):
         img =request.args["img"]
         
         result = add_post(user_id, recipe_id, post, img)
-        return result
+        return jsonify(result = result)
