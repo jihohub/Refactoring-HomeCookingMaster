@@ -26,9 +26,9 @@ class SearchbyString(Resource):
 @recipe_ns.response(200, "success")
 @recipe_ns.response(500, "Failed")
 class AddLike(Resource):
-    def get(self, recipe_id):
+    def post(self, recipe_id):
         """해당 레시피의 좋아요를 관리하는 api"""
-        user_id =request.args["user_id"]
+        user_id = request.json.get("user_id")
         result = check_likes(recipe_id, user_id)
         return jsonify(result = result)
 
@@ -36,11 +36,11 @@ class AddLike(Resource):
 @recipe_ns.response(200, "success")
 @recipe_ns.response(500, "Failed")
 class AddPost(Resource):
-    def get(self, recipe_id):
+    def post(self, recipe_id):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
-        user_id =request.args["user_id"]
-        post =request.args["post"]
-        img =request.args["img"]
+        user_id = request.json.get("user_id")
+        post = request.json.get("post")
+        img = request.json.get("img")
         
         result = add_post(user_id, recipe_id, post, img)
         return jsonify(result = result)
