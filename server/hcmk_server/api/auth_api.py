@@ -7,7 +7,18 @@ from hcmk_server.services.auth import (
     get_user_by_email,
     get_user_by_id,
     get_user_by_nickname,
+    validate_token,
 )
+
+from flask_jwt_extended import (
+    create_access_token,
+    create_refresh_token,
+    get_jwt_identity,
+    jwt_required,
+    get_jwt,
+    decode_token,
+)
+from flask_jwt_extended.utils import decode_token
 
 bcrypt = Bcrypt()
 
@@ -15,6 +26,10 @@ auth_ns = Namespace(
     name="auth",
     description="회원정보를 관리하는 API.",
 )
+
+'''
+회원가입 API
+'''
 
 signin_fields = auth_ns.model(
     "user",
@@ -48,14 +63,18 @@ class Signup(Resource):
         # 패스워드 hash 변환
         password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
         # 필수 정보 db에 입력 및 현재 유저 정보 읽기
-        current_user = get_user_by_id(insert_user(email, password_hash, nickname, img, intro))
+        user = get_user_by_id(insert_user(email, password_hash, nickname, img, intro))
 
         result = {
-            'nickname': current_user.nickname
+            'nickname': user.nickname
         }
 
-        return result
+        return result, 200
 
+
+'''
+이메일 중복 확인 API
+'''
 
 val_email_fields = auth_ns.model(
     "validate_email",
@@ -88,6 +107,10 @@ class ValidateEmail(Resource):
 
         return result
 
+'''
+닉네임 중복 확인 API
+'''
+
 val_nickname_fields = auth_ns.model(
     "validate_nickname",
     {
@@ -118,3 +141,129 @@ class ValidateEmail(Resource):
             result = { 'overlaps': True }
 
         return result
+
+
+'''
+로그인 API
+'''
+
+login_fields = auth_ns.model(
+    "login",
+    {
+        "result": fields.String,
+        "message": fields.String,
+        "access_token" : fields.String,
+        "refresh_token" : fields.String,
+    }
+)
+
+@auth_ns.route("/login")
+@auth_ns.response(200, "success")
+class Login(Resource):
+    """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
+
+    @auth_ns.doc("POST User login")
+    @auth_ns.marshal_with(login_fields)
+    def post(self):
+
+        user_data = request.json
+
+        email = user_data.get("email")
+        password = user_data.get("password")
+        
+        user = get_user_by_email(email)
+
+        if user is None:
+            return {"result": "failed", "message": "이메일 혹은 비밀번호가 일치하지 않습니다."}, 404
+        if not bcrypt.check_password_hash(user.password, password):
+            return {"result": "failed", "message": "이메일 혹은 비밀번호가 일치하지 않습니다."}, 404
+
+        access_token = create_access_token(
+            identity=user.id, additional_claims={"email": user.email, "nickname": user.nickname}
+        )
+        refresh_token = create_refresh_token(identity=user.id)
+
+        try:
+            user.access_token = access_token
+            user.refresh_token = refresh_token
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            raise
+
+        return {"result": "success", "message": "로그인 되었습니다." , "access_token" : access_token, "refresh_token" : refresh_token}, 200
+
+
+logout_fields = auth_ns.model(
+    "logout",
+    {
+        "result": fields.String,
+        "message": fields.String,
+    }
+)
+
+
+@auth_ns.route("/logout")
+@auth_ns.response(200, "success")
+class Logout(Resource):
+    """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
+
+    @auth_ns.doc("POST User logout")
+    @auth_ns.marshal_with(logout_fields)
+    @jwt_required()
+    def delete(self):
+
+        if validate_token(get_jwt())  == False:
+            return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 404
+
+        user_id = get_jwt_identity()
+        user = get_user_by_id(user_id=user_id)
+
+        if not user:
+            return {'result' :"fail", 'message':"존재하지 않는 사용자입니다."}, 404
+
+        try:
+            user.access_token = None
+            user.refresh_token = None
+            db.session.commit()
+            return {"result": "success", 'message':"로그아웃 되었습니다."}, 200
+        except Exception:
+            db.session.rollback()
+            raise
+
+
+
+@auth_ns.route("/refresh")
+@auth_ns.response(200, "success")
+class Refresh(Resource):
+    """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
+
+    @auth_ns.doc("POST Token Refresh")
+    @auth_ns.marshal_with(login_fields)
+    def post(self):
+        
+        post_refresh_token = decode_token(request.json.get('refresh_token'))
+        user_id = post_refresh_token.get('sub')
+
+        if validate_token(post_refresh_token) == False:
+            return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 404
+
+        user = get_user_by_id(user_id=user_id)
+        if not user:
+            return {'result' :"fail", 'message':"존재하지 않는 사용자입니다."}, 404
+
+        try:
+            new_access_token = create_access_token(
+                identity=user.id,
+                additional_claims={"email": user.email, "name": user.nickname},
+            )
+            user.access_token = new_access_token
+            db.session.commit()
+            
+            return {"result": "success", "message": "access_token이 재발급 되었습니다." , "access_token" : new_access_token }, 200
+        except Exception:
+            db.session.rollback()
+            raise
+
+
+
