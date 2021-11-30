@@ -45,7 +45,8 @@ food db 넣기
 '''
 
 # 파일 불러오기 
-file_path = '../csv_file/food_label_data.csv'
+# file_path = '../csv_file/food_label_data.csv'
+file_path = 'db/csv_file/food_label_data.csv'
 f = open(file_path, "r", encoding="UTF-8")
 csv_data = csv.reader(f)
 header = next(csv_data)
@@ -81,14 +82,15 @@ print("Added food data.")
 recipe db 넣기
 '''
 # 파일 불러오기 
-file_path = '../csv_file/recipe_result_211126.csv'
+# file_path = '../csv_file/recipe_result_211126.csv'
+file_path = 'db/csv_file/recipe_result_211126.csv'
 f = open(file_path, "r", encoding="UTF-8")
 csv_data = csv.reader(f)
 header = next(csv_data)
 
 # csv to mysql
 for row in csv_data:
-    name = row[5]
+    name = row[4]
     views = 0
     likes = 0
     servings = row[9]
@@ -126,7 +128,8 @@ recipe_ingredent db 넣기
 '''
 
 # 파일 불러오기
-file_path = '../csv_file/recipe_ingredient_211124.csv'
+# file_path = '../csv_file/recipe_ingredient_211124.csv'
+file_path = 'db/csv_file/recipe_ingredient_211124.csv'
 f = open(file_path, "r", encoding="UTF-8")
 csv_data = csv.reader(f)
 header = next(csv_data)
@@ -136,7 +139,7 @@ for row in csv_data:
     recipe_id = row[0]
     name = row[1]
     amount = row[2]
-    sql = """insert into recipe_ingredent (
+    sql = """insert into recipe_ingredient (
         name, amount, recipe_id
         )
         values (%s, %s, %s)"""
@@ -154,7 +157,7 @@ conn.commit()
 # 파일 닫기
 f.close()
 
-print("Added recipe_ingredent data.")
+print("Added recipe_ingredient data.")
 
 
 '''
@@ -162,7 +165,8 @@ recipe_ingredent db 넣기
 '''
 
 # 파일 불러오기
-file_path = '../csv_file/recipe_process_211126.csv'
+# file_path = '../csv_file/recipe_process_211126.csv'
+file_path = 'db/csv_file/recipe_process_211126.csv'
 f = open(file_path, "r", encoding="UTF-8")
 csv_data = csv.reader(f)
 header = next(csv_data)
