@@ -14,7 +14,7 @@ class Post(db.Model):
     '''
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     post = db.Column(db.String(128), nullable=False)
-    img = db.Column(db.String(1024))
+    img = db.Column(db.Text)
     timestamp = db.Column(db.DateTime(), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
