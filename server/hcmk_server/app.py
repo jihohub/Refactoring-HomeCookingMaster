@@ -40,7 +40,7 @@ def create_app():
     print("migration added")
 
     # models import
-    from models import user, recipe, recipe_ingredient, recipe_process, recipe_like, post, food
+    from .models import user, recipe, recipe_ingredient, recipe_process, recipe_like, post, food
 
     rest_api.init_app(app)
 
