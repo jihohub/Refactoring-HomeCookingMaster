@@ -13,7 +13,7 @@ class Post(db.Model):
     recipe_id = 댓글이 달린 레시피의 id
     '''
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    post = db.Column(db.String(128), nullable=False)
+    post = db.Column(db.Text, nullable=False)
     img = db.Column(db.String(1024))
     timestamp = db.Column(db.DateTime(), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
