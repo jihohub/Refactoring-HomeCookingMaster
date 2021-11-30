@@ -42,11 +42,11 @@ signin_fields = auth_ns.model(
 @auth_ns.response(200, "success")
 @auth_ns.response(500, "Failed registration")
 class Signup(Resource):
-    """user 테이블에 회원정보를 등록합니다."""
 
     @auth_ns.doc("POST Sign up for user")
     @auth_ns.marshal_with(signin_fields)
     def post(self):
+        """user 테이블에 회원정보를 등록합니다."""  
 
         user_data = request.json
 
@@ -86,11 +86,11 @@ val_email_fields = auth_ns.model(
 @auth_ns.route("/signup/val_email")
 @auth_ns.response(200, "success")
 class ValidateEmail(Resource):
-    """email이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
 
     @auth_ns.doc("POST Validate Email")
     @auth_ns.marshal_with(val_email_fields)
     def post(self):
+        """email이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
         
         try:
             user_data = request.json
@@ -121,11 +121,11 @@ val_nickname_fields = auth_ns.model(
 @auth_ns.route("/signup/val_nickname")
 @auth_ns.response(200, "success")
 class ValidateEmail(Resource):
-    """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
 
     @auth_ns.doc("POST Validate Nickname")
     @auth_ns.marshal_with(val_nickname_fields)
     def post(self):
+        """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
 
         try:
             user_data = request.json
@@ -160,11 +160,11 @@ login_fields = auth_ns.model(
 @auth_ns.route("/login")
 @auth_ns.response(200, "success")
 class Login(Resource):
-    """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
 
     @auth_ns.doc("POST User login")
     @auth_ns.marshal_with(login_fields)
     def post(self):
+        """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
 
         user_data = request.json
 
@@ -206,12 +206,12 @@ logout_fields = auth_ns.model(
 @auth_ns.route("/logout")
 @auth_ns.response(200, "success")
 class Logout(Resource):
-    """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
 
     @auth_ns.doc("POST User logout")
     @auth_ns.marshal_with(logout_fields)
     @jwt_required()
     def delete(self):
+        """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
 
         if validate_token(get_jwt())  == False:
             return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 404
@@ -236,11 +236,11 @@ class Logout(Resource):
 @auth_ns.route("/refresh")
 @auth_ns.response(200, "success")
 class Refresh(Resource):
-    """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
 
     @auth_ns.doc("POST Token Refresh")
     @auth_ns.marshal_with(login_fields)
     def post(self):
+        """닉네임이 이미 등록이 되어있는지 확인하고 결과를 보내줍니다."""
         
         post_refresh_token = decode_token(request.json.get('refresh_token'))
         user_id = post_refresh_token.get('sub')
