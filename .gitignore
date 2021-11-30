@@ -33,6 +33,8 @@ __pycache__/
 /user_data
 user_data/
 
+migrations/
+
 # database
 database/
 
