@@ -88,7 +88,7 @@ header = next(csv_data)
 
 # csv to mysql
 for row in csv_data:
-    name = row[5]
+    name = row[4]
     views = 0
     likes = 0
     servings = row[9]
