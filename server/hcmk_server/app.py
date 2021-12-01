@@ -2,6 +2,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 from hcmk_server import config
 from hcmk_server.db_connect import db
@@ -22,6 +23,7 @@ def create_app():
     output: app
     """
     app = Flask(__name__)
+    CORS(app, supports_credentials=True)
 
     # Configure Database
     app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
