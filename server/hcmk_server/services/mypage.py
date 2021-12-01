@@ -5,7 +5,7 @@ from flask_jwt_extended import get_jwt_identity, get_jwt
 from hcmk_server.services.auth import get_user_by_id, validate_token
 
 
-def get_recipe ():
+def get_mypage ():
     if validate_token(get_jwt())  == False:
         return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 401
     
@@ -16,19 +16,23 @@ def get_recipe ():
     '''2. 유저 아이디로 스크랩한 레시피 찾기'''
     liked_recipes = RecipeLike.query.filter(RecipeLike.user_id == user.id).all()
     result_liked_recipe = []
-    for liked_recipe in liked_recipes:
-        recipe = Recipe.query.filter(Recipe.id == liked_recipe.recipe_id).first()
-        result_liked_recipe.append(recipe.to_dict_for_mypage())
+    # 스크랩한 레시피가 있다면
+    if liked_recipes:
+        for liked_recipe in liked_recipes:
+            recipe = Recipe.query.filter(Recipe.id == liked_recipe.recipe_id).first()
+            result_liked_recipe.append(recipe.to_dict_for_mypage())
     
     '''3. 유저 아이디로 댓글 작성한 레시피 찾기'''
     my_post_recipes = Post.query.filter(Post.user_id == user.id).all()
     result_my_post_recipe = []
-    for my_post_recipe in my_post_recipes:
-        recipe = Recipe.query.filter(Recipe.id == my_post_recipe.recipe_id).first()
-        result_my_post_recipe.append(recipe.to_dict_for_mypage())
+    # 댓글을 작성한 레시피가 있다면
+    if my_post_recipes:
+        for my_post_recipe in my_post_recipes:
+            recipe = Recipe.query.filter(Recipe.id == my_post_recipe.recipe_id).first()
+            result_my_post_recipe.append(recipe.to_dict_for_mypage())
 
     return {
-        "result" : "success",
+        "result" : "Success",
         "message" : "마이페이지 정보를 전송하였습니다.",
         "data": 
         {
