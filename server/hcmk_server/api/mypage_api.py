@@ -1,6 +1,6 @@
 from flask_restx import Resource, Namespace, fields
 from flask_jwt_extended import jwt_required
-from hcmk_server.services.mypage import get_recipe
+from hcmk_server.services.mypage import get_mypage
 
 mypage_ns = Namespace(
     name="mypage",
@@ -8,7 +8,7 @@ mypage_ns = Namespace(
 )
 
 recipe_fields = mypage_ns.model(
-    "liked_recipe",
+    "my_page_liked_recipe",
     {
         "recipe_id": fields.Integer,
         "recipe_name": fields.String,
@@ -17,7 +17,7 @@ recipe_fields = mypage_ns.model(
 )
 
 user_info_fields = mypage_ns.model(
-    "user_info",
+    "my_page_user_info",
     {
         "email": fields.String,
         "nickname": fields.String,
@@ -27,8 +27,8 @@ user_info_fields = mypage_ns.model(
     }
 )
 
-data_fields = mypage_ns.model(
-    "data",
+mypage_data_fields = mypage_ns.model(
+    "mypage_data",
     {
         "user_info": fields.Nested(user_info_fields),
         "liked_recipe": fields.List(fields.Nested(recipe_fields)),
@@ -41,7 +41,7 @@ mypage_fields = mypage_ns.model(
     {
         "result": fields.String,
         "message": fields.String,
-        "data": fields.Nested(data_fields)
+        "data": fields.Nested(mypage_data_fields)
     }
 )
 @mypage_ns.route('')
@@ -49,10 +49,9 @@ mypage_fields = mypage_ns.model(
 @mypage_ns.response(401, "Fail")
 class Mypage(Resource):
 
-    @mypage_ns.doc("POST Sign up for user")
     @mypage_ns.marshal_with(mypage_fields)
     @jwt_required()
     def get(self):
         """마이페이지에서 유저 정보, 스크랩한 레시피 리스트, 작성한 포스트의 레시피 리스트 보내주는 API"""
-        result = get_recipe()
+        result = get_mypage()
         return result
