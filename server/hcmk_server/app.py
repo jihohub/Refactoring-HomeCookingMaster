@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
@@ -22,6 +23,7 @@ def create_app():
     output: app
     """
     app = Flask(__name__)
+    CORS(app, supports_credentials=True)
 
     # Configure Database
     app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI

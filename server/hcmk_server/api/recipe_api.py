@@ -1,12 +1,12 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
-from sqlalchemy.sql.elements import Null
+# from sqlalchemy.sql.elements import Null
+from hcmk_server.services.s3 import boto3_image_upload
 from hcmk_server.services.recipe import (
     get_recipe,
     check_likes,
     add_post,
 )
-
 recipe_ns = Namespace(
     name="recipe",
     description="레시피 페이지를 관리하는 API.",
@@ -40,7 +40,9 @@ class AddPost(Resource):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
         user_id = request.json.get("user_id")
         post = request.json.get("post")
-        img = request.json.get("img")
+        # img = request.json.get("img")
+        img = request.files["img"]
         
-        result = add_post(user_id, recipe_id, post, img)
+        image_url = boto3_image_upload(img)
+        result = add_post(user_id, recipe_id, post, image_url)
         return jsonify(result = result)
