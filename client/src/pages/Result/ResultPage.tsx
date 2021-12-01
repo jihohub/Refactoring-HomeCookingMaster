@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import searchedImageSlice from "../../components/Result/searchedImageSlice";
+import { TextSearchBar } from "../../components/Result/TextSearchBar";
+import ItemList from "../../components/Result/ItemList";
+
 
 function ResultPage() {
-    const previewUrl = useSelector((state: RootStateOrAny) => state.searchedImageSlice.previewUrl);
 
     return (
         <div>
-            <img src={previewUrl} alt="preview" />
+            <TextSearchBar/>
+            <ItemList />
         </div>
     );
 }

@@ -9,9 +9,7 @@ import RegisterCompletePage from "./pages/Register/RegisterPage";
 import RegisterUserInfoPage from "./pages/Register/RegisterInfo";
 import TermsNConditionsPage from './pages/Register/TermsNConditions'
 import AboutPage from "./pages/About/AboutPage";
-import DictionaryPage from "./pages/Dictionary/DictionaryPage";
 import ResultPage from "./pages/Result/ResultPage";
-import SuggestionPage from "./pages/Suggestion/SuggestionPage";
 import RecipePage from "./pages/Recipe/RecipePage";
 import MyPage from "./pages/Mypage/MyPage";
 import ScrollToTop from "./components/Common/ScrollToTop";
@@ -34,8 +32,6 @@ function Router() {
                 <Route exact={true} path="/register/termsNConditions" element={<TermsNConditionsPage />} />
                 <Route exact={true} path="/register/userInfo" element={<RegisterUserInfoPage />} />
                 <Route exact={true} path="/register/complete" element={<RegisterCompletePage />} />
-                <Route exact={true} path="/suggestion" element={<SuggestionPage />} />
-                <Route exact={true} path="/dictionary" element={<DictionaryPage />} />
                 <Route exact={true} path="/about" element={<AboutPage />} />
             </Routes>
         </BrowserRouter>
