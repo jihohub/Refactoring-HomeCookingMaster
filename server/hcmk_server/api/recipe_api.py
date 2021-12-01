@@ -114,8 +114,8 @@ add_like_fields = recipe_ns.model(
     }
 )
 
-user_id_fields = recipe_ns.model(
-    "recipe_expect",
+add_like_expect_fields = recipe_ns.model(
+    "add_like_expect",
     {
         "user_id": fields.Integer,
     }
@@ -125,7 +125,7 @@ user_id_fields = recipe_ns.model(
 @recipe_ns.response(200, "success")
 @recipe_ns.response(500, "Failed")
 class AddLike(Resource):
-    @recipe_ns.expect(user_id_fields)
+    @recipe_ns.expect(add_like_expect_fields)
     @recipe_ns.marshal_with(add_like_fields)
     def post(self, recipe_id):
         """해당 레시피의 좋아요를 관리하는 api"""
@@ -143,11 +143,20 @@ add_post_fields = recipe_ns.model(
     }
 )
 
+add_post_expect_fields = recipe_ns.model(
+    "add_post_expect",
+    {
+        "user_id": fields.Integer,
+        "post": fields.String,
+        "img": fields.String,
+    }
+)
+
 @recipe_ns.route('/<int:recipe_id>/post')
 @recipe_ns.response(200, "success")
 @recipe_ns.response(500, "Failed")
 class AddPost(Resource):
-    @recipe_ns.expect(user_id_fields)
+    @recipe_ns.expect(add_post_expect_fields)
     @recipe_ns.marshal_with(add_post_fields)
     def post(self, recipe_id):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
