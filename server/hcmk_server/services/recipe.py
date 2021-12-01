@@ -92,10 +92,10 @@ def check_likes(recipe_id, user_id):
     add_like(recipe_id)
     return "add like"
 
-def add_post(user_id, recipe_id, post, img):
+def add_post(user_id, recipe_id, post, image_url):
     new_value = Post(
         post = post,
-        img = img,
+        img = image_url,
         user_id = user_id,
         recipe_id = recipe_id,
     )
