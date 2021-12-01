@@ -32,7 +32,7 @@ class User(db.Model):
 # 사용 편의에 따라 추후 변경 가능
     def to_dict(self):
         return {
-            "id": self.id, 
+            # "id": self.id, 
             "email": self.email, 
             "nickname": self.nickname, 
             "img": self.img, 

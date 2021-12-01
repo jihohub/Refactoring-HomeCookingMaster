@@ -50,7 +50,7 @@ def get_recipe(recipe_id):
                 return result
             tmp = []
             for post in posts:
-                p_dict = food.to_dict()
+                p_dict = post.to_dict()
                 tmp.append(p_dict)
             result['post_info'] = tmp
 

@@ -47,3 +47,10 @@ class Recipe(db.Model):
             "cooking_time": self.cooking_time,
             "food_id": self.food_id,
         }
+
+    def to_dict_for_mypage(self):
+        return {
+            "recipe_id": self.id,
+            "recipe_name": self.name,
+            "recipe_img": self.img,
+        }
