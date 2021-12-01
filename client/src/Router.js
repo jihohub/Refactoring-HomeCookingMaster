@@ -27,7 +27,7 @@ function Router() {
             {!hide && <Header />}
             <Routes>
                 <Route exact={true} path="/" element={<MainPage />} />
-                <Route exact={true} path="/recipe" element={<RecipePage />} />
+                <Route exact={true} path="/recipe/:id" element={<RecipePage />} />
                 <Route exact={true} path="/result" element={<ResultPage />} />
                 <Route exact={true} path="/mypage" element={<MyPage />} />
                 <Route exact={true} path="/login" element={<LoginPage />} />
