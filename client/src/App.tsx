@@ -6,12 +6,16 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import Router from "./Router";
 import hideHeaderSlice from "./components/Common/hideHeaderSlice";
 import searchedImageSlice from "./components/Result/searchedImageSlice";
+import searchText from "./redux/search";
+import getSearchList from "./redux/searchList";
 import "./App.css";
 
 function App() {
     const rootReducer = combineReducers({
         hideHeaderSlice: hideHeaderSlice,
-        searchedImageSlice: searchedImageSlice
+        searchedImageSlice: searchedImageSlice,
+        searchText : searchText,
+        getSearchList : getSearchList
     });
 
     const store = configureStore({

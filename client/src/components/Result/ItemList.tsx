@@ -3,35 +3,37 @@ import React, { useState, useEffect } from 'react';
 import { line,recipeIntro } from "../../css/result_csst";
 import { sample } from '../../assets/Sample.js';
 import { itemImg,imgList,itemStyle } from "../../css/result_csst";
-import { useDispatch, useSelector } from "react-redux";
-import {getList} from '../../redux/search';
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import {getList} from "../../redux/searchList"
 
 function ItemList(){
     const dispatch = useDispatch();
-    const foodList = useSelector((state) => state.searchText);
+    const searchWord = useSelector((state:RootStateOrAny) => state.searchText.word);
+    const [foodList, setFoodList] = useState([]);
     
     useEffect(() => {
-        // dispatch(getList(""));
-        console.log(dispatch(getList("")))
+        dispatch(getList(searchWord))
     },[])
 
+    const resultList = useSelector((state:RootStateOrAny) => state.getSearchList.list)
+    
+    console.log('resultList', resultList)
+    
     const onClick = () => {
-        console.log(foodList)
+        // dispatch(getList(searchWord))
+        // console.log('검색어',searchWord)
     }
     return(
         <>
             <div>
-                <p onClick = {onClick} css={recipeIntro}>다양한 레시피를 확인해보세요!</p>
+                <p onClick = {onClick} css={recipeIntro}>{searchWord} 검색결과 입니다.</p>
                 <hr css={line}/>
             </div>
             <div css={imgList}>
-            {sample.map(item => {
-                const img = item.img
-                const title = item.name
+            {Object.keys(resultList).map((item:any) => {
                 return(
-                    <div css={itemStyle} key={title}>
-                        <img src={img} alt={title} css={itemImg} />
-                        <p>{title}</p>
+                    <div css={itemStyle} key={item}>
+                        <p>{item}</p>
                     </div>
                 )
             })}
@@ -70,3 +72,16 @@ export default ItemList;
 
 // // chage page
 // const paginate = (pageNumber:any) => setCurrentPage(pageNumber)
+
+
+// {Object.keys(resultList).map((item:any) => {
+//     const img = item.img
+//     const title = item.name
+//     console.log('item', item)
+//     return(
+//         <div css={itemStyle} key={title}>
+//             {/* <img src={img} alt={title} css={itemImg} /> */}
+//             <p>{title}</p>
+//         </div>
+//     )
+// })}

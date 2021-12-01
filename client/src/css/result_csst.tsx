@@ -45,7 +45,7 @@ export const recipeIntro = css`
 `;
 
 export const line = css`
-    width: 75rem;
+    width: 75%;
     height: 7px;
     background-color: #fa9026;
     border: none;
