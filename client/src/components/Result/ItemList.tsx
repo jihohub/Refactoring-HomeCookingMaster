@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { line,recipeIntro } from "../../css/result_csst";
 import { sample } from '../../assets/Sample.js';
 import { itemImg,imgList,itemStyle } from "../../css/result_csst";
-import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import {getList} from '../../redux/search';
 
@@ -12,7 +11,7 @@ function ItemList(){
     const foodList = useSelector((state) => state.searchText);
     
     useEffect(() => {
-        dispatch(getList(""));
+        // dispatch(getList(""));
         console.log(dispatch(getList("")))
     },[])
 
