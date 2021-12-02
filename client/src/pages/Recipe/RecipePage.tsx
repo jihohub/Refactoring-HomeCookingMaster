@@ -19,21 +19,12 @@ function RecipePage() {
         };
     }, []);
     
-    const { food_info, post_info, recipe_info } = useSelector((state: RootStateOrAny) => state.recipeSlice);
+    const { food_info, ingredient_info, post_info, process_info, recipe_info } = useSelector((state: RootStateOrAny) => state.recipeSlice);
     
-    console.log(food_info);
-    console.log(post_info);
-    console.log(recipe_info);
-    
-    
-    const {
-        category_l,
-        category_m,
-        category_s,
-        food_id,
-        food_name
-    } = food_info;
-    const post = post_info;
+    console.log("1", ingredient_info);
+    console.log("2", process_info);
+    console.log("3", recipe_info);
+
     const {
         cooking_time,
         difficulty,
@@ -48,19 +39,39 @@ function RecipePage() {
 
     return (
         <div>
-            <img src={img} />
+            <img src={img} alt="food" />
             <Typography>{name}</Typography>
             <Typography>재료리스트</Typography>
-            <Typography>재료 룰루랄라</Typography>
+            {ingredient_info.map((item: any) => {
+                return (
+                    <div>
+                        <Typography>
+                            {item.name} {item.amount}
+                        </Typography>
+                    </div>
+                );
+            })}
             <Typography>레시피</Typography>
-            <Typography>1단계</Typography>
-            <Typography>하하</Typography>
-            <Typography>2단계</Typography>
-            <Typography>호호</Typography>
-            <Typography>3단계</Typography>
-            <Typography>룰루</Typography>
+            {process_info.map((item: any) => {
+                return (
+                    <div>
+                        <img src={item.img} alt="recipe" />
+                        <Typography>{item.step}</Typography>
+                        <Typography>{item.recipe}</Typography>
+                    </div>
+                );
+            })}
             <Typography>다른 레시피 보기</Typography>
             <Typography>생생한 리뷰 보기</Typography>
+            {post_info.map((item: any) => {
+                return (
+                    <div>
+                        <Typography>
+                            {item.id} {item.post} {item.timestamp}
+                        </Typography>
+                    </div>
+                );
+            })}
         </div>
     );
 }

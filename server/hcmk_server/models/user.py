@@ -20,6 +20,8 @@ class User(db.Model):
     img = db.Column(db.String(1024))
     intro = db.Column(db.Text)
     exp = db.Column(db.Integer, nullable=False)
+    access_token = db.Column(db.String(1024), nullable=True)
+    refresh_token = db.Column(db.String(1024), nullable=True)
 
     def __init__(self, email: str, password: str, nickname: str):
         self.email = email
@@ -30,7 +32,7 @@ class User(db.Model):
 # 사용 편의에 따라 추후 변경 가능
     def to_dict(self):
         return {
-            "id": self.id, 
+            # "id": self.id, 
             "email": self.email, 
             "nickname": self.nickname, 
             "img": self.img, 

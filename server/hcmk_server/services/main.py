@@ -7,7 +7,7 @@ def get_food_list(data):
     try:
         foods = Food.query.filter(Food.name.like(_like)).order_by(Food.name.asc())
         if foods is None:
-            return None
+            return result
         for food in foods:
             recipes = Recipe.query.filter(Recipe.food_id == food.id).all()
             tmp = []

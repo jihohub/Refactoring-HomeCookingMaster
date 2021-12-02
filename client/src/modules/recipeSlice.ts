@@ -9,7 +9,20 @@ interface RecipeState {
         id: number;
         name: string;
     };
-    post_info: {};
+    ingredient_info: Array<{
+        amount: string;
+        id: number;
+        name: string;
+        recipe_id: number;
+    }>;
+    post_info: [];
+    process_info: Array<{
+        id: number;
+        img: string;
+        recipe: string;
+        recipe_id: number;
+        step: number;
+    }>;
     recipe_info: {
         cooking_time: string;
         difficulty: string;
@@ -33,7 +46,9 @@ const initialState: RecipeState = {
         id: 0,
         name: ""
     },
-    post_info: {},
+    ingredient_info: [],
+    post_info: [],
+    process_info: [],
     recipe_info: {
         cooking_time: "",
         difficulty: "",
@@ -72,9 +87,9 @@ export const recipeSlice = createSlice({
                 id: 0,
                 name: ""
             };
-            state.post_info = {
-
-            };
+            state.ingredient_info = [];
+            state.post_info = [];
+            state.process_info = [];
             state.recipe_info = {
                 cooking_time: "",
                 difficulty: "",
@@ -103,7 +118,9 @@ export const recipeSlice = createSlice({
 
         builder.addCase(getRecipe.fulfilled, (state, action: PayloadAction<any>) => {
             state.food_info = action.payload.food_info;
+            state.ingredient_info = action.payload.ingredient_info;
             state.post_info = action.payload.post_info;
+            state.process_info = action.payload.process_info;
             state.recipe_info = action.payload.recipe_info;
         });
     },
