@@ -8,6 +8,7 @@ import hideHeaderSlice from "./components/Common/hideHeaderSlice";
 import searchedImageSlice from "./components/Result/searchedImageSlice";
 import searchText from "./redux/search";
 import getSearchList from "./redux/searchList";
+import getUserInfo from "./redux/userLogin";
 import "./App.css";
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         hideHeaderSlice: hideHeaderSlice,
         searchedImageSlice: searchedImageSlice,
         searchText : searchText,
-        getSearchList : getSearchList
+        getSearchList : getSearchList,
+        getUserInfo : getUserInfo
     });
 
     const store = configureStore({

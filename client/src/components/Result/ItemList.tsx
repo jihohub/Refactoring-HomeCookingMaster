@@ -30,13 +30,13 @@ function ItemList(){
                 <hr css={line}/>
             </div>
             <div css={imgList}>
-            {Object.keys(resultList).map((item:any) => {
+            {resultList ? Object.keys(resultList).map((item:any) => {
                 return(
                     <div css={itemStyle} key={item}>
                         <p>{item}</p>
                     </div>
                 )
-            })}
+            }) : ""}
             </div>
         </>
     )
