@@ -1,5 +1,7 @@
+from pytz import timezone
 from datetime import datetime
 from hcmk_server.db_connect import db
+
 '''
 댓글 DB
 '''
@@ -22,7 +24,7 @@ class Post(db.Model):
     def __init__(self, post, img, user_id, recipe_id):
         self.post = post
         self.img = img
-        self.timestamp = datetime.now().isoformat(timespec='seconds').replace("T", " ")
+        self.timestamp = datetime.now(timezone('Asia/Seoul'))
         self.user_id = user_id
         self.recipe_id = recipe_id
 
