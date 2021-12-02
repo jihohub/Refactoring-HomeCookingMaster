@@ -23,17 +23,22 @@ def boto3_image_upload(file):
     output: 저장한 image url
     '''
     file_name = uuid.uuid4().hex
-    file_type = file.name.split(".")[-1]
+    file_type = file.filename.split(".")[-1]
     file_path = f"uploaded_images/{file_name}.{file_type}"
     s3_client.put_object(
-        Bucket=BUCKET_NAME, Body=file, Key=file_path, ContentType= f"image/{file_type}"
+        ACL='public-read',  # 읽기 권한 부여
+        Bucket=BUCKET_NAME, 
+        Body=file, 
+        Key=file_path, 
+        ContentType= f"image/{file_type}",
     )
     result = aws_public_root_url + file_path
     return result
-## Example
+# # Example
 # img = open('./maincharacter.png', 'rb') #<_io.BufferedReader name='./maincharacter.png'>
 # image_url = boto3_image_upload(img)
-## img_url 형태: "https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/uploaded_images/8215f60b23b749e49c0cdacddda45d4b.png"
+# print(image_url)
+# # img_url 형태: "https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/uploaded_images/8215f60b23b749e49c0cdacddda45d4b.png"
 
 def boto3_image_delete(image_url):
     '''
@@ -43,5 +48,5 @@ def boto3_image_delete(image_url):
     print(file_name)
     s3_client.delete_object(Bucket=BUCKET_NAME, Key=file_name)
 ## Example
-# tmp_url = image_url
+# tmp_url = 'https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/uploaded_images/1eab904e55c449bfb53e34418805f77c.'
 # boto3_image_delete(tmp_url)
