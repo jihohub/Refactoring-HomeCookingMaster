@@ -60,6 +60,23 @@ def validate_token(token):
     return True
 
 
+def signup(email, password, nickname, img, intro):
+        # 패스워드 hash 변환
+        password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+        # 필수 정보 db에 입력 및 현재 유저 정보 읽기
+        user = get_user_by_id(insert_user(email, password_hash, nickname, img, intro))
+
+        return {
+            "result" : "Success",
+            "message" : "회원 정보가 DB에 저장되었습니다.",
+            'data' : {
+                'user_id': user.id,
+                'nickname': user.nickname,
+            }
+        } , 200
+
+
+
 def login(email, password):
     user = get_user_by_email(email)
 
@@ -139,3 +156,34 @@ def refresh(refresh_token):
     except Exception:
         db.session.rollback()
         raise
+
+
+def val_email(email):
+    user = get_user_by_email(email)
+    
+    if user:
+        return {
+        "is_valid" : False,
+        "message" : "중복되는 email이 존재합니다."
+        }, 200
+    else :
+        return {
+        "is_valid" : True,
+        "message" : "중복되는 email이 존재하지 않습니다."
+        }, 200
+    
+
+def val_nickname(nickname):
+    user = get_user_by_nickname(nickname)
+    
+    if user:
+        return {
+        "is_valid" : False,
+        "message" : "중복되는 nickname이 존재합니다."
+        }, 200
+    else :
+        return {
+        "is_valid" : True,
+        "message" : "중복되는 nickname이 존재하지 않습니다."
+        }, 200
+    
