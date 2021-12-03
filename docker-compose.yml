@@ -34,5 +34,5 @@ services:
       - ./server:/server
     ports:
       - 5000:5000
-    depends_on:
-      - HCMK-mysql
+    # depends_on:
+    #   - HCMK-mysql

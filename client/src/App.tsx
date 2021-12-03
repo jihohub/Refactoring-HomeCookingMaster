@@ -8,6 +8,9 @@ import hideHeaderSlice from "./modules/hideHeaderSlice";
 import recipeSlice from "./modules/recipeSlice";
 import rankingSlice from "./modules/rankingSlice";
 import searchedImageSlice from "./components/Result/searchedImageSlice";
+import searchText from "./redux/search";
+import getSearchList from "./redux/searchList";
+import getUserInfo from "./redux/userLogin";
 import "./App.css";
 
 function App() {
@@ -15,7 +18,10 @@ function App() {
         hideHeaderSlice: hideHeaderSlice,
         searchedImageSlice: searchedImageSlice,
         recipeSlice: recipeSlice,
-        rankingSlice: rankingSlice
+        rankingSlice: rankingSlice,
+        searchText : searchText,
+        getSearchList : getSearchList,
+        getUserInfo : getUserInfo
     });
 
     const store = configureStore({

@@ -5,6 +5,8 @@ const asd = css`
     background-image: url('../../assets/main.jpg');
     width: 100vw;
     height: 100vh;
+    color: #fa9026;
+    font-size: 90px;
 `
 
 function DictionaryPage() {
