@@ -45,7 +45,6 @@ def boto3_image_delete(image_url):
     input: image url
     '''
     file_name = image_url.split(aws_public_root_url)[-1] # 입력박는 image_url 보고 수정 예정
-    print(file_name)
     s3_client.delete_object(Bucket=BUCKET_NAME, Key=file_name)
 ## Example
 # tmp_url = 'https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/uploaded_images/1eab904e55c449bfb53e34418805f77c.'

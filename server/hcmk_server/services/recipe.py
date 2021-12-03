@@ -39,7 +39,7 @@ def get_recipe(recipe_id):
         tmp = []
         for process in processes:
             pro_dict = process.to_dict()
-            # tmp[pro_dict.step] = pro_dict
+            # tmp[pro_dict['step']] = pro_dict
             tmp.append(pro_dict)
         data['process_info'] = tmp
     
@@ -52,7 +52,7 @@ def get_recipe(recipe_id):
                 tmp = []
                 for post in posts:
                     p_dict = post.to_dict()
-                    user = User.query.filter(User.id == p_dict.user_id).first()
+                    user = User.query.filter(User.id == p_dict['user_id']).first()
                     p_dict["nickname"] = user.nickname
                     tmp.append(p_dict)
                 data['post_info'] = tmp
