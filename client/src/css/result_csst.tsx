@@ -57,12 +57,18 @@ export const itemImg = css`
 `;
 
 export const imgList = css`
-    display: flex;
+    display: block;
     flex-direction: row;
+    /* width: 50%; */
 `;
 
 export const itemStyle = css`
     display: block;
     flex-direction: column;
     margin: 2rem;
+    width: 100%;
+`;
+
+export const itembtn = css`
+    width: 50%;
 `;

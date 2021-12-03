@@ -117,6 +117,7 @@ const mainWrapperStyle = css`
     }
 `
 
+
 const MainSearch = () => {
     return (
         <div id="sec1" className="page-section">
@@ -193,6 +194,19 @@ const Div6 = () => {
 }
 
 function MainPage() {
+    // const token = useSelector((state:RootStateOrAny) => state.getUserInfo.list)
+
+    // const checkLogState = () => {
+    //     if(token){
+    //         localStorage.setItem('id', token['refresh_token'])
+    //         sessionStorage.setItem('id', token['access_token'])
+            
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     checkLogState();
+    // },[])
 
     return (
         <div css={mainWrapperStyle}>

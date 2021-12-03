@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const name = 'searchText';
 
@@ -11,11 +10,6 @@ const initialState : stateType = {
     word : ''
 }
 
-// export const getList = createAsyncThunk("GET_ITEM", async (recipe_id: string) => {
-//     const response = await axios.get("/api/main/search/str", {params:{data:recipe_id}})
-//     console.log('getList',response.data.result)
-//     return response.data.result;
-// })
 
 export const searchText = createSlice({
     name,
@@ -23,7 +17,7 @@ export const searchText = createSlice({
     reducers : {
         setWord(state,action : PayloadAction<String>){
             state.word = action.payload;
-            console.log(state.word);
+            console.log('state.word', state.word);
         }
     },
 });

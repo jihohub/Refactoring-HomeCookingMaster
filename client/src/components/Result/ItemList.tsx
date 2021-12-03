@@ -1,43 +1,55 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from 'react';
 import { line,recipeIntro } from "../../css/result_csst";
-import { sample } from '../../assets/Sample.js';
-import { itemImg,imgList,itemStyle } from "../../css/result_csst";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import {getList} from "../../redux/searchList"
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
-function ItemList(){
+import queryString from 'query-string';
+
+function ItemList(location:any){
+    console.log('location',location);
+
+    const query = queryString.parse(location.search)
+    console.log('query',query)
+
     const dispatch = useDispatch();
     const searchWord = useSelector((state:RootStateOrAny) => state.searchText.word);
-    const [foodList, setFoodList] = useState([]);
-    
+
     useEffect(() => {
         dispatch(getList(searchWord))
-    },[])
+        console.log('getList 11')
+    },[searchWord])
+
 
     const resultList = useSelector((state:RootStateOrAny) => state.getSearchList.list)
-    
-    console.log('resultList', resultList)
-    
-    const onClick = () => {
-        // dispatch(getList(searchWord))
-        // console.log('검색어',searchWord)
-    }
+
     return(
         <>
             <div>
-                <p onClick = {onClick} css={recipeIntro}>{searchWord} 검색결과 입니다.</p>
+                <p css={recipeIntro}>{searchWord ? `${searchWord} 검색결과 입니다.` : "다양한 레시피를 확인해보세요."}</p>
                 <hr css={line}/>
             </div>
-            <div css={imgList}>
-            {resultList ? Object.keys(resultList).map((item:any) => {
-                return(
-                    <div css={itemStyle} key={item}>
-                        <p>{item}</p>
-                    </div>
-                )
-            }) : ""}
-            </div>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                p: 5,
+                ml: 4,
+                flexDirection:'row'
+            }}>
+                <Grid container spacing={2}>
+                    {resultList ? Object.keys(resultList).map((item:any) => (
+                            <div>
+                                <Button variant="outlined"
+                                    sx={{width: 150, fontSize:15, height:60}}
+                                >{item}</Button>
+                            </div>
+                        )
+                    ) : ""}
+                </Grid>
+            </Box>
         </>
     )
 }

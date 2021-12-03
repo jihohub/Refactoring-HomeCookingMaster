@@ -12,6 +12,7 @@ const initialState : stateType = {
 }
 
 export const getList = createAsyncThunk("GET_ITEM", async (recipe_id: string) => {
+    console.log('before axios')
     const response = await axios.get("/api/main/search/str", {params:{data:recipe_id}})
     console.log('getList',response.data.data)
     return response.data.data;

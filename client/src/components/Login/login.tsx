@@ -4,14 +4,13 @@ import { RootStateOrAny } from 'react-redux';
 import { login_title, loign_box, input_box } from "../../css/login_css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { getUser } from '../../redux/userLogin';
+import { getUser, getUserInfo } from '../../redux/userLogin';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
     const [check, setCheck] = useState<boolean>(true)
     const [id, setId] = useState<string>("");
     const [pw, setPw] = useState<string>("");
-    const [userInfo, setUserInfo] = useState<{}>({});
 
     const dispatch = useDispatch();
 
@@ -25,40 +24,36 @@ function Login() {
         setPw(e.target.value)
     }
 
-    useEffect(() => {
-        dispatch(getUser(userInfo))
-    }, [userInfo])
-
-
-    const token = useSelector((state:RootStateOrAny) => state.getUserInfo.list)
+    let token = useSelector((state:RootStateOrAny) => state.getUserInfo.list)
 
     const checkLogState = () => {
-        if(token !== "Fail"){
-            localStorage.setItem('id', token['refresh_token'])
-            sessionStorage.setItem('id', token['access_token'])
-            window.location.replace('/')
-        }else{
-            setCheck(false)
-        }
+        dispatch(getUser({
+            email : id,
+            password : pw
+        }))
+        
+
+        // dispatch(getUserInfo)
+        // if(!token){
+        //     setCheck(false)
+        //     console.log('false 됨')
+        // }
+        // window.location.replace('/')
     }
 
     const handleLogin = (e:any) => {
         e.preventDefault();
-        // const id = (document.getElementById('email') as HTMLInputElement).value
-        // const pw = (document.getElementById('pw') as HTMLInputElement).value
         if(id && pw){
             setCheck(true)
-            setUserInfo({
-                email : id,
-                password : pw
-            })
             checkLogState();
+            console.log('들어옴')
         }else{
             setCheck(false);
         }
     }
 
     return (
+        
         <div>
             <h1 css={login_title}>로그인</h1>
             <div className="login" css={loign_box}>

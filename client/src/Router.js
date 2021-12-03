@@ -29,8 +29,8 @@ function Router() {
                 <Route path="/" element={<MainPage />} />
                 <Route path="/recipe" element={<RecipePage />} />
                 <Route path="/result" element={<ResultPage />}>
-                    <Route path=":name" element={<SearchResultPage />} />
-                    <Route path=":name:number" element={<ResultInfo />} />
+                    {/* <Route path=":name" element={<SearchResultPage />} /> */}
+                    {/* <Route path=":name:number" element={<ResultInfo />} /> */}
                 </Route>
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/login" element={<LoginPage />} />

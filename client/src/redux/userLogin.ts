@@ -5,20 +5,24 @@ const name = 'getUserInfo';
 
 type stateType = {
     list : [],
+    success : boolean | null
 }
 
 const initialState : stateType = {
     list : [],
+    success : null
 }
 
-export const getUser = createAsyncThunk("POST_USER", async (userList:{}) => {
+export const getUser = createAsyncThunk("POST_USER", async (userList:{}, ThunkAPI:any) => {
     console.log('userLiset',userList)
     try{
+        const { getUserInfo } = ThunkAPI.getState();
         const response = await axios.post("/api/auth/login", userList)
         console.log('getUser',response.data.data)
+        getUserInfo.success = true;
         return response.data.data;
     }catch(e){
-        return "Fail"
+        return false
     }
 })
 

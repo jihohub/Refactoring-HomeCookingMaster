@@ -3,19 +3,25 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Paper, InputBase, Button } from "@mui/material";
 import { search,searchBtn,elem,intro,toImage } from "../../css/result_csst";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector, RootStateOrAny } from "react-redux";
 import { setWord } from "../../redux/search";
+import { useNavigate } from "react-router";
 
 export const TextSearchBar = () => {
     const [userText, setUserText] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleTextChange = (e:any) => {
         setUserText(e.target.value)
     }
 
+    const searchWord = useSelector((state:RootStateOrAny) => state.searchText.word);
+
     const handleTextClick = () => {
+        console.log('1')
         dispatch(setWord(userText))
+        navigate(`/result?data=${searchWord}`)
     }
 
     return (
@@ -32,7 +38,7 @@ export const TextSearchBar = () => {
                                     onChange={handleTextChange}
                                 />
                         </Paper>
-                    <Link to={`/result/${userText}`} style={{textDecoration:'none'}}>
+                    {/* <Link to={`/result/${userText}`} style={{textDecoration:'none'}}> */}
                     <Button
                         aria-label="directions"
                         className="searchButton"
@@ -41,7 +47,7 @@ export const TextSearchBar = () => {
                     >
                         검색
                     </Button>
-                    </Link>
+                    {/* </Link> */}
                 </div>
                 <p css={toImage}>
                     <Link to="/" style={{textDecoration:'none', color:'blue'}}>
