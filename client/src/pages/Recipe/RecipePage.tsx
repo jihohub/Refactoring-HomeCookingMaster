@@ -11,7 +11,7 @@ function RecipePage() {
     const dispatch = useDispatch();
     const params = useParams();
     const id = Number(params.id);
-    console.log(id);
+    console.log("hm", id, typeof id);
 
     useEffect(() => {
         dispatch(getRecipe(id));
@@ -64,7 +64,7 @@ function RecipePage() {
             })}
             <Typography>다른 레시피 보기</Typography>
             <Typography>생생한 리뷰 보기</Typography>
-            <ReviewList />
+            <ReviewList post={post_info} />
         </div>
     );
 }

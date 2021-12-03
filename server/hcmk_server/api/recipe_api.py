@@ -69,6 +69,7 @@ get_recipe_post_info_fields = recipe_ns.model(
         "img": fields.String,
         "timestamp": fields.String,
         "user_id": fields.Integer,
+        "nickname": fields.String,
         "recipe_id": fields.Integer,
     }
 )
@@ -163,7 +164,7 @@ class AddPost(Resource):
         user_id = request.form.get("user_id")
         post = request.form.get("post")        
         img = request.files["img"]
-        
+
         image_url = boto3_image_upload(img)
         if image_url[-1] == ".":
             boto3_image_delete(image_url)
