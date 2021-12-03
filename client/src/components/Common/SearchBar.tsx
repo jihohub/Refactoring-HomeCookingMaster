@@ -8,7 +8,7 @@ import { setImageFile, setPreviewUrl } from "../../components/Result/searchedIma
 import { Paper, Input, InputBase, Divider, IconButton, Button } from "@mui/material";
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 
-export const SearchBar = () => {
+const SearchBar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [imagefile, setImagefile] = useState();
@@ -70,3 +70,5 @@ export const SearchBar = () => {
         </div>
     );
 }
+
+export default SearchBar;

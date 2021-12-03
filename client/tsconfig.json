@@ -20,6 +20,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true
@@ -29,5 +30,8 @@
   ],
   "exclude": [
     "node_modules"
+  ],
+  "typeRoots": [
+    "src/types"
   ]
 }

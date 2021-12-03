@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { setHideTrue, setHideFalse } from "./hideHeaderSlice";
+import { setHideTrue, setHideFalse } from "../../modules/hideHeaderSlice";
 
 export default function HideNavBar() {
     const dispatch = useDispatch();
