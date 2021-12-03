@@ -16,7 +16,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     email = db.Column(db.String(256), nullable=False, unique=True)
     password = db.Column(db.String(64), nullable=False)
-    nickname = db.Column(db.String(128))
+    nickname = db.Column(db.String(128), nullable=False)
     img = db.Column(db.String(1024))
     intro = db.Column(db.Text)
     exp = db.Column(db.Integer, nullable=False)
