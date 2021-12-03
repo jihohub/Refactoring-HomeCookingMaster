@@ -47,7 +47,7 @@ def get_recipe(recipe_id):
             '''5. 댓글 데이터 가져오기'''
             posts = Post.query.filter(Post.recipe_id == recipe_id).all()
             if posts is None:
-                data['post_info'] = {}
+                data['post_info'] = []
             else :
                 tmp = []
                 for post in posts:
