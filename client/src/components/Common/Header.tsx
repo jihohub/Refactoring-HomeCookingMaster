@@ -19,7 +19,7 @@ function Header() {
         }else{
             setLogCheck(false)
         }
-    },[])
+    },[localID])
 
     const handleLogout = async () => {
         const res = await axios.delete("/api/auth/logout", {
@@ -27,13 +27,13 @@ function Header() {
                 Authorization: 'Bearer ' + sessionID
             }
         })
-        console.log('res',res)
+        console.log('<Header>: logout delete api response',res)
     }
 
     const handleLog = () => {
         setOpen(false)
         handleLogout();
-        console.log('logout')
+        console.log('<Header> : logout')
         localStorage.removeItem('id')
         sessionStorage.removeItem('id')
         // window.location.replace('/')

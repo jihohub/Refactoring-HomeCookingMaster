@@ -1,20 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
 import { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { terms,line,terms_cnt,terms_title,service_title, service_sub_title, all_agree,btn,more_btn,more_btn_show, agree_btn, select_cnt } from "../../css/register_css";
+import { terms,line,terms_cnt,terms_title,service_title, service_sub_title, all_agree,btn,agree_btn, select_cnt } from "../../css/register_css";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useNavigate } from "react-router";
-
 
 function TermsNConditions() {
-    const navigate = useNavigate();
     // 약관 보기 버튼
     const [open1, setOpen1] = useState(false);
     const [open2, setOpen2] = useState(false);
@@ -56,25 +51,6 @@ function TermsNConditions() {
             }
         }
     }, [open1,open2]);
-    
-    // const [moreBtn1, setMoreBtn1] = useState<boolean>(false)
-    // const [moreBtn2, setMoreBtn2] = useState<boolean>(false)
-
-    // const changeBtn1 = () => {
-    //     setMoreBtn1(!moreBtn1)
-    // }
-
-    // const changeBtn2 = () => {
-    //     setMoreBtn2(!moreBtn2)
-    // }
-
-    const confirmChecked = () => {
-        if(check1 && check2 && check3){
-            setCheckAll(true)
-        }else{
-            setCheckAll(false)
-        }
-    }
 
     // 약관 동의 체크 
     const [checkAll, setCheckAll] = useState<boolean>(false)
@@ -89,18 +65,23 @@ function TermsNConditions() {
 
     const handleCheck1 = () => {
         setCheck1(!check1)
-        confirmChecked();
     }
 
     const handleCheck2 = () => {
         setCheck2(!check2)
-        confirmChecked();
     }
 
     const handleCheck3 = () => {
         setCheck3(!check3)
-        confirmChecked();
     }
+
+    useEffect(() => {
+        if (check1 && check2 && check3) {
+            setCheckAll(true);
+        } else {
+            setCheckAll(false);
+        }
+    }, [check1, check2, check3]);
 
     // 약관 전체 동의 체크
     const handleCheck = () => {
@@ -123,45 +104,43 @@ function TermsNConditions() {
             <div id="agree_box" css={terms_cnt}>
                 <p css={service_title}>집밥꼬꼬선생</p>
                 <p css={service_sub_title}>서비스 약관에 동의해주세요.</p>
+                <div css={all_agree}>
+                    <div>
+                        <label style={{cursor: "pointer"}}>
+                            <Checkbox id="check_all" color="warning" checked={checkAll} onChange={handleCheckAll}/>
+                            <strong>약관에 모두 동의합니다.</strong>
+                        </label>
+                    </div>
+                </div>
+                <div css={select_cnt}>
                     <div css={all_agree}>
-                        <div>
+                        <div >
                             <label style={{cursor: "pointer"}}>
-                                <Checkbox id="check_all" color="warning" checked={checkAll} onChange={handleCheckAll}/>
-                                <strong>약관에 모두 동의합니다.</strong>
+                                <Checkbox id="check_one" color="warning" checked={check1} onChange={handleCheck1}/>
+                                <strong>[필수] 만 14세 이상입니다.</strong>
                             </label>
                         </div>
                     </div>
-                    <div css={select_cnt}>
-                        <div css={all_agree}>
-                            <div >
-                                {/* <input type="checkbox" id="check2" />  */}
-                                <label style={{cursor: "pointer"}}>
-                                    <Checkbox id="check_one" color="warning" checked={check1} onChange={handleCheck1}/>
-                                    <strong>만 14세 이상입니다.</strong>
-                                </label>
-                            </div>
-                        </div>
-                        <div css={all_agree}>
-                            <div >
-                                {/* <input type="checkbox" id="check3" />  */}
-                                <label style={{cursor: "pointer"}}>
-                                    <Checkbox id="check_one" color="warning" checked={check2} onChange={handleCheck2} />
-                                    <strong>[필수] 이용약관</strong>
-                                </label>
-                                <Button 
-                                    variant="text" 
-                                    onClick={handleClickOpen1('paper')} 
-                                    size="small" 
-                                    sx={{fontWeight:'bold'}}
-                                    color="warning"
-                                >보기</Button>
-                                <Dialog
-                                    open={open1}
-                                    onClose={handleClose1}
-                                    scroll={scroll1}
-                                >
-                                    <DialogTitle>[필수] 이용약관</DialogTitle>
-                                    <DialogContent dividers={scroll1 === 'paper'}>
+                    <div css={all_agree}>
+                        <div >
+                            <label style={{cursor: "pointer"}}>
+                                <Checkbox id="check_one" color="warning" checked={check2} onChange={handleCheck2} />
+                                <strong>[필수] 이용약관</strong>
+                            </label>
+                            <Button 
+                                variant="text" 
+                                onClick={handleClickOpen1('paper')} 
+                                size="small" 
+                                sx={{fontWeight:'bold'}}
+                                color="warning"
+                            >보기</Button>
+                            <Dialog
+                                open={open1}
+                                onClose={handleClose1}
+                                scroll={scroll1}
+                            >
+                                <DialogTitle>[필수] 이용약관</DialogTitle>
+                                <DialogContent dividers={scroll1 === 'paper'}>
                                     <DialogContentText
                                         ref={descriptionElementRef1}
                                         tabIndex={-1}
@@ -198,65 +177,64 @@ function TermsNConditions() {
                                         2. 회사와 이용자 간의 분쟁이 발생한 경우 그에 대하여 대한민국의 법령을 적용합니다.
                                         3. 서비스 이용 중 발생한 회사와 이용자 간의 소송은 회사의 본점 소재지를 관할하는 법원을 관할법원으로 합니다.
                                     </DialogContentText>
-                                    </DialogContent>
-                                    </Dialog>
-                            </div>
-                            {/* <p css={moreBtn1 ? more_btn_show : more_btn}></p> */}
-                        </div>
-                        <div css={all_agree}>
-                            <div >
-                                {/* <input type="checkbox" id="check4" /> */}
-                                <label style={{cursor: "pointer"}}>
-                                    <Checkbox id="check_one" color="warning" checked={check3} onChange={handleCheck3} />
-                                    <strong>[필수] 개인정보 수집 및 이용 동의</strong>
-                                </label>
-                                <Button 
-                                    variant="text" 
-                                    onClick={handleClickOpen2('paper')} 
-                                    size="small" 
-                                    sx={{fontWeight:'bold'}}
-                                    color="warning"
-                                >보기</Button>
-                                <Dialog
-                                    open={open2}
-                                    onClose={handleClose2}
-                                    scroll={scroll2}
-                                >
-                                    <DialogTitle>[필수] 개인정보 수집 및 이용 동의</DialogTitle>
-                                    <DialogContent dividers={scroll2 === 'paper'}>
-                                    <DialogContentText
-                                        ref={descriptionElementRef2}
-                                        tabIndex={-1}
-                                    >
-                                        집밥꼬꼬선생(이하 ‘회사’라 한다)은 개인정보 보호법 제30조에 따라 회사의 서비스를 이용하는 회원(이하 ‘이용자’라 한다) 의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립·공개합니다.<br />
-                                        제1조 총칙
-                                        １. 개인정보란 생존하는 개인에 관한 정보로서 해당 정보에 포함되어 있는 이름, 연락처 등의 사항에 의하여 개인을 식별할 수 있는 정보를 말합니다.
-                                        ２. 회사는 이용자의 개인정보를 소중히 취급하며 정보통신망 이용촉진 및 정보보호 등에 관한 법률상의 개인정보보호규정 및 정보통신부가 제정한 개인정보보호지침을 준수하고 있습니다. 회사는 개인정보취급방침을 통하여 이용자가 제공하는 개인정보가 어떠한 목적과 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
-                                        ３. 회사는 개인정보취급방침을 홈페이지 첫 화면에 공개함으로써 이용자가 언제나 용이하게 확인할 수 있도록 조치하고 있습니다.
-                                        ４. 회사는 개인정보취급방침의 지속적인 개선을 위하여 개인정보취급방침을 개정하는데 필요한 절차를 정하고 있습니다.<br />
-                                        제2조 수집하는 개인정보의 항목 및 수집방법
-                                        １. 회사는 회원 가입 시 서비스 제공을 위해 필요한 최소한의 개인정보만을 수집합니다.
-                                        ２. 이용자는 회사의 서비스를 이용하기 위해서 회원 가입 시 개인정보를 입력해야 합니다.
-                                        가) 필수항목 : 아이디(ID), 비밀번호, 닉네임, 이메일주소, 성별, 생년월일
-                                        나) 선택항목 : 사진, 블로그 주소
-                                    </DialogContentText>
-                                    </DialogContent>
-                                    </Dialog>
-                                {/* <button onClick={changeBtn2}>보기</button> */}
-                            </div>
-                            {/* <p css={moreBtn2 ? more_btn_show : more_btn}></p> */}
+                                </DialogContent>
+                            </Dialog>
                         </div>
                     </div>
-                    <div>
-                        <Link to="/register/userInfo" css={agree_btn}>
-                        <Button id="nextBtn" variant="contained" color="warning" disabled={check2 && check3 ? false : true} css={btn}>
-                                다음
-                            </Button>
-                        </Link>
+                    <div css={all_agree}>
+                        <div >
+                            <label style={{cursor: "pointer"}}>
+                                <Checkbox id="check_one" color="warning" checked={check3} onChange={handleCheck3} />
+                                <strong>[필수] 개인정보 수집 및 이용 동의</strong>
+                            </label>
+                            <Button 
+                                variant="text" 
+                                onClick={handleClickOpen2('paper')} 
+                                size="small" 
+                                sx={{fontWeight:'bold'}}
+                                color="warning"
+                            >보기</Button>
+                            <Dialog
+                                open={open2}
+                                onClose={handleClose2}
+                                scroll={scroll2}
+                            >
+                                <DialogTitle>[필수] 개인정보 수집 및 이용 동의</DialogTitle>
+                                    <DialogContent dividers={scroll2 === 'paper'}>
+                                        <DialogContentText
+                                            ref={descriptionElementRef2}
+                                            tabIndex={-1}
+                                        >
+                                            집밥꼬꼬선생(이하 ‘회사’라 한다)은 개인정보 보호법 제30조에 따라 회사의 서비스를 이용하는 회원(이하 ‘이용자’라 한다) 의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립·공개합니다.<br />
+                                            제1조 총칙
+                                            １. 개인정보란 생존하는 개인에 관한 정보로서 해당 정보에 포함되어 있는 이름, 연락처 등의 사항에 의하여 개인을 식별할 수 있는 정보를 말합니다.
+                                            ２. 회사는 이용자의 개인정보를 소중히 취급하며 정보통신망 이용촉진 및 정보보호 등에 관한 법률상의 개인정보보호규정 및 정보통신부가 제정한 개인정보보호지침을 준수하고 있습니다. 회사는 개인정보취급방침을 통하여 이용자가 제공하는 개인정보가 어떠한 목적과 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
+                                            ３. 회사는 개인정보취급방침을 홈페이지 첫 화면에 공개함으로써 이용자가 언제나 용이하게 확인할 수 있도록 조치하고 있습니다.
+                                            ４. 회사는 개인정보취급방침의 지속적인 개선을 위하여 개인정보취급방침을 개정하는데 필요한 절차를 정하고 있습니다.<br />
+                                            제2조 수집하는 개인정보의 항목 및 수집방법
+                                            １. 회사는 회원 가입 시 서비스 제공을 위해 필요한 최소한의 개인정보만을 수집합니다.
+                                            ２. 이용자는 회사의 서비스를 이용하기 위해서 회원 가입 시 개인정보를 입력해야 합니다.
+                                            가) 필수항목 : 아이디(ID), 비밀번호, 닉네임, 이메일주소, 성별, 생년월일
+                                            나) 선택항목 : 사진, 블로그 주소
+                                        </DialogContentText>
+                                    </DialogContent>
+                                </Dialog>
+                        </div>
                     </div>
                 </div>
-                
+                <div>
+                    <Link to="/register/userInfo" css={agree_btn}>
+                        <Button 
+                            id="nextBtn" variant="contained" 
+                            color="warning"
+                            disabled={checkAll ? false : true} css={btn}
+                        >
+                            다음
+                        </Button>
+                    </Link>
+                </div>
             </div>
+        </div>
     );
 }
 

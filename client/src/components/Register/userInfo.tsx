@@ -1,36 +1,49 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { userInfo,terms_title,line,input_box,check_box,option_title,profile_img,btn,option_box, file_select,option_sub_title } from "../../css/register_css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import axios from "axios";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 function UserInfo() {
     const [email, setEmail] = useState<string>("");
     const [pw, setPw] = useState<string>("");
     const [nickname, setNickname] = useState<string>("");
+    const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
 
-    // 다음페이지로 전달할 state
-    const [resultName, setResultName] = useState<string>("");
     const navigate = useNavigate();
+    // 회원가입 api
+    const signup = async() => {
+        const res = await axios.post('/api/auth/signup', {
+            email : email,
+            password : pw,
+            nickname : nickname
+        })
+        console.log(res);
+        navigate('/register/complete', {state : res.data.data.nickname})
+    }
+
+    // useEffect(() => {
+    //     navigate('/register/complete', {state : resultName})
+    // },[resultName])
 
     // ====================================================================
     // 유효성검사
-    const [pwCheck, setPwCheck] = useState<boolean>(true); // 비밀번호 확인
-    const [emailVal, setemailVal] = useState<boolean>(true); // 이메일 유효성
-    const [pwVal, setPwVal] = useState<boolean>(false); // 비밀번호 유효성
-    const [nicknameVal, setNicknameVal] = useState<boolean>(true); // 닉네임 유효성
-    const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
+    const [emailVal, setemailVal] = useState<boolean>(false); // 이메일 유효성 여부
+    const [pwVal, setPwVal] = useState<boolean>(false); // 비밀번호 유효성 여부
+    const [pwCheck, setPwCheck] = useState<boolean>(false); // 비밀번호 일치 여부
+    const [nicknameVal, setNicknameVal] = useState<boolean>(false); // 닉네임 유효성 여부
 
     const emailForm = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     const number = /[0-9]/;
     const english = /[a-zA-Z]/;
 
     const emailValidation = (e:any) => {
-        // const email = (document.getElementById('email') as HTMLInputElement).value;
         setEmail(e.target.value)
 
         if (emailForm.test(email)){
@@ -41,24 +54,12 @@ function UserInfo() {
     }
     
     const pwValidation = (e:any) => {
-        // const pw = (document.getElementById('pw') as HTMLInputElement).value;
         setPw(e.target.value)
 
-        if (pw.length > 7 && pw.length <17 && number.test(pw) && english.test(pw)){
+        if (pw.length > 6 && pw.length <16 && number.test(pw) && english.test(pw)){
             setPwVal(true);
         }else{
             setPwVal(false);
-        }
-    }
-
-    const nameValidation = (e:any) => {
-        // const name = (document.getElementById('name') as HTMLInputElement).value;
-        setNickname(e.target.value)
-
-        if (nickname){
-            setNicknameVal(true)
-        }else{
-            setNicknameVal(false)
         }
     }
 
@@ -71,8 +72,18 @@ function UserInfo() {
             setPwCheck(false)
         }
     }
-    // ====================================================================
 
+    const nameValidation = (e:any) => {
+        setNickname(e.target.value)
+
+        if (nickname){
+            setNicknameVal(true)
+        }else{
+            setNicknameVal(false)
+        }
+    }
+
+    // ====================================================================
     // 프로필 사진
     const handleImage = (e: any) => {
         let reader = new FileReader();
@@ -82,17 +93,7 @@ function UserInfo() {
         }
         reader.readAsDataURL(file);
     }
-    
-    // 회원가입 api
-    const signup = async() => {
-        const res = await axios.post('/api/auth/signup', {
-            email : email,
-            password : pw,
-            nickname : nickname
-        })
-        console.log(res);
-        setResultName(res.data.data.nickname)
-    }
+
     // ====================================================================
     // 중복확인
     const [ableEmail, setAbleEmail] = useState<boolean>(false);
@@ -101,6 +102,7 @@ function UserInfo() {
             email : email
         })
         setAbleEmail(res.data.is_valid)
+        handleOpen1();
     }
     const [ableName, setAbleName] = useState<boolean>(false);
     const confirmName = async () => {
@@ -108,15 +110,15 @@ function UserInfo() {
             nickname : nickname
         })
         setAbleName(res.data.is_valid)
+        handleOpen2();
     }
 
     // ====================================================================
     // 회원가입 완료 처리
-
     const handleComplete = () => {
-        if(ableEmail && pwVal && pwCheck && ableName){
+        if(emailVal && ableEmail && pwVal && pwCheck && nicknameVal && ableName){
             signup()
-            navigate('/register/complete', {state : resultName})
+            // navigate('/register/complete', {state : resultName})
         }else{
             if(!emailVal){
                 setemailVal(false)
@@ -138,6 +140,16 @@ function UserInfo() {
             }
         }
     }
+
+    // ====================================================================
+    // 중복확인 modal
+    const [open1, setOpen1] = useState(false);
+    const handleOpen1 = () => setOpen1(true);
+    const handleClose1 = () => setOpen1(false);
+
+    const [open2, setOpen2] = useState(false);
+    const handleOpen2 = () => setOpen2(true);
+    const handleClose2 = () => setOpen2(false);
     
     return (
         <div css={userInfo}>
@@ -153,13 +165,28 @@ function UserInfo() {
                     />
                     <Button 
                         variant="outlined" color="warning" 
-                        disabled={!emailVal}
+                        disabled={!(emailVal && email.length >0)}
                         onClick={confirmEmail}
                     >중복확인</Button>
+                    <Modal
+                        open={open1}
+                        onClose={handleClose1}
+                        >
+                        <Box sx={style}>
+                            <Typography variant="h6" component="h2">
+                                중복확인
+                            </Typography>
+                            <Typography sx={{ mt: 2 }}>
+                                {ableEmail ? "사용가능한 아이디입니다." : "사용할 수 없는 아이디입니다."}
+                            </Typography>
+                            <Button onClick={handleClose1} color="warning">확인</Button>
+                        </Box>
+                    </Modal>
                 </div>
                 <div css={input_box} >
                     {emailVal ? "" : <p style={{color:'red', fontSize:'15px', paddingBottom:'2%'}}>아이디를 이메일 형식으로 입력해주세요.</p>}
-                    {ableEmail ? <p style={{color:'blue', fontSize:'15px'}}>아이디 사용 가능합니다.</p> : <p style={{color:'red', fontSize:'15px'}}>아이디 중복확인 해주세요.</p>}
+                    {ableEmail ? "" : <p style={{color:'red', fontSize:'15px'}}>아이디 중복확인 해주세요.</p>}
+                    {/* {ableEmail && emailVal ? <p style={{color:'blue', fontSize:'15px'}}>아이디 사용 가능합니다.</p> : ""} */}
                 </div>
                 <div>
                     <TextField 
@@ -192,12 +219,27 @@ function UserInfo() {
                     />
                     <Button 
                         variant="outlined" color="warning"
+                        disabled={!(nicknameVal && nickname.length >0)}
                         onClick={confirmName}
                     >중복확인</Button>
+                    <Modal
+                        open={open2}
+                        onClose={handleClose2}
+                        >
+                        <Box sx={style}>
+                            <Typography variant="h6" component="h2">
+                                중복확인
+                            </Typography>
+                            <Typography sx={{ mt: 2 }}>
+                                {ableName ? "사용가능한 닉네임입니다." : "사용할 수 없는 닉네임입니다."}
+                            </Typography>
+                            <Button onClick={handleClose2} color="warning">확인</Button>
+                        </Box>
+                    </Modal>
                 </div>
                 <div css={input_box} >
                     {nicknameVal ? "" : <p style={{color:'red', fontSize:'15px', paddingBottom:'2%'}}>닉네임을 입력해주세요.</p>}
-                    {ableName ? <p style={{color:'blue', fontSize:'15px'}}>닉네임 사용 가능합니다.</p> : <p style={{color:'red', fontSize:'15px'}}>닉네임 중복확인 해주세요.</p>}
+                    {ableName ? "" : <p style={{color:'red', fontSize:'15px'}}>닉네임 중복확인 해주세요.</p>}
                 </div>
             </div>
             <div css={option_box}>
@@ -234,3 +276,15 @@ function UserInfo() {
 }
 
 export default UserInfo;
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 200,
+    bgcolor: '#ffffff',
+    border: '10px solid #ffb62e',
+    boxShadow: 24,
+    p: 4,
+};

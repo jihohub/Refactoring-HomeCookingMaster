@@ -1,4 +1,4 @@
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 
 // ==========================
 // ===== 약관인증 페이지 ========
@@ -158,6 +158,7 @@ export const complete_cnt = css`
     text-align: center;
     font-size: 20px;
     font-weight: 500;
+    padding-top: 5%;
 `;
 
 export const to_login_btn = css`
@@ -173,5 +174,10 @@ export const to_login = css`
     height: 100%;
     width: 100%;
     
+`;
+
+export const userName = css`
+    font-size : 30px;
+    font-weight: 700;
 `;
 
