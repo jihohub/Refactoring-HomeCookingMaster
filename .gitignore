@@ -1,4 +1,3 @@
-
 # dependencies
 node_modules
 /.pnp
@@ -34,3 +33,5 @@ __pycache__/
 user_data/
 
 
+# database
+database/
