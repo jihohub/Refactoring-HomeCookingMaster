@@ -110,7 +110,7 @@ def login(email, password):
 def logout():
 
     if validate_token(get_jwt())  == False:
-        return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 404
+        return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 401
 
     user_id = get_jwt_identity()
     user = get_user_by_id(user_id=user_id)
@@ -132,7 +132,7 @@ def refresh(refresh_token):
     user_id = post_refresh_token.get('sub')
 
     if validate_token(post_refresh_token) == False:
-        return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 404
+        return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 401
 
     user = get_user_by_id(user_id=user_id)
     if not user:
