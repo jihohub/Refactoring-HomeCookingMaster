@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
 # from sqlalchemy.sql.elements import Null
-from hcmk_server.services.s3 import boto3_image_upload
+from hcmk_server.services.s3 import boto3_image_upload, boto3_image_delete
 from hcmk_server.services.recipe import (
     get_recipe,
     check_likes,
@@ -69,6 +69,7 @@ get_recipe_post_info_fields = recipe_ns.model(
         "img": fields.String,
         "timestamp": fields.String,
         "user_id": fields.Integer,
+        "nickname": fields.String,
         "recipe_id": fields.Integer,
     }
 )
@@ -160,11 +161,13 @@ class AddPost(Resource):
     @recipe_ns.marshal_with(add_post_fields)
     def post(self, recipe_id):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
-        user_id = request.json.get("user_id")
-        post = request.json.get("post")
-        # img = request.json.get("img")
+        user_id = request.form.get("user_id")
+        post = request.form.get("post")        
         img = request.files["img"]
-        
+
         image_url = boto3_image_upload(img)
+        if image_url[-1] == ".":
+            boto3_image_delete(image_url)
+            image_url = None
         result = add_post(user_id, recipe_id, post, image_url)
-        return jsonify(result = result)
+        return result

@@ -34,7 +34,8 @@
   - 프로젝트만의 차별점, 기대 효과
 
 ## 4. 프로젝트 구성도
-  - [와이어프레임/스토리보드](https://www.figma.com/file/msrhnc0kPClrNoHFeKGPgL/%EC%9D%8C%EC%8B%9D-%EB%A0%88%EC%8B%9C%ED%94%BC-%EC%84%9C%EB%B9%84%EC%8A%A4?node-id=0%3A1)
+  - [와이어프레임(figma)](https://www.figma.com/file/msrhnc0kPClrNoHFeKGPgL/%EC%9D%8C%EC%8B%9D-%EB%A0%88%EC%8B%9C%ED%94%BC-%EC%84%9C%EB%B9%84%EC%8A%A4?node-id=0%3A1)
+  - [와이어프레임(whimsical)](https://whimsical.com/5-5Q9eYmb5H7FFQhfbx2aBhs)
 
 ## 5. 프로젝트 팀원 역할 분담
 | 이름 | 담당 업무 |
