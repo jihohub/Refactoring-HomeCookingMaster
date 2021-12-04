@@ -1,10 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
+import { TextSearchBar } from "../../components/Result/TextSearchBar";
+import ItemList from "../../components/Result/ItemList";
+import { Outlet } from "react-router";
+
 
 function ResultPage() {
+    
+
     return (
         <div>
-            ResultPage
+            <TextSearchBar/>
+            <ItemList />
+
+            <Outlet />
         </div>
     );
 }
