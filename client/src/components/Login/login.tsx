@@ -4,16 +4,8 @@ import { RootStateOrAny } from 'react-redux';
 import { loign_box, input_box } from "../../css/login_css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { getUser, getUserInfo } from '../../redux/userLogin';
+import { getUser } from '../../redux/userLogin';
 import { useDispatch, useSelector } from 'react-redux';
-
-// const GetToken = async() => {
-//     console.log("<login> : in GetToken")
-//     const token = await useSelector((state:RootStateOrAny) => state.getUserInfo.list);
-//     console.log("<login> : token complete")
-//     return token
-// }
-// -> 오류남
 
 function Login() {
     const dispatch = useDispatch();
@@ -22,15 +14,24 @@ function Login() {
     const [pw, setPw] = useState<string>("");
     const [check, setCheck] = useState<boolean>(true) // 아이디, 비밀번호 모두 입력됐는지 확인
 
-    // const idChange = (e:any) => {
-    //     setId(e.target.value)
-    // }
-
-    // const pwChange = (e:any) => {
-    //     setPw(e.target.value)
-    // }
-
     const token = useSelector((state:RootStateOrAny) => state.getUserInfo.list);
+
+    useEffect(() => {
+        console.log("<login> : useEffect token : ", token)
+
+        if(Array.isArray(token) && token.length === 0){
+            console.log("<login> : token empty")
+            setCheck(false);
+        }else if(!token){
+            console.log("<login> : token false")
+            setCheck(false);
+        }else{
+            console.log("<login> : token true")
+            localStorage.setItem('id', token['refresh_token'])
+            sessionStorage.setItem('id', token['access_token'])
+            window.location.replace('/')
+        }
+    },[token])
 
     const checkLogState = () => {
         console.log("<login> : before dispatch")
@@ -39,13 +40,6 @@ function Login() {
             password : pw
         }))
         console.log("<login> : after dispatch")
-        // if(!token){
-        //     setCheck(false)
-        //     console.log('false 됨')
-        // }
-        // window.location.replace('/')
-        // GetToken();
-        // console.log("<login> : after GetToken")
     }
 
     const handleLogin = (e:any) => {

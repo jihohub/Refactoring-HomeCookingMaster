@@ -78,12 +78,12 @@ const MainRanking = () => {
         return;
     }
 
-    const ranking = useSelector((state: RootStateOrAny) => state.rankingSlice.ranking);
-    console.log("page", ranking);
+    // const ranking = useSelector((state: RootStateOrAny) => state.rankingSlice.ranking);
+    // console.log("page", ranking);
 
     return (
         <div id="sec2" className="page-section">
-            <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            {/* <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {ranking.map((item: any) => {
                     return (
                         <Grid item xs={2} sm={3} md={3} display="flex" justifyContent="center">
@@ -109,26 +109,12 @@ const MainRanking = () => {
                         </Grid>
                     )
                 })}
-            </Grid>
+            </Grid> */}
         </div>
     )
 }
 
 function MainPage() {
-    // const token = useSelector((state:RootStateOrAny) => state.getUserInfo.list)
-
-    // const checkLogState = () => {
-    //     if(token){
-    //         localStorage.setItem('id', token['refresh_token'])
-    //         sessionStorage.setItem('id', token['access_token'])
-            
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     checkLogState();
-    // },[])
-
     return (
         <div css={mainWrapperStyle}>
             <MainSearch />
