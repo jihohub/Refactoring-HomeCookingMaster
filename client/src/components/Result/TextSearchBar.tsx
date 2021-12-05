@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Paper, InputBase, Button } from "@mui/material";
 import { search,searchBtn,elem,intro,toImage } from "../../css/result_csst";
@@ -13,9 +13,9 @@ export const TextSearchBar = () => {
 
     const [userText, setUserText] = useState(''); // 텍스트 검색어
 
-    // const handleTextChange = (e:any) => {
-    //     setUserText(e.target.value)
-    // }
+    useEffect(() => {
+        setUserText("");
+    },[userText])
 
     const handleTextClick = () => {
         console.log('<textSearchBar> : 검색 버튼 누름, before dispatch')

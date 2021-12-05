@@ -10,6 +10,8 @@ import searchedImageSlice from "./components/Result/searchedImageSlice";
 import searchText from "./redux/search";
 import getSearchList from "./redux/searchList";
 import getUserInfo from "./redux/userLogin";
+import getMyInfoList from "./redux/myInfo";
+import getNewAccessList from './redux/newToken'
 import "./App.css";
 
 function App() {
@@ -20,7 +22,9 @@ function App() {
         rankingSlice: rankingSlice,
         searchText : searchText,
         getSearchList : getSearchList,
-        getUserInfo : getUserInfo
+        getUserInfo : getUserInfo,
+        getMyInfoList : getMyInfoList,
+        getNewAccessList:getNewAccessList
     });
 
     const store = configureStore({

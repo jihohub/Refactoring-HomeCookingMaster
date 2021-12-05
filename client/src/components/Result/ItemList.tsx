@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
-import { line,recipeIntro, foodName } from "../../css/result_csst";
+import { line } from "../../css/result_csst";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import {getList} from "../../redux/searchList"
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import queryString from 'query-string';
 import { useLocation, useNavigate } from 'react-router';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import Typography from '@mui/material/Typography';
 
 function ItemList(){
     const dispatch = useDispatch();
@@ -35,45 +36,57 @@ function ItemList(){
     console.log('<itemList> : resultList : ', resultList)
 
     // 검색결과 수 확인(1개일 때만 레시피 출력)
-    // const [recipeList, setRecipeList] = useState<[]>([]);
-    // useEffect(() => {
-    //     const foodNumbers = Object.keys(resultList).length;
-    //     if(foodNumbers === 1){
-    //         const tmp: any[] = Object.values(recipeList)
-    //         console.log('tmp', tmp)
-    //         setRecipeList(tmp[0])
-    //     }
-    // },[resultList])
-    // console.log('recipeList', recipeList)
+    const [recipeList, setRecipeList] = useState<any[]>([]);
+    useEffect(() => {
+        const foodNumbers = Object.keys(resultList).length;
+        if(foodNumbers === 1){
+            const tmp: any[] = Object.values(resultList)
+            console.log('tmp', tmp)
+            setRecipeList(tmp[0])
+        }else{
+            setRecipeList([])
+        }
+    },[resultList])
+    console.log('recipeList', recipeList)
 
     return(
         <>
-            <div>
-                <p css={recipeIntro}>{query ? `${query} 검색결과 입니다.` : "다양한 레시피를 확인해보세요."}</p>
-                <hr css={line}/>
-            </div>
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                p: 5,
-                ml: 4,
-                flexDirection:'row'
-            }}>
-                <Grid container spacing={2}>
-                    {resultList ? Object.keys(resultList).map((item:any) => (
-                            <div key={item}>
-                                <Button variant="outlined"
-                                    sx={{width: 150, fontSize:15, height:60}}
-                                    onClick={() => navigate(`/result?data=${item}`)}
-                                >{item}</Button>
-                            </div>
-                        )
-                    ) : ""}
-                    {/* {recipeList ? recipeList.map((item:any) => (
-                        console.log(item)
-                    )) : ""} */}
-                </Grid>
-            </Box>
+            <Typography 
+                variant="h6" 
+                gutterBottom component="div" 
+                sx={{ fontWeight : '600', ml:20, mt:5}}
+            >
+                {query ? `${query} 검색결과 입니다.` : "다양한 레시피를 확인해보세요."}
+            </Typography>
+            <hr css={line}/>
+            {resultList ? Object.keys(resultList).map((item:any) => (
+                    <div key={item}>
+                        <Typography variant="h6" 
+                            gutterBottom component="div" 
+                            sx={{width: 150, fontSize:15, height:60}}
+                            onClick={() => navigate(`/result?data=${item}`)}
+                        >{item}</Typography>
+                    </div>
+                )
+            ) : ""}
+            <ImageList sx={{ width: '100%', height: '100%' }}>
+                {recipeList ? recipeList.map((item:any) => (
+                    <ImageListItem key={item.id}>
+                        <img
+                            src={item.img}
+                            srcSet={item.img}
+                            alt={item.id}
+                            loading="lazy"
+                            onClick={() => navigate(`/recipe/${item.id}`)}
+                        />
+                    <ImageListItemBar
+                        title={item.name}
+                        subtitle={<span>{item.cooking_time}</span>}
+                        position="below"
+                    />
+                    </ImageListItem>
+                )) : ""}
+            </ImageList>
         </>
     )
 }
