@@ -10,5 +10,7 @@ ENV FLASK_APP hcmk_server.app
 # ENV FLASK_ENV production
 ENV FLASK_ENV development
 
-ENTRYPOINT ["flask"]
-CMD ["run", "--host", "0.0.0.0"]
+# ENTRYPOINT ["flask"]
+# CMD ["run", "--host", "0.0.0.0"]
+
+CMD ["python3", "inception_resnet_v2_predict.py"]
