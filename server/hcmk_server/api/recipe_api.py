@@ -69,6 +69,7 @@ get_recipe_post_info_fields = recipe_ns.model(
         "img": fields.String,
         "timestamp": fields.String,
         "user_id": fields.Integer,
+        "nickname": fields.String,
         "recipe_id": fields.Integer,
     }
 )
@@ -161,12 +162,13 @@ class AddPost(Resource):
     def post(self, recipe_id):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
         user_id = request.form.get("user_id")
-        post = request.form.get("post")        
+        post = request.form.get("post")
         img = request.files["img"]
-        
-        image_url = boto3_image_upload(img)
-        if image_url[-1] == ".":
-            boto3_image_delete(image_url)
+
+        if img.filename == "":
             image_url = None
+        else:
+            image_url = boto3_image_upload(img)
+
         result = add_post(user_id, recipe_id, post, image_url)
         return result

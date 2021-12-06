@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
 
+
 from hcmk_server import config
 from hcmk_server.db_connect import db
 from hcmk_server.api import auth_api, recipe_api

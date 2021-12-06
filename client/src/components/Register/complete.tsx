@@ -1,10 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from "@emotion/react";
 import {Link} from 'react-router-dom';
+import { useLocation } from "react-router";
 import { complete, terms_title, line, complete_cnt, to_login, to_login_btn } from "../../css/register_css";
 import Button from '@mui/material/Button';
 
 function Complete() {
+    const location = useLocation();
+
+    console.log(location.state);
 
     return (
         <div css={complete}>
@@ -12,7 +16,7 @@ function Complete() {
             <div css={line}></div>
             <div>
                 <p css={complete_cnt}>
-                    님 환영합니다. 회원가입이 완료되었습니다.<br />
+                    {location.state} 님 환영합니다. 회원가입이 완료되었습니다.<br />
                     로그인 후 이용해주세요.
                 </p>
                 <Link to="/login" css={to_login}>

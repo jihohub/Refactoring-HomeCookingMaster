@@ -3,4 +3,4 @@ export FLASK_ENV=development
 
 python db/scripts/create_db.py
 flask db upgrade
-python db/scripts/initialize_hcmk_data.py
+py db/scripts/initialize_hcmk_data.py
