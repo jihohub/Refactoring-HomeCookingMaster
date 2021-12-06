@@ -41,11 +41,12 @@ function MyPost(){
                         width: '100%', 
                         height: 450, 
                         display: 'flex',
-                        justifyContent: 'center', 
+                        // justifyContent: 'center', 
+                        marginLeft:'25%',
                         mt:8,
                     }}>
                     <ImageListItem key="Subheader" cols={2}>
-                        <ListSubheader component="div"  sx={{ mb:2}}>
+                        <ListSubheader component="div"  sx={{ mb:2, width:'40rem', backgroundColor:'#ED6C02', color:'white'}}>
                             작성리뷰
                         </ListSubheader>
                         {isEmpty ? "" : 

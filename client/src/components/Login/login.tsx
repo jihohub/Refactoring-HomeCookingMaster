@@ -6,6 +6,16 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { getUser } from '../../redux/userLogin';
 import { useDispatch, useSelector } from 'react-redux';
+import { styled } from '@mui/material/styles';
+
+const OkButton = styled(Button)({
+    backgroundColor: '#897A5F',
+    borderColor: '#897A5F',
+    '&:hover': {
+        backgroundColor: '#ED6C02',
+        borderColor: '#ED6C02',
+    },
+});
 
 function Login() {
     const dispatch = useDispatch();
@@ -21,14 +31,14 @@ function Login() {
 
         if(Array.isArray(token) && token.length === 0){
             console.log("<login> : token empty")
-            setCheck(false);
+            // setCheck(false);
         }else if(!token){
             console.log("<login> : token false")
             setCheck(false);
         }else{
             console.log("<login> : token true")
-            localStorage.setItem('id', token['refresh_token'])
-            sessionStorage.setItem('id', token['access_token'])
+            sessionStorage.setItem('usrRfshTkn', token['refresh_token'])
+            sessionStorage.setItem('usrAcsTkn', token['access_token'])
             window.location.replace('/')
         }
     },[token])
@@ -76,15 +86,14 @@ function Login() {
                     css={input_box}
                     onChange={(e) => setPw(e.target.value)}
                 />
-                {check ? "" : <p style={{color:'red'}}>아이디와 비밀번호를 확인해주세요.</p>}
-                <Button
+                {check ? "" : <p style={{ color:'#e45a41', marginBottom:'10px', fontWeight:'600'}}>아이디와 비밀번호를 확인해주세요.</p>}
+                <OkButton
                     variant="contained" 
-                    color="warning" 
                     onClick={handleLogin} 
                     css={input_box}
                 >
                 로그인
-                </Button>
+                </OkButton>
             </div>
         </div>
     );

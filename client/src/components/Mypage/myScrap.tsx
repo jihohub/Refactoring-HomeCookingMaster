@@ -41,11 +41,12 @@ function MyScrap(){
                         width: '100%', 
                         height: 450, 
                         display: 'flex',
-                        justifyContent: 'center', 
+                        marginLeft:'25%',
+                        // justifyContent: 'center', 
                         mt:8,
                     }}>
                     <ImageListItem key="Subheader" cols={2}>
-                        <ListSubheader component="div"  sx={{ mb:2}}>
+                        <ListSubheader component="div"  sx={{ mb:2, width:'40rem', backgroundColor:'#ED6C02', color:'white' }}>
                             스크랩레시피
                         </ListSubheader>
                         {isEmpty ? "" : 

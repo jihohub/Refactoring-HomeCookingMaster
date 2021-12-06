@@ -35,6 +35,9 @@ function ItemList(){
     const resultList = useSelector((state:RootStateOrAny) => state.getSearchList.list)
     console.log('<itemList> : resultList : ', resultList)
 
+    // 검색결과 수 확인용
+    const [isRecipeList, setIsReciptList] = useState(true);
+
     // 검색결과 수 확인(1개일 때만 레시피 출력)
     const [recipeList, setRecipeList] = useState<any[]>([]);
     useEffect(() => {
@@ -43,6 +46,7 @@ function ItemList(){
             const tmp: any[] = Object.values(resultList)
             console.log('tmp', tmp)
             setRecipeList(tmp[0])
+            setIsReciptList(false);
         }else{
             setRecipeList([])
         }
@@ -54,12 +58,12 @@ function ItemList(){
             <Typography 
                 variant="h6" 
                 gutterBottom component="div" 
-                sx={{ fontWeight : '600', ml:20, mt:5}}
+                sx={{ fontWeight : '600', ml:23, mt:5, mb:3}}
             >
                 {query ? `${query} 검색결과 입니다.` : "다양한 레시피를 확인해보세요."}
             </Typography>
-            <hr css={line}/>
-            {resultList ? Object.keys(resultList).map((item:any) => (
+            {/* <hr css={line}/> */}
+            {isRecipeList ? Object.keys(resultList).map((item:any) => (
                     <div key={item}>
                         <Typography variant="h6" 
                             gutterBottom component="div" 
@@ -69,7 +73,10 @@ function ItemList(){
                     </div>
                 )
             ) : ""}
-            <ImageList sx={{ width: '100%', height: '100%' }}>
+            <ImageList sx={{ 
+                    width: '50rem', 
+                    height: '100%',
+                    marginLeft:'15%'}}>
                 {recipeList ? recipeList.map((item:any) => (
                     <ImageListItem key={item.id}>
                         <img
@@ -81,7 +88,9 @@ function ItemList(){
                         />
                     <ImageListItemBar
                         title={item.name}
-                        subtitle={<span>{item.cooking_time}</span>}
+                        subtitle={
+                            <span>스크랩수 {item.likes}, 조회수 {item.views}</span>
+                        }
                         position="below"
                     />
                     </ImageListItem>

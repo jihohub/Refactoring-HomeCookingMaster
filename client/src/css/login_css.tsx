@@ -4,14 +4,15 @@ export const login_title = css `
     display: flex;
     justify-content: center;
     text-align: center;
-    margin: 0;
-    font-size: 40px;
+    margin-bottom: 5%;
+    font-size: 32px;
+    color : #897A5F;
 `;
 
 export const line = css`
     width: 25rem;
     display: flex;
-    border-bottom: 3px solid #ee9b00;
+    border-bottom: 3px solid #897A5F;
     line-height: 1rem;
     margin-top : 1rem;
     margin-left: 2.5rem;
@@ -37,7 +38,7 @@ export const to_register = css`
 // `;
 
 export const to_register_button = css`
-    padding-left: 5rem;
+    padding-left: 2rem;
     text-decoration: none;
 `;
 

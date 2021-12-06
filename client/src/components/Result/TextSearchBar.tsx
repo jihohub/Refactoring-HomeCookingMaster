@@ -10,12 +10,15 @@ import { useNavigate } from "react-router";
 export const TextSearchBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    // const searchWord = useSelector((state:RootStateOrAny) => state.searchText.word)
 
     const [userText, setUserText] = useState(''); // 텍스트 검색어
 
-    useEffect(() => {
-        setUserText("");
-    },[userText])
+    // let input = (document.getElementById('searchInput') as HTMLInputElement).value
+
+    // useEffect(() => {
+    //     console.log(input);
+    // },[userText])
 
     const handleTextClick = () => {
         console.log('<textSearchBar> : 검색 버튼 누름, before dispatch')
@@ -25,6 +28,13 @@ export const TextSearchBar = () => {
         console.log('<textSearchBar> : after navigate')
     }
 
+    const handleKeyPress = (e:any) => {
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            handleTextClick();
+        }
+    }
+
     return (
         <>
             <div>
@@ -32,10 +42,13 @@ export const TextSearchBar = () => {
                 <div css={elem}>
                     <Paper component="form" className="paper" css={search}>
                             <InputBase
+                                id="searchInput"
                                 sx={{ ml: 4, flex: 1 }}
                                 placeholder="예) 김치볶음밥, 된장찌개, 닭볶음탕"
                                 inputProps={{ 'aria-label': 'search google maps' }}
+                                // value={userText}
                                 onChange={(e) => setUserText(e.target.value)}
+                                onKeyPress={handleKeyPress} 
                             />
                     </Paper>
                     <Button

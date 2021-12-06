@@ -11,14 +11,13 @@ const initialState : stateType = {
     list : []
 }
 
-const sessionID = sessionStorage.getItem('id')          // access_token
-
 export const getMyInfo = createAsyncThunk("GET_INFO", async () => {
+    const accessTkn = sessionStorage.getItem('usrAcsTkn')          // access_token
     try{
         console.log('<MyInfo> : before axios')
         const response = await axios.get("/api/mypage", {
             headers : {
-                Authorization: 'Bearer ' + sessionID
+                Authorization: 'Bearer ' + accessTkn
             }
         })
         console.log('<MyInfo> : res : ',response.data)

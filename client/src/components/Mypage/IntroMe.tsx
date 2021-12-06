@@ -10,12 +10,13 @@ import Box from '@mui/material/Box';
 
 function IntroMe(){
     const dispatch = useDispatch();
-    const localId = localStorage.getItem('id')
+    const refreshTkn = sessionStorage.getItem('usrRfshTkn')
     const [isInfo, setIsInfo] = useState(false);
 
     const newToken = useSelector((state:RootStateOrAny) => state.getNewAccessList.list)
 
     useEffect(() => {
+        console.log("<IntroMe> : dispatch > getMyInfo")
         dispatch(getMyInfo());
     },[])
 
@@ -36,11 +37,9 @@ function IntroMe(){
 
     const handleToken = () => {
         dispatch(getNewAccess({
-            refresh_token : localId
+            refresh_token : refreshTkn
         }))
     }
-
-    
 
     useEffect(() => {
         console.log("<newToken> : ", newToken)
@@ -50,8 +49,10 @@ function IntroMe(){
             console.log("<newToken> : token false")
         }else{
             console.log("<newToken> : token true ", newToken.data)
-            sessionStorage.removeItem('id')
-            sessionStorage.setItem('id', newToken.data['access_token'])
+            sessionStorage.removeItem('usrAcsTkn')
+            sessionStorage.setItem('usrAcsTkn', newToken.data['access_token'])
+            console.log("<newToken> : dispatch > again")
+            dispatch(getMyInfo());
         }
     },[newToken])
     
@@ -63,8 +64,9 @@ function IntroMe(){
                     <Box component="div"
                         sx={{
                         display: 'flex',
-                        justifyContent: 'center',
-                        flexDirection : 'row'
+                        // justifyContent: 'center',
+                        flexDirection : 'row',
+                        marginLeft : '25%'
                         }}
                     >
                         <Avatar
