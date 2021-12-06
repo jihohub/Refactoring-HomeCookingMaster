@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 interface RecipeState {
     recipe_info: {
         id: number;

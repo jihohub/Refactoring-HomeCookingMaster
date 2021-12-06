@@ -28,7 +28,6 @@ function RecipeBoard(props: any) {
         formData.append("post", text);
         imageFile && formData.append("img", imageFile);
         dispatch(postReview({ formData, id }));
-        dispatch(getRecipe(id));
     }
 
     return (

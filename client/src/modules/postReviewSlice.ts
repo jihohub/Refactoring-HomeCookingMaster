@@ -19,11 +19,13 @@ export const postReview = createAsyncThunk(
     "POST_REVIEW",
     async (args: any, ThunkAPI: any) => {
         /* 백엔드 [GET] /recipe/<recipe_id> 요청 */
+        const { recipeSlice } = ThunkAPI.getState();
         const response = await axios.post(`/api/recipe/${args.id}/post`, args.formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
+        console.log(response);
 
         return null;
     }
