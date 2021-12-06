@@ -51,11 +51,13 @@ def create_app():
     from .api.recipe_api import recipe_ns
     from .api.main_api import main_ns
     from .api.mypage_api import mypage_ns
+    from .api.food_classifiaction_api import fc_ns
 
     rest_api.add_namespace(auth_ns, "/api/auth")
     rest_api.add_namespace(recipe_ns, "/api/recipe")
     rest_api.add_namespace(main_ns, "/api/main")
     rest_api.add_namespace(mypage_ns, "/api/mypage")
+    rest_api.add_namespace(fc_ns, "/api/foodclassification")
 
 
     return app
