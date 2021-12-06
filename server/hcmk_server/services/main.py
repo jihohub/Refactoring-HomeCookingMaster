@@ -10,10 +10,10 @@ def get_food_list(data):
             return result, "Success", "검색 결과가 없습니다."
         for food in foods:
             recipes = Recipe.query.filter(Recipe.food_id == food.id).all()
-            tmp = []
+            recipe_dicts = []
             for recipe in recipes:
-                tmp.append(recipe.to_dict())
-            result[food.name] = tmp
+                recipe_dicts.append(recipe.to_dict())
+            result[food.name] = recipe_dicts
         return result, "Success", "검색 결과를 전달하였습니다."
     except Exception:
         db.session.rollback()
