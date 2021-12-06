@@ -1,5 +1,10 @@
+from flask import request
 from flask_restx import Resource, Namespace, fields
 from foodclassification import FoodClassification
+import numpy as np
+from PIL import Image
+from hcmk_server.app import model
+
 
 fc_ns = Namespace(
     name="fc",
@@ -11,17 +16,21 @@ fc_ns = Namespace(
 @fc_ns.response(404, "Fail")
 class FoodClassificationApi(Resource):
     @fc_ns.doc("POST Food Classification Result")
-    def post(self, img):
+    def post(self):
+
+        img = request.files["img"]
 
         food = FoodClassification('test')
         # 어떤 형태로 프론트에서 받을건지 정해야 함
         # 1. PIL 사용
-        # image = Image.open(img)
-        # image_array = np.array(image)
+        image = Image.open(img)
+        image_array = np.array(image)
 
         # 2. np.frombuffer 사용
         # bytes_img = data['img']
         # image_array = np.from_buffer(shape=(), buf=bytes_img) #AI 개발자한테 맞춰주기 위해 np사용
+        # 모델 불러오기
+        # global model
         
         # 전처리
         processed_img = food.preprocessing(image_array)

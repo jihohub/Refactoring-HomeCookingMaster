@@ -3,11 +3,14 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
+from tensorflow.keras.models import load_model
+
 
 
 from hcmk_server import config
 from hcmk_server.db_connect import db
 from hcmk_server.api import auth_api, recipe_api
+
 
 rest_api = Api(
     version="1.0",
@@ -25,6 +28,10 @@ def create_app():
     """
     app = Flask(__name__)
     CORS(app, supports_credentials=True)
+
+    # machine learning model load
+    global model
+    model = load_model('/home/team5/machinelearning/trained_models/InceptionResNetV2_07.h5')
 
     # Configure Database
     app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI

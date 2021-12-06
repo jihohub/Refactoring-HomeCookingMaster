@@ -1,7 +1,7 @@
 version: '3'
 
-services: 
-  test: 
+services:
+  backend:
     # image: nvidia/cuda:11.4.2-runtime-ubuntu20.04
     # image: tensorflow/tensorflow:latest-gpu
     build:
@@ -9,15 +9,16 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./server:/opt/server
-    # command: python3 -c "import tensorflow as tf;tf.test.gpu_device_name()"
-    # command: python3 inception_resnet_v2_predict.py
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=0
-    # deploy: 
-    #   resources: 
-    #     reservations: 
-    #       devices: 
-    #       - driver: nvidia 
-    #         count: 1 
-    #         capabilities: [gpu, utility]
+    ports:
+      - 5000:5000
+
+  proxy:
+    build: proxy
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - backend

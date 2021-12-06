@@ -28,10 +28,12 @@ RUN pip3 install rembg
 RUN pip3 freeze > requirements.txt
 
 
-# ENV FLASK_APP hcmk_server.app
+ENV FLASK_APP hcmk_server.app
 # ENV FLASK_ENV production
-# ENV FLASK_ENV development
+ENV FLASK_ENV development
 
 # 실행 파일 설정
 # CMD ["python3", "inception_resnet_v2_predict.py"]
-CMD ["python3", "test_rembg.py"]
+# CMD ["python3", "test_rembg.py"]
+ENTRYPOINT ["flask"]
+CMD ["run", "--host", "0.0.0.0"]
