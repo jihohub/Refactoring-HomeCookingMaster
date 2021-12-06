@@ -27,7 +27,7 @@ function RecipePage() {
         <div>
             <RecipeMain recipe={recipe} />
             <ReviewList recipe={recipe} />
-            <RecipeBoard />
+            <RecipeBoard recipe={recipe} />
         </div>
     );
 }

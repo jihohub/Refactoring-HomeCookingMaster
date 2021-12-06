@@ -4,9 +4,11 @@ import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 import { useDispatch } from "react-redux";
 import { postReview } from "../../modules/postReviewSlice";
 
-function RecipeBoard() {
+function RecipeBoard(props: any) {
     const dispatch = useDispatch();
     const [text, setText] = useState<string>("");
+    
+    const id = props.recipe.recipe_info.id;
     const formData = new FormData()
 
     const handleText = (e: any) => {
@@ -46,9 +48,6 @@ function RecipeBoard() {
                     multiline={true}
                     onChange={handleText}
                 />
-                <Button variant="contained" onClick={handleSubmit}>
-                    등록
-                </Button>
                 <form id="formElem" encType="multipart/form-data">
                     <label htmlFor="icon-button-file">
                         <input
@@ -66,6 +65,9 @@ function RecipeBoard() {
                         </IconButton>
                     </label>
                 </form>
+                <Button variant="contained" onClick={handleSubmit}>
+                    등록
+                </Button>
             </Paper>
         </Box>
     );
