@@ -24,7 +24,7 @@ function RecipeBoard(props: any) {
     const handleSubmit = () => {
         formData.append("user_id", "7");
         formData.append("post", text);
-        dispatch(postReview(formData));
+        dispatch(postReview({formData, id}));
     }
 
     return (
