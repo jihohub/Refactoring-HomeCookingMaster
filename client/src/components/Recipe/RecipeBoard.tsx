@@ -3,6 +3,7 @@ import { Box, Paper, TextField, Button, IconButton } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 import { useDispatch } from "react-redux";
 import { postReview } from "../../modules/postReviewSlice";
+import { getRecipe } from "../../modules/recipeSlice";
 
 function RecipeBoard(props: any) {
     const dispatch = useDispatch();
@@ -10,21 +11,24 @@ function RecipeBoard(props: any) {
     
     const id = props.recipe.recipe_info.id;
     const formData = new FormData()
+    let imageFile: any = null;
 
     const handleText = (e: any) => {
         setText(e.target.value);
     }
 
     const handleUpload = (e: any) => {
-        const imageFile = e.target.files[0];
+        imageFile = e.target.files[0];
         console.log(imageFile);
-        formData.set("img", imageFile);
+        
     };
 
     const handleSubmit = () => {
         formData.append("user_id", "7");
         formData.append("post", text);
-        dispatch(postReview({formData, id}));
+        imageFile && formData.append("img", imageFile);
+        dispatch(postReview({ formData, id }));
+        dispatch(getRecipe(id));
     }
 
     return (
