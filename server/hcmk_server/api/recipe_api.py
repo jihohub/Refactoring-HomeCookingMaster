@@ -163,12 +163,15 @@ class AddPost(Resource):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
         user_id = request.form.get("user_id")
         post = request.form.get("post")
-        img = request.files["img"]
 
-        if img.filename == "":
+        try:
+            img = request.files["img"]
+            if img.filename == "":
+                image_url = None
+            else:
+                image_url = boto3_image_upload(img)
+        except Exception:
             image_url = None
-        else:
-            image_url = boto3_image_upload(img)
 
         result = add_post(user_id, recipe_id, post, image_url)
         return result
