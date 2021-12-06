@@ -10,7 +10,7 @@ function Header() {
     const [open, setOpen] = useState(false);
     const [logCheck, setLogCheck] = useState<boolean>(false);
 
-    const refreshTkn = localStorage.getItem('usrRfshTkn')          // refresh_token
+    const refreshTkn = sessionStorage.getItem('usrRfshTkn')          // refresh_token
     const accessTkn = sessionStorage.getItem('usrAcsTkn')          // access_token
 
     useEffect(() => {
@@ -34,8 +34,8 @@ function Header() {
         setOpen(false)
         handleLogout();
         console.log('<Header> : logout')
-        localStorage.removeItem('id')
-        sessionStorage.removeItem('id')
+        sessionStorage.removeItem('usrRfshTkn')
+        sessionStorage.removeItem('usrAcsTkn')
         window.location.replace('/')
     }
 
