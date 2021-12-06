@@ -15,66 +15,104 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ImageIcon from "@mui/icons-material/Image";
-
-function createData(
-    nickname: string,
-    post: string,
-    timestamp: string,
-    img: string
-) {
-    return {
-        nickname,
-        post,
-        timestamp,
-        img,
-    };
-}
+import ListSubheader from "@mui/material/ListSubheader";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
+import SendIcon from "@mui/icons-material/Send";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import StarBorder from "@mui/icons-material/StarBorder";
+import Modal from "@mui/material/Modal";
 
 function Row(props: any) {
-    const { row } = props;
-    const [open, setOpen] = React.useState(false);
+    const review = props.row;
+    const [open, setOpen] = useState<boolean>(false);
+
+    const [openImage, setOpenImage] = useState<boolean>(false);
+    const handleOpen = () => setOpenImage(true);
+    const handleClose = () => setOpenImage(false);
+
+    const handleClick = () => {
+        setOpen(!open);
+    };
 
     return (
-        <React.Fragment>
-            <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                <TableCell align="right">{row.id}</TableCell>
-                <TableCell align="right">{row.nickname}</TableCell>
-                <TableCell align="right">{row.post}</TableCell>
-                <TableCell align="right">{row.img && <ImageIcon />}</TableCell>
-                <TableCell align="right">{row.timestamp}</TableCell>
-                <TableCell>
-                    <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
-                    >
-                        {open ? (
-                            <KeyboardArrowUpIcon />
+        <>
+            <ListItemButton onClick={handleClick}>
+                <ListItemText primary={!open && review.nickname} />
+                <ListItemText
+                    primary={
+                        !open &&
+                        (review.img ? (
+                            <>
+                                <IconButton>
+                                    <ImageIcon fontSize="small" />
+                                </IconButton>
+                                {review.post}
+                            </>
                         ) : (
-                            <KeyboardArrowDownIcon />
-                        )}
-                    </IconButton>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell
-                    style={{ paddingBottom: 0, paddingTop: 0 }}
-                    colSpan={6}
-                >
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <p style={{ textAlign: "center" }}>{row.post}</p>
-                        {row.img && (
-                            <div style={{ textAlign: "center" }}>
-                                <img src={row.img} alt="big post" />
-                            </div>
-                        )}
-                    </Collapse>
-                </TableCell>
-            </TableRow>
-        </React.Fragment>
+                            review.post
+                        ))
+                    }
+                />
+                <ListItemText
+                    primary={!open && review.timestamp.split(" ")[0]}
+                />
+                {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding onClick={handleClick}>
+                    <ListItemButton sx={{ pl: 4, minHeight: "300px" }}>
+                        <ListItemText primary={open && review.nickname} />
+                        <ListItemText
+                            sx={{ textAlign: "center" }}
+                            primary={
+                                open &&
+                                (review.img ? (
+                                    <>
+                                        {review.post}
+                                        <br />
+                                        <img
+                                            src={review.img}
+                                            width="60%"
+                                            alt="big"
+                                            onClick={handleOpen}
+                                        />
+                                    </>
+                                ) : (
+                                    review.post
+                                ))
+                            }
+                        />
+                        <ListItemText
+                            primary={open && review.timestamp.split(" ")[0]}
+                        />
+                    </ListItemButton>
+                </List>
+            </Collapse>
+            <Modal
+                open={openImage}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <img
+                    src={review.img}
+                    style={{
+                        display: "flex",
+                        lineHeight: "100%",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                    alt="original"
+                />
+            </Modal>
+        </>
     );
 }
 
@@ -82,41 +120,39 @@ Row.propTypes = {
     row: PropTypes.shape({
         nickname: PropTypes.string.isRequired,
         post: PropTypes.string.isRequired,
-        timestamp: PropTypes.number.isRequired,
-        img: PropTypes.string
+        timestamp: PropTypes.string.isRequired,
+        img: PropTypes.string,
     }).isRequired,
 };
 
-// const rows = [
-//     createData("Frozen yoghurt", 159, 6.0, 24),
-//     createData("Ice cream sandwich", 237, 9.0, 37),
-//     createData("Eclair", 262, 16.0, 24),
-//     createData("Cupcake", 305, 3.7, 67),
-//     createData("Gingerbread", 356, 16.0, 49),
-// ];
+function ReviewList(props: any) {
+    const post = props.recipe.post_info;
 
-export default function ReviewList(props: any) {
-    console.log("게시판", props);
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="right">번호</TableCell>
-                        <TableCell align="right">닉네임</TableCell>
-                        <TableCell align="right">내용</TableCell>
-                        <TableCell align="right"></TableCell>
-                        <TableCell align="right">날짜</TableCell>
-                        <TableCell align="right"></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {props.post &&
-                        props.post.map((item: any) => (
-                            <Row key={item.id} row={item} />
-                        ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <List
+            sx={{ width: "100%", maxWidth: "70vw", bgcolor: "background.paper" }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+            subheader={
+                <ListSubheader component="div" id="nested-list-subheader">
+                    생생한 리뷰 보기
+                </ListSubheader>
+            }
+        >
+            {post.length > 0 ? (
+                post.map((item: any) => (
+                    <Row key={item.id} row={item} />
+                ))
+            ) : (
+                <TableRow>
+                    <TableCell align="right"></TableCell>
+                    <TableCell align="right"></TableCell>
+                    <TableCell align="center">아직 리뷰가 없습니다.</TableCell>
+                    <TableCell align="center"></TableCell>
+                </TableRow>
+            )}
+        </List>
     );
 }
+
+export default ReviewList;

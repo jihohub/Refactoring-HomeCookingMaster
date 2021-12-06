@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
 import Header from "./components/Common/Header";
+import HeaderTest from "./components/Common/HeaderTest";
 import MainPage from "./pages/Main/MainPage";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterCompletePage from "./pages/Register/RegisterPage";
@@ -13,16 +14,12 @@ import ResultPage from "./pages/Result/ResultPage";
 import RecipePage from "./pages/Recipe/RecipePage";
 import MyPage from "./pages/Mypage/MyPage";
 import ScrollToTop from "./components/Common/ScrollToTop";
-import HideNavBar from "./components/Common/HideNavBar";
 
 function Router() {
-    const hide = useSelector((state) => state.hideHeaderSlice.hide);
-
     return (
         <BrowserRouter>
             <ScrollToTop />
-            <HideNavBar />
-            {!hide && <Header />}
+            <HeaderTest />
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/recipe/:id" element={<RecipePage />} />
