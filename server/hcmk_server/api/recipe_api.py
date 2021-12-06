@@ -165,11 +165,10 @@ class AddPost(Resource):
         post = request.form.get("post")
         img = request.files["img"]
 
-        image_url = boto3_image_upload(img)
-        if image_url[-1] == ".":
-            boto3_image_delete(image_url)
+        if img.filename == "":
             image_url = None
         else:
             image_url = boto3_image_upload(img)
+
         result = add_post(user_id, recipe_id, post, image_url)
         return result
