@@ -21,7 +21,7 @@ def get_food_list(data):
 
 def get_ranking():
     data = []
-    ranks = Recipe.query.order_by(Recipe.likes.desc(), Recipe.views.desc())
+    ranks = Recipe.query.order_by(Recipe.likes.desc(), Recipe.views.desc()).limit(12)
     for rank in ranks:
         data.append(rank.to_dict())
     return {
