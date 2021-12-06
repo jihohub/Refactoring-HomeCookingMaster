@@ -16,8 +16,9 @@ services:
       - 5000:5000
 
   proxy:
-    build: proxy
-    restart: always
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
     ports:
       - 80:80
     depends_on:
