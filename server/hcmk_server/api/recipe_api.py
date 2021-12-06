@@ -135,12 +135,19 @@ class AddLike(Resource):
         return result
 
 '''AddPost Models'''
+get_post_data_fields = recipe_ns.model(
+    "get_post_data",
+    {
+        "post_info": fields.List(fields.Nested(get_recipe_post_info_fields)),
+    }
+)
 
 add_post_fields = recipe_ns.model(
     "add_post",
     {
         "result": fields.String,
         "message": fields.String,
+        "data": fields.Nested(get_post_data_fields)
     }
 )
 
@@ -163,12 +170,15 @@ class AddPost(Resource):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
         user_id = request.form.get("user_id")
         post = request.form.get("post")
-        img = request.files["img"]
 
-        if img.filename == "":
+        try:
+            img = request.files["img"]
+            if img.filename == "":
+                image_url = None
+            else:
+                image_url = boto3_image_upload(img)
+        except Exception:
             image_url = None
-        else:
-            image_url = boto3_image_upload(img)
 
         result = add_post(user_id, recipe_id, post, image_url)
         return result
