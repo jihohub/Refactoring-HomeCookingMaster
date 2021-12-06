@@ -135,12 +135,19 @@ class AddLike(Resource):
         return result
 
 '''AddPost Models'''
+get_post_data_fields = recipe_ns.model(
+    "get_post_data",
+    {
+        "post_info": fields.List(fields.Nested(get_recipe_post_info_fields)),
+    }
+)
 
 add_post_fields = recipe_ns.model(
     "add_post",
     {
         "result": fields.String,
         "message": fields.String,
+        "data": fields.Nested(get_post_data_fields)
     }
 )
 

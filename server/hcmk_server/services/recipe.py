@@ -118,14 +118,25 @@ def add_post(user_id, recipe_id, post, image_url):
     db.session.add(new_value)
     db.session.commit()
 
+    data={}
+    try:
+        posts = Post.query.filter(Post.recipe_id == recipe_id).all()
+        if posts is None:
+            data['post_info'] = []
+        else :
+            post_dict = []
+            for post in posts:
+                p_dict = post.to_dict()
+                user = User.query.filter(User.id == p_dict['user_id']).first()
+                p_dict["nickname"] = user.nickname
+                post_dict.append(p_dict)
+            data['post_info'] = post_dict
+
+    except Exception:
+        db.session.rollback()
+        raise
     return {
             "result" : "Success",
-            "message" : "댓글을 추가하였습니다."
+            "message" : "댓글을 추가하였습니다.",
+            "data": data
         }
-
-    # result = []
-    # posts = Post.query.all()
-    # for post in posts:
-    #     p_dict = post.to_dict()
-    #     result.append(p_dict)
-    # return result
