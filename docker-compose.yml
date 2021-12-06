@@ -10,7 +10,7 @@ services:
     volumes:
       - ./server:/opt/server
     # command: python3 -c "import tensorflow as tf;tf.test.gpu_device_name()"
-    command: python3 inception_resnet_v2_predict.py
+    # command: python3 inception_resnet_v2_predict.py
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=0
