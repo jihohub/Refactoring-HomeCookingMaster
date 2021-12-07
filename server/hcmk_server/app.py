@@ -3,7 +3,6 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
-# from tensorflow.keras.models import load_model
 
 
 
@@ -28,10 +27,6 @@ def create_app():
     """
     app = Flask(__name__)
     CORS(app, supports_credentials=True)
-
-    # machine learning model load
-    # global model
-    # model = load_model('/home/team5/machinelearning/trained_models/InceptionResNetV2_07.h5')
 
     # Configure Database
     app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
@@ -58,13 +53,11 @@ def create_app():
     from .api.recipe_api import recipe_ns
     from .api.main_api import main_ns
     from .api.mypage_api import mypage_ns
-    # from .api.food_classifiaction_api import fc_ns
 
     rest_api.add_namespace(auth_ns, "/api/auth")
     rest_api.add_namespace(recipe_ns, "/api/recipe")
     rest_api.add_namespace(main_ns, "/api/main")
     rest_api.add_namespace(mypage_ns, "/api/mypage")
-    # rest_api.add_namespace(fc_ns, "/api/foodclassification")
 
 
     return app
