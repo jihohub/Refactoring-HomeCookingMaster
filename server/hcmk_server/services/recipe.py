@@ -73,12 +73,15 @@ def get_recipe(recipe_id):
         db.session.rollback()
         raise
 
-def add_like(recipe_id):
+def edit_like(recipe_id, toggle):
     try:
         recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
         if recipe is None:
             return None
-        recipe.likes += 1
+        if toggle == 1:
+            recipe.likes += 1
+        elif toggle == -1:
+            recipe.likes -= 1
         db.session.add(recipe)
         db.session.commit()
         return "success"
@@ -88,25 +91,33 @@ def add_like(recipe_id):
         raise
 
 def check_likes(recipe_id, user_id):
-    data = RecipeLike.query.filter((RecipeLike.recipe_id == recipe_id) & (RecipeLike.user_id == user_id)).first()
-    if data is not None:
+    try:
+        data = RecipeLike.query.filter((RecipeLike.recipe_id == recipe_id) & (RecipeLike.user_id == user_id)).first()
+        print(data)
+        if data is None:
+            new_value = RecipeLike(
+                recipe_id=recipe_id,
+                user_id=user_id,
+            )
+            db.session.add(new_value)
+            db.session.commit()
+            edit_like(recipe_id, 1)
+
+            return {
+                "result" : "Success",
+                "message" : "레시피를 스크랩하였습니다."
+            }
         db.session.delete(data)
         db.session.commit()
+        edit_like(recipe_id, -1)
         return {
-            "result" : "Success",
-            "message" : "레시피를 스크랩하였습니다."
-        }
-    new_value = RecipeLike(
-        recipe_id=recipe_id,
-        user_id=user_id,
-    )
-    db.session.add(new_value)
-    db.session.commit()
-    add_like(recipe_id)
-    return {
-            "result" : "Success",
-            "message" : "레시피 스크랩을 취소하였습니다."
-        }
+                "result" : "Success",
+                "message" : "레시피 스크랩을 취소하였습니다."
+            }
+    except Exception:
+        db.session.rollback()
+        raise
+    
 
 def add_post(user_id, recipe_id, post, image_url):
     new_value = Post(
