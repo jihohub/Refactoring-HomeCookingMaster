@@ -5,7 +5,7 @@ import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { recipeLike } from "../../modules/recipeLikeSlice";
 import { getRecipe } from "../../modules/recipeSlice";
-import { Box, Typography, Button, IconButton, Divider } from "@mui/material";
+import { Box, Typography, Button, IconButton, Divider, Popover  } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import AlarmIcon from "@mui/icons-material/Alarm";
 import QuizIcon from "@mui/icons-material/Quiz";
@@ -19,10 +19,20 @@ function RecipeMain(props: any) {
     const recipe_id = recipe_info.id
     const user_id = String(sessionStorage.getItem("user_id")); // user_id
 
-    const handleLike = async () => {
+    const handleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
         await dispatch(recipeLike({ recipe_id, user_id }));
         dispatch(getRecipe(recipe_id));
     };
+
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? "simple-popover" : undefined;
 
     return (
         <>
@@ -68,9 +78,30 @@ function RecipeMain(props: any) {
                     {recipe_info.cooking_time}
                 </Typography>
             </Box>
-            <Button variant="contained" onClick={handleLike}>
-                좋아요
-            </Button>
+            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "right" }}>
+                <Typography>
+                    <IconButton onClick={handleLike}>
+                        <FavoriteIcon sx={{ color: "red" }} />
+                    </IconButton>
+                    {recipe_info.likes}
+                    <Popover
+                        id={id}
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "left",
+                        }}
+                    >
+                        <Typography sx={{ p: 2 }}>
+                            이 레시피에 좋아요를 누르셨습니다.<br />
+                            좋아요를 누른 레시피는 스크랩되어<br />
+                            마이페이지에서도 확인하실 수 있습니다.
+                        </Typography>
+                    </Popover>
+                </Typography>
+            </Box>
             <Box sx={{ width: "70vw", height: "30px" }} />
             <Box sx={{ width: "70vw", margin: "0 auto" }}>
                 <Typography sx={{ fontSize: "1.5rem", color: "brown" }}>
