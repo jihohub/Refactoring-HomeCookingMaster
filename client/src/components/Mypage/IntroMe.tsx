@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { getMyInfo } from "../../redux/myInfo";
-import { getNewAccess } from "../../redux/newToken";
+import { getMyInfo } from "../../modules/myInfo";
+import { getNewAccess } from "../../modules/newToken";
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';

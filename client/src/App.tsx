@@ -8,11 +8,11 @@ import recipeReviewSlice from "./modules/recipeReviewSlice";
 import recipeLikeSlice from "./modules/recipeLikeSlice";
 import rankingSlice from "./modules/rankingSlice";
 import searchedImageSlice from "./components/Result/searchedImageSlice";
-import searchText from "./redux/search";
-import getSearchList from "./redux/searchList";
-import getUserInfo from "./redux/userLogin";
-import getMyInfoList from "./redux/myInfo";
-import getNewAccessList from './redux/newToken'
+import searchText from "./modules/search";
+import getSearchList from "./modules/searchList";
+import getUserInfo from "./modules/userLogin";
+import getMyInfoList from "./modules/myInfo";
+import getNewAccessList from './modules/newToken'
 import "./App.css";
 
 function App() {

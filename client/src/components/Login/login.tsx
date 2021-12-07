@@ -4,7 +4,7 @@ import { RootStateOrAny } from 'react-redux';
 import { loign_box, input_box } from "../../css/login_css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { getUser } from '../../redux/userLogin';
+import { getUser } from '../../modules/userLogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 

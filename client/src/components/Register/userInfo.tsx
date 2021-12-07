@@ -29,16 +29,12 @@ function UserInfo() {
             intro : intro
         })
         console.log(res);
-        navigate('/register/complete', {state : res.data.data.nickname})
+        navigate('/register/complete', {state : res.data.data.nickname})   // 회원가입 완료시 닉네임값 전달
     }
-
-    // useEffect(() => {
-    //     navigate('/register/complete', {state : resultName})
-    // },[resultName])
 
     // ====================================================================
     // 유효성검사
-    const [emailVal, setemailVal] = useState<boolean>(false); // 이메일 유효성 여부
+    const [emailVal, setEmailVal] = useState<boolean>(false); // 이메일 유효성 여부
     const [pwVal, setPwVal] = useState<boolean>(false); // 비밀번호 유효성 여부
     const [pwCheck, setPwCheck] = useState<boolean>(false); // 비밀번호 일치 여부
     const [nicknameVal, setNicknameVal] = useState<boolean>(false); // 닉네임 유효성 여부
@@ -47,35 +43,26 @@ function UserInfo() {
     const number = /[0-9]/;
     const english = /[a-zA-Z]/;
 
-    const emailValidation = (e:any) => {
-        setEmail(e.target.value)
-
-        if (emailForm.test(email)){
-            setemailVal(true)
-        }else{
-            setemailVal(false)
+    useEffect(() => {
+        if (emailForm.test(email)) {
+            setEmailVal(true);
+        } else {
+            setEmailVal(false);
         }
     }, [email]);
     
-    const pwValidation = (e:any) => {
-        setPw(e.target.value)
-
-        if (pw.length > 6 && pw.length <16 && number.test(pw) && english.test(pw)){
+    useEffect(() => {
+        if (
+            pw.length > 7 &&
+            pw.length < 17 &&
+            number.test(pw) &&
+            english.test(pw)
+        ) {
             setPwVal(true);
         } else {
             setPwVal(false);
         }
     }, [pw]);
-
-    const checkPw = () => {
-        const pwCheck = (document.getElementById('pwCheck') as HTMLInputElement).value;
-
-        if (pw === pwCheck){
-            setPwCheck(true)
-        }else{
-            setPwCheck(false)
-        }
-    }
 
     const checkPw = () => {
         const pwCheck = (document.getElementById('pwCheck') as HTMLInputElement).value;
@@ -128,32 +115,14 @@ function UserInfo() {
     }
 
     // ====================================================================
-    // 회원가입 완료 처리
-    const handleComplete = () => {
-        if(emailVal && ableEmail && pwVal && pwCheck && nicknameVal && ableName){
-            signup()
-            // navigate('/register/complete', {state : resultName})
-        }else{
-            if(!emailVal){
-                setemailVal(false)
-            }
-            if(!pwCheck){
-                setPwCheck(false)
-            }
-            if(!pwVal){
-                setPwVal(false)
-            }
-            if(!nickname){
-                setNicknameVal(false)
-            }
-            if(!ableName){
-                setAbleEmail(false)
-            }
-            if(!ableEmail){
-                setAbleName(false)
-            }
+    // 회원가입 완료 버튼 활성화 처리(정보 입력 완료 여부 확인)
+    const [ableSignUp, setAbleSignUp] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (ableEmail && pwVal && pwCheck && ableName) {
+            setAbleSignUp(true);
         }
-    }
+    }, [ableEmail, pwVal, pwCheck, ableName]);
 
     // ====================================================================
     // 중복확인 modal
@@ -296,6 +265,10 @@ function UserInfo() {
 
 export default UserInfo;
 
+
+
+
+// 중복확인 모달
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import {getList} from "../../redux/searchList"
+import {getList} from "../../modules/searchList"
 import queryString from 'query-string';
 import { useLocation, useNavigate } from 'react-router';
 import ImageList from '@mui/material/ImageList';
