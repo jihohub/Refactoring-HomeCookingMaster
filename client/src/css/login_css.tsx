@@ -1,23 +1,28 @@
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 
 export const login_title = css `
     display: flex;
     justify-content: center;
+    text-align: center;
+    margin-bottom: 5%;
+    font-size: 32px;
+    color : #897A5F;
 `;
 
-// export const login_line = css`
-//     width: 26rem;
-//     display: flex;
-//     border-bottom: 3px solid #aaa;
-//     line-height: 1rem;
-//     margin-bottom : 2rem;
-//     margin-left: 25rem;
-// `;
+export const line = css`
+    width: 25rem;
+    display: flex;
+    border-bottom: 3px solid #897A5F;
+    line-height: 1rem;
+    margin-top : 1rem;
+    margin-left: 2.5rem;
+`;
 
 export const loign_box = css`
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 5%;
 `
 
 export const to_register = css`
@@ -33,7 +38,7 @@ export const to_register = css`
 // `;
 
 export const to_register_button = css`
-    padding-left: 5rem;
+    padding-left: 2rem;
     text-decoration: none;
 `;
 
@@ -43,7 +48,14 @@ export const to_register_button = css`
 // `;
 
 export const login_all = css`
-    margin-top: 10%;
+        display: flex;
+    flex-direction: column;
+    width: 30rem;
+    position:absolute;
+    left:45%;
+    top:45%;
+    margin-left:-140px;
+    margin-top:-150px;
 `;
 
 export const input_box = css`

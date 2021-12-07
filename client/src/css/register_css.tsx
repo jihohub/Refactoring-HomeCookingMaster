@@ -1,4 +1,4 @@
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 
 // ==========================
 // ===== 약관인증 페이지 ========
@@ -16,17 +16,18 @@ export const terms = css `
 `;
 
 export const terms_title = css`
-    text-align: center;
-    margin: 0;
-    font-size: 40px;
+    font-size: 39px;
+    font-weight: 700;
+    color : #897A5F;
 `;
 
 export const line = css`
-    width: 30rem;
+    width: 29rem;
     display: flex;
-    border-bottom: 3px solid #ee9b00;
+    border-bottom: 1px solid #897A5F;
     line-height: 1rem;
     margin-top : 1rem;
+    margin-left: 8px;
 `;
 
 export const terms_cnt = css`
@@ -35,12 +36,13 @@ export const terms_cnt = css`
 
 export const service_title = css`
     font-size: 25px;
-    font-weight: 700;
+    font-weight: 500;
     margin: 0;
 `;
 
 export const service_sub_title = css`
-    font-weight: bold;
+    font-weight: 500;
+    font-size: 25px;
     margin-top: 2%;
 `;
 
@@ -73,7 +75,7 @@ export const more_btn_show =css`
 `;
 
 export const btn = css`
-    margin-top: 2rem;
+    margin-top: 4rem;
     width: 30rem;
 `;
 
@@ -94,7 +96,7 @@ export const userInfo = css `
     display: flex;
     flex-direction: column;
     width: 30rem;
-    height: 100%;
+    height: 140%;
     position:absolute;
     left:45%;
     top:45%;
@@ -103,25 +105,32 @@ export const userInfo = css `
 `;
 
 export const input_box = css`
-    width: 23rem;
-    margin: 2%;
+    width: 24rem;
+    /* margin-left: 2%; */
+    margin-right: 2%;
+    margin-bottom: 2%;
 `;
 
 export const check_box = css`
     display: flex;
     align-items: center;
+    margin-top: 40px;
 `;
 
 export const option_title = css`
     font-size: 25px;
     font-weight : bold;
-    text-align: center;
-    margin: 7%;
+    margin-top: 20%;
+    margin-left: 3%;
+    margin-right: 7%;
     width: 100%;
+    color : #191919;
 `;
 
 export const option_sub_title = css`
-    padding-left: 4%;
+    padding-left: 5%;
+    margin-bottom: 10px;
+    margin-top: 30px;
 `;
 
 export const profile_img = css`
@@ -132,11 +141,15 @@ export const profile_img = css`
 
 export const option_box = css`
     width: 23rem;
-    margin: 2%;
+    /* margin: 2%; */
 `;
 
 export const file_select = css`
     margin-left: 10%;
+`;
+
+export const introText = css`
+    margin-left: 4%;   
 `;
 
 // ==========================
@@ -158,6 +171,7 @@ export const complete_cnt = css`
     text-align: center;
     font-size: 20px;
     font-weight: 500;
+    padding-top: 5%;
 `;
 
 export const to_login_btn = css`
@@ -173,5 +187,11 @@ export const to_login = css`
     height: 100%;
     width: 100%;
     
+`;
+
+export const userName = css`
+    font-size : 30px;
+    font-weight: 700;
+    color : #ED6C02;
 `;
 
