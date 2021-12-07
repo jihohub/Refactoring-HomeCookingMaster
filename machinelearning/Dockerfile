@@ -14,7 +14,7 @@ RUN apt install -y build-essential curl git g++
 # 파이썬 설치
 RUN apt install -y python3 python3-pip
 
-#작업 폴더 설정
+# 작업 폴더 설정
 WORKDIR /opt/server
 
 # 소스코드 복사
@@ -23,21 +23,12 @@ COPY requirements.txt .
 # 파이썬 패키지 설정
 RUN pip3 install -r requirements.txt
 
-# ENV FLASK_APP app
-# ENV FLASK_ENV development
+# 환경변수 설정
 ENV FLASK_ENV production
 
-
-# 실행 파일 설정
-# CMD ["python3", "inception_resnet_v2_predict.py"]
-# CMD ["python3", "test_rembg.py"]
-
-
+# flask run 실행
 ENTRYPOINT ["flask"]
 CMD ["run", "--host", "0.0.0.0"]
-
-# CMD ['python3', 'app.py']
-
 
 # gunicorn 실행
 # CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8000"]
