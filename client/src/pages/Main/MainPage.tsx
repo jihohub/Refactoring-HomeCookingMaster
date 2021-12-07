@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from "@emotion/react";
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 import { Grid, Card, CardMedia, CardContent, CardActionArea, Typography } from "@mui/material";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
@@ -10,22 +11,37 @@ import { getRanking, clearRanking } from "../../modules/rankingSlice";
 import background from "../../assets/main.jpg";
 import DragDrop from "../../components/Main/DragDrop";
 import DropZone from "../../components/Main/DropZone";
-import { sample } from "../../assets/Sample";
+
+import MainSlide from "../../components/Main/mainSlide";
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import { imageTitle, btn, btnDiv,imgSearch,imgGuide,guideTitle } from "../../css/main_css";
+
+const OkButton = styled(Button)({
+    backgroundColor: '#897A5F',
+    borderColor: '#897A5F',
+    '&:hover': {
+        backgroundColor: '#ED6C02',
+        borderColor: '#ED6C02',
+    },
+});
 
 const mainWrapperStyle = css`
     width: 100%;
-    height: 100%;
-    background-image: url(${background});
-    background-size: cover;
+    height: 45rem;
+    /* background-image: url(${background}); */
+    /* background-size: cover; */
     // position: relative;
 `;
 
 const searchDivStyle = css`
-    margin: 0 auto;
-    display: block;
+    /* margin: 0 auto; */
+    display: flex;
     position: relative;
-    max-width: 810px;
+    /* max-width: 810px; */
     height: 30vh;
+    width: 100%;
+    justify-content: space-around;
 
     @media screen and (min-width: 768px) and (max-width: 1080px) {
         max-width: 500px;
@@ -57,7 +73,28 @@ const searchDivStyle = css`
 const MainSearch = () => {
     return (
         <div css={searchDivStyle}>
-            <DropZone />
+            <div css={imgSearch}>
+                <h2 css={imageTitle}>이미지 검색</h2>
+                <DropZone />
+                <div css={btnDiv}>
+                    {/* <Link to="/" css={agree_btn}> */}
+                        <OkButton
+                            id="nextBtn" variant="contained" css={btn}
+                        >
+                            검색
+                        </OkButton>
+                    {/* </Link> */}
+                </div>
+            </div>
+            <div css={imgGuide}>
+                <h2 css={guideTitle}>이렇게 찍어주세요!</h2>
+                <div>
+                    <h5>1. 완성된 음식 사진을 올려주세요!</h5>
+                    <p>미완성된 음식 사진을 올리거나 재료 사진을 올릴 경우에 원하는 결과를 얻을 수 없습니다. 완성된 음식 사진을 올려야 정확도 있는 결과를 받을 수 있습니다!</p>
+                    <h5>2. 화질이 나쁜 사진은 검색이 어렵습니다.</h5>
+                    <p>이미지의 화질이 너무 안좋거나 정확한 판단이 어려운 사진을 올릴 경우, 원하는 결과를 얻기 어렵습니다.</p>
+                </div>
+            </div>
         </div>
     );
 }
@@ -116,10 +153,14 @@ const MainRanking = () => {
 
 function MainPage() {
     return (
-        <div css={mainWrapperStyle}>
-            <MainSearch />
-            {/* <MainRanking /> */}
-        </div>
+        <>
+            <MainSlide/>
+            <div css={mainWrapperStyle}>
+                <MainSearch />
+                <MainRanking />
+            </div>
+            
+        </>
     );
 }
 
