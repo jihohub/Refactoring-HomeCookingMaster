@@ -4,30 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import ImageIcon from "@mui/icons-material/Image";
 import ListSubheader from "@mui/material/ListSubheader";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
-import Modal from "@mui/material/Modal";
+import { Box, Typography, Divider, Collapse, IconButton, List, ListItemButton, ListItemText, Modal } from "@mui/material";
 
 function Row(props: any) {
     const review = props.row;
@@ -122,29 +103,40 @@ function ReviewList(props: any) {
     const post = props.post;
 
     return (
-        <List
-            sx={{ width: "100%", maxWidth: "70vw", bgcolor: "background.paper" }}
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                    생생한 리뷰 보기
-                </ListSubheader>
-            }
-        >
+        <>
+            <Box sx={{ width: "70vw", height: "30px" }} />
+            <Box sx={{ width: "70vw", margin: "0 auto" }}>
+                <Typography sx={{ fontSize: "1.5rem", color: "brown" }}>
+                    레시피 후기
+                </Typography>
+            </Box>
+            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+                <Divider />
+            </Box>
             {post.length > 0 ? (
                 post.map((item: any) => (
-                    <Row key={item.id} row={item} />
+                    <>
+                        <Box sx={{ width: "70vw", height: "10px" }} />
+                        <Box sx={{ width: "70vw", margin: "0 auto" }}>
+                            <Row key={item.id} row={item} />
+                        </Box>
+                    </>
                 ))
             ) : (
-                <TableRow>
-                    <TableCell align="right"></TableCell>
-                    <TableCell align="right"></TableCell>
-                    <TableCell align="center">아직 리뷰가 없습니다.</TableCell>
-                    <TableCell align="center"></TableCell>
-                </TableRow>
+                <>
+                    <Box sx={{ width: "70vw", height: "10px" }} />
+                    <Box sx={{ width: "70vw", margin: "0 auto" }}>
+                        <List>
+                            <ListItemButton>
+                                <ListItemText sx={{ textAlign: "center" }}>
+                                    아직 리뷰가 없습니다.
+                                </ListItemText>
+                            </ListItemButton>
+                        </List>
+                    </Box>
+                </>
             )}
-        </List>
+        </>
     );
 }
 

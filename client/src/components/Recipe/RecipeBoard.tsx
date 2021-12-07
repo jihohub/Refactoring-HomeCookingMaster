@@ -31,17 +31,7 @@ function RecipeBoard(props: any) {
     };
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                "& > :not(style)": {
-                    m: 1,
-                    width: "70vw",
-                    height: "20vh",
-                },
-            }}
-        >
+        <Box sx={{ width: "70vw", margin: "0 auto" }}>
             <Paper elevation={0}>
                 <TextField
                     id="outlined-basic"
@@ -51,7 +41,7 @@ function RecipeBoard(props: any) {
                     multiline={true}
                     onChange={handleText}
                 />
-                <form id="formElem" encType="multipart/form-data">
+                <form id="formElem" encType="multipart/form-data" style={{ textAlign: "right" }}>
                     <label htmlFor="icon-button-file">
                         <input
                             accept="image/*"
@@ -67,10 +57,10 @@ function RecipeBoard(props: any) {
                             <AddAPhotoRoundedIcon />
                         </IconButton>
                     </label>
+                    <Button variant="contained" onClick={handleSubmit}>
+                        등록
+                    </Button>
                 </form>
-                <Button variant="contained" onClick={handleSubmit}>
-                    등록
-                </Button>
             </Paper>
         </Box>
     );
