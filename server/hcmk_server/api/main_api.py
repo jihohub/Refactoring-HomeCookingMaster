@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
 from hcmk_server.services.main import get_food_list, get_ranking
+import requests
 
 main_ns = Namespace(
     name="main",
@@ -53,3 +54,15 @@ class TodayRanking(Resource):
         result = get_ranking()
         return result
 
+
+@main_ns.route('/test')
+@main_ns.response(200, "success")
+@main_ns.response(500, "Failed")
+class test(Resource):
+    def post(self):
+        """현재 가장 인기있는 음식의 레시피를 반환합니다."""
+
+        img = request.files["img"]
+        res = requests.post('http://machinelearning:8000/receive', files=img).json()
+
+        return res

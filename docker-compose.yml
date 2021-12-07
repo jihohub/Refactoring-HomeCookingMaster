@@ -8,15 +8,25 @@ services:
       context: ./server
       dockerfile: Dockerfile
     volumes:
+      - ./server:/server
+    ports:
+      - 5000:5000
+    networks:
+      - backnet
+
+  machinelearning:
+    build:
+      context: ./machinelearning
+      dockerfile: Dockerfile
+    volumes:
       - ./server:/opt/server
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=0
     ports:
-      - 5000:5000
+      - 8000:8000
     networks:
       - backnet
-      - frontnet
 
   proxy:
     build:
