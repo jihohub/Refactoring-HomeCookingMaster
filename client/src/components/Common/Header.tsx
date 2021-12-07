@@ -75,6 +75,7 @@ const Header = (props: Props) => {
 
     const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
     const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
+    const user_img = sessionStorage.getItem("user_img"); // user_img
 
     useEffect(() => {
         if (refreshTkn) {
@@ -99,6 +100,7 @@ const Header = (props: Props) => {
         sessionStorage.removeItem("usrRfshTkn");
         sessionStorage.removeItem("usrAcsTkn");
         sessionStorage.removeItem("user_id");
+        sessionStorage.removeItem("user_img");
         window.location.replace("/");
     };
 
@@ -124,18 +126,18 @@ const Header = (props: Props) => {
         {
             text: "마이페이지",
             path: "/mypage",
-            func: handleCloseNavMenu
+            func: handleCloseNavMenu,
         },
         {
             text: "회원정보수정",
             path: "/modifyInfo",
-            func: handleCloseNavMenu
+            func: handleCloseNavMenu,
         },
         {
             text: "로그아웃",
             path: "/",
-            func: handleLog
-        }
+            func: handleLog,
+        },
     ];
 
     return (
@@ -268,10 +270,17 @@ const Header = (props: Props) => {
                                             onClick={handleOpenUserMenu}
                                             sx={{ p: 0 }}
                                         >
-                                            <Avatar
-                                                alt="Remy Sharp"
-                                                src="/static/images/avatar/2.jpg"
-                                            />
+                                            {user_img ? (
+                                                <Avatar
+                                                    alt="Remy Sharp"
+                                                    src={user_img}
+                                                />
+                                            ) : (
+                                                <Avatar
+                                                    alt="Remy Sharp"
+                                                    src="/static/images/avatar/2.jpg"
+                                                />
+                                            )}
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
@@ -340,5 +349,5 @@ const Header = (props: Props) => {
             </ScrollTop>
         </>
     );
-};;
+};;;
 export default Header;

@@ -40,6 +40,7 @@ function Login() {
             sessionStorage.setItem('usrRfshTkn', token['refresh_token'])
             sessionStorage.setItem('usrAcsTkn', token['access_token'])
             sessionStorage.setItem("user_id", token["user_id"]);
+            sessionStorage.setItem("user_img", token["img"]);
             window.location.replace('/')
         }
     },[token])
