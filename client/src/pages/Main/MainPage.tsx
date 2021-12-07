@@ -66,24 +66,24 @@ const MainRanking = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     dispatch(getRanking());
-    //     return () => {
-    //         dispatch(clearRanking());
-    //     };
-    // }, []);
+    useEffect(() => {
+        dispatch(getRanking());
+        return () => {
+            dispatch(clearRanking());
+        };
+    }, []);
 
-    // const handleClick = (item: any) => {
-    //     navigate(`/recipe/${item.id}`);
-    //     return;
-    // }
+    const handleClick = (item: any) => {
+        navigate(`/recipe/${item.id}`);
+        return;
+    }
 
-    // const ranking = useSelector((state: RootStateOrAny) => state.rankingSlice.ranking);
-    // console.log("page", ranking);
+    const ranking = useSelector((state: RootStateOrAny) => state.rankingSlice.ranking);
+    console.log("page", ranking);
 
     return (
         <div id="sec2" className="page-section">
-            {/* <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {ranking.map((item: any) => {
                     return (
                         <Grid item xs={2} sm={3} md={3} display="flex" justifyContent="center">
@@ -109,7 +109,7 @@ const MainRanking = () => {
                         </Grid>
                     )
                 })}
-            </Grid> */}
+            </Grid>
         </div>
     )
 }
