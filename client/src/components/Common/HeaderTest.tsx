@@ -26,14 +26,26 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 const pages = [
     {
         text: "텍스트검색",
-        path: "/login"
+        path: "/result"
     },
     {
         text: "어바웃",
         path: "/about"
     }
 ];
-const settings = ["마이페이지", "회원정보수정", "비밀번호변경", "로그아웃"];
+
+const isNotLoggedIn = [
+    {
+        text: "회원가입",
+        path: "register/termsNConditions",
+    },
+    {
+        text: "로그인",
+        path: "/login",
+    },
+];
+
+const isLoggedIn = ["마이페이지", "회원정보수정", "비밀번호변경", "로그아웃"];
 
 interface Props {
     /**
@@ -46,6 +58,36 @@ interface Props {
 
 const HeaderTest = (props: Props) => {
     const navigate = useNavigate();
+
+    const [logCheck, setLogCheck] = useState<boolean>(false);
+
+    const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
+    const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
+
+    useEffect(() => {
+        if (refreshTkn) {
+            setLogCheck(true);
+        } else {
+            setLogCheck(false);
+        }
+    }, [refreshTkn]);
+
+    const handleLogout = async () => {
+        const res = await axios.delete("/api/auth/logout", {
+            headers: {
+                Authorization: "Bearer " + accessTkn,
+            },
+        });
+        console.log("<Header>: logout delete api response", res);
+    };
+
+    const handleLog = () => {
+        handleLogout();
+        console.log("<Header> : logout");
+        sessionStorage.removeItem("usrRfshTkn");
+        sessionStorage.removeItem("usrAcsTkn");
+        window.location.replace("/");
+    };
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -83,7 +125,10 @@ const HeaderTest = (props: Props) => {
                             >
                                 <img
                                     src={mainlogo}
-                                    style={{ height: "40px", cursor: "pointer" }}
+                                    style={{
+                                        height: "40px",
+                                        cursor: "pointer",
+                                    }}
                                     onClick={() => navigate("/")}
                                     alt="main logo"
                                 />
@@ -151,7 +196,10 @@ const HeaderTest = (props: Props) => {
                             >
                                 <img
                                     src={mainlogo}
-                                    style={{ height: "40px", cursor: "pointer" }}
+                                    style={{
+                                        height: "40px",
+                                        cursor: "pointer",
+                                    }}
                                     onClick={() => navigate("/")}
                                     alt="main logo"
                                 />
@@ -182,47 +230,64 @@ const HeaderTest = (props: Props) => {
                                     </Button>
                                 ))}
                             </Box>
-
-                            <Box sx={{ flexGrow: 0 }}>
-                                <Tooltip title="Open settings">
-                                    <IconButton
-                                        onClick={handleOpenUserMenu}
-                                        sx={{ p: 0 }}
-                                    >
-                                        <Avatar
-                                            alt="Remy Sharp"
-                                            src="/static/images/avatar/2.jpg"
-                                        />
-                                    </IconButton>
-                                </Tooltip>
-                                <Menu
-                                    sx={{ mt: "45px" }}
-                                    id="menu-appbar"
-                                    anchorEl={anchorElUser}
-                                    anchorOrigin={{
-                                        vertical: "top",
-                                        horizontal: "right",
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: "top",
-                                        horizontal: "right",
-                                    }}
-                                    open={Boolean(anchorElUser)}
-                                    onClose={handleCloseUserMenu}
-                                >
-                                    {settings.map((setting) => (
-                                        <MenuItem
-                                            key={setting}
-                                            onClick={handleCloseNavMenu}
+                            {logCheck ? (
+                                <Box sx={{ flexGrow: 0 }}>
+                                    <Tooltip title="Open settings">
+                                        <IconButton
+                                            onClick={handleOpenUserMenu}
+                                            sx={{ p: 0 }}
                                         >
-                                            <Typography textAlign="center">
-                                                {setting}
-                                            </Typography>
-                                        </MenuItem>
-                                    ))}
-                                </Menu>
-                            </Box>
+                                            <Avatar
+                                                alt="Remy Sharp"
+                                                src="/static/images/avatar/2.jpg"
+                                            />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Menu
+                                        sx={{ mt: "45px" }}
+                                        id="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}
+                                    >
+                                        {isLoggedIn.map((item, index) => (
+                                            <MenuItem
+                                                key={index}
+                                                onClick={handleCloseNavMenu}
+                                            >
+                                                <Typography textAlign="center">
+                                                    {item}
+                                                </Typography>
+                                            </MenuItem>
+                                        ))}
+                                    </Menu>
+                                </Box>
+                            ) : (
+                                isNotLoggedIn.map((item, index) => (
+                                    <MenuItem
+                                        key={index}
+                                        onClick={handleCloseNavMenu}
+                                    >
+                                        <Typography
+                                            textAlign="center"
+                                            onClick={() =>
+                                                navigate(`${item.path}`)
+                                            }
+                                        >
+                                            {item.text}
+                                        </Typography>
+                                    </MenuItem>
+                                ))
+                            )}
                         </Toolbar>
                     </Container>
                 </AppBar>
@@ -239,5 +304,5 @@ const HeaderTest = (props: Props) => {
             </ScrollTop>
         </>
     );
-};
+};;
 export default HeaderTest;

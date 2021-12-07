@@ -8,14 +8,15 @@ import { getRecipe } from "../../modules/recipeSlice";
 function RecipeBoard(props: any) {
     const dispatch = useDispatch();
     const [text, setText] = useState<string>("");
-    
+
+    const user_id = String(sessionStorage.getItem("user_id")); // user_id
     const id = props.id;
-    const formData = new FormData()
+    const formData = new FormData();
     let imageFile: any = null;
 
     const handleText = (e: any) => {
         setText(e.target.value);
-    }
+    };
 
     const handleUpload = (e: any) => {
         imageFile = e.target.files[0];
@@ -24,11 +25,11 @@ function RecipeBoard(props: any) {
     };
 
     const handleSubmit = async () => {
-        formData.append("user_id", "7");
+        formData.append("user_id", user_id);
         formData.append("post", text);
         dispatch(recipeReview({ formData, id }));
         await dispatch(getRecipe(id));
-    }
+    };
 
     return (
         <Box
