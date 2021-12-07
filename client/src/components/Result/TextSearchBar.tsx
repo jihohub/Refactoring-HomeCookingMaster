@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Paper, InputBase, Button } from "@mui/material";
 import { search,searchBtn,elem,intro,toImage } from "../../css/result_csst";
@@ -13,16 +13,19 @@ export const TextSearchBar = () => {
 
     const [userText, setUserText] = useState(''); // 텍스트 검색어
 
-    // const handleTextChange = (e:any) => {
-    //     setUserText(e.target.value)
-    // }
-
     const handleTextClick = () => {
-        console.log('<textSearchBar> : 검색 버튼 누름, before dispatch')
+        // console.log('<textSearchBar> : 검색 버튼 누름, before dispatch')
         dispatch(setWord(userText))
-        console.log('<textSearchBar> : 검색 버튼 누름, after dispatch')
+        // console.log('<textSearchBar> : 검색 버튼 누름, after dispatch')
         navigate(`/result?data=${userText}`)
-        console.log('<textSearchBar> : after navigate')
+        // console.log('<textSearchBar> : after navigate')
+    }
+
+    const handleKeyPress = (e:any) => {
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            handleTextClick();
+        }
     }
 
     return (
@@ -32,10 +35,11 @@ export const TextSearchBar = () => {
                 <div css={elem}>
                     <Paper component="form" className="paper" css={search}>
                             <InputBase
+                                id="searchInput"
                                 sx={{ ml: 4, flex: 1 }}
                                 placeholder="예) 김치볶음밥, 된장찌개, 닭볶음탕"
-                                inputProps={{ 'aria-label': 'search google maps' }}
                                 onChange={(e) => setUserText(e.target.value)}
+                                onKeyPress={handleKeyPress} 
                             />
                     </Paper>
                     <Button

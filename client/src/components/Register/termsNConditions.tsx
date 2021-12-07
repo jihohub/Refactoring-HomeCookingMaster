@@ -8,6 +8,16 @@ import Dialog, { DialogProps } from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { styled } from '@mui/material/styles';
+
+const OkButton = styled(Button)({
+    backgroundColor: '#897A5F',
+    borderColor: '#897A5F',
+    '&:hover': {
+        backgroundColor: '#ED6C02',
+        borderColor: '#ED6C02',
+    },
+});
 
 function TermsNConditions() {
     // 약관 보기 버튼
@@ -132,7 +142,7 @@ function TermsNConditions() {
     return (
         <div css={terms}>
             <h1 css={terms_title}>약관인증</h1>
-            <div css={line}></div>
+            {/* <div css={line}></div> */}
             <div id="agree_box" css={terms_cnt}>
                 <p css={service_title}>집밥꼬꼬선생</p>
                 <p css={service_sub_title}>서비스 약관에 동의해주세요.</p>
@@ -411,15 +421,12 @@ function TermsNConditions() {
                 </div>
                 <div>
                     <Link to="/register/userInfo" css={agree_btn}>
-                        <Button
-                            id="nextBtn"
-                            variant="contained"
-                            color="warning"
-                            disabled={checkAll ? false : true}
-                            css={btn}
+                        <OkButton 
+                            id="nextBtn" variant="contained" 
+                            disabled={checkAll ? false : true} css={btn}
                         >
                             다음
-                        </Button>
+                        </OkButton>
                     </Link>
                 </div>
             </div>

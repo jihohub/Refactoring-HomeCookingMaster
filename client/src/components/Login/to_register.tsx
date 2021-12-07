@@ -11,7 +11,6 @@ function ToRegister() {
             <Link to="/register/termsNConditions" css={to_register_button}>
                 <Button variant="text" color="warning" sx={{ fontSize: 16,  fontWeight: 'bold' }}>회원가입</Button>
             </Link>
-            
         </div>
     );
 }

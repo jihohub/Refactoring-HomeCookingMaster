@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { userInfo,terms_title,line,input_box,check_box,option_title,profile_img,btn,option_box, file_select,option_sub_title } from "../../css/register_css";
+import { userInfo,terms_title,line,input_box,check_box,option_title,profile_img,btn,option_box, file_select,option_sub_title, introText } from "../../css/register_css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -9,12 +9,14 @@ import axios from "axios";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { styled } from '@mui/material/styles';
 
 function UserInfo() {
     const [email, setEmail] = useState<string>("");
     const [pw, setPw] = useState<string>("");
     const [nickname, setNickname] = useState<string>("");
     const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
+    const [intro, setIntro] = useState<String | null>("");
 
     const navigate = useNavigate();
     // 회원가입 api
@@ -22,7 +24,9 @@ function UserInfo() {
         const res = await axios.post('/api/auth/signup', {
             email : email,
             password : pw,
-            nickname : nickname
+            nickname : nickname,
+            img : profileImage,
+            intro : intro
         })
         console.log(res);
         navigate('/register/complete', {state : res.data.data.nickname})
@@ -164,7 +168,7 @@ function UserInfo() {
     return (
         <div css={userInfo}>
             <h2 css={terms_title}>정보입력</h2>
-            <div css={line}></div>
+            {/* <div css={line}></div> */}
             <div>
                 <div css={check_box}>
                     <TextField 
@@ -189,14 +193,13 @@ function UserInfo() {
                             <Typography sx={{ mt: 2 }}>
                                 {ableEmail ? "사용가능한 아이디입니다." : "사용할 수 없는 아이디입니다."}
                             </Typography>
-                            <Button onClick={handleClose1} color="warning">확인</Button>
+                            <CheckButton onClick={handleClose1} sx = {{fontWeight:700, fontSize:'15px'}}>확인</CheckButton>
                         </Box>
                     </Modal>
                 </div>
                 <div css={input_box} >
-                    {emailVal ? "" : <p style={{color:'red', fontSize:'15px', paddingBottom:'2%'}}>아이디를 이메일 형식으로 입력해주세요.</p>}
-                    {ableEmail ? "" : <p style={{color:'red', fontSize:'15px'}}>아이디 중복확인 해주세요.</p>}
-                    {/* {ableEmail && emailVal ? <p style={{color:'blue', fontSize:'15px'}}>아이디 사용 가능합니다.</p> : ""} */}
+                    {emailVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', paddingBottom:'2%', fontWeight:'500'}}>아이디를 이메일 형식으로 입력해주세요.</p>}
+                    {ableEmail ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>아이디 중복확인 해주세요.</p>}
                 </div>
                 <div>
                     <TextField 
@@ -207,7 +210,7 @@ function UserInfo() {
                     />
                 </div>
                 <div css={input_box} >
-                    {pwVal ? "" : <p style={{color:'red', fontSize:'15px'}}>숫자/영문자 조합으로 8~16자로 입력해주세요.</p>}
+                    {pwVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>숫자/영문자 조합으로 8~16자로 입력해주세요.</p>}
                 </div>
                 <div>
                     <TextField 
@@ -218,7 +221,7 @@ function UserInfo() {
                     />
                 </div>
                 <div css={input_box} >
-                    {pwCheck ? "" : <p style={{color:'red', fontSize:'15px'}}>비밀번호가 일치하지 않습니다.</p>}
+                    {pwCheck ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>비밀번호가 일치하지 않습니다.</p>}
                 </div>
                 <div>
                     <TextField 
@@ -243,13 +246,13 @@ function UserInfo() {
                             <Typography sx={{ mt: 2 }}>
                                 {ableName ? "사용가능한 닉네임입니다." : "사용할 수 없는 닉네임입니다."}
                             </Typography>
-                            <Button onClick={handleClose2} color="warning">확인</Button>
+                            <CheckButton onClick={handleClose2} >확인</CheckButton>
                         </Box>
                     </Modal>
                 </div>
                 <div css={input_box} >
-                    {nicknameVal ? "" : <p style={{color:'red', fontSize:'15px', paddingBottom:'2%'}}>닉네임을 입력해주세요.</p>}
-                    {ableName ? "" : <p style={{color:'red', fontSize:'15px'}}>닉네임 중복확인 해주세요.</p>}
+                    {nicknameVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', paddingBottom:'2%', fontWeight:'500'}}>닉네임을 입력해주세요.</p>}
+                    {ableName ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>닉네임 중복확인 해주세요.</p>}
                 </div>
             </div>
             <div css={option_box}>
@@ -272,18 +275,20 @@ function UserInfo() {
                             id="introduction" name="introduction" 
                             cols={54} rows={5} 
                             placeholder="한줄 소개를 작성해주세요."
+                            css={introText}
+                            onChange={(e) => setIntro(e.target.value)}
                         />
                     </div>
                 </div>
             </div>
             <div>
-                <Button 
-                    variant="contained" color="warning" 
+                <OkButton 
+                    variant="contained"
                     css={btn} onClick={signup}
                     disabled={ableSignUp ? false : true}
                 >
                     가입완료
-                </Button>
+                </OkButton>
             </div>
         </div>
     );
@@ -297,8 +302,32 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 200,
-    bgcolor: '#ffffff',
-    border: '10px solid #ffb62e',
+    bgcolor: 'white',
+    border: '10px solid white',
+    color : '#ED6C02',
     boxShadow: 24,
     p: 4,
 };
+
+// 중복확인 모달 내 확인 버튼
+const CheckButton = styled(Button)({
+    marginTop:'20px',
+    backgroundColor: '#ED6C02',
+    borderColor: '#ED6C02',
+    color:'white',
+    '&:hover': {
+        backgroundColor: '#897A5F',
+        borderColor: '#897A5F',
+        color:'white',
+    },
+});
+
+// 가입완료 버튼
+const OkButton = styled(Button)({
+    backgroundColor: '#897A5F',
+    borderColor: '#897A5F',
+    '&:hover': {
+        backgroundColor: '#ED6C02',
+        borderColor: '#ED6C02',
+    },
+});

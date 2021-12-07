@@ -8,7 +8,7 @@ function LoginPage() {
     return (
         <div css={login_all}>
             <h1 css={login_title}>로그인</h1>
-            <div css={line}></div>
+            {/* <div css={line}></div> */}
             <Login />
             <SimpleLogin />
             <ToRegister />
