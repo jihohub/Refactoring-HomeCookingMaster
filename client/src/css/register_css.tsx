@@ -16,8 +16,8 @@ export const terms = css `
 `;
 
 export const terms_title = css`
-    font-size: 37px;
-    font-weight: 600;
+    font-size: 39px;
+    font-weight: 700;
     color : #897A5F;
 `;
 
@@ -105,8 +105,8 @@ export const userInfo = css `
 `;
 
 export const input_box = css`
-    width: 23rem;
-    margin-left: 2%;
+    width: 24rem;
+    /* margin-left: 2%; */
     margin-right: 2%;
     margin-bottom: 2%;
 `;
