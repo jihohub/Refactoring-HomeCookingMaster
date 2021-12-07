@@ -12,23 +12,22 @@ function RecipeBoard(props: any) {
     const user_id = String(sessionStorage.getItem("user_id")); // user_id
     const id = props.id;
     const formData = new FormData();
-    let imageFile: any = null;
 
     const handleText = (e: any) => {
         setText(e.target.value);
     };
 
     const handleUpload = (e: any) => {
-        imageFile = e.target.files[0];
+        const imageFile = e.target.files[0];
         console.log(imageFile);
-        formData.append("img", imageFile);
+        formData.set("img", imageFile);
     };
 
     const handleSubmit = async () => {
-        formData.append("user_id", user_id);
-        formData.append("post", text);
-        dispatch(recipeReview({ formData, id }));
-        await dispatch(getRecipe(id));
+        await formData.append("user_id", user_id);
+        await formData.append("post", text);
+        await dispatch(recipeReview({ formData, id }));
+        dispatch(getRecipe(id));
     };
 
     return (

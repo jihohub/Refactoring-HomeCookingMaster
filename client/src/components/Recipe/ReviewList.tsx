@@ -43,55 +43,48 @@ function Row(props: any) {
 
     return (
         <>
-            <ListItemButton onClick={handleClick}>
-                <ListItemText primary={!open && review.nickname} />
-                <ListItemText
-                    primary={
-                        !open &&
-                        (review.img ? (
-                            <>
-                                <IconButton>
-                                    <ImageIcon fontSize="small" />
-                                </IconButton>
-                                {review.post}
-                            </>
-                        ) : (
-                            review.post
-                        ))
-                    }
-                />
-                <ListItemText
-                    primary={!open && review.timestamp.split(" ")[0]}
-                />
-                {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
+            {!open && (
+                <ListItemButton onClick={handleClick}>
+                    <ListItemText primary={review.nickname} />
+                    <ListItemText
+                        primary={
+                            review.img ? (
+                                <>
+                                    <IconButton>
+                                        <ImageIcon fontSize="small" />
+                                    </IconButton>
+                                    {review.post}
+                                </>
+                            ) : (
+                                review.post
+                            )
+                        }
+                    />
+                    <ListItemText primary={review.timestamp.split(" ")[0]} />
+                    <ExpandMore />
+                </ListItemButton>
+            )}
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding onClick={handleClick}>
-                    <ListItemButton sx={{ pl: 4, minHeight: "300px" }}>
-                        <ListItemText primary={open && review.nickname} />
+                    <ListItemButton sx={{ minHeight: "300px" }}>
+                        <ListItemText primary={review.nickname} />
                         <ListItemText
-                            sx={{ textAlign: "center" }}
                             primary={
-                                open &&
-                                (review.img ? (
-                                    <>
-                                        {review.post}
-                                        <br />
-                                        <img
-                                            src={review.img}
-                                            width="60%"
-                                            alt="big"
-                                            onClick={handleOpen}
-                                        />
-                                    </>
-                                ) : (
-                                    review.post
-                                ))
+                                <>
+                                    {review.post}
+                                    <br />
+                                    {review.img && <img
+                                        src={review.img}
+                                        width="200px"
+                                        alt="big"
+                                        onClick={handleOpen}
+                                    />
+                                    }
+                                </>
                             }
                         />
-                        <ListItemText
-                            primary={open && review.timestamp.split(" ")[0]}
-                        />
+                        <ListItemText primary={review.timestamp.split(" ")[0]} />
+                        <ExpandLess />
                     </ListItemButton>
                 </List>
             </Collapse>

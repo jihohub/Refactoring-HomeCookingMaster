@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Header from "./components/Common/Header";
-import HeaderTest from "./components/Common/HeaderTest";
 import MainPage from "./pages/Main/MainPage";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterCompletePage from "./pages/Register/RegisterPage";
@@ -19,7 +18,7 @@ function Router() {
     return (
         <BrowserRouter>
             <ScrollToTop />
-            <HeaderTest />
+            <Header />
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/recipe/:id" element={<RecipePage />} />
