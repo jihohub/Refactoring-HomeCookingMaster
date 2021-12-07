@@ -16,10 +16,10 @@ main_ns = Namespace(
 class SearchbyString(Resource):
     def get(self):
         """검색어와 일치하는 음식의 레시피를 반환합니다."""
-        data =request.args["data"].replace(" ", "")
+        data =request.args["data"].replace(" ", "") #검색어의 띄어쓰기를 제거
         result_data, result, message = get_food_list(data)
         
-        return jsonify(result = result, message = message, data = result_data)
+        return jsonify(result=result, message=message, data=result_data)
 
 
 today_ranking_data_fields = main_ns.model(

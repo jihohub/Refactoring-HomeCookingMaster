@@ -10,33 +10,33 @@ function Header() {
     const [open, setOpen] = useState(false);
     const [logCheck, setLogCheck] = useState<boolean>(false);
 
-    const localID = localStorage.getItem('id')
-    const sessionID = sessionStorage.getItem('id')
+    const refreshTkn = sessionStorage.getItem('usrRfshTkn')          // refresh_token
+    const accessTkn = sessionStorage.getItem('usrAcsTkn')          // access_token
 
     useEffect(() => {
-        if(localID){
+        if(refreshTkn){
             setLogCheck(true);
         }else{
             setLogCheck(false)
         }
-    },[])
+    },[refreshTkn])
 
     const handleLogout = async () => {
         const res = await axios.delete("/api/auth/logout", {
             headers : {
-                Authorization: 'Bearer ' + sessionID
+                Authorization: 'Bearer ' + accessTkn
             }
         })
-        console.log('res',res)
+        console.log('<Header>: logout delete api response',res)
     }
 
     const handleLog = () => {
         setOpen(false)
         handleLogout();
-        console.log('logout')
-        localStorage.removeItem('id')
-        sessionStorage.removeItem('id')
-        // window.location.replace('/')
+        console.log('<Header> : logout')
+        sessionStorage.removeItem('usrRfshTkn')
+        sessionStorage.removeItem('usrAcsTkn')
+        window.location.replace('/')
     }
 
     return (

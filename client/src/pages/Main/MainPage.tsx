@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 import { Grid, Card, CardMedia, CardContent, CardActionArea, Typography } from "@mui/material";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setHideTrue, setHideFalse } from "../../modules/hideHeaderSlice";
 import { setImageFile, setPreviewUrl } from "../../components/Result/searchedImageSlice";
 import { getRanking, clearRanking } from "../../modules/rankingSlice";
 import background from "../../assets/main.jpg";
 import DragDrop from "../../components/Main/DragDrop";
+import DropZone from "../../components/Main/DropZone";
 import { sample } from "../../assets/Sample";
 
 const mainWrapperStyle = css`
@@ -57,7 +57,7 @@ const searchDivStyle = css`
 const MainSearch = () => {
     return (
         <div css={searchDivStyle}>
-            <DragDrop />
+            <DropZone />
         </div>
     );
 }
@@ -115,20 +115,6 @@ const MainRanking = () => {
 }
 
 function MainPage() {
-    // const token = useSelector((state:RootStateOrAny) => state.getUserInfo.list)
-
-    // const checkLogState = () => {
-    //     if(token){
-    //         localStorage.setItem('id', token['refresh_token'])
-    //         sessionStorage.setItem('id', token['access_token'])
-            
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     checkLogState();
-    // },[])
-
     return (
         <div css={mainWrapperStyle}>
             <MainSearch />

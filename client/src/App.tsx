@@ -1,27 +1,32 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
 
 import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import Router from "./Router";
-import hideHeaderSlice from "./modules/hideHeaderSlice";
 import recipeSlice from "./modules/recipeSlice";
+import recipeReviewSlice from "./modules/recipeReviewSlice";
+import recipeLikeSlice from "./modules/recipeLikeSlice";
 import rankingSlice from "./modules/rankingSlice";
 import searchedImageSlice from "./components/Result/searchedImageSlice";
-import searchText from "./redux/search";
-import getSearchList from "./redux/searchList";
-import getUserInfo from "./redux/userLogin";
+import searchText from "./modules/search";
+import getSearchList from "./modules/searchList";
+import getUserInfo from "./modules/userLogin";
+import getMyInfoList from "./modules/myInfo";
+import getNewAccessList from './modules/newToken'
 import "./App.css";
 
 function App() {
     const rootReducer = combineReducers({
-        hideHeaderSlice: hideHeaderSlice,
-        searchedImageSlice: searchedImageSlice,
         recipeSlice: recipeSlice,
+        recipeReviewSlice: recipeReviewSlice,
+        recipeLikeSlice: recipeLikeSlice,
         rankingSlice: rankingSlice,
-        searchText : searchText,
-        getSearchList : getSearchList,
-        getUserInfo : getUserInfo
+        searchedImageSlice: searchedImageSlice,
+        searchText: searchText,
+        getSearchList: getSearchList,
+        getUserInfo: getUserInfo,
+        getMyInfoList : getMyInfoList,
+        getNewAccessList:getNewAccessList
     });
 
     const store = configureStore({

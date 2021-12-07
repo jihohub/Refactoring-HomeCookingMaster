@@ -11,10 +11,10 @@ const initialState : stateType = {
     list : []
 }
 
-export const getList = createAsyncThunk("GET_ITEM", async (recipe_id: string) => {
-    console.log('before axios')
+export const getList = createAsyncThunk("GET_ITEM", async (recipe_id: any) => {
+    // console.log('<getList> : before axios')
     const response = await axios.get("/api/main/search/str", {params:{data:recipe_id}})
-    console.log('getList',response.data.data)
+    console.log('<getList> : res : ',response.data.data)
     return response.data.data;
 })
 
