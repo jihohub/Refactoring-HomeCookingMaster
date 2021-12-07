@@ -1,61 +1,72 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from 'react';
 import { RootStateOrAny } from 'react-redux';
-import { login_title, loign_box, input_box } from "../../css/login_css";
+import { loign_box, input_box } from "../../css/login_css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { getUser, getUserInfo } from '../../redux/userLogin';
+import { getUser } from '../../modules/userLogin';
 import { useDispatch, useSelector } from 'react-redux';
+import { styled } from '@mui/material/styles';
+
+const OkButton = styled(Button)({
+    backgroundColor: '#897A5F',
+    borderColor: '#897A5F',
+    '&:hover': {
+        backgroundColor: '#ED6C02',
+        borderColor: '#ED6C02',
+    },
+});
 
 function Login() {
-    const [check, setCheck] = useState<boolean>(true)
-    const [id, setId] = useState<string>("");
-    const [pw, setPw] = useState<string>("");
-
     const dispatch = useDispatch();
 
-    const idChange = (e:any) => {
-        e.preventDefault();
-        setId(e.target.value)
-    }
+    const [id, setId] = useState<string>("");
+    const [pw, setPw] = useState<string>("");
+    const [check, setCheck] = useState<boolean>(true) // 아이디, 비밀번호 모두 입력됐는지 확인
 
-    const pwChange = (e:any) => {
-        e.preventDefault();
-        setPw(e.target.value)
-    }
+    const token = useSelector((state:RootStateOrAny) => state.getUserInfo.list);
 
-    let token = useSelector((state:RootStateOrAny) => state.getUserInfo.list)
+    useEffect(() => {
+        console.log("<login> : useEffect token : ", token)
+
+        if(Array.isArray(token) && token.length === 0){
+            console.log("<login> : token empty")
+            // setCheck(false);
+        }else if(!token){
+            console.log("<login> : token false")
+            setCheck(false);
+        }else{
+            console.log("<login> : token true")
+            sessionStorage.setItem('usrRfshTkn', token['refresh_token'])
+            sessionStorage.setItem('usrAcsTkn', token['access_token'])
+            window.location.replace('/')
+        }
+    },[token])
 
     const checkLogState = () => {
+        console.log("<login> : before dispatch")
         dispatch(getUser({
             email : id,
             password : pw
         }))
-        
-
-        // dispatch(getUserInfo)
-        // if(!token){
-        //     setCheck(false)
-        //     console.log('false 됨')
-        // }
-        // window.location.replace('/')
+        console.log("<login> : after dispatch")
     }
 
     const handleLogin = (e:any) => {
-        e.preventDefault();
         if(id && pw){
-            setCheck(true)
+            console.log("<login> : 아이디, 비밀번호 모두 입력됨")
             checkLogState();
-            console.log('들어옴')
+            console.log("<login> : dispatch 함수 다음")
+            setCheck(true)
+            console.log("<login> : check값 true됨")
+            console.log("<login> : 받아온 token값 : ", token);
         }else{
             setCheck(false);
         }
     }
 
     return (
-        
         <div>
-            <h1 css={login_title}>로그인</h1>
             <div className="login" css={loign_box}>
                 <TextField 
                     id="email" 
@@ -64,7 +75,7 @@ function Login() {
                     variant="filled" 
                     color="warning" 
                     css={input_box}
-                    onChange={idChange}
+                    onChange={(e) => setId(e.target.value)}
                 />
                 <TextField 
                     id="pw" 
@@ -73,13 +84,16 @@ function Login() {
                     variant="filled" 
                     color="warning" 
                     css={input_box}
-                    onChange={pwChange}
+                    onChange={(e) => setPw(e.target.value)}
                 />
-                {check ? "" : <p style={{color:'red'}}>아이디와 비밀번호를 확인해주세요.</p>}
-                <Button
-                    variant="contained" color="warning" 
+                {check ? "" : <p style={{ color:'#e45a41', marginBottom:'10px', fontWeight:'600'}}>아이디와 비밀번호를 확인해주세요.</p>}
+                <OkButton
+                    variant="contained" 
                     onClick={handleLogin} 
-                    css={input_box}>로그인</Button>
+                    css={input_box}
+                >
+                로그인
+                </OkButton>
             </div>
         </div>
     );

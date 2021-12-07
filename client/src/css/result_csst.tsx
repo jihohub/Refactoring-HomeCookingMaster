@@ -1,4 +1,4 @@
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 
 // text searchbar
 export const search = css`
@@ -71,4 +71,8 @@ export const itemStyle = css`
 
 export const itembtn = css`
     width: 50%;
+`;
+
+export const foodName = css`
+    font-size: 20px;
 `;
