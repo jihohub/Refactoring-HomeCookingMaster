@@ -103,7 +103,8 @@ def login(email, password):
         "message": "로그인 되었습니다." ,
         "data": {
             "access_token" : access_token, 
-            "refresh_token" : refresh_token
+            "refresh_token" : refresh_token,
+            "user_id" : user.id
         }
         }, 200
 

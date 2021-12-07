@@ -156,6 +156,7 @@ login_data_fields = auth_ns.model(
     {
         "access_token" : fields.String,
         "refresh_token" : fields.String,
+        "user_id" : fields.Integer,
     }
 )
 
