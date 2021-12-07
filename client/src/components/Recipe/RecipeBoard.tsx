@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Paper, TextField, Button, IconButton } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import { useDispatch } from "react-redux";
-import { postReview } from "../../modules/postReviewSlice";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { recipeReview } from "../../modules/recipeReviewSlice";
 import { getRecipe } from "../../modules/recipeSlice";
 
 function RecipeBoard(props: any) {
     const dispatch = useDispatch();
     const [text, setText] = useState<string>("");
     
-    const id = props.recipe.recipe_info.id;
+    const id = props.id;
     const formData = new FormData()
     let imageFile: any = null;
 
@@ -20,14 +20,14 @@ function RecipeBoard(props: any) {
     const handleUpload = (e: any) => {
         imageFile = e.target.files[0];
         console.log(imageFile);
-        
+        formData.append("img", imageFile);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         formData.append("user_id", "7");
         formData.append("post", text);
-        imageFile && formData.append("img", imageFile);
-        dispatch(postReview({ formData, id }));
+        dispatch(recipeReview({ formData, id }));
+        await dispatch(getRecipe(id));
     }
 
     return (

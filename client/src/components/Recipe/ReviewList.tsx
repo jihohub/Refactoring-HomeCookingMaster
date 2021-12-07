@@ -126,7 +126,7 @@ Row.propTypes = {
 };
 
 function ReviewList(props: any) {
-    const post = props.recipe.post_info;
+    const post = props.post;
 
     return (
         <List

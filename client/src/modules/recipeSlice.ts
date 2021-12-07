@@ -97,40 +97,49 @@ export const recipeSlice = createSlice({
                 servings: "",
                 difficulty: "",
                 cooking_time: "",
-                food_id: 0
+                food_id: 0,
             };
             state.food_info = {
                 id: 0,
                 name: "",
                 category_l: "",
                 category_m: "",
-                category_s: ""
+                category_s: "",
             };
             state.ingredient_info = [];
             state.process_info = [];
             state.post_info = [];
             state.loading = false;
             state.error = "";
-        }
+        },
     },
     extraReducers: (builder) => {
-        builder.addCase(getRecipe.rejected, (state, action: PayloadAction<any>) => {
-            state.loading = false;
-            state.error = action.payload;
-        });
+        builder.addCase(
+            getRecipe.rejected,
+            (state, action: PayloadAction<any>) => {
+                state.loading = false;
+                state.error = action.payload;
+            }
+        );
 
-        builder.addCase(getRecipe.pending, (state, action: PayloadAction<any>) => {
-            state.loading = true;
-            state.error = "";
-        });
+        builder.addCase(
+            getRecipe.pending,
+            (state, action: PayloadAction<any>) => {
+                state.loading = true;
+                state.error = "";
+            }
+        );
 
-        builder.addCase(getRecipe.fulfilled, (state, action: PayloadAction<any>) => {
-            state.recipe_info = action.payload.recipe_info;
-            state.food_info = action.payload.food_info;
-            state.ingredient_info = action.payload.ingredient_info;
-            state.process_info = action.payload.process_info;
-            state.post_info = action.payload.post_info;
-        });
+        builder.addCase(
+            getRecipe.fulfilled,
+            (state, action: PayloadAction<any>) => {
+                state.recipe_info = action.payload.recipe_info;
+                state.food_info = action.payload.food_info;
+                state.ingredient_info = action.payload.ingredient_info;
+                state.process_info = action.payload.process_info;
+                state.post_info = action.payload.post_info;
+            }
+        );
     },
 });
 

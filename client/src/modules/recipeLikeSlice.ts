@@ -2,37 +2,36 @@ import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
-interface PostState {
+interface LikeState {
     formData: FormData | null;
     loading: boolean;
     error: string;
 }
 
-const initialState: PostState = {
+const initialState: LikeState = {
     formData: null,
     loading: false,
     error: "",
 };
 
 /* 레시피 데이터 요청 */
-export const postReview = createAsyncThunk(
-    "POST_REVIEW",
-    async (args: any, ThunkAPI: any) => {
-        /* 백엔드 [GET] /recipe/<recipe_id> 요청 */
-        const { recipeSlice } = ThunkAPI.getState();
-        const response = await axios.post(`/api/recipe/${args.id}/post`, args.formData, {
+export const recipeLike = createAsyncThunk("RECIPE_LIKE", async (args: any) => {
+    /* 백엔드 [GET] /recipe/<recipe_id> 요청 */
+    const response = await axios.post(
+        `/api/recipe/${args.id}/like`,
+        args.formData,
+        {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
-        });
-        console.log(response);
+        }
+    );
 
-        return null;
-    }
-);
+    return null;
+});
 
-export const postReviewSlice = createSlice({
-    name: "postReviewSlice",
+export const recipeLikeSlice = createSlice({
+    name: "recipeLikeSlice",
     initialState,
     reducers: {
         clearPost(state) {
@@ -67,5 +66,5 @@ export const postReviewSlice = createSlice({
     // },
 });
 
-export const { clearPost } = postReviewSlice.actions;
-export default postReviewSlice.reducer;
+export const { clearPost } = recipeLikeSlice.actions;
+export default recipeLikeSlice.reducer;

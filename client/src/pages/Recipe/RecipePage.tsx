@@ -3,7 +3,6 @@ import { css, jsx } from "@emotion/react";
 import { useEffect, useState, useRef } from "react";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { Typography } from "@mui/material";
 import { getRecipe, clearRecipe } from "../../modules/recipeSlice";
 import RecipeMain from "../../components/Recipe/RecipeMain";
 import ReviewList from "../../components/Recipe/ReviewList";
@@ -26,8 +25,8 @@ function RecipePage() {
     return (
         <div>
             <RecipeMain recipe={recipe} />
-            <ReviewList recipe={recipe} />
-            <RecipeBoard recipe={recipe} />
+            <ReviewList post={recipe.post_info} />
+            <RecipeBoard id={recipe.recipe_info.id} />
         </div>
     );
 }

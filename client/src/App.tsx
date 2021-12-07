@@ -5,6 +5,8 @@ import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import Router from "./Router";
 import recipeSlice from "./modules/recipeSlice";
+import recipeReviewSlice from "./modules/recipeReviewSlice";
+import recipeLikeSlice from "./modules/recipeLikeSlice";
 import rankingSlice from "./modules/rankingSlice";
 import searchedImageSlice from "./components/Result/searchedImageSlice";
 import searchText from "./redux/search";
@@ -14,12 +16,14 @@ import "./App.css";
 
 function App() {
     const rootReducer = combineReducers({
-        searchedImageSlice: searchedImageSlice,
         recipeSlice: recipeSlice,
+        recipeReviewSlice: recipeReviewSlice,
+        recipeLikeSlice: recipeLikeSlice,
         rankingSlice: rankingSlice,
-        searchText : searchText,
-        getSearchList : getSearchList,
-        getUserInfo : getUserInfo
+        searchedImageSlice: searchedImageSlice,
+        searchText: searchText,
+        getSearchList: getSearchList,
+        getUserInfo: getUserInfo,
     });
 
     const store = configureStore({
