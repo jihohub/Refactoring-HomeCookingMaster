@@ -118,7 +118,7 @@ function MainPage() {
     return (
         <div css={mainWrapperStyle}>
             <MainSearch />
-            <MainRanking />
+            {/* <MainRanking /> */}
         </div>
     );
 }
