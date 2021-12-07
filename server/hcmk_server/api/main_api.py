@@ -63,6 +63,12 @@ class test(Resource):
         """현재 가장 인기있는 음식의 레시피를 반환합니다."""
 
         img = request.files["img"]
-        res = requests.post('http://machinelearning:8000/receive', files=img).json()
+        # res = requests.post('http://machinelearning:8000/receive', files=img).json()
 
-        return res
+        print('wtf')
+        
+        print(img)
+        result = {"result" : 'wow'}
+
+        return result
+        # return  

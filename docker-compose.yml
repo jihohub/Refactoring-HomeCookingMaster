@@ -2,8 +2,6 @@ version: '3'
 
 services:
   backend:
-    # image: nvidia/cuda:11.4.2-runtime-ubuntu20.04
-    # image: tensorflow/tensorflow:latest-gpu
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -11,22 +9,20 @@ services:
       - ./server:/server
     ports:
       - 5000:5000
-    networks:
-      - backnet
 
   machinelearning:
     build:
       context: ./machinelearning
       dockerfile: Dockerfile
     volumes:
-      - ./server:/opt/server
+      - ./machinelearning:/opt/server
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=0
     ports:
       - 8000:8000
-    networks:
-      - backnet
+  #   networks:
+  #     - backnet
 
   proxy:
     build:
@@ -36,9 +32,4 @@ services:
       - 80:80
     depends_on:
       - backend
-    networks:
-      - frontnet
 
-networks:
-  backnet:
-  frontnet:

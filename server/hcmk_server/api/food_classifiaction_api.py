@@ -1,6 +1,6 @@
 from flask import request
 from flask_restx import Resource, Namespace, fields
-from foodclassification import FoodClassification
+# from foodclassification import FoodClassification
 import numpy as np
 from PIL import Image
 from hcmk_server.app import model
