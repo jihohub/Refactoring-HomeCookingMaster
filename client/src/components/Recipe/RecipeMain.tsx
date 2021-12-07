@@ -8,13 +8,15 @@ import { getRecipe } from "../../modules/recipeSlice";
 import { Typography, Button } from "@mui/material";
 
 function RecipeMain(props: any) {
-    const { recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
     const dispatch = useDispatch();
-    console.log(recipe_info.id);
+    const { recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
+    
+    const recipe_id = recipe_info.id
+    const user_id = String(sessionStorage.getItem("user_id")); // user_id
 
     const handleLike = async () => {
-        dispatch(recipeLike(recipe_info.id));
-        await dispatch(getRecipe(recipe_info.id));
+        dispatch(recipeLike({ recipe_id, user_id }));
+        await dispatch(getRecipe(recipe_id));
     };
 
     return (
