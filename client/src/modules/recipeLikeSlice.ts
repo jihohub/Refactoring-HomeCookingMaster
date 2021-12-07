@@ -15,7 +15,9 @@ const initialState: LikeState = {
 /* 레시피 좋아요 */
 export const recipeLike = createAsyncThunk("RECIPE_LIKE", async (id: number) => {
     /* 백엔드 [POST] /recipe/<recipe_id>/like 요청 */
-    const response = await axios.post(`/api/recipe/${id}/like`);
+    const response = await axios.post(`/api/recipe/${id}/like`, {
+        user_id: 2
+    });
 
     return null;
 });

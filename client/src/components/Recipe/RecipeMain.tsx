@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { recipeLike } from "../../modules/recipeLikeSlice";
+import { getRecipe } from "../../modules/recipeSlice";
 import { Typography, Button } from "@mui/material";
 
 function RecipeMain(props: any) {
@@ -11,8 +12,9 @@ function RecipeMain(props: any) {
     const dispatch = useDispatch();
     console.log(recipe_info.id);
 
-    const handleLike = () => {
+    const handleLike = async () => {
         dispatch(recipeLike(recipe_info.id));
+        await dispatch(getRecipe(recipe_info.id));
     };
 
     return (
@@ -40,6 +42,7 @@ function RecipeMain(props: any) {
                 );
             })}
             <Button variant="contained" onClick={handleLike}>좋아요</Button>
+            <Typography>조회수 : {recipe_info.views} 좋아요 : {recipe_info.likes}</Typography>
             <Typography>다른 레시피 보기</Typography>
             <Typography>생생한 리뷰 보기</Typography>
         </div>
