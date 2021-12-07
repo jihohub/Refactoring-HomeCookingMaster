@@ -1,4 +1,4 @@
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 
 
 export const logoImg = css`

@@ -3,11 +3,17 @@ import { css, jsx } from "@emotion/react";
 import { useEffect, useState, useRef } from "react";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { Typography } from "@mui/material";
-import { getRecipe, clearRecipe } from "../../modules/recipeSlice";
+import { recipeLike } from "../../modules/recipeLikeSlice";
+import { Typography, Button } from "@mui/material";
 
 function RecipeMain(props: any) {
     const { recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
+    const dispatch = useDispatch();
+    console.log(recipe_info.id);
+
+    const handleLike = () => {
+        dispatch(recipeLike(recipe_info.id));
+    };
 
     return (
         <div>
@@ -33,6 +39,7 @@ function RecipeMain(props: any) {
                     </div>
                 );
             })}
+            <Button variant="contained" onClick={handleLike}>좋아요</Button>
             <Typography>다른 레시피 보기</Typography>
             <Typography>생생한 리뷰 보기</Typography>
         </div>

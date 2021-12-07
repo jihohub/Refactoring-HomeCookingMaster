@@ -1,35 +1,55 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from 'react';
-import { line,recipeIntro } from "../../css/result_csst";
+import { useEffect, useState } from 'react';
+import { line,recipeIntro, foodName } from "../../css/result_csst";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import {getList} from "../../redux/searchList"
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
 import queryString from 'query-string';
+import { useLocation, useNavigate } from 'react-router';
 
-function ItemList(location:any){
-    console.log('location',location);
-
-    const query = queryString.parse(location.search)
-    console.log('query',query)
-
+function ItemList(){
     const dispatch = useDispatch();
-    const searchWord = useSelector((state:RootStateOrAny) => state.searchText.word);
+    const navigate = useNavigate();
+
+    // 쿼리 스트링
+    const location = useLocation();
+    console.log('<itemList> : location : ',location);
+    const query = queryString.parse(location.search)['data']
+    console.log('<itemList> : query data : ',query)
 
     useEffect(() => {
-        dispatch(getList(searchWord))
-        console.log('getList 11')
-    },[searchWord])
-
+        if(query){
+            console.log('<itemList> queryData : before dispatch')
+            dispatch(getList(query))
+            console.log('<itemList> queryData : after dispatch')
+        }else{
+            console.log('<itemList> null : before dispatch')
+            dispatch(getList(""))
+            console.log('<itemList> null : before dispatch')
+        }
+    },[query])
 
     const resultList = useSelector((state:RootStateOrAny) => state.getSearchList.list)
+    console.log('<itemList> : resultList : ', resultList)
+
+    // 검색결과 수 확인(1개일 때만 레시피 출력)
+    // const [recipeList, setRecipeList] = useState<[]>([]);
+    // useEffect(() => {
+    //     const foodNumbers = Object.keys(resultList).length;
+    //     if(foodNumbers === 1){
+    //         const tmp: any[] = Object.values(recipeList)
+    //         console.log('tmp', tmp)
+    //         setRecipeList(tmp[0])
+    //     }
+    // },[resultList])
+    // console.log('recipeList', recipeList)
 
     return(
         <>
             <div>
-                <p css={recipeIntro}>{searchWord ? `${searchWord} 검색결과 입니다.` : "다양한 레시피를 확인해보세요."}</p>
+                <p css={recipeIntro}>{query ? `${query} 검색결과 입니다.` : "다양한 레시피를 확인해보세요."}</p>
                 <hr css={line}/>
             </div>
             <Box sx={{
@@ -41,13 +61,17 @@ function ItemList(location:any){
             }}>
                 <Grid container spacing={2}>
                     {resultList ? Object.keys(resultList).map((item:any) => (
-                            <div>
+                            <div key={item}>
                                 <Button variant="outlined"
                                     sx={{width: 150, fontSize:15, height:60}}
+                                    onClick={() => navigate(`/result?data=${item}`)}
                                 >{item}</Button>
                             </div>
                         )
                     ) : ""}
+                    {/* {recipeList ? recipeList.map((item:any) => (
+                        console.log(item)
+                    )) : ""} */}
                 </Grid>
             </Box>
         </>

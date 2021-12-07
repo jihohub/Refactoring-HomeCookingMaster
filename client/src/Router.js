@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Header from "./components/Common/Header";
 import HeaderTest from "./components/Common/HeaderTest";

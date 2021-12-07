@@ -51,15 +51,25 @@ function UserInfo() {
         }else{
             setemailVal(false)
         }
-    }
+    }, [email]);
     
     const pwValidation = (e:any) => {
         setPw(e.target.value)
 
         if (pw.length > 6 && pw.length <16 && number.test(pw) && english.test(pw)){
             setPwVal(true);
-        }else{
+        } else {
             setPwVal(false);
+        }
+    }, [pw]);
+
+    const checkPw = () => {
+        const pwCheck = (document.getElementById('pwCheck') as HTMLInputElement).value;
+
+        if (pw === pwCheck){
+            setPwCheck(true)
+        }else{
+            setPwCheck(false)
         }
     }
 
@@ -161,7 +171,7 @@ function UserInfo() {
                         id="email" label="아이디(이메일)" type="email" 
                         variant="standard" color="warning" size="small" 
                         css={input_box}
-                        onChange={emailValidation}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <Button 
                         variant="outlined" color="warning" 
@@ -193,7 +203,7 @@ function UserInfo() {
                         id="pw" label="비밀번호" type="password" 
                         variant="standard" color="warning" size="small" 
                         css={input_box} 
-                        onChange={pwValidation}
+                        onChange={(e) => setPw(e.target.value)}
                     />
                 </div>
                 <div css={input_box} >
@@ -267,7 +277,11 @@ function UserInfo() {
                 </div>
             </div>
             <div>
-                <Button variant="contained" color="warning" css={btn} onClick={handleComplete}>
+                <Button 
+                    variant="contained" color="warning" 
+                    css={btn} onClick={signup}
+                    disabled={ableSignUp ? false : true}
+                >
                     가입완료
                 </Button>
             </div>

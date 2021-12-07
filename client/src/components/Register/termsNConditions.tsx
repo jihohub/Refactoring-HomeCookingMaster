@@ -1,20 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
 import { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { terms,line,terms_cnt,terms_title,service_title, service_sub_title, all_agree,btn,more_btn,more_btn_show, agree_btn, select_cnt } from "../../css/register_css";
+import { terms,line,terms_cnt,terms_title,service_title, service_sub_title, all_agree,btn,agree_btn, select_cnt } from "../../css/register_css";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useNavigate } from "react-router";
-
 
 function TermsNConditions() {
-    const navigate = useNavigate();
     // 약관 보기 버튼
     const [open1, setOpen1] = useState(false);
     const [open2, setOpen2] = useState(false);
@@ -111,6 +106,14 @@ function TermsNConditions() {
         setCheck3(!check3)
         // confirmChecked();
     }
+
+    useEffect(() => {
+        if (check1 && check2 && check3) {
+            setCheckAll(true);
+        } else {
+            setCheckAll(false);
+        }
+    }, [check1, check2, check3]);
 
     // 약관 전체 동의 체크
     const handleCheck = () => {

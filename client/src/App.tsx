@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
 
 import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
