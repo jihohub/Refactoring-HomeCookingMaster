@@ -1,6 +1,9 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
 from hcmk_server.services.main import get_food_list, get_ranking
+import requests
+import os
+from werkzeug.utils import secure_filename
 
 main_ns = Namespace(
     name="main",
@@ -53,3 +56,24 @@ class TodayRanking(Resource):
         result = get_ranking()
         return result
 
+
+@main_ns.route('/test')
+@main_ns.response(200, "success")
+@main_ns.response(500, "Failed")
+class test(Resource):
+    def post(self):
+        """현재 가장 인기있는 음식의 레시피를 반환합니다."""
+
+        f = request.files["img"]
+
+        s_filename = secure_filename(f.filename) # 파일명 저장
+        file_dir = '/server/static/uploads/' + s_filename # 파일을 저장하기 위한 경로 지정
+ 
+        f.save(file_dir) # 파일 저장
+ 
+        upload = {'img': open(file_dir, 'rb') } # 업로드하기위한 파일
+        res = requests.post('http://machinelearning:5000/receive', files=upload).json()
+
+
+        # return jsonify(res)
+        return res
