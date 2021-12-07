@@ -72,7 +72,7 @@ def create_app():
 
 application = create_app()
 
-if __name__ == "__main__":
-    HOST = "0.0.0.0"
-    PORT = 5000
-    application.run(host=HOST, port=PORT, debug=True)
+# if __name__ == "__main__":
+#     HOST = "0.0.0.0"
+#     PORT = 5000
+#     application.run(host=HOST, port=PORT, debug=True)

@@ -17,5 +17,5 @@ CMD ["run", "--host", "0.0.0.0"]
 
 
 
-# gunicorn 실행
+# # gunicorn 실행
 # CMD ["gunicorn", "hcmk_server.app:application", "-b", "0.0.0.0:5000"]
