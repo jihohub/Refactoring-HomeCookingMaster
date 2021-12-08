@@ -1,7 +1,10 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
 # from sqlalchemy.sql.elements import Null
-from hcmk_server.services.s3 import boto3_image_upload, boto3_image_delete
+from hcmk_server.services.s3 import (
+    boto3_image_upload,
+    default_profile_img,
+)
 from hcmk_server.services.recipe import (
     get_recipe,
     check_likes,
@@ -70,6 +73,7 @@ get_recipe_post_info_fields = recipe_ns.model(
         "timestamp": fields.String,
         "user_id": fields.Integer,
         "nickname": fields.String,
+        "profile_img": fields.String,
         "recipe_id": fields.Integer,
     }
 )
@@ -180,7 +184,7 @@ class AddPost(Resource):
             else:
                 image_url = boto3_image_upload(img)
         except Exception:
-            image_url = None
+            raise
 
         result = add_post(user_id, recipe_id, post, image_url)
         return result

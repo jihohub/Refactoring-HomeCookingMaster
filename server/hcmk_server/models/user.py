@@ -23,10 +23,11 @@ class User(db.Model):
     access_token = db.Column(db.String(1024), nullable=True)
     refresh_token = db.Column(db.String(1024), nullable=True)
 
-    def __init__(self, email: str, password: str, nickname: str):
+    def __init__(self, email: str, password: str, nickname: str, img: str):
         self.email = email
         self.password = password
         self.nickname = nickname
+        self.img = img
         self.exp = 0
 
 # 사용 편의에 따라 추후 변경 가능

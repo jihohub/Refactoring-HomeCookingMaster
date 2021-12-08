@@ -63,6 +63,7 @@ def get_recipe(recipe_id, user_id):
                     p_dict = post.to_dict()
                     user = User.query.filter(User.id == p_dict['user_id']).first()
                     p_dict["nickname"] = user.nickname
+                    p_dict["profile_img"] = user.img
                     post_dict.append(p_dict)
                 data['post_info'] = post_dict
         except Exception:
@@ -145,6 +146,8 @@ def add_post(user_id, recipe_id, post, image_url):
                 p_dict = post.to_dict()
                 user = User.query.filter(User.id == p_dict['user_id']).first()
                 p_dict["nickname"] = user.nickname
+                p_dict["profile_img"] = user.img
+                
                 post_dict.append(p_dict)
             data['post_info'] = post_dict
 
