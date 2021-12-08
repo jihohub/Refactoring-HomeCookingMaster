@@ -15,6 +15,7 @@ import getSearchList from "./modules/searchList";
 import getUserInfo from "./modules/userLogin";
 import getMyInfoList from "./modules/myInfo";
 import getNewAccessList from './modules/newToken'
+import getResultByImg from "./modules/searchByImageSlice";
 import "./App.css";
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
         getSearchList: getSearchList,
         getUserInfo: getUserInfo,
         getMyInfoList : getMyInfoList,
-        getNewAccessList:getNewAccessList
+        getNewAccessList:getNewAccessList,
+        getResultByImg:getResultByImg
     });
 
     const store = configureStore({

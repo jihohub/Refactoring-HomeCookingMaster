@@ -5,8 +5,8 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import Dropzone from "react-dropzone";
 import Box from "@mui/material/Box";
-import { useDispatch } from "react-redux";
-import { searchByImage } from "../../modules/searchByImageSlice";
+import { useDispatch, useSelector,RootStateOrAny } from "react-redux";
+import { getImgResult } from "../../modules/searchByImageSlice";
 import Paper from "@mui/material/Paper";
 import { GrImage } from "react-icons/gr";
 import { styled } from '@mui/material/styles';
@@ -16,11 +16,18 @@ import { btn, btnDiv } from "../../css/main_css";
 function DropZone() {
     const dispatch = useDispatch();
     
-    const handleDrop = (acceptedFiles: any) => {
+    const handleDrop = (e: any) => {
         const formData = new FormData();
-        formData.append("image", acceptedFiles[0]);
-        dispatch(searchByImage(formData));
+        console.log('formData', e.target.files)
+        
+        formData.append("img", e.target.files);
+        console.log('formData real', formData)
+        // dispatch(getImgResult(formData));
     };
+
+    const imgResult = useSelector((state:RootStateOrAny) => state.getResultByImg.list)
+
+    console.log('imgResult', imgResult)
 
     return (
         <div>
