@@ -31,30 +31,6 @@ export const recipeLikeSlice = createSlice({
             state.error = "";
         },
     },
-    // extraReducers: (builder) => {
-    //     builder.addCase(
-    //         postReview.rejected,
-    //         (state, action: PayloadAction<any>) => {
-    //             state.loading = false;
-    //             state.error = action.payload;
-    //         }
-    //     );
-
-    //     builder.addCase(
-    //         postReview.pending,
-    //         (state, action: PayloadAction<any>) => {
-    //             state.loading = true;
-    //             state.error = "";
-    //         }
-    //     );
-
-    //     builder.addCase(
-    //         postReview.fulfilled,
-    //         (state, action: PayloadAction<any>) => {
-    //             state.formData = action.payload;
-    //         }
-    //     );
-    // },
 });
 
 export const { clearLike } = recipeLikeSlice.actions;
