@@ -69,7 +69,23 @@ def get_recipe(recipe_id, user_id):
         except Exception:
             db.session.rollback()
             raise
-        
+        try:
+            '''6. 유사 레시피 데이터 가져오기'''
+            other_recipes = Recipe.query.filter((Recipe.food_id == recipe.food_id)
+                                                    &(Recipe.id != recipe_id)).all()
+            if other_recipes is None:
+                data['other_recipes_info'] = []
+            else :
+                other_recipe_dict = []
+                for other_recipe in other_recipes:
+                    o_dict = other_recipe.to_dict()
+                    other_recipe_dict.append(o_dict)
+                data['other_recipes_info'] = other_recipe_dict  
+
+        except Exception:
+            db.session.rollback()
+            raise
+
         return {
             "result" : "Success",
             "message" : "레시피 정보를 전송하였습니다.",
