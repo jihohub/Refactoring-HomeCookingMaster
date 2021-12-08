@@ -46,7 +46,7 @@ function MyPost(){
                         mt:8,
                     }}>
                     <ImageListItem key="Subheader" cols={2}>
-                        <ListSubheader component="div"  sx={{ mb:2, width:'40rem', backgroundColor:'#ED6C02', color:'white'}}>
+                        <ListSubheader component="div"  sx={{ mb:2, width:'40rem', backgroundColor:'#897A5F', color:'white'}}>
                             작성리뷰
                         </ListSubheader>
                         {isEmpty ? "" : 

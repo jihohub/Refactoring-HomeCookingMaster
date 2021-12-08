@@ -39,7 +39,7 @@ function App() {
 
     return (
         <Provider store={store}>
-            <div>
+            <div style={{fontFamily: "Elice"}}>
                 <Router />
             </div>
         </Provider>

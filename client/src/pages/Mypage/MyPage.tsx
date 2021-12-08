@@ -5,7 +5,7 @@ import MyScrap from '../../components/Mypage/myScrap'
 
 function MyPage() {
     return (
-        <div>
+        <div style={{marginTop:'10rem'}}>
             <IntroMe />
             <MyPost />
             <MyScrap />

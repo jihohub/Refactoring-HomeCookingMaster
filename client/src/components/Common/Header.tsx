@@ -4,6 +4,9 @@ import React, { useState, useEffect } from "react";
 import ScrollTop from "./ScrollTop";
 import HideOnScroll from "./HideOnScroll";
 import mainlogo from "../../assets/hcmk_logo.png";
+import logo1line from "../../assets/logo22.png";
+import logohat from "../../assets/hatYess.png";
+import logonohat from "../../assets/hatNoo.png";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +25,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import background from "../../assets/bg2.jpeg";
 
 const pages = [
     {
@@ -144,10 +148,10 @@ const Header = (props: Props) => {
         <>
             <CssBaseline />
             <HideOnScroll {...props}>
-                <AppBar position="fixed" sx={{ backgroundColor: "pink" }}>
+                <AppBar position="fixed" sx={{ backgroundImage:`url(${background})`, height:'5rem' }}>
                     <Container maxWidth="xl">
                         <Toolbar disableGutters>
-                            <Typography
+                        <Typography
                                 variant="h6"
                                 noWrap
                                 component="div"
@@ -157,16 +161,17 @@ const Header = (props: Props) => {
                                 }}
                             >
                                 <img
-                                    src={mainlogo}
+                                    src={logohat}
                                     style={{
-                                        height: "40px",
+                                        height: "3rem",
                                         cursor: "pointer",
+                                        margin: '1rem',
+                                        marginTop:'1rem',
                                     }}
                                     onClick={() => navigate("/")}
                                     alt="main logo"
                                 />
                             </Typography>
-
                             <Box
                                 sx={{
                                     flexGrow: 1,
@@ -218,7 +223,7 @@ const Header = (props: Props) => {
                                     ))}
                                 </Menu>
                             </Box>
-                            <Typography
+                            {/* <Typography
                                 variant="h6"
                                 noWrap
                                 component="div"
@@ -232,11 +237,12 @@ const Header = (props: Props) => {
                                     style={{
                                         height: "40px",
                                         cursor: "pointer",
+                                        paddingRight:'5rem'
                                     }}
                                     onClick={() => navigate("/")}
                                     alt="main logo"
                                 />
-                            </Typography>
+                            </Typography> */}
                             <Box
                                 sx={{
                                     flexGrow: 1,
@@ -244,25 +250,38 @@ const Header = (props: Props) => {
                                 }}
                             >
                                 {pages.map((page, index) => (
-                                    <Button
+                                    // <Button
+                                    //     key={index}
+                                    //     onClick={handleCloseNavMenu}
+                                    //     sx={{
+                                    //         my: 2,
+                                    //         color: "#897A5F",
+                                    //         display: "block",
+                                    //     }}
+                                    // >
+                                    <MenuItem
                                         key={index}
                                         onClick={handleCloseNavMenu}
-                                        sx={{
-                                            my: 2,
-                                            color: "white",
-                                            display: "block",
-                                        }}
                                     >
                                         <Typography
+                                            textAlign="center"
                                             onClick={() =>
                                                 navigate(`${page.path}`)
                                             }
+                                            sx={{color:'#897A5F', fontSize:'1.2em', fontFamily:'EliceBold', fontWeight:'800'}}
+                                            // sx={{
+                                            //     my: 2,
+                                            //     color: "#897A5F",
+                                            //     display: "block",
+                                            // }}
                                         >
                                             {page.text}
                                         </Typography>
-                                    </Button>
+                                    </MenuItem>
+                                    // </Button>
                                 ))}
                             </Box>
+                            
                             {logCheck ? (
                                 <Box sx={{ flexGrow: 0 }}>
                                     <Tooltip title="Open settings">
@@ -309,6 +328,7 @@ const Header = (props: Props) => {
                                                     onClick={() =>
                                                         navigate(`${item.path}`)
                                                     }
+                                                    sx={{color:'#897A5F'}}
                                                 >
                                                     {item.text}
                                                 </Typography>
@@ -327,6 +347,7 @@ const Header = (props: Props) => {
                                             onClick={() =>
                                                 navigate(`${item.path}`)
                                             }
+                                            sx={{color:'#897A5F', fontSize:'1.2rem', fontFamily:'EliceBold', fontWeight:'800'}}
                                         >
                                             {item.text}
                                         </Typography>
