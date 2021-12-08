@@ -38,7 +38,7 @@ function RecipeMain(props: any) {
         <>
             <Box sx={{ width: "70vw", height: "50px" }} />
             <Box sx={{ width: "70vw", margin: "0 auto" }}>
-                <Typography sx={{ color: "brown" }}>
+                <Typography sx={{ color: "brown", fontSize: "1.25rem" }}>
                     {`${food_info.category_l} > ${food_info.category_m} > ${food_info.category_s}`}
                 </Typography>
             </Box>
