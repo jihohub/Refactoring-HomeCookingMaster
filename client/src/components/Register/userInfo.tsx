@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { userInfo,terms_title,line,input_box,check_box,option_title,profile_img,btn,option_box, file_select,option_sub_title, introText } from "../../css/register_css";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { sendRegister } from "../../modules/registerInfoSlice";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -16,20 +18,21 @@ function UserInfo() {
     const [pw, setPw] = useState<string>("");
     const [nickname, setNickname] = useState<string>("");
     const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
-    const [intro, setIntro] = useState<String | null>("");
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const formData = new FormData();
+
     // 회원가입 api
-    const signup = async() => {
-        const res = await axios.post('/api/auth/signup', {
-            email : email,
-            password : pw,
-            nickname : nickname,
-            img : profileImage,
-            intro : intro
-        })
-        console.log(res);
-        navigate('/register/complete', {state : res.data.data.nickname})   // 회원가입 완료시 닉네임값 전달
+    const signup = async () => {
+        await formData.append("email", email);
+        await formData.append("password", pw);
+        await formData.append("nickname", nickname);
+
+        dispatch(sendRegister(formData));
+        // console.log(res);
+        // navigate('/register/complete')   // 회원가입 완료시 닉네임값 전달
     }
 
     // ====================================================================
@@ -44,6 +47,8 @@ function UserInfo() {
     const english = /[a-zA-Z]/;
 
     useEffect(() => {
+        formData.set("email", email);
+
         if (emailForm.test(email)) {
             setEmailVal(true);
         } else {
@@ -52,6 +57,8 @@ function UserInfo() {
     }, [email]);
     
     useEffect(() => {
+        formData.set("password", pw);
+
         if (
             pw.length > 7 &&
             pw.length < 17 &&
@@ -63,6 +70,10 @@ function UserInfo() {
             setPwVal(false);
         }
     }, [pw]);
+
+    useEffect(() => {
+        formData.set("nickname", nickname);
+    }, [nickname]);
 
     const checkPw = () => {
         const pwCheck = (document.getElementById('pwCheck') as HTMLInputElement).value;
@@ -89,6 +100,8 @@ function UserInfo() {
     const handleImage = (e: any) => {
         let reader = new FileReader();
         let file = e.target.files[0];
+        formData.set("img", file);
+
         reader.onloadend = () => {
             setProfileImage(reader.result);
         }
@@ -235,17 +248,6 @@ function UserInfo() {
                             accept="image/*" 
                             css={file_select}
                             onChange={handleImage}
-                        />
-                    </div>
-                    <br />
-                    <h4 css={option_sub_title}>한줄 소개</h4>
-                    <div>
-                        <textarea 
-                            id="introduction" name="introduction" 
-                            cols={54} rows={5} 
-                            placeholder="한줄 소개를 작성해주세요."
-                            css={introText}
-                            onChange={(e) => setIntro(e.target.value)}
                         />
                     </div>
                 </div>

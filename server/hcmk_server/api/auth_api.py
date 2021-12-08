@@ -1,6 +1,10 @@
 from flask_restx import Resource, Namespace, fields, reqparse
 from flask import request, jsonify
 from flask_bcrypt import Bcrypt
+from hcmk_server.services.s3 import (
+    boto3_image_upload,
+    default_profile_img
+)
 from hcmk_server.services.auth import (
     db,
     insert_user,
@@ -71,16 +75,21 @@ class Signup(Resource):
     @auth_ns.marshal_with(signin_fields)
     def post(self):
         """user 테이블에 회원정보를 등록합니다."""  
-        user_data = request.json
+        user_data = request.form
         email = user_data.get("email")
         password = user_data.get("password") 
         nickname = user_data.get("nickname") 
-        '''
-        TODO 이미지 s3에 올리고 주소 받아오는게 필요할듯?
-        '''
-        img = user_data.get("img")
-        intro = user_data.get("intro")
-        result = signup(email, password, nickname, img, intro)
+        
+        try:
+            img = request.files["img"]
+            if img.filename == "":
+                image_url = default_profile_img()
+            else:
+                image_url = boto3_image_upload(img)
+        except Exception:
+            raise
+
+        result = signup(email, password, nickname, image_url)
         return result
 
 
@@ -157,6 +166,7 @@ login_data_fields = auth_ns.model(
         "access_token" : fields.String,
         "refresh_token" : fields.String,
         "user_id" : fields.Integer,
+        "nickname" : fields.String,
         "img" : fields.String,
     }
 )

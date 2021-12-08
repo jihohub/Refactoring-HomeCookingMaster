@@ -16,7 +16,7 @@ const initialState: RankingState = {
 /* 레시피 데이터 요청 */
 export const getRanking = createAsyncThunk(
     "GET_RANKING",
-    async (ThunkAPI) => {
+    async () => {
         /* 백엔드 [GET] /recipe/<recipe_id> 요청 */
         let response = await axios.get(`/api/main/ranking`);
         console.log("res", response.data.data);
