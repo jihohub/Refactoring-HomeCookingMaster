@@ -26,9 +26,9 @@ function UserInfo() {
 
     // 회원가입 api
     const signup = async () => {
-        await formData.append("email", email);
-        await formData.append("password", pw);
-        await formData.append("nickname", nickname);
+        formData.append("email", email);
+        formData.append("password", pw);
+        formData.append("nickname", nickname);
 
         dispatch(sendRegister(formData));
         // console.log(res);
@@ -47,8 +47,6 @@ function UserInfo() {
     const english = /[a-zA-Z]/;
 
     useEffect(() => {
-        formData.set("email", email);
-
         if (emailForm.test(email)) {
             setEmailVal(true);
         } else {
@@ -57,8 +55,6 @@ function UserInfo() {
     }, [email]);
     
     useEffect(() => {
-        formData.set("password", pw);
-
         if (
             pw.length > 7 &&
             pw.length < 17 &&
@@ -70,10 +66,6 @@ function UserInfo() {
             setPwVal(false);
         }
     }, [pw]);
-
-    useEffect(() => {
-        formData.set("nickname", nickname);
-    }, [nickname]);
 
     const checkPw = () => {
         const pwCheck = (document.getElementById('pwCheck') as HTMLInputElement).value;
