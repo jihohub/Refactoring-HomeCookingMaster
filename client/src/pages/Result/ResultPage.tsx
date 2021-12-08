@@ -8,7 +8,7 @@ function ResultPage() {
     
 
     return (
-        <div>
+        <div style={{marginTop:'13rem', paddingBottom:'7rem'}}>
             <TextSearchBar/>
             <ItemList />
 

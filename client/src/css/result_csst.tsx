@@ -11,7 +11,7 @@ export const search = css`
 export const searchBtn = css`
     width: 3rem;
     height: 3rem;
-    background-color: #fa9026;
+    background-color: #ED6C02;
     color: white;
 `;
 
@@ -31,8 +31,11 @@ export const intro = css`
 export const toImage = css`
     display: flex;
     justify-content: center;
-    margin-left: 29rem;
-    padding-top: 1rem;
+    margin-left: 30rem;
+    padding-top: 2rem;
+    :hover{
+        color:#897A5F;
+    }
 `;
 
 // item list

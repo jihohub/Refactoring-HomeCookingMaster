@@ -1,7 +1,7 @@
 import { css, jsx } from "@emotion/react";
 
 export const imgSearch = css`
-    padding-left: 15rem;
+    padding-left: 10rem;
 `;
 
 export const imageTitle = css`
@@ -51,7 +51,7 @@ export const rankingDiv = css`
 
 export const top3TopDiv = css`
     display: flex;
-    padding-left: 25%;
+    padding-left: 20%;
     flex-direction: column;
     margin-bottom: 5rem;
 `;

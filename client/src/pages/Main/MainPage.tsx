@@ -132,7 +132,7 @@ const MainRanking = () => {
     useEffect(() => {
         if(ranking.length !== 0){
             setTop3List([ranking[0], ranking[1], ranking[2]]);
-            setOthersList([ranking[3], ranking[4], ranking[5],ranking[6], ranking[7], ranking[8],ranking[9], ranking[10], ranking[11]]);
+            setOthersList([ranking[3], ranking[4], ranking[5],ranking[6], ranking[7], ranking[8],ranking[9], ranking[10]]);
         }
     },[ranking])
     console.log(top3List)
@@ -143,7 +143,7 @@ const MainRanking = () => {
             <h1 css={rankingTitle}>레시피 랭킹</h1>
             <div css={top3TopDiv}>
                 {top3List ? top3List.map((item:any) => (
-                    <div css={top3ItemDiv}>
+                    <div css={top3ItemDiv} key={item.name}>
                         <div css={top3Div}>
                             <Typography variant="h2" gutterBottom component="p">
                                 {top3List.indexOf(item)+1}
@@ -176,14 +176,14 @@ const MainRanking = () => {
                 {othersList ? othersList.map((item:any) => (
                     <ImageListItem 
                         key={item.img} 
-                        sx={{width:'26%', height:'10rem'}}
+                        sx={{width:'20%', height:'10rem', boxShadow:'10px 5px 20px gray'}}
                         >
                         <img
                             src={`${item.img}?w=248&fit=crop&auto=format`}
                             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title}
                             loading="lazy"
-                            style={{width:'100%', height:'22rem'}}
+                            style={{width:'100%', height:'17rem'}}
                         />
                         <ImageListItemBar
                             title={item.name}
