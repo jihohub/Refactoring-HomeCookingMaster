@@ -64,8 +64,7 @@ const DragDrop = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [imagefile, setImagefile] = useState();
-    const [prvUrl, setPrvUrl] = useState <string | ArrayBuffer
-        | null>();
+    const [previewUrl, setPreviewUrl] = useState<string | ArrayBuffer | null>();
     
     const handleUpload = (e: any) => {
         e.preventDefault();
@@ -76,7 +75,7 @@ const DragDrop = () => {
         reader.onload = (e: any) => {
             dispatch(setImageFile(file));
             dispatch(setPreviewUrl(e.target.result));
-            navigate("/result");
+            // navigate("/result");
         }
     };
 
@@ -95,8 +94,10 @@ const DragDrop = () => {
     };
 
     let profile_preview: any = null;
-    if(imagefile !== '' && typeof prvUrl == "string"){
-        profile_preview = <img className='profile_preview' src={prvUrl} alt="preview" />
+    if (imagefile !== "" && typeof previewUrl == "string") {
+        profile_preview = (
+            <img className="profile_preview" src={previewUrl} alt="preview" />
+        );
     }
 
     const handleFilterFile = useCallback(
@@ -202,6 +203,7 @@ const DragDrop = () => {
                                 >
                                     X
                                 </div>
+                                {profile_preview}
                             </div>
                         );
                     })}

@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { Link, NavLink } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+
 import ScrollTop from "./ScrollTop";
 import HideOnScroll from "./HideOnScroll";
 import mainlogo from "../../assets/hcmk_logo.png";
@@ -74,12 +76,13 @@ interface Props {
 
 const Header = (props: Props) => {
     const navigate = useNavigate();
+    const user_info = useSelector((state:RootStateOrAny) => state.getUserInfo);
 
     const [logCheck, setLogCheck] = useState<boolean>(false);
 
     const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
     const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
-    const user_img = sessionStorage.getItem("user_img"); // user_img
+    const user_img = user_info.img;
 
     useEffect(() => {
         if (refreshTkn) {
@@ -148,10 +151,16 @@ const Header = (props: Props) => {
         <>
             <CssBaseline />
             <HideOnScroll {...props}>
-                <AppBar position="fixed" sx={{ backgroundImage:`url(${background})`, height:'5rem' }}>
+                <AppBar
+                    position="fixed"
+                    sx={{
+                        backgroundImage: `url(${background})`,
+                        height: "5rem",
+                    }}
+                >
                     <Container maxWidth="xl">
                         <Toolbar disableGutters>
-                        <Typography
+                            <Typography
                                 variant="h6"
                                 noWrap
                                 component="div"
@@ -165,8 +174,8 @@ const Header = (props: Props) => {
                                     style={{
                                         height: "3rem",
                                         cursor: "pointer",
-                                        margin: '1rem',
-                                        marginTop:'1rem',
+                                        margin: "1rem",
+                                        marginTop: "1rem",
                                     }}
                                     onClick={() => navigate("/")}
                                     alt="main logo"
@@ -268,7 +277,12 @@ const Header = (props: Props) => {
                                             onClick={() =>
                                                 navigate(`${page.path}`)
                                             }
-                                            sx={{color:'#897A5F', fontSize:'1.2em', fontFamily:'EliceBold', fontWeight:'800'}}
+                                            sx={{
+                                                color: "#897A5F",
+                                                fontSize: "1.2em",
+                                                fontFamily: "EliceBold",
+                                                fontWeight: "800",
+                                            }}
                                             // sx={{
                                             //     my: 2,
                                             //     color: "#897A5F",
@@ -281,61 +295,74 @@ const Header = (props: Props) => {
                                     // </Button>
                                 ))}
                             </Box>
-                            
+
                             {logCheck ? (
-                                <Box sx={{ flexGrow: 0 }}>
-                                    <Tooltip title="Open settings">
-                                        <IconButton
-                                            onClick={handleOpenUserMenu}
-                                            sx={{ p: 0 }}
+                                <>
+                                    <Box sx={{ marginRight: "20px" }}>
+                                        <Typography
+                                            sx={{
+                                                color: "#897A5F",
+                                                fontSize: "1rem",
+                                                fontFamily: "EliceBold",
+                                                fontWeight: "800",
+                                            }}
                                         >
-                                            {user_img ? (
-                                                <Avatar
-                                                    alt="Remy Sharp"
-                                                    src={user_img}
-                                                />
-                                            ) : (
-                                                <Avatar
-                                                    alt="Remy Sharp"
-                                                    src="/static/images/avatar/2.jpg"
-                                                />
-                                            )}
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Menu
-                                        sx={{ mt: "45px" }}
-                                        id="menu-appbar"
-                                        anchorEl={anchorElUser}
-                                        anchorOrigin={{
-                                            vertical: "top",
-                                            horizontal: "right",
-                                        }}
-                                        keepMounted
-                                        transformOrigin={{
-                                            vertical: "top",
-                                            horizontal: "right",
-                                        }}
-                                        open={Boolean(anchorElUser)}
-                                        onClose={handleCloseUserMenu}
-                                    >
-                                        {loggedIn.map((item, index) => (
-                                            <MenuItem
-                                                key={index}
-                                                onClick={item.func}
+                                            {`${user_info.nickname}`}
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{ flexGrow: 0 }}>
+                                        <Tooltip
+                                            title={`${user_info.nickname}님의 마이페이지`}
+                                        >
+                                            <IconButton
+                                                onClick={handleOpenUserMenu}
+                                                sx={{ p: 0 }}
                                             >
-                                                <Typography
-                                                    textAlign="center"
-                                                    onClick={() =>
-                                                        navigate(`${item.path}`)
-                                                    }
-                                                    sx={{color:'#897A5F'}}
+                                                <Avatar
+                                                    alt="profile image on the header bar"
+                                                    src={user_info.img}
+                                                />
+                                            </IconButton>
+                                        </Tooltip>
+                                        <Menu
+                                            sx={{ mt: "45px" }}
+                                            id="menu-appbar"
+                                            anchorEl={anchorElUser}
+                                            anchorOrigin={{
+                                                vertical: "top",
+                                                horizontal: "right",
+                                            }}
+                                            keepMounted
+                                            transformOrigin={{
+                                                vertical: "top",
+                                                horizontal: "right",
+                                            }}
+                                            open={Boolean(anchorElUser)}
+                                            onClose={handleCloseUserMenu}
+                                        >
+                                            {loggedIn.map((item, index) => (
+                                                <MenuItem
+                                                    key={index}
+                                                    onClick={item.func}
                                                 >
-                                                    {item.text}
-                                                </Typography>
-                                            </MenuItem>
-                                        ))}
-                                    </Menu>
-                                </Box>
+                                                    <Typography
+                                                        textAlign="center"
+                                                        onClick={() =>
+                                                            navigate(
+                                                                `${item.path}`
+                                                            )
+                                                        }
+                                                        sx={{
+                                                            color: "#897A5F",
+                                                        }}
+                                                    >
+                                                        {item.text}
+                                                    </Typography>
+                                                </MenuItem>
+                                            ))}
+                                        </Menu>
+                                    </Box>
+                                </>
                             ) : (
                                 notLoggedIn.map((item, index) => (
                                     <MenuItem
@@ -347,7 +374,12 @@ const Header = (props: Props) => {
                                             onClick={() =>
                                                 navigate(`${item.path}`)
                                             }
-                                            sx={{color:'#897A5F', fontSize:'1.2rem', fontFamily:'EliceBold', fontWeight:'800'}}
+                                            sx={{
+                                                color: "#897A5F",
+                                                fontSize: "1.2rem",
+                                                fontFamily: "EliceBold",
+                                                fontWeight: "800",
+                                            }}
                                         >
                                             {item.text}
                                         </Typography>
