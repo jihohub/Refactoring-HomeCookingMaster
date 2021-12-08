@@ -1,6 +1,10 @@
+from flask import request
 from flask_restx import Resource, Namespace, fields
 from flask_jwt_extended import jwt_required
-from hcmk_server.services.mypage import get_mypage
+from hcmk_server.services.mypage import (
+    get_mypage,
+    edit_img
+)
 
 mypage_ns = Namespace(
     name="mypage",
@@ -54,4 +58,41 @@ class Mypage(Resource):
     def get(self):
         """마이페이지에서 유저 정보, 스크랩한 레시피 리스트, 작성한 포스트의 레시피 리스트 보내주는 API"""
         result = get_mypage()
+        return result
+
+'''EditImg Models'''
+edit_img_data_fields = mypage_ns.model(
+    "edit_img_data",
+    {
+        "img": fields.String,
+    }
+)
+
+edit_img_fields = mypage_ns.model(
+    "edit_img",
+    {
+        "result": fields.String,
+        "message": fields.String,
+        "data": fields.Nested(edit_img_data_fields)
+    }
+)
+
+edit_img_expect_fields = mypage_ns.model(
+    "edit_img_expect",
+    {
+        "post_id": fields.Integer,
+    }
+)
+
+@mypage_ns.route('/editimg')
+@mypage_ns.response(200, "success")
+@mypage_ns.response(500, "Failed")
+class EditImg(Resource):
+    @mypage_ns.expect(edit_img_expect_fields)
+    @mypage_ns.marshal_with(edit_img_fields)
+    def post(self):
+        """해당 레시피의 좋아요를 관리하는 api"""
+        user_id = request.form.get("user_id")
+        img = request.files["img"]
+        result = edit_img(user_id, img)
         return result
