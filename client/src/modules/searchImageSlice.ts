@@ -15,21 +15,17 @@ const initialState: ImageState = {
 };
 
 /* 레시피 데이터 요청 */
-export const postImage = createAsyncThunk(
-    "POST_IMAGE",    
-    async (args: any, ThunkAPI: any) => {
-        /* 백엔드 [GET] /recipe/<recipe_id> 요청 */
+export const postImage = createAsyncThunk("POST_IMAGE", async (args: any, ThunkAPI: any) => {
         const { searchImageSlice } = ThunkAPI.getState();
         console.log("args", args);
         const response = await axios.post(
-            "/api/recipe/600/post",
+            `/api/recipe/${args}/post`,
             searchImageSlice.formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             }
         );
-        
         return response;
     }
 );

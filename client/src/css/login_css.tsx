@@ -36,6 +36,7 @@ export const to_register = css`
 export const to_register_p = css`
     margin-top: 15px;
     font-weight: 550;
+    color:'#363535'
 `;
 
 // export const to_register_cnt = css`

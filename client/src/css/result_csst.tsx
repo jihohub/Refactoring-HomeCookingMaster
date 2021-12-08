@@ -11,8 +11,12 @@ export const search = css`
 export const searchBtn = css`
     width: 3rem;
     height: 3rem;
-    background-color: #fa9026;
+    background-color: #897A5F;
     color: white;
+
+    :hover{
+        background-color: #c7b595;
+    }
 `;
 
 export const elem = css`
@@ -31,8 +35,12 @@ export const intro = css`
 export const toImage = css`
     display: flex;
     justify-content: center;
-    margin-left: 29rem;
-    padding-top: 1rem;
+    margin-left: 61%;
+    padding-top: 1.5em;
+    width: 10%;
+    :hover{
+        color:#c7b595;
+    }
 `;
 
 // item list

@@ -16,7 +16,7 @@ export const terms = css `
 `;
 
 export const terms_title = css`
-    font-size: 39px;
+    font-size: 37px;
     font-weight: 700;
     color : #897A5F;
 `;
@@ -128,7 +128,7 @@ export const option_title = css`
 `;
 
 export const option_sub_title = css`
-    padding-left: 5%;
+    padding-left: 1%;
     margin-bottom: 10px;
     margin-top: 30px;
 `;
@@ -137,11 +137,13 @@ export const profile_img = css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    margin-left: 1rem;
 `;
 
 export const option_box = css`
     width: 23rem;
-    /* margin: 2%; */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 `;
 
 export const file_select = css`
