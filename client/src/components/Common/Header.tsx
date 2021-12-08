@@ -29,6 +29,22 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import background from "../../assets/bg2.jpeg";
 
+const styles = {
+    "&.MuiFab-secondary": {
+        // border: "1px black solid",
+        backgroundColor: "#897A5F",
+    },
+    // "&.MuiButton-text": {
+    //     color: "grey",
+    // },
+    // "&.MuiButton-contained": {
+    //     color: "yellow",
+    // },
+    // "&.MuiButton-outlined": {
+    //     color: "brown",
+    // },
+};
+
 const pages = [
     {
         text: "텍스트검색",
@@ -82,7 +98,6 @@ const Header = (props: Props) => {
 
     const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
     const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
-    const user_img = user_info.img;
 
     useEffect(() => {
         if (refreshTkn) {
@@ -106,9 +121,7 @@ const Header = (props: Props) => {
         console.log("<Header> : logout");
         sessionStorage.removeItem("usrRfshTkn");
         sessionStorage.removeItem("usrAcsTkn");
-        sessionStorage.removeItem("user_id");
-        sessionStorage.removeItem("user_img");
-        window.location.replace("/");
+        navigate("/");
     };
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -396,6 +409,7 @@ const Header = (props: Props) => {
                     color="secondary"
                     size="small"
                     aria-label="scroll back to top"
+                    sx={styles}
                 >
                     <KeyboardArrowUpIcon />
                 </Fab>

@@ -13,22 +13,23 @@ function RecipePage() {
     const dispatch = useDispatch();
     const params = useParams();
     const recipe_id = Number(params.id);
-    const user_info = useSelector((state: RootStateOrAny) => state.loginInfoSlice);
+    const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
     const recipe = useSelector((state: RootStateOrAny) => state.recipeSlice);
 
+    const { user_id } = user_info;
     console.log("ui", user_info);
-    // useEffect(() => {
-    //     dispatch(getRecipe({ recipe_id, user_info.user_id }));
-    //     return () => {
-    //         dispatch(clearRecipe());
-    //     };
-    // }, []);
+    useEffect(() => {
+        dispatch(getRecipe({ recipe_id, user_id }));
+        return () => {
+            dispatch(clearRecipe());
+        };
+    }, []);
 
     return (
         <div>
-            <RecipeMain recipe={recipe} user_id={user_info.user_id} />
+            <RecipeMain recipe={recipe} user_id={user_id} />
             <ReviewList post={recipe.post_info} />
-            <RecipeBoard recipe_id={recipe_id}/>
+            <RecipeBoard recipe_id={recipe_id} />
         </div>
     );
 }

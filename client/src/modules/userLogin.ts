@@ -6,7 +6,7 @@ const name = 'getUserInfo';
 type UserInfo = {
     access_token: string | null;
     refresh_token: string | null;
-    user_id: number;
+    user_id: number | null;
     nickname: string;
     img: string;
     loading: boolean;
@@ -16,7 +16,7 @@ type UserInfo = {
 const initialState: UserInfo = {
     access_token: null,
     refresh_token: null,
-    user_id: 0,
+    user_id: null,
     nickname: "",
     img: "",
     loading: false,
@@ -38,7 +38,7 @@ export const getUserInfo = createSlice({
         setUser(state) {
             state.access_token = null;
             state.refresh_token = null;
-            state.user_id = 0;
+            state.user_id = null;
             state.nickname = "";
             state.img = "";
             state.loading = false;

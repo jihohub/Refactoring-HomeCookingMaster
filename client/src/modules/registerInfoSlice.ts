@@ -2,14 +2,14 @@ import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface RegisterState {
-    user_id: number;
+    user_id: number | null;
     nickname: string;
     loading: boolean;
     error: string;
 }
 
 const initialState: RegisterState = {
-    user_id: 0,
+    user_id: null,
     nickname: "",
     loading: false,
     error: "",
@@ -35,6 +35,8 @@ export const registerInfoSlice = createSlice({
     initialState,
     reducers: {
         clearRegister(state) {
+            state.user_id = null;
+            state.nickname = "";
             state.loading = false;
             state.error = "";
         },

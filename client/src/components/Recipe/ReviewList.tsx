@@ -26,45 +26,77 @@ function Row(props: any) {
         <>
             {!open && (
                 <ListItemButton onClick={handleClick}>
-                    <ListItemText primary={review.nickname} />
+                    <ListItemText
+                        primary={
+                            <Typography sx={{ fontFamily: "Elice" }}>
+                                {review.nickname}
+                            </Typography>
+                        }
+                    />
                     <ListItemText
                         primary={
                             review.img ? (
-                                <>
+                                <Box sx={{ display: "flex" }}>
                                     <IconButton>
                                         <ImageIcon fontSize="small" />
                                     </IconButton>
-                                    {review.post}
-                                </>
+                                    <Typography sx={{ fontFamily: "Elice" }}>
+                                        {review.post}
+                                    </Typography>
+                                </Box>
                             ) : (
-                                review.post
+                                <Typography sx={{ fontFamily: "Elice" }}>
+                                    {review.post}
+                                </Typography>
                             )
                         }
+                        sx={{ textAlign: "left" }}
                     />
-                    <ListItemText primary={review.timestamp.split(" ")[0]} />
+                    <ListItemText
+                        primary={
+                            <Typography sx={{ fontFamily: "Elice" }}>
+                                {review.timestamp.split(" ")[0]}
+                            </Typography>
+                        }
+                    />
                     <ExpandMore />
                 </ListItemButton>
             )}
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding onClick={handleClick}>
                     <ListItemButton sx={{ minHeight: "300px" }}>
-                        <ListItemText primary={review.nickname} />
+                        <ListItemText
+                            primary={
+                                <Typography sx={{ fontFamily: "Elice" }}>
+                                    {review.nickname}
+                                </Typography>
+                            }
+                        />
                         <ListItemText
                             primary={
                                 <>
-                                    {review.post}
+                                    <Typography sx={{ fontFamily: "Elice" }}>
+                                        {review.post}
+                                    </Typography>
                                     <br />
-                                    {review.img && <img
-                                        src={review.img}
-                                        width="200px"
-                                        alt="big"
-                                        onClick={handleOpen}
-                                    />
-                                    }
+                                    {review.img && (
+                                        <img
+                                            src={review.img}
+                                            width="200px"
+                                            alt="big"
+                                            onClick={handleOpen}
+                                        />
+                                    )}
                                 </>
                             }
                         />
-                        <ListItemText primary={review.timestamp.split(" ")[0]} />
+                        <ListItemText
+                            primary={
+                                <Typography sx={{ fontFamily: "Elice" }}>
+                                    {review.timestamp.split(" ")[0]}
+                                </Typography>
+                            }
+                        />
                         <ExpandLess />
                     </ListItemButton>
                 </List>
@@ -78,10 +110,14 @@ function Row(props: any) {
                 <img
                     src={review.img}
                     style={{
-                        display: "flex",
-                        lineHeight: "100%",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        width: "70%",
+                        maxWidth: "80vw",
+                        maxHeight: "80%",
+                        position: "fixed",
+                        top: "50%",
+                        left: "30%",
+                        transform: "translate(-20%, -50%)",
+                        overflowY: "auto",
                     }}
                     alt="original"
                 />
@@ -104,28 +140,65 @@ function ReviewList(props: any) {
 
     return (
         <>
-            <Box sx={{ width: "70vw", maxWidth: "750px", height: "30px" }} />
-            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
-                <Typography sx={{ fontSize: "1.75rem", color: "brown" }}>
+            <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
+            <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
+                <Typography
+                    sx={{
+                        fontSize: "1.75rem",
+                        color: "#897A5F",
+                        fontFamily: "Elice",
+                    }}
+                >
                     레시피 후기
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "1080px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <Divider />
             </Box>
             {post.length > 0 ? (
                 post.map((item: any) => (
                     <>
-                        <Box sx={{ width: "70vw", maxWidth: "750px", height: "10px" }} />
-                        <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
+                        <Box
+                            sx={{
+                                width: "70vw",
+                                maxWidth: "1080px",
+                                height: "10px",
+                            }}
+                        />
+                        <Box
+                            sx={{
+                                width: "70vw",
+                                maxWidth: "1080px",
+                                margin: "0 auto",
+                            }}
+                        >
                             <Row key={item.id} row={item} />
                         </Box>
                     </>
                 ))
             ) : (
                 <>
-                    <Box sx={{ width: "70vw", maxWidth: "750px", height: "10px" }} />
-                    <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
+                    <Box
+                        sx={{
+                            width: "70vw",
+                            maxWidth: "1080px",
+                            height: "10px",
+                        }}
+                    />
+                    <Box
+                        sx={{
+                            width: "70vw",
+                            maxWidth: "1080px",
+                            margin: "0 auto",
+                        }}
+                    >
                         <List>
                             <ListItemButton>
                                 <ListItemText sx={{ textAlign: "center" }}>
