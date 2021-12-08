@@ -49,7 +49,7 @@ function MyScrap(){
                         mt:8,
                     }}>
                     <ImageListItem key="Subheader" cols={2}>
-                        <ListSubheader component="div"  sx={{ width:'40rem', backgroundColor:'#ED6C02', color:'white' }}>
+                        <ListSubheader component="div"  sx={{ width:'40rem', backgroundColor:'#897A5F', color:'white' }}>
                             스크랩레시피
                         </ListSubheader>
                         {isEmpty ? "" : 

@@ -12,6 +12,7 @@ import { GrImage } from "react-icons/gr";
 
 function DropZone() {
     const dispatch = useDispatch();
+    
     const handleDrop = (acceptedFiles: any) => {
         const formData = new FormData();
         formData.append("image", acceptedFiles[0]);

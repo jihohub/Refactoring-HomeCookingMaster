@@ -29,7 +29,6 @@ export const postImage = createAsyncThunk(
                 },
             }
         );
-        
         return response;
     }
 );
