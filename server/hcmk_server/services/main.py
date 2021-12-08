@@ -3,6 +3,7 @@ from hcmk_server.models.recipe import Recipe
 from io import BufferedReader
 import requests
 import json
+from werkzeug.utils import secure_filename
 
 def get_food_list(data):
     result = {}
@@ -35,14 +36,13 @@ def get_ranking():
 
 
 def get_equal_rate(image):
-    # 받은 파일 이름 복사
+    #받은 파일 이름 복사
+    print(image)
     image.name = image.filename
     # 버퍼로 변환
     image = BufferedReader(image)
     # 머신러닝 서버로 이미지 전송
-    response = requests.post('http://192.168.0.13:8000/test', files={'img': image}).json()
-
-    print('type of response: ',type(response))
+    response = requests.post('http://elice-kdt-2nd-team5.koreacentral.cloudapp.azure.com/receive', files={'img': image}).json()
 
     # 결과값 넣을 딕셔너리, 음식 이름명 넣을 리스트
     result = {}
