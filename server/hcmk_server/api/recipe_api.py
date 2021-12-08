@@ -1,7 +1,10 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
 # from sqlalchemy.sql.elements import Null
-from hcmk_server.services.s3 import boto3_image_upload, boto3_image_delete
+from hcmk_server.services.s3 import (
+    boto3_image_upload,
+    default_profile_img,
+)
 from hcmk_server.services.recipe import (
     get_recipe,
     check_likes,
@@ -70,6 +73,7 @@ get_recipe_post_info_fields = recipe_ns.model(
         "timestamp": fields.String,
         "user_id": fields.Integer,
         "nickname": fields.String,
+        "profile_img": fields.String,
         "recipe_id": fields.Integer,
     }
 )
@@ -82,6 +86,7 @@ get_recipe_data_fields = recipe_ns.model(
         "ingredient_info": fields.List(fields.Nested(get_recipe_ingredient_info_fields)),
         "process_info": fields.List(fields.Nested(get_recipe_process_info_fields)),
         "post_info": fields.List(fields.Nested(get_recipe_post_info_fields)),
+        "did_u_liked": fields.Boolean,
     }
 )
 
@@ -101,7 +106,8 @@ class GetRecipe(Resource):
     @recipe_ns.marshal_with(get_recipe_fields)
     def get(self, recipe_id):
         """검색어와 일치하는 음식의 레시피 조회수 증가 후 데이터를 반환하는 api"""
-        result = get_recipe(recipe_id)
+        user_id = request.json.get("user_id")
+        result = get_recipe(recipe_id, user_id)
         
         return result
 
@@ -178,7 +184,7 @@ class AddPost(Resource):
             else:
                 image_url = boto3_image_upload(img)
         except Exception:
-            image_url = None
+            raise
 
         result = add_post(user_id, recipe_id, post, image_url)
         return result
