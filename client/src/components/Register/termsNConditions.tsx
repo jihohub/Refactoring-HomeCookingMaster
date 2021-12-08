@@ -9,13 +9,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { styled } from '@mui/material/styles';
+import { brown } from '@mui/material/colors';
 
 const OkButton = styled(Button)({
     backgroundColor: '#897A5F',
     borderColor: '#897A5F',
     '&:hover': {
-        backgroundColor: '#ED6C02',
-        borderColor: '#ED6C02',
+        backgroundColor: '#c7b595',
+        borderColor: '#c7b595',
     },
 });
 
@@ -154,8 +155,14 @@ function TermsNConditions() {
                                 color="warning"
                                 checked={checkAll}
                                 onChange={handleCheckAll}
+                                sx={{
+                                    color: brown[800],
+                                    '&.Mui-checked': {
+                                        color: brown[600],
+                                    },
+                                }}
                             />
-                            <strong>약관에 모두 동의합니다.</strong>
+                            약관에 모두 동의합니다.
                         </label>
                     </div>
                 </div>
@@ -169,8 +176,14 @@ function TermsNConditions() {
                                     color="warning"
                                     checked={check1}
                                     onChange={handleCheck1}
+                                    sx={{
+                                        color: brown[800],
+                                        '&.Mui-checked': {
+                                            color: brown[600],
+                                        },
+                                    }}
                                 />
-                                <strong>만 14세 이상입니다.</strong>
+                                [필수] 만 14세 이상입니다.
                             </label>
                         </div>
                     </div>
@@ -183,15 +196,20 @@ function TermsNConditions() {
                                     color="warning"
                                     checked={check2}
                                     onChange={handleCheck2}
+                                    sx={{
+                                        color: brown[800],
+                                        '&.Mui-checked': {
+                                            color: brown[600],
+                                        },
+                                    }}
                                 />
-                                <strong>[필수] 이용약관</strong>
+                                [필수] 이용약관
                             </label>
                             <Button
                                 variant="text"
                                 onClick={handleClickOpen1("paper")}
                                 size="small"
-                                sx={{ fontWeight: "bold" }}
-                                color="warning"
+                                sx={{ fontWeight: "bold", color:'#897A5F' }}
                             >
                                 보기
                             </Button>
@@ -342,20 +360,24 @@ function TermsNConditions() {
                             <label style={{ cursor: "pointer" }}>
                                 <Checkbox
                                     id="check_one"
-                                    color="warning"
                                     checked={check3}
                                     onChange={handleCheck3}
+                                    sx={{
+                                        color: brown[800],
+                                        '&.Mui-checked': {
+                                            color: brown[600],
+                                        },
+                                    }}
                                 />
-                                <strong>
+                                
                                     [필수] 개인정보 수집 및 이용 동의
-                                </strong>
+                                
                             </label>
                             <Button
                                 variant="text"
                                 onClick={handleClickOpen2("paper")}
                                 size="small"
-                                sx={{ fontWeight: "bold" }}
-                                color="warning"
+                                sx={{ fontWeight: "bold", color:'#897A5F' }}
                             >
                                 보기
                             </Button>

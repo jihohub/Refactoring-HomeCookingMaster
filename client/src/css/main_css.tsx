@@ -1,7 +1,7 @@
 import { css, jsx } from "@emotion/react";
 
 export const imgSearch = css`
-    padding-left: 20rem;
+    padding-left: 10rem;
 `;
 
 export const imageTitle = css`
@@ -22,14 +22,15 @@ export const btnDiv = css`
 `;
 
 export const imgGuide  = css`
-    padding-right: 20rem;
+    padding-right: 13rem;
     width:40%;
-    margin-top: 5rem;
+    margin-top: 2rem;
 `;
 
 export const guideTitle = css`
     text-align: center;
     margin-bottom: 2rem;
+    font-weight: 700;
 `;
 
 
@@ -51,7 +52,7 @@ export const rankingDiv = css`
 
 export const top3TopDiv = css`
     display: flex;
-    padding-left: 25%;
+    padding-left: 20%;
     flex-direction: column;
     margin-bottom: 5rem;
 `;

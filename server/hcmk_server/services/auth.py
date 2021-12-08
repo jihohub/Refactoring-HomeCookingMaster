@@ -27,15 +27,12 @@ def get_user_by_id(user_id):
     return result
 
 
-def insert_user(email, password, nickname, img, intro):
+def insert_user(email, password, nickname, image_url):
     try:
-        new_user = User(email=email, password=password, nickname=nickname)
-        #만약 프로필 이미지와 한 줄 소개가 있다면 db에 넣기
-        if img:
-            new_user.img = img
-        if intro:
-            new_user.intro = intro  
-
+        new_user = User(email=email,
+                        password=password,
+                        nickname=nickname,
+                        img=image_url)
         db.session.add(new_user)
         db.session.commit()
         return new_user.id
@@ -60,11 +57,11 @@ def validate_token(token):
     return True
 
 
-def signup(email, password, nickname, img, intro):
+def signup(email, password, nickname, image_url):
         # 패스워드 hash 변환
         password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
         # 필수 정보 db에 입력 및 현재 유저 정보 읽기
-        user = get_user_by_id(insert_user(email, password_hash, nickname, img, intro))
+        user = get_user_by_id(insert_user(email, password_hash, nickname, image_url))
 
         return {
             "result" : "Success",
@@ -105,6 +102,7 @@ def login(email, password):
             "access_token" : access_token, 
             "refresh_token" : refresh_token,
             "user_id" : user.id,
+            "nickname" : user.nickname,
             "img" : user.img
         }
         }, 200
