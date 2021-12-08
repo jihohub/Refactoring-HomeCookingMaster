@@ -45,7 +45,7 @@ function RecipeMain(props: any) {
             <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
                 <img
                     src={recipe_info.img}
-                    style={{ width: "80%" }}
+                    style={{ width: "80%", minWidth: "80%" }}
                     alt="food"
                 />
             </Box>
@@ -151,7 +151,7 @@ function RecipeMain(props: any) {
                     >
                         <img
                             src={item.img}
-                            style={{ width: "40%" }}
+                            style={{ width: "40%", minWidth: "40%" }}
                             alt="step"
                         />
                         <Typography sx={{ margin: "0 3%" }}>
