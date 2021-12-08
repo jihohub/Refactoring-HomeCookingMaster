@@ -25,14 +25,13 @@ function UserInfo() {
     const formData = new FormData();
 
     // 회원가입 api
-    const signup = async () => {
+    const signup = () => {
         formData.append("email", email);
         formData.append("password", pw);
         formData.append("nickname", nickname);
 
         dispatch(sendRegister(formData));
-        // console.log(res);
-        // navigate('/register/complete')   // 회원가입 완료시 닉네임값 전달
+        navigate('/register/complete')   // 회원가입 완료시 닉네임값 전달
     }
 
     // ====================================================================
