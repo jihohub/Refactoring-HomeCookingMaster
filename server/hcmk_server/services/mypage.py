@@ -1,9 +1,13 @@
-from hcmk_server.models.post import Post
+from hcmk_server.models.post import Post, db
+from hcmk_server.models.user import User
 from hcmk_server.models.recipe import Recipe
 from hcmk_server.models.recipe_like import RecipeLike
 from flask_jwt_extended import get_jwt_identity, get_jwt
 from hcmk_server.services.auth import get_user_by_id, validate_token
-
+from hcmk_server.services.s3 import (
+    boto3_image_upload,
+    boto3_image_delete,
+)
 
 def get_mypage ():
     if validate_token(get_jwt())  == False:
@@ -46,5 +50,26 @@ def get_mypage ():
             },
             "liked_recipe" : result_liked_recipe,
             "my_post" : result_my_post_recipe
+        }
+    }, 200
+
+
+def edit_img(user_id, img):
+    user = User.query.filter(User.id == user_id).first()
+    try:
+        boto3_image_delete(user.img)
+        img_url = boto3_image_upload(img)
+    except Exception:
+        raise
+
+    user.img = img_url
+    db.session.add(user)
+    db.session.commit()
+    return {
+        "result" : "Success",
+        "message" : "프로필 사진을 수정하였습니다.",
+        "data": 
+        {
+            "img": img_url
         }
     }, 200
