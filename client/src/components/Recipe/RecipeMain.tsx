@@ -11,11 +11,12 @@ import AlarmIcon from "@mui/icons-material/Alarm";
 import QuizIcon from "@mui/icons-material/Quiz";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 function RecipeMain(props: any) {
     const dispatch = useDispatch();
 
-    const { recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
+    const { did_u_liked, recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
     const recipe_id = recipe_info.id
     const user_id = props.user_id;
 
@@ -35,7 +36,18 @@ function RecipeMain(props: any) {
 
     const open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
+    
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
+    const checkLoggedIn = (obj: object) => {
+        Object.keys(obj).length === 0 && obj.constructor === Object
+            ? setIsLoggedIn(false)
+            : setIsLoggedIn(true);
+    }
+
+    checkLoggedIn(user_id);
+    
+    
     return (
         <>
             <Box sx={{ width: "70vw", height: "50px" }} />
@@ -81,30 +93,72 @@ function RecipeMain(props: any) {
                 </Typography>
             </Box>
             <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "right" }}>
-                <Typography>
-                    <IconButton onClick={handleLike}>
-                        <FavoriteIcon sx={{ color: "red" }} />
-                    </IconButton>
-                    {recipe_info.likes}
-                    <Popover
-                        id={id}
-                        open={open}
-                        anchorEl={anchorEl}
-                        onClose={handleClose}
-                        anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "left",
-                        }}
-                    >
-                        <Typography sx={{ p: 2 }}>
-                            이 레시피에 좋아요를 누르셨습니다.
-                            <br />
-                            좋아요를 누른 레시피는 스크랩되어
-                            <br />
-                            마이페이지에서도 확인하실 수 있습니다.
-                        </Typography>
-                    </Popover>
-                </Typography>
+                {(isLoggedIn && did_u_liked) && (
+                    <Typography>
+                        <IconButton onClick={handleLike}>
+                            <FavoriteBorderIcon sx={{ color: "red" }} />
+                        </IconButton>
+                        {recipe_info.likes}
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "left",
+                            }}
+                        >
+                            <Typography sx={{ p: 2 }}>
+                                좋아요를 취소하셨습니다.
+                            </Typography>
+                        </Popover>
+                    </Typography>
+                )}
+                {(isLoggedIn && !did_u_liked) && (
+                    <Typography>
+                        <IconButton onClick={handleLike}>
+                            <FavoriteIcon sx={{ color: "red" }} />
+                        </IconButton>
+                        {recipe_info.likes}
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "left",
+                            }}
+                        >
+                            <Typography sx={{ p: 2 }}>
+                                이 레시피에 좋아요를 누르셨습니다.
+                            </Typography>
+                        </Popover>
+                    </Typography>
+                )}
+                {!isLoggedIn && (
+                    <Typography>
+                        <IconButton onClick={handleLike}>
+                            <FavoriteBorderIcon sx={{ color: "red" }} />
+                        </IconButton>
+                        {recipe_info.likes}
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "left",
+                            }}
+                        >
+                            <Typography sx={{ p: 2 }}>
+                                로그인 후 이용해주세요.
+                            </Typography>
+                        </Popover>
+                    </Typography>
+                )}
             </Box>
             <Box sx={{ width: "70vw", height: "30px" }} />
             <Box sx={{ width: "70vw", margin: "0 auto" }}>

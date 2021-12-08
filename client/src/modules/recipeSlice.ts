@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface RecipeState {
+    did_u_liked: boolean;
     recipe_info: {
         id: number;
         name: string;
@@ -46,6 +47,7 @@ interface RecipeState {
 }
 
 const initialState: RecipeState = {
+    did_u_liked: false,
     recipe_info: {
         id: 0,
         name: "",
@@ -91,6 +93,7 @@ export const recipeSlice = createSlice({
     initialState,
     reducers: {
         clearRecipe(state) {
+            state.did_u_liked = false;
             state.recipe_info = {
                 id: 0,
                 name: "",
@@ -136,6 +139,7 @@ export const recipeSlice = createSlice({
         builder.addCase(
             getRecipe.fulfilled,
             (state, action: PayloadAction<any>) => {
+                state.did_u_liked = action.payload.did_u_liked;
                 state.recipe_info = action.payload.recipe_info;
                 state.food_info = action.payload.food_info;
                 state.ingredient_info = action.payload.ingredient_info;
