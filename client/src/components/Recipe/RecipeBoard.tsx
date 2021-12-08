@@ -7,27 +7,26 @@ import { getRecipe } from "../../modules/recipeSlice";
 
 function RecipeBoard(props: any) {
     const dispatch = useDispatch();
-    const [text, setText] = useState<string>("");
+    const [post, setPost] = useState<string>("");
 
-    const user_id = String(sessionStorage.getItem("user_id")); // user_id
-    const id = props.id;
+    const recipe_id = props.recipe_id;
+    const user_id = props.user_id;
     const formData = new FormData();
 
     const handleText = (e: any) => {
-        setText(e.target.value);
+        setPost(e.target.value);
     };
 
     const handleUpload = (e: any) => {
         const imageFile = e.target.files[0];
-        console.log(imageFile);
-        formData.set("img", imageFile);
+        formData.append("img", imageFile);
     };
 
     const handleSubmit = async () => {
         await formData.append("user_id", user_id);
-        await formData.append("post", text);
-        await dispatch(recipeReview({ formData, id }));
-        dispatch(getRecipe(id));
+        await formData.append("post", post);
+        await dispatch(recipeReview({ formData, recipe_id }));
+        dispatch(getRecipe({ recipe_id, user_id }));
     };
 
     return (

@@ -27,7 +27,7 @@ function RecipePage() {
         <div>
             <RecipeMain recipe={recipe} user_id={user_id} />
             <ReviewList post={recipe.post_info} />
-            <RecipeBoard id={recipe.recipe_info.id} />
+            <RecipeBoard recipe_id={recipe_id} user_id={user_id} />
         </div>
     );
 }

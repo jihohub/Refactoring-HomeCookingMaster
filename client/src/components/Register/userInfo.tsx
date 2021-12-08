@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { userInfo,terms_title,line,input_box,check_box,option_title,profile_img,btn,option_box, file_select,option_sub_title, introText } from "../../css/register_css";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { sendRegister } from "../../modules/registerInfoSlice";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -16,24 +18,21 @@ function UserInfo() {
     const [pw, setPw] = useState<string>("");
     const [nickname, setNickname] = useState<string>("");
     const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
-    const [intro, setIntro] = useState<String | null>("");
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const formData = new FormData();
+
     // 회원가입 api
     const signup = async () => {
-        formData.append("email", email);
-        formData.append("password", pw);
-        formData.append("nickname", nickname);
-        
-        const res = await axios.post("/api/auth/signup", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });
-        console.log(res);
-        navigate('/register/complete', {state : res.data.data.nickname})   // 회원가입 완료시 닉네임값 전달
+        await formData.append("email", email);
+        await formData.append("password", pw);
+        await formData.append("nickname", nickname);
+
+        dispatch(sendRegister(formData));
+        // console.log(res);
+        // navigate('/register/complete')   // 회원가입 완료시 닉네임값 전달
     }
 
     // ====================================================================
@@ -48,6 +47,8 @@ function UserInfo() {
     const english = /[a-zA-Z]/;
 
     useEffect(() => {
+        formData.set("email", email);
+
         if (emailForm.test(email)) {
             setEmailVal(true);
         } else {
@@ -56,6 +57,8 @@ function UserInfo() {
     }, [email]);
     
     useEffect(() => {
+        formData.set("password", pw);
+
         if (
             pw.length > 7 &&
             pw.length < 17 &&
@@ -67,6 +70,10 @@ function UserInfo() {
             setPwVal(false);
         }
     }, [pw]);
+
+    useEffect(() => {
+        formData.set("nickname", nickname);
+    }, [nickname]);
 
     const checkPw = () => {
         const pwCheck = (document.getElementById('pwCheck') as HTMLInputElement).value;
@@ -93,11 +100,12 @@ function UserInfo() {
     const handleImage = (e: any) => {
         let reader = new FileReader();
         let file = e.target.files[0];
+        formData.set("img", file);
+
         reader.onloadend = () => {
             setProfileImage(reader.result);
         }
         reader.readAsDataURL(file);
-        formData.append("img", file);
     }
 
     // ====================================================================
