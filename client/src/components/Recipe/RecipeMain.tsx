@@ -37,15 +37,15 @@ function RecipeMain(props: any) {
     const open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
     
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-    const checkLoggedIn = (obj: object) => {
-        Object.keys(obj).length === 0 && obj.constructor === Object
-            ? setIsLoggedIn(false)
-            : setIsLoggedIn(true);
-    }
+    // const checkLoggedIn = (obj: object) => {
+    //     Object.keys(obj).length === 0 && obj.constructor === Object
+    //         ? setIsLoggedIn(false)
+    //         : setIsLoggedIn(true);
+    // }
 
-    checkLoggedIn(user_id);
+    // checkLoggedIn(user_id);
     
     
     return (
@@ -93,7 +93,7 @@ function RecipeMain(props: any) {
                 </Typography>
             </Box>
             <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "right" }}>
-                {(isLoggedIn && did_u_liked) && (
+                {user_id && did_u_liked && (
                     <Typography>
                         <IconButton onClick={handleLike}>
                             <FavoriteBorderIcon sx={{ color: "red" }} />
@@ -115,7 +115,7 @@ function RecipeMain(props: any) {
                         </Popover>
                     </Typography>
                 )}
-                {(isLoggedIn && !did_u_liked) && (
+                {user_id && !did_u_liked && (
                     <Typography>
                         <IconButton onClick={handleLike}>
                             <FavoriteIcon sx={{ color: "red" }} />
@@ -137,7 +137,7 @@ function RecipeMain(props: any) {
                         </Popover>
                     </Typography>
                 )}
-                {!isLoggedIn && (
+                {!user_id && (
                     <Typography>
                         <IconButton onClick={handleLike}>
                             <FavoriteBorderIcon sx={{ color: "red" }} />
