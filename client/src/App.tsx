@@ -7,6 +7,7 @@ import recipeSlice from "./modules/recipeSlice";
 import recipeReviewSlice from "./modules/recipeReviewSlice";
 import recipeLikeSlice from "./modules/recipeLikeSlice";
 import rankingSlice from "./modules/rankingSlice";
+import searchedByImageSlice from "./modules/searchByImageSlice";
 import searchedImageSlice from "./components/Result/searchedImageSlice";
 import searchText from "./modules/search";
 import getSearchList from "./modules/searchList";
@@ -19,6 +20,7 @@ function App() {
     const rootReducer = combineReducers({
         recipeSlice: recipeSlice,
         recipeReviewSlice: recipeReviewSlice,
+        searchedByImageSlice: searchedByImageSlice,
         recipeLikeSlice: recipeLikeSlice,
         rankingSlice: rankingSlice,
         searchedImageSlice: searchedImageSlice,

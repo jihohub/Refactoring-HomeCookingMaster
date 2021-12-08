@@ -6,7 +6,7 @@ import { useDropzone } from "react-dropzone";
 import Dropzone from "react-dropzone";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
-import { postImage } from "../../modules/searchImageSlice";
+import { searchByImage } from "../../modules/searchByImageSlice";
 import Paper from "@mui/material/Paper";
 import { GrImage } from "react-icons/gr";
 
@@ -15,7 +15,7 @@ function DropZone() {
     const handleDrop = (acceptedFiles: any) => {
         const formData = new FormData();
         formData.append("image", acceptedFiles[0]);
-        dispatch(postImage(formData));
+        dispatch(searchByImage(formData));
     };
 
     return (

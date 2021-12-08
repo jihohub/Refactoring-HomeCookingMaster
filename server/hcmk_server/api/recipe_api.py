@@ -104,7 +104,7 @@ get_recipe_fields = recipe_ns.model(
 @recipe_ns.response(500, "Failed")
 class GetRecipe(Resource):
     @recipe_ns.marshal_with(get_recipe_fields)
-    def get(self, recipe_id):
+    def post(self, recipe_id):
         """검색어와 일치하는 음식의 레시피 조회수 증가 후 데이터를 반환하는 api"""
         user_id = request.json.get("user_id")
         result = get_recipe(recipe_id, user_id)

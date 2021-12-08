@@ -74,10 +74,13 @@ const initialState: RecipeState = {
 /* 레시피 데이터 요청 */
 export const getRecipe = createAsyncThunk(
     "GET_RECIPE",
-    async (recipe_id: number, ThunkAPI) => {
+    async (args: any) => {
         /* 백엔드 [GET] /recipe/<recipe_id> 요청 */
-        let response = await axios.get(`/api/recipe/${recipe_id}`);
-        console.log("잘되나", recipe_id);
+        let response = await axios.post(`/api/recipe/${args.recipe_id}`, {
+            user_id: args.user_id,
+        });
+        console.log("recip_id", args.recipe_id);
+        console.log("user_id", args.user_id);
         console.log("res", response.data);
         return response.data.data;
     }

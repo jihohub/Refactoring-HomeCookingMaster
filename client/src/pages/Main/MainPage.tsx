@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 
 import { Grid, Card, CardMedia, CardContent, CardActionArea, Typography } from "@mui/material";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import { setImageFile, setPreviewUrl } from "../../components/Result/searchedImageSlice";
 import { getRanking, clearRanking } from "../../modules/rankingSlice";
 import background from "../../assets/main.jpg";
-import DragDrop from "../../components/Main/DragDrop";
 import DropZone from "../../components/Main/DropZone";
 
 import MainSlide from "../../components/Main/mainSlide";

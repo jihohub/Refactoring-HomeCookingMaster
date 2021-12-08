@@ -17,12 +17,14 @@ function RecipeMain(props: any) {
 
     const { recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
     const recipe_id = recipe_info.id
-    const user_id = String(sessionStorage.getItem("user_id")); // user_id
+    const user_id = props.user_id;
 
     const handleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
+        console.log("라이크 누를 때", user_id);
+        console.log("라이크 누를 때", recipe_id);
         await dispatch(recipeLike({ recipe_id, user_id }));
-        dispatch(getRecipe(recipe_id));
+        dispatch(getRecipe({ recipe_id, user_id }));
     };
 
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
