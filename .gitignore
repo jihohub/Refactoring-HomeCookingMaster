@@ -34,3 +34,6 @@ user_data/
 
 # database
 database/
+
+#trained_model
+trained_models/

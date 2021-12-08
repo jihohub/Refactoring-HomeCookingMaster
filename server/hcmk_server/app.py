@@ -5,9 +5,11 @@ from flask_restx import Api
 from flask_jwt_extended import JWTManager
 
 
+
 from hcmk_server import config
 from hcmk_server.db_connect import db
 from hcmk_server.api import auth_api, recipe_api
+
 
 rest_api = Api(
     version="1.0",
@@ -61,9 +63,9 @@ def create_app():
     return app
 
 
-# application = create_app()
+application = create_app()
 
 # if __name__ == "__main__":
 #     HOST = "0.0.0.0"
-#     PORT = 5001
+#     PORT = 5000
 #     application.run(host=HOST, port=PORT, debug=True)
