@@ -12,37 +12,26 @@ function RecipeBoard(props: any) {
     const user_id = String(sessionStorage.getItem("user_id")); // user_id
     const id = props.id;
     const formData = new FormData();
-    let imageFile: any = null;
 
     const handleText = (e: any) => {
         setText(e.target.value);
     };
 
     const handleUpload = (e: any) => {
-        imageFile = e.target.files[0];
+        const imageFile = e.target.files[0];
         console.log(imageFile);
-        formData.append("img", imageFile);
+        formData.set("img", imageFile);
     };
 
     const handleSubmit = async () => {
-        formData.append("user_id", user_id);
-        formData.append("post", text);
-        dispatch(recipeReview({ formData, id }));
-        await dispatch(getRecipe(id));
+        await formData.append("user_id", user_id);
+        await formData.append("post", text);
+        await dispatch(recipeReview({ formData, id }));
+        dispatch(getRecipe(id));
     };
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                "& > :not(style)": {
-                    m: 1,
-                    width: "70vw",
-                    height: "20vh",
-                },
-            }}
-        >
+        <Box sx={{ width: "70vw", margin: "0 auto" }}>
             <Paper elevation={0}>
                 <TextField
                     id="outlined-basic"
@@ -52,7 +41,7 @@ function RecipeBoard(props: any) {
                     multiline={true}
                     onChange={handleText}
                 />
-                <form id="formElem" encType="multipart/form-data">
+                <form id="formElem" encType="multipart/form-data" style={{ textAlign: "right" }}>
                     <label htmlFor="icon-button-file">
                         <input
                             accept="image/*"
@@ -68,10 +57,10 @@ function RecipeBoard(props: any) {
                             <AddAPhotoRoundedIcon />
                         </IconButton>
                     </label>
+                    <Button variant="contained" onClick={handleSubmit}>
+                        등록
+                    </Button>
                 </form>
-                <Button variant="contained" onClick={handleSubmit}>
-                    등록
-                </Button>
             </Paper>
         </Box>
     );
