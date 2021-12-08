@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  database:
+    # 사용할 이미지
+    image: mysql
+    # 컨테이너 이름 설정
+    container_name: HCMK-mysql
+    # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
+    ports:
+      - '3307:3306'
+    # -e 옵션
+    environment:
+      # MYSQL 패스워드 설정 옵션
+      MYSQL_ROOT_PASSWORD: '1230'
+    # 명령어 실행 (한글 인코딩 관련)
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --secure-file-priv=/app/data
+    volumes:
+      # -v 옵션 (다렉토리 마운트 설정)
+      - ./database/data:/var/lib/mysql
+      - ./data:/app/data
+
+  backend:
+    container_name: HCMK-backend
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/server
+    ports:
+      - 5000:5000
+
+  # machinelearning:
+  #   # 컨테이너 이름 설정
+  #   container_name: HCMK-machinelearning
+  #   build:
+  #     context: ./machinelearning
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./machinelearning:/opt/server
+  #   runtime: nvidia
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=0
+  #   ports:
+  #     - 8000:8000
+
+  frontend:
+    # 컨테이너 이름 설정
+    container_name: HCMK-frontend
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - /home/ubuntu/ssl:/etc/nginx/certs

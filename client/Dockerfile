@@ -1,13 +1,13 @@
-FROM node:14.18.2 as build
+FROM node:16.13.1 as build
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app
 
 COPY . /usr/src/app
 
-RUN npm install
+RUN yarn install
 
-RUN npm run build
+RUN yarn run build
 
 FROM nginx:alpine
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
