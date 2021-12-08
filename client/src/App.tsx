@@ -7,7 +7,9 @@ import recipeSlice from "./modules/recipeSlice";
 import recipeReviewSlice from "./modules/recipeReviewSlice";
 import recipeLikeSlice from "./modules/recipeLikeSlice";
 import rankingSlice from "./modules/rankingSlice";
+import searchedByImageSlice from "./modules/searchByImageSlice";
 import searchedImageSlice from "./components/Result/searchedImageSlice";
+import registerInfoSlice from "./modules/registerInfoSlice";
 import searchText from "./modules/search";
 import getSearchList from "./modules/searchList";
 import getUserInfo from "./modules/userLogin";
@@ -19,9 +21,11 @@ function App() {
     const rootReducer = combineReducers({
         recipeSlice: recipeSlice,
         recipeReviewSlice: recipeReviewSlice,
+        searchedByImageSlice: searchedByImageSlice,
         recipeLikeSlice: recipeLikeSlice,
         rankingSlice: rankingSlice,
         searchedImageSlice: searchedImageSlice,
+        registerInfoSlice: registerInfoSlice,
         searchText: searchText,
         getSearchList: getSearchList,
         getUserInfo: getUserInfo,
@@ -35,7 +39,7 @@ function App() {
 
     return (
         <Provider store={store}>
-            <div>
+            <div style={{fontFamily: "Elice"}}>
                 <Router />
             </div>
         </Provider>

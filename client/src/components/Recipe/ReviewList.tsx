@@ -104,28 +104,28 @@ function ReviewList(props: any) {
 
     return (
         <>
-            <Box sx={{ width: "70vw", height: "30px" }} />
-            <Box sx={{ width: "70vw", margin: "0 auto" }}>
-                <Typography sx={{ fontSize: "1.5rem", color: "brown" }}>
+            <Box sx={{ width: "70vw", maxWidth: "750px", height: "30px" }} />
+            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
+                <Typography sx={{ fontSize: "1.75rem", color: "brown" }}>
                     레시피 후기
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto", textAlign: "center" }}>
                 <Divider />
             </Box>
             {post.length > 0 ? (
                 post.map((item: any) => (
                     <>
-                        <Box sx={{ width: "70vw", height: "10px" }} />
-                        <Box sx={{ width: "70vw", margin: "0 auto" }}>
+                        <Box sx={{ width: "70vw", maxWidth: "750px", height: "10px" }} />
+                        <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
                             <Row key={item.id} row={item} />
                         </Box>
                     </>
                 ))
             ) : (
                 <>
-                    <Box sx={{ width: "70vw", height: "10px" }} />
-                    <Box sx={{ width: "70vw", margin: "0 auto" }}>
+                    <Box sx={{ width: "70vw", maxWidth: "750px", height: "10px" }} />
+                    <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
                         <List>
                             <ListItemButton>
                                 <ListItemText sx={{ textAlign: "center" }}>

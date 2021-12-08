@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface RecipeState {
+    did_u_liked: boolean;
     recipe_info: {
         id: number;
         name: string;
@@ -46,6 +47,7 @@ interface RecipeState {
 }
 
 const initialState: RecipeState = {
+    did_u_liked: false,
     recipe_info: {
         id: 0,
         name: "",
@@ -74,10 +76,13 @@ const initialState: RecipeState = {
 /* 레시피 데이터 요청 */
 export const getRecipe = createAsyncThunk(
     "GET_RECIPE",
-    async (recipe_id: number, ThunkAPI) => {
+    async (args: any) => {
         /* 백엔드 [GET] /recipe/<recipe_id> 요청 */
-        let response = await axios.get(`/api/recipe/${recipe_id}`);
-        console.log("잘되나", recipe_id);
+        let response = await axios.post(`/api/recipe/${args.recipe_id}`, {
+            user_id: args.user_id,
+        });
+        console.log("recip_id", args.recipe_id);
+        console.log("user_id", args.user_id);
         console.log("res", response.data);
         return response.data.data;
     }
@@ -88,6 +93,7 @@ export const recipeSlice = createSlice({
     initialState,
     reducers: {
         clearRecipe(state) {
+            state.did_u_liked = false;
             state.recipe_info = {
                 id: 0,
                 name: "",
@@ -133,6 +139,7 @@ export const recipeSlice = createSlice({
         builder.addCase(
             getRecipe.fulfilled,
             (state, action: PayloadAction<any>) => {
+                state.did_u_liked = action.payload.did_u_liked;
                 state.recipe_info = action.payload.recipe_info;
                 state.food_info = action.payload.food_info;
                 state.ingredient_info = action.payload.ingredient_info;

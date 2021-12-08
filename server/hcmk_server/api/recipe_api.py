@@ -79,6 +79,21 @@ get_recipe_post_info_fields = recipe_ns.model(
     }
 )
 
+get_recipe_other_recipes_info_fields = recipe_ns.model(
+    "get_recipe_other_recipes_info",
+    {
+        "id": fields.Integer,
+        "name": fields.String,
+        "img": fields.String,
+        "views": fields.Integer,
+        "likes": fields.Integer,
+        "servings": fields.String,
+        "difficulty": fields.String,
+        "cooking_time": fields.String,
+        "food_id": fields.Integer,
+    }
+)
+
 get_recipe_data_fields = recipe_ns.model(
     "get_recipe_data",
     {
@@ -87,6 +102,7 @@ get_recipe_data_fields = recipe_ns.model(
         "ingredient_info": fields.List(fields.Nested(get_recipe_ingredient_info_fields)),
         "process_info": fields.List(fields.Nested(get_recipe_process_info_fields)),
         "post_info": fields.List(fields.Nested(get_recipe_post_info_fields)),
+        "other_recipes_info": fields.List(fields.Nested(get_recipe_other_recipes_info_fields)),
         "did_u_liked": fields.Boolean,
     }
 )

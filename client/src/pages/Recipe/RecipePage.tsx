@@ -11,10 +11,11 @@ import RecipeBoard from "../../components/Recipe/RecipeBoard";
 function RecipePage() {
     const dispatch = useDispatch();
     const params = useParams();
-    const id = Number(params.id);
+    const recipe_id = Number(params.id);
+    const user_id = String(sessionStorage.getItem("user_id")); // user_id
 
     useEffect(() => {
-        dispatch(getRecipe(id));
+        dispatch(getRecipe({ recipe_id, user_id }));
         return () => {
             dispatch(clearRecipe());
         };
@@ -24,9 +25,9 @@ function RecipePage() {
 
     return (
         <div>
-            <RecipeMain recipe={recipe} />
+            <RecipeMain recipe={recipe} user_id={user_id} />
             <ReviewList post={recipe.post_info} />
-            <RecipeBoard id={recipe.recipe_info.id} />
+            <RecipeBoard recipe_id={recipe_id} user_id={user_id} />
         </div>
     );
 }

@@ -102,6 +102,7 @@ def login(email, password):
             "access_token" : access_token, 
             "refresh_token" : refresh_token,
             "user_id" : user.id,
+            "nickname" : user.nickname,
             "img" : user.img
         }
         }, 200
