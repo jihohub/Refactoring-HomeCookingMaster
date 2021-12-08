@@ -66,5 +66,4 @@ class test(Resource):
         """현재 가장 인기있는 음식의 레시피를 반환합니다."""
         image = request.files.get('img')
         result_data, result, message = get_equal_rate(image)
-        print(result_data)
         return jsonify(result=result, message=message, data=result_data)

@@ -44,19 +44,20 @@ def get_equal_rate(image):
 
     print('type of response: ',type(response))
 
-    # dict_response = json.loads(response)
-
-    # print(type(dict_response))
-    # 결과값 넣을 딕셔너리
+    # 결과값 넣을 딕셔너리, 음식 이름명 넣을 리스트
     result = {}
     foods = []
+    equal_rate = []
+
+    # 결과 data에 일치율 리스트 (equal_rate) 넣기
+    equal_rate_list = sorted(response.items(), reverse=True, key=lambda item: item[1])
+    for equal_rate_tuple in equal_rate_list:
+        equal_rate.append({'name' : equal_rate_tuple[0], 'rate': equal_rate_tuple[1]})
+    result['equal_rate'] = equal_rate
+    
     # 일치율이 가장 높은 3가지 음식명 받기
     food_names = response.keys()
-    # 결과 data에 일치율 리스트 보내주기
-    # result['equal_rate'] = sorted(list(response.values()), reverse=True)
-    result['equal_rate'] = response
-    # result['food_name'] = sorted(response.items(), reverse=True, key=lambda item: item[1])
-
+    
     try:
         # 음식명으로 db에서 데이터 찾기
         for food_name in food_names:
