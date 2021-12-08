@@ -1,4 +1,4 @@
-FROM node:16.13 as build
+FROM node:14.18.2 as build
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app
@@ -6,7 +6,6 @@ COPY package.json /usr/src/app
 COPY . /usr/src/app
 
 RUN npm install
-
 
 RUN npm run build
 
