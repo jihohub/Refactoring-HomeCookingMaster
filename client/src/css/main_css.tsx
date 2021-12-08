@@ -30,6 +30,7 @@ export const imgGuide  = css`
 export const guideTitle = css`
     text-align: center;
     margin-bottom: 2rem;
+    font-weight: 700;
 `;
 
 

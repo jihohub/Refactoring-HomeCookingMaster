@@ -16,7 +16,7 @@ export const terms = css `
 `;
 
 export const terms_title = css`
-    font-size: 39px;
+    font-size: 37px;
     font-weight: 700;
     color : #897A5F;
 `;

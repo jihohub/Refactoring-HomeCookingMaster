@@ -22,14 +22,6 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-const OkButton = styled(Button)({
-    backgroundColor: '#897A5F',
-    borderColor: '#897A5F',
-    '&:hover': {
-        backgroundColor: '#ED6C02',
-        borderColor: '#ED6C02',
-    },
-});
 
 const mainWrapperStyle = css`
     width: 100%;
@@ -82,24 +74,15 @@ const MainSearch = () => {
             <div css={imgSearch}>
                 <h2 css={imageTitle}>이미지 검색</h2>
                 <DropZone />
-                <div css={btnDiv}>
-                    {/* <Link to="/" css={agree_btn}> */}
-                        <OkButton
-                            id="nextBtn" variant="contained" css={btn}
-                        >
-                            검색
-                        </OkButton>
-                    {/* </Link> */}
-                </div>
             </div>
             <div css={imgGuide}>
                 <h2 css={guideTitle}>이렇게 찍어주세요!</h2>
                 <div>
-                    <h5>1. 완성된 음식 사진을 올려주세요!</h5>
-                    <p>미완성된 음식 사진을 올리거나 재료 사진을 올릴 경우에 원하는 결과를 얻을 수 없습니다. 완성된 음식 사진을 올려야 정확도 있는 결과를 받을 수 있습니다!</p>
-                    <h5>2. 화질이 나쁜 사진은 검색이 어렵습니다.</h5>
-                    <p>이미지의 화질이 너무 안좋거나 정확한 판단이 어려운 사진을 올릴 경우, 원하는 결과를 얻기 어렵습니다.</p>
-                    <h5>3. 음식이 잘보이는 사진일수록 더욱 정확한 결과를 얻을 수 있습니다.</h5>
+                    <h4>1. 완성된 음식 사진을 올려주세요.</h4>
+                    <p>미완성된 음식 사진을 올리거나 음식의 재료 사진을 올릴 경우, 결과의 정확도가 낮아집니다. 완성된 음식 사진으로 검색하여 정확도 있는 검색결과를 얻어보세요!</p>
+                    <h4>2. 화질이 나쁜 사진은 검색이 어렵습니다.</h4>
+                    <p>이미지의 화질이 너무 안좋은 사진으로 검색할 경우, 원하는 결과를 얻기 어렵습니다.</p>
+                    <h4>3. 음식이 잘보이는 사진일수록 더욱 정확한 결과를 얻을 수 있습니다.</h4>
                     <p>이미지 내에 음식 크기가 너무 작을 경우 이미지 인식이 어려워 정확한 결과를 얻을 확률이 낮아집니다. 결과의 정확도를 위해 음식이 잘 보이는 사진으로 검색해주세요!</p>
                 </div>
             </div>
@@ -145,16 +128,16 @@ const MainRanking = () => {
                 {top3List ? top3List.map((item:any) => (
                     <div css={top3ItemDiv} key={item.name}>
                         <div css={top3Div}>
-                            <Typography variant="h2" gutterBottom component="p">
+                            <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold'}}>
                                 {top3List.indexOf(item)+1}
                             </Typography>
                         </div>
                         <img src={item.img} css={top3Img} alt={item.name}></img>
                         <div css={top3Name}>
-                            <Typography variant="h5" gutterBottom component="p">
+                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice'}}>
                                     {item.name}
                             </Typography>
-                            <Typography variant="subtitle1" gutterBottom component="p">
+                            <Typography variant="subtitle1" gutterBottom component="p" sx={{fontFamily:'Elice'}}>
                                     {item.cooking_time}, {item.servings}, {item.difficulty}
                             </Typography>
                         </div>
@@ -207,7 +190,7 @@ const MainRanking = () => {
 
 function MainPage() {
     return (
-        <div style={{height:'200%'}}>
+        <div style={{marginTop:'1rem'}}>
             <MainSlide/>
             <div css={mainWrapperStyle}>
                 <MainSearch />

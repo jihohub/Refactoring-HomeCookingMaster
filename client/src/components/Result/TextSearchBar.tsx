@@ -50,9 +50,9 @@ export const TextSearchBar = () => {
                         검색
                     </Button>
                 </div>
-                <Link to="/" style={{textDecoration:'none', color:'#ED6C02', fontWeight:'700', fontSize:'16px'}}>
+                <Link to="/" style={{textDecoration:'none', color:'#897A5F', fontWeight:'700', fontSize:'16px'}}>
                     <p css={toImage}>
-                        이미지 검색
+                        이미지로 검색하기
                     </p>
                 </Link>
                 

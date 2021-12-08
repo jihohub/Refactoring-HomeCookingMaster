@@ -34,7 +34,7 @@ function UserInfo() {
     // 유효성검사
     const [emailVal, setEmailVal] = useState<boolean>(false); // 이메일 유효성 여부
     const [pwVal, setPwVal] = useState<boolean>(false); // 비밀번호 유효성 여부
-    const [pwCheck, setPwCheck] = useState<boolean>(false); // 비밀번호 일치 여부
+    const [pwCheck, setPwCheck] = useState<boolean>(true); // 비밀번호 일치 여부
     const [nicknameVal, setNicknameVal] = useState<boolean>(false); // 닉네임 유효성 여부
 
     const emailForm = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
@@ -144,11 +144,11 @@ function UserInfo() {
                         css={input_box}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <Button 
-                        variant="outlined" color="warning" 
+                    <CheckBtn 
+                        variant="outlined" 
                         disabled={!(emailVal && email.length >0)}
                         onClick={confirmEmail}
-                    >중복확인</Button>
+                    >중복확인</CheckBtn>
                     <Modal
                         open={open1}
                         onClose={handleClose1}
@@ -165,8 +165,8 @@ function UserInfo() {
                     </Modal>
                 </div>
                 <div css={input_box} >
-                    {emailVal ? "" : <p style={{color:'#e45a41', fontSize:'15px',  fontWeight:'500'}}>아이디를 이메일 형식으로 입력해주세요.</p>}
-                    {ableEmail ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>아이디 중복확인 해주세요.</p>}
+                    {emailVal ? "" : <p style={{color:'#e45a41', fontSize:'15px',  fontWeight:'500'}}>• 아이디를 이메일 형식으로 입력해주세요.</p>}
+                    {ableEmail ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>• 아이디 중복확인 해주세요.</p>}
                 </div>
                 <div>
                     <TextField 
@@ -177,7 +177,7 @@ function UserInfo() {
                     />
                 </div>
                 <div css={input_box} >
-                    {pwVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>숫자/영문자 조합으로 8~16자로 입력해주세요.</p>}
+                    {pwVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>• 숫자/영문자 조합으로 8~16자로 입력해주세요.</p>}
                 </div>
                 <div>
                     <TextField 
@@ -197,11 +197,11 @@ function UserInfo() {
                         css={input_box}
                         onChange={nameValidation}
                     />
-                    <Button 
+                    <CheckBtn 
                         variant="outlined" color="warning"
                         disabled={!(nicknameVal && nickname.length >0)}
                         onClick={confirmName}
-                    >중복확인</Button>
+                    >중복확인</CheckBtn>
                     <Modal
                         open={open2}
                         onClose={handleClose2}
@@ -218,8 +218,8 @@ function UserInfo() {
                     </Modal>
                 </div>
                 <div css={input_box} >
-                    {nicknameVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>닉네임을 입력해주세요.</p>}
-                    {ableName ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>닉네임 중복확인 해주세요.</p>}
+                    {nicknameVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>• 닉네임을 입력해주세요.</p>}
+                    {ableName ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>• 닉네임 중복확인 해주세요.</p>}
                 </div>
             </div>
             <div css={option_box}>
@@ -260,10 +260,10 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '17%',
+    width: '17rem',
     bgcolor: 'white',
     border: '10px solid white',
-    color : '#ED6C02',
+    color : '#897A5F',
     boxShadow: 24,
     p: 4,
 };
@@ -271,12 +271,12 @@ const style = {
 // 중복확인 모달 내 확인 버튼
 const CheckButton = styled(Button)({
     marginTop:'20px',
-    backgroundColor: '#ED6C02',
-    borderColor: '#ED6C02',
+    backgroundColor: '#897A5F',
+    borderColor: '#897A5F',
     color:'white',
     '&:hover': {
-        backgroundColor: '#897A5F',
-        borderColor: '#897A5F',
+        backgroundColor: '#c7b595',
+        borderColor: '#c7b595',
         color:'white',
     },
 });
@@ -286,7 +286,17 @@ const OkButton = styled(Button)({
     backgroundColor: '#897A5F',
     borderColor: '#897A5F',
     '&:hover': {
-        backgroundColor: '#ED6C02',
-        borderColor: '#ED6C02',
+        backgroundColor: '#c7b595',
+        borderColor: '#c7b595',
+    },
+});
+
+const CheckBtn = styled(Button)({
+    // backgroundColor: '#897A5F',
+    borderColor: '#897A5F',
+    color:'#897A5F',
+    '&:hover': {
+        // backgroundColor: '#c7b595',
+        borderColor: '#c7b595',
     },
 });

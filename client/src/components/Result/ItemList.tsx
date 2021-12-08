@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import { MdPersonSearch } from "react-icons/md";
 
 function ItemList(){
     const dispatch = useDispatch();
@@ -84,11 +85,11 @@ function ItemList(){
             <Typography 
                 variant="h6" 
                 gutterBottom component="div" 
-                sx={{ fontWeight : '600', ml:23, mt:5, mb:5}}
+                sx={{ fontWeight : '600', ml:'15%', mt:5, mb:5, fontFamily:'EliceBold'}}
             >
-                {query ? `${query} 검색결과 입니다.` : "추천검색어"}
+                {query ? `${query} 검색결과 입니다.` : <p><MdPersonSearch size='30'/> 추천검색어</p>}
             </Typography>
-            <Box component="div" sx={{width:'80%', marginLeft:'15%'}}>
+            <Box component="div" sx={{width:'80%', marginLeft:'12%'}}>
             {isRecipeList ? foodList.map((item:any) => (
                     <ItemBox 
                         variant="outlined" 
@@ -119,6 +120,7 @@ function ItemList(){
                                 <span>스크랩수 {item.likes}, 조회수 {item.views}</span>
                             }
                             position="below"
+                            sx={{fontFamily:'Elice'}}
                         />
                     </ImageListItem>
                 )) : ""}
@@ -134,15 +136,15 @@ export default ItemList;
 const ItemBox = styled(Button)({
     borderRadius:'30px',
     backgroundColor: 'white',
-    borderColor: '#ED6C02',
-    color:'#ED6C02',
+    borderColor: '#897A5F',
+    color:'#897A5F',
     width: 150,
     height: 50,
     margin: 5,
     marginBottom:10,
     '&:hover': {
-        backgroundColor: '#ED6C02',
-        borderColor: '#ED6C02',
+        backgroundColor: '#c7b595',
+        borderColor: '#c7b595',
         color: 'white',
     },
 });

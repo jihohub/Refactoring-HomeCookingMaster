@@ -11,8 +11,12 @@ export const search = css`
 export const searchBtn = css`
     width: 3rem;
     height: 3rem;
-    background-color: #ED6C02;
+    background-color: #897A5F;
     color: white;
+
+    :hover{
+        background-color: #c7b595;
+    }
 `;
 
 export const elem = css`
@@ -31,10 +35,11 @@ export const intro = css`
 export const toImage = css`
     display: flex;
     justify-content: center;
-    margin-left: 30rem;
-    padding-top: 2rem;
+    margin-left: 61%;
+    padding-top: 1.5em;
+    width: 10%;
     :hover{
-        color:#897A5F;
+        color:#c7b595;
     }
 `;
 
