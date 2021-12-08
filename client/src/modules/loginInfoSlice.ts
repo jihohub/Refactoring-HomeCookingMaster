@@ -1,47 +1,48 @@
 import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface RegisterState {
+interface LoginState {
     user_id: number;
     nickname: string;
+    img: string;
     loading: boolean;
     error: string;
 }
 
-const initialState: RegisterState = {
+const initialState: LoginState = {
     user_id: 0,
     nickname: "",
+    img: "",
     loading: false,
     error: "",
 };
 
 /* 레시피 좋아요 */
-export const sendRegister = createAsyncThunk(
-    "RECIPE_LIKE",
-    async (formData: any) => {
+export const login = createAsyncThunk(
+    "LOGIN",
+    async (args: any) => {
         /* 백엔드 [POST] /recipe/<recipe_id>/like 요청 */
-        const response = await axios.post("/api/auth/signup", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });
-
+        const response = await axios.post("/api/auth/login", args);
+        console.log(response.data.data);
         return response.data.data;
     }
 );
 
-export const registerInfoSlice = createSlice({
-    name: "registerInfoSlice",
+export const loginInfoSlice = createSlice({
+    name: "loginInfoSlice",
     initialState,
     reducers: {
-        clearRegister(state) {
+        clearLogin(state) {
+            state.user_id = 0;
+            state.nickname = "";
+            state.img = "";
             state.loading = false;
             state.error = "";
         },
     },
     extraReducers: (builder) => {
         builder.addCase(
-            sendRegister.rejected,
+            login.rejected,
             (state, action: PayloadAction<any>) => {
                 state.loading = false;
                 state.error = action.payload;
@@ -49,7 +50,7 @@ export const registerInfoSlice = createSlice({
         );
 
         builder.addCase(
-            sendRegister.pending,
+            login.pending,
             (state, action: PayloadAction<any>) => {
                 state.loading = true;
                 state.error = "";
@@ -57,14 +58,15 @@ export const registerInfoSlice = createSlice({
         );
 
         builder.addCase(
-            sendRegister.fulfilled,
+            login.fulfilled,
             (state, action: PayloadAction<any>) => {
                 state.user_id = action.payload.user_id;
                 state.nickname = action.payload.nickname;
+                state.img = action.payload.img;
             }
         );
     },
 });
 
-export const { clearRegister } = registerInfoSlice.actions;
-export default registerInfoSlice.reducer;
+export const { clearLogin } = loginInfoSlice.actions;
+export default loginInfoSlice.reducer;

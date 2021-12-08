@@ -10,6 +10,7 @@ import { setImageFile, setPreviewUrl } from "../../components/Result/searchedIma
 import { getRanking, clearRanking } from "../../modules/rankingSlice";
 import background from "../../assets/main.jpg";
 import DropZone from "../../components/Main/DropZone";
+import DragDrop from "../../components/Main/DragDrop";
 
 import MainSlide from "../../components/Main/mainSlide";
 import { styled } from '@mui/material/styles';
@@ -73,6 +74,7 @@ const MainSearch = () => {
             <div css={imgSearch}>
                 <h2 css={imageTitle}>이미지 검색</h2>
                 <DropZone />
+                <DragDrop />
             </div>
             <div css={imgGuide}>
                 <h2 css={guideTitle}>이렇게 찍어주세요!</h2>

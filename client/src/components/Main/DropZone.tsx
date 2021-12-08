@@ -18,6 +18,7 @@ function DropZone() {
     
     const handleDrop = (acceptedFiles: any) => {
         const formData = new FormData();
+        console.log("img", acceptedFiles);
         formData.append("image", acceptedFiles[0]);
         dispatch(searchByImage(formData));
     };
