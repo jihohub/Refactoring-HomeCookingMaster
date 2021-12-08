@@ -86,11 +86,11 @@ class Signup(Resource):
             pass
         try:
             if img.filename == "":
-                image_url = default_profile_img
+                image_url = default_profile_img()
             else:
                 image_url = boto3_image_upload(img)
         except UnboundLocalError:
-            image_url = default_profile_img
+            image_url = default_profile_img()
 
         result = signup(email, password, nickname, image_url)
         return result
