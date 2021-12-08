@@ -82,6 +82,7 @@ get_recipe_data_fields = recipe_ns.model(
         "ingredient_info": fields.List(fields.Nested(get_recipe_ingredient_info_fields)),
         "process_info": fields.List(fields.Nested(get_recipe_process_info_fields)),
         "post_info": fields.List(fields.Nested(get_recipe_post_info_fields)),
+        "did_u_liked": fields.Boolean,
     }
 )
 
@@ -101,7 +102,8 @@ class GetRecipe(Resource):
     @recipe_ns.marshal_with(get_recipe_fields)
     def get(self, recipe_id):
         """검색어와 일치하는 음식의 레시피 조회수 증가 후 데이터를 반환하는 api"""
-        result = get_recipe(recipe_id)
+        user_id = request.json.get("user_id")
+        result = get_recipe(recipe_id, user_id)
         
         return result
 
