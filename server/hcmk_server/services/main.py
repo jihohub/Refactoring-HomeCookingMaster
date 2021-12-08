@@ -1,5 +1,8 @@
 from hcmk_server.models.food import Food, db
 from hcmk_server.models.recipe import Recipe
+from io import BufferedReader
+import requests
+import json
 
 def get_food_list(data):
     result = {}
@@ -29,3 +32,48 @@ def get_ranking():
         "message" : "랭킹 레시피를 전달 하였습니다.",
         "data" : data
     }
+
+
+def get_equal_rate(image):
+    # 받은 파일 이름 복사
+    image.name = image.filename
+    # 버퍼로 변환
+    image = BufferedReader(image)
+    # 머신러닝 서버로 이미지 전송
+    response = requests.post('http://192.168.0.13:8000/test', files={'img': image}).json()
+
+    print('type of response: ',type(response))
+
+    # dict_response = json.loads(response)
+
+    # print(type(dict_response))
+    # 결과값 넣을 딕셔너리
+    result = {}
+    foods = []
+    # 일치율이 가장 높은 3가지 음식명 받기
+    food_names = response.keys()
+    # 결과 data에 일치율 리스트 보내주기
+    # result['equal_rate'] = sorted(list(response.values()), reverse=True)
+    result['equal_rate'] = response
+    # result['food_name'] = sorted(response.items(), reverse=True, key=lambda item: item[1])
+
+    try:
+        # 음식명으로 db에서 데이터 찾기
+        for food_name in food_names:
+            foods.append(Food.query.filter(Food.name.like(food_name)).one())
+        # 만약에 db에서 음식명이 없으면 에러
+        if foods is None:
+            return result, "Success", "검색 결과가 없습니다."
+        # 음식마다 레시피 검색해서 넣기
+        for food in foods:
+            recipes = Recipe.query.filter(Recipe.food_id == food.id).all()
+            recipe_dicts = []
+            for recipe in recipes:
+                recipe_dicts.append(recipe.to_dict())
+            result[food.name] = recipe_dicts
+        print('type of result: ', type(result))
+        return result, "Success", "검색 결과를 전달하였습니다."
+
+    except Exception:
+        db.session.rollback()
+        raise
