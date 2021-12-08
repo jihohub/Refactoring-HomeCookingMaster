@@ -42,10 +42,10 @@ function RecipeMain(props: any) {
                     {`${food_info.category_l} > ${food_info.category_m} > ${food_info.category_s}`}
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto" }}>
+            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
                 <img
                     src={recipe_info.img}
-                    style={{ width: "100%" }}
+                    style={{ width: "80%" }}
                     alt="food"
                 />
             </Box>
@@ -95,8 +95,10 @@ function RecipeMain(props: any) {
                         }}
                     >
                         <Typography sx={{ p: 2 }}>
-                            이 레시피에 좋아요를 누르셨습니다.<br />
-                            좋아요를 누른 레시피는 스크랩되어<br />
+                            이 레시피에 좋아요를 누르셨습니다.
+                            <br />
+                            좋아요를 누른 레시피는 스크랩되어
+                            <br />
                             마이페이지에서도 확인하실 수 있습니다.
                         </Typography>
                     </Popover>
