@@ -19,15 +19,19 @@ function UserInfo() {
     const [intro, setIntro] = useState<String | null>("");
 
     const navigate = useNavigate();
+
+    const formData = new FormData();
     // 회원가입 api
-    const signup = async() => {
-        const res = await axios.post('/api/auth/signup', {
-            email : email,
-            password : pw,
-            nickname : nickname,
-            img : profileImage,
-            intro : intro
-        })
+    const signup = async () => {
+        formData.append("email", email);
+        formData.append("password", pw);
+        formData.append("nickname", nickname);
+        
+        const res = await axios.post("/api/auth/signup", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
         console.log(res);
         navigate('/register/complete', {state : res.data.data.nickname})   // 회원가입 완료시 닉네임값 전달
     }
@@ -93,6 +97,7 @@ function UserInfo() {
             setProfileImage(reader.result);
         }
         reader.readAsDataURL(file);
+        formData.append("img", file);
     }
 
     // ====================================================================
@@ -235,17 +240,6 @@ function UserInfo() {
                             accept="image/*" 
                             css={file_select}
                             onChange={handleImage}
-                        />
-                    </div>
-                    <br />
-                    <h4 css={option_sub_title}>한줄 소개</h4>
-                    <div>
-                        <textarea 
-                            id="introduction" name="introduction" 
-                            cols={54} rows={5} 
-                            placeholder="한줄 소개를 작성해주세요."
-                            css={introText}
-                            onChange={(e) => setIntro(e.target.value)}
                         />
                     </div>
                 </div>

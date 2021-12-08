@@ -12,6 +12,7 @@ import QuizIcon from "@mui/icons-material/Quiz";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 function RecipeMain(props: any) {
     const dispatch = useDispatch();
@@ -37,38 +38,48 @@ function RecipeMain(props: any) {
     const open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
     
-    // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-    // const checkLoggedIn = (obj: object) => {
-    //     Object.keys(obj).length === 0 && obj.constructor === Object
-    //         ? setIsLoggedIn(false)
-    //         : setIsLoggedIn(true);
-    // }
-
-    // checkLoggedIn(user_id);
-    
-    
     return (
         <>
-            <Box sx={{ width: "70vw", height: "50px" }} />
-            <Box sx={{ width: "70vw", margin: "0 auto" }}>
+            <Box sx={{ width: "70vw", maxWidth: "750px", height: "50px" }} />
+            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
                 <Typography sx={{ color: "brown", fontSize: "1.25rem" }}>
                     {`${food_info.category_l} > ${food_info.category_m} > ${food_info.category_s}`}
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <img
                     src={recipe_info.img}
                     style={{ width: "80%", minWidth: "80%" }}
                     alt="food"
                 />
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <Typography sx={{ fontSize: "2rem" }}>
                     {recipe_info.name}
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <Typography>
                     <IconButton>
                         <RestaurantIcon />
@@ -76,7 +87,14 @@ function RecipeMain(props: any) {
                     {recipe_info.servings}
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <Typography>
                     <IconButton>
                         <QuizIcon />
@@ -84,7 +102,14 @@ function RecipeMain(props: any) {
                     {recipe_info.difficulty}
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <Typography>
                     <IconButton>
                         <AlarmIcon />
@@ -92,11 +117,20 @@ function RecipeMain(props: any) {
                     {recipe_info.cooking_time}
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "right" }}>
-                {user_id && did_u_liked && (
-                    <Typography>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "right",
+                }}
+            >
+                {user_id != "null" && did_u_liked && (
+                    <Typography sx={{ fontSize: "2.3rem" }}>
                         <IconButton onClick={handleLike}>
-                            <FavoriteBorderIcon sx={{ color: "red" }} />
+                            <FavoriteIcon
+                                sx={{ color: "#897A5F", fontSize: "2.5rem" }}
+                            />
                         </IconButton>
                         {recipe_info.likes}
                         <Popover
@@ -115,10 +149,12 @@ function RecipeMain(props: any) {
                         </Popover>
                     </Typography>
                 )}
-                {user_id && !did_u_liked && (
-                    <Typography>
+                {user_id != "null" && !did_u_liked && (
+                    <Typography sx={{ fontSize: "2.3rem" }}>
                         <IconButton onClick={handleLike}>
-                            <FavoriteIcon sx={{ color: "red" }} />
+                            <FavoriteBorderIcon
+                                sx={{ color: "#897A5F", fontSize: "2.5rem" }}
+                            />
                         </IconButton>
                         {recipe_info.likes}
                         <Popover
@@ -137,10 +173,12 @@ function RecipeMain(props: any) {
                         </Popover>
                     </Typography>
                 )}
-                {!user_id && (
-                    <Typography>
+                {user_id == "null" && (
+                    <Typography sx={{ fontSize: "2.3rem" }}>
                         <IconButton onClick={handleLike}>
-                            <FavoriteBorderIcon sx={{ color: "red" }} />
+                            <FavoriteBorderIcon
+                                sx={{ color: "#897A5F", fontSize: "2.5rem" }}
+                            />
                         </IconButton>
                         {recipe_info.likes}
                         <Popover
@@ -160,36 +198,63 @@ function RecipeMain(props: any) {
                     </Typography>
                 )}
             </Box>
-            <Box sx={{ width: "70vw", height: "30px" }} />
-            <Box sx={{ width: "70vw", margin: "0 auto" }}>
-                <Typography sx={{ fontSize: "1.5rem", color: "brown" }}>
+            <Box sx={{ width: "70vw", maxWidth: "750px", height: "30px" }} />
+            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
+                <Typography sx={{ fontSize: "1.75rem", color: "brown" }}>
                     재료 리스트
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <Divider />
             </Box>
-            <Box sx={{ width: "70vw", height: "10px" }} />
-            <Box sx={{ width: "70vw", margin: "0 auto" }}>
+            <Box sx={{ width: "70vw", maxWidth: "750px", height: "10px" }} />
+            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
                 {ingredient_info.map((item: any, index: number) => (
-                    <Typography key={index}>
-                        {`${item.name} ${item.amount}`}
+                    <Typography key={index} sx={{ fontSize: "1.25rem" }}>
+                        <FiberManualRecordIcon sx={{ fontSize: "0.5rem" }} />
+                        {` ${item.name} ${item.amount}`}
                     </Typography>
                 ))}
             </Box>
-            <Box sx={{ width: "70vw", height: "30px" }} />
-            <Box sx={{ width: "70vw", margin: "0 auto" }}>
-                <Typography sx={{ fontSize: "1.5rem", color: "brown" }}>
+            <Box sx={{ width: "70vw", maxWidth: "750px", height: "30px" }} />
+            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
+                <Typography sx={{ fontSize: "1.75rem", color: "brown" }}>
                     레시피
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <Divider />
             </Box>
             {process_info.map((item: any, index: number) => (
                 <>
-                    <Box sx={{ width: "70vw", height: "10px" }} />
-                    <Box sx={{ width: "70vw", margin: "0 auto" }}>
+                    <Box
+                        sx={{
+                            width: "70vw",
+                            maxWidth: "750px",
+                            height: "10px",
+                        }}
+                    />
+                    <Box
+                        sx={{
+                            width: "70vw",
+                            maxWidth: "750px",
+                            margin: "0 auto",
+                        }}
+                    >
                         <Typography>
                             <IconButton>
                                 <CheckCircleIcon />
@@ -200,6 +265,7 @@ function RecipeMain(props: any) {
                     <Box
                         sx={{
                             width: "70vw",
+                            maxWidth: "750px",
                             margin: "0 auto",
                             display: "flex",
                             alignItems: "flex-start",
@@ -210,22 +276,31 @@ function RecipeMain(props: any) {
                             style={{ width: "40%", minWidth: "40%" }}
                             alt="step"
                         />
-                        <Typography sx={{ margin: "0 3%" }}>
+                        <Typography
+                            sx={{ margin: "0 3%", fontSize: "1.25rem" }}
+                        >
                             {`${item.recipe}`}
                         </Typography>
                     </Box>
                 </>
             ))}
-            <Box sx={{ width: "70vw", height: "30px" }} />
-            <Box sx={{ width: "70vw", margin: "0 auto" }}>
-                <Typography sx={{ fontSize: "1.5rem", color: "brown" }}>
+            <Box sx={{ width: "70vw", maxWidth: "750px", height: "30px" }} />
+            <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
+                <Typography sx={{ fontSize: "1.75rem", color: "brown" }}>
                     다른 레시피 보기
                 </Typography>
             </Box>
-            <Box sx={{ width: "70vw", margin: "0 auto", textAlign: "center" }}>
+            <Box
+                sx={{
+                    width: "70vw",
+                    maxWidth: "750px",
+                    margin: "0 auto",
+                    textAlign: "center",
+                }}
+            >
                 <Divider />
             </Box>
-            <Box sx={{ width: "70vw", height: "30px" }} />
+            <Box sx={{ width: "70vw", maxWidth: "750px", height: "30px" }} />
         </>
     );
 }
