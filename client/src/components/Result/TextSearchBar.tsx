@@ -30,7 +30,7 @@ export const TextSearchBar = () => {
 
     return (
         <>
-            <div>
+            <div style={{marginBottom:'5rem'}}>
                 <p css={intro}>원하는 검색어를 입력해주세요.</p>
                 <div css={elem}>
                     <Paper component="form" className="paper" css={search}>
@@ -50,11 +50,12 @@ export const TextSearchBar = () => {
                         검색
                     </Button>
                 </div>
-                <p css={toImage}>
-                    <Link to="/" style={{textDecoration:'none', color:'blue'}}>
-                        이미지 검색
-                    </Link>
-                </p>
+                <Link to="/" style={{textDecoration:'none', color:'#897A5F', fontWeight:'700', fontSize:'16px'}}>
+                    <p css={toImage}>
+                        이미지로 검색하기
+                    </p>
+                </Link>
+                
             </div>
         </>
     );

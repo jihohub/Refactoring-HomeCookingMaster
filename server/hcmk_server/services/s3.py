@@ -49,3 +49,6 @@ def boto3_image_delete(image_url):
 ## Example
 # tmp_url = 'https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/uploaded_images/1eab904e55c449bfb53e34418805f77c.'
 # boto3_image_delete(tmp_url)
+
+def default_profile_img():
+    return "https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/uploaded_images/default_profile_img.png"

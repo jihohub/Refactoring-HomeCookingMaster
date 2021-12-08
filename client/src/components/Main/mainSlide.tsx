@@ -14,19 +14,19 @@ function MainSlide() {
                     className="d-block w-100"
                     src={main1}
                     alt="main1"
-                    style={{width:'55rem', height:'60rem'}}
+                    style={{width:'60rem', height:'60rem'}}
                     />
-                    {/* <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption> */}
+                    <Carousel.Caption style={{marginBottom:'30rem'}}>
+                    <h2 style={{fontSize:'5rem'}}>집밥꼬꼬선생</h2>
+                    <p style={{backgroundColor:'white', color:'black'}}>집밥 레시피 검색 플랫폼</p>
+                    </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <Image
                     className="d-block w-100"
                     src={main2}
                     alt="main2"
-                    style={{width:'55rem', height:'60rem'}}
+                    style={{width:'60rem', height:'60rem'}}
                     />
                     {/* <Carousel.Caption>
                     <h3>Second slide label</h3>
@@ -38,7 +38,7 @@ function MainSlide() {
                     className="d-block w-100"
                     src={main3}
                     alt="main3"
-                    style={{width:'55rem', height:'60rem'}}
+                    style={{width:'60rem', height:'60rem'}}
                     />
                     <Carousel.Caption style={{marginBottom:'30rem'}}>
                     <h3>Third slide label</h3>
@@ -50,7 +50,7 @@ function MainSlide() {
                     className="d-block w-100"
                     src={main4}
                     alt="main4"
-                    style={{width:'55rem', height:'60rem'}}
+                    style={{width:'60rem', height:'60rem'}}
                     />
                     <Carousel.Caption>
                     <h3>Third slide label</h3>

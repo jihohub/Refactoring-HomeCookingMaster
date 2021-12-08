@@ -1,11 +1,15 @@
 from flask import request, jsonify
 from flask_restx import Resource, Namespace, fields, reqparse
 # from sqlalchemy.sql.elements import Null
-from hcmk_server.services.s3 import boto3_image_upload, boto3_image_delete
+from hcmk_server.services.s3 import (
+    boto3_image_upload,
+    default_profile_img,
+)
 from hcmk_server.services.recipe import (
     get_recipe,
     check_likes,
     add_post,
+    delete_post,
 )
 recipe_ns = Namespace(
     name="recipe",
@@ -70,6 +74,7 @@ get_recipe_post_info_fields = recipe_ns.model(
         "timestamp": fields.String,
         "user_id": fields.Integer,
         "nickname": fields.String,
+        "profile_img": fields.String,
         "recipe_id": fields.Integer,
     }
 )
@@ -82,6 +87,7 @@ get_recipe_data_fields = recipe_ns.model(
         "ingredient_info": fields.List(fields.Nested(get_recipe_ingredient_info_fields)),
         "process_info": fields.List(fields.Nested(get_recipe_process_info_fields)),
         "post_info": fields.List(fields.Nested(get_recipe_post_info_fields)),
+        "did_u_liked": fields.Boolean,
     }
 )
 
@@ -101,7 +107,8 @@ class GetRecipe(Resource):
     @recipe_ns.marshal_with(get_recipe_fields)
     def get(self, recipe_id):
         """검색어와 일치하는 음식의 레시피 조회수 증가 후 데이터를 반환하는 api"""
-        result = get_recipe(recipe_id)
+        user_id = request.json.get("user_id")
+        result = get_recipe(recipe_id, user_id)
         
         return result
 
@@ -135,8 +142,8 @@ class AddLike(Resource):
         return result
 
 '''AddPost Models'''
-get_post_data_fields = recipe_ns.model(
-    "get_post_data",
+add_post_data_fields = recipe_ns.model(
+    "add_post_data",
     {
         "post_info": fields.List(fields.Nested(get_recipe_post_info_fields)),
     }
@@ -147,7 +154,7 @@ add_post_fields = recipe_ns.model(
     {
         "result": fields.String,
         "message": fields.String,
-        "data": fields.Nested(get_post_data_fields)
+        "data": fields.Nested(add_post_data_fields)
     }
 )
 
@@ -178,7 +185,36 @@ class AddPost(Resource):
             else:
                 image_url = boto3_image_upload(img)
         except Exception:
-            image_url = None
+            raise
 
         result = add_post(user_id, recipe_id, post, image_url)
+        return result
+
+'''DeletePost Models'''
+
+delete_post_fields = recipe_ns.model(
+    "delete_post",
+    {
+        "result": fields.String,
+        "message": fields.String,
+    }
+)
+
+delete_post_expect_fields = recipe_ns.model(
+    "delete_post_expect",
+    {
+        "post_id": fields.Integer,
+    }
+)
+
+@recipe_ns.route('/<int:recipe_id>/del')
+@recipe_ns.response(200, "success")
+@recipe_ns.response(500, "Failed")
+class DeletePost(Resource):
+    @recipe_ns.expect(delete_post_expect_fields)
+    @recipe_ns.marshal_with(delete_post_fields)
+    def delete(self, recipe_id):
+        """해당 레시피의 좋아요를 관리하는 api"""
+        post_id = request.json.get("post_id")
+        result = delete_post(recipe_id, post_id)
         return result

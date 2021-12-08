@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/server
+    ports:
+      - 5000:5000
+
+  machinelearning:
+    build:
+      context: ./machinelearning
+      dockerfile: Dockerfile
+    volumes:
+      - ./machinelearning:/opt/server
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+    ports:
+      - 8000:8000
+  #   networks:
+  #     - backnet
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+
