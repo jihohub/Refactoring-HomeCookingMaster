@@ -93,14 +93,6 @@ function IntroMe(){
                                     Lv. {myInfo.data.user_info.exp}
                                 </Typography>
                             </Box>
-                            <Box component="div" >
-                                <Typography variant="subtitle1" gutterBottom component="div" sx={{ fontWeight : '600' }}>
-                                    한줄소개
-                                </Typography>
-                                <Typography variant="subtitle1" gutterBottom component="div">
-                                    {myInfo.data.user_info.intro}
-                                </Typography>
-                            </Box>
                             <Box component="div" 
                                 sx={{ 
                                     display: 'flex', 

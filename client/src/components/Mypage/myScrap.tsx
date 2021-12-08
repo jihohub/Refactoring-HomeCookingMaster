@@ -9,8 +9,11 @@ import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function MyScrap(){
+    const navigate = useNavigate();
+
     const [isScrapList, setIsScrapList] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
     const scarpList = useSelector((state:RootStateOrAny) => state.getMyInfoList.list)
@@ -42,11 +45,11 @@ function MyScrap(){
                         height: 450, 
                         display: 'flex',
                         marginLeft:'25%',
-                        // justifyContent: 'center', 
+                        flexDirection:'column',
                         mt:8,
                     }}>
                     <ImageListItem key="Subheader" cols={2}>
-                        <ListSubheader component="div"  sx={{ mb:2, width:'40rem', backgroundColor:'#ED6C02', color:'white' }}>
+                        <ListSubheader component="div"  sx={{ width:'40rem', backgroundColor:'#ED6C02', color:'white' }}>
                             스크랩레시피
                         </ListSubheader>
                         {isEmpty ? "" : 
@@ -60,16 +63,18 @@ function MyScrap(){
                         }
                     </ImageListItem>
                     {scarpList.data.liked_recipe.map((item : any) => (
-                        <ImageListItem>
+                        <ImageListItem 
+                            sx={{width:'15rem', height:'10rem', cursor:'pointer'}}
+                            onClick={() => navigate(`/recipe/${item.recipe_id}`)}>
                             <img
-                                src={`${item.img}?w=248&fit=crop&auto=format`}
+                                src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
                                 srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                alt={item.title}
-                                loading="lazy"
+                                alt={item.recipe_name}
+                                style={{width:'100%', height:'15rem'}}
                             />
                             <ImageListItemBar
-                                title={item.title}
-                                subtitle={item.author}
+                                title={item.recipe_name}
+                                // subtitle={item.author}
                             />
                         </ImageListItem>
                     ))}

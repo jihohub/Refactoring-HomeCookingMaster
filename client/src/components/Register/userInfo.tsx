@@ -16,7 +16,6 @@ function UserInfo() {
     const [pw, setPw] = useState<string>("");
     const [nickname, setNickname] = useState<string>("");
     const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
-    const [intro, setIntro] = useState<String | null>("");
 
     const navigate = useNavigate();
     // 회원가입 api
@@ -26,7 +25,6 @@ function UserInfo() {
             password : pw,
             nickname : nickname,
             img : profileImage,
-            intro : intro
         })
         console.log(res);
         navigate('/register/complete', {state : res.data.data.nickname})   // 회원가입 완료시 닉네임값 전달
@@ -167,7 +165,7 @@ function UserInfo() {
                     </Modal>
                 </div>
                 <div css={input_box} >
-                    {emailVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', paddingBottom:'2%', fontWeight:'500'}}>아이디를 이메일 형식으로 입력해주세요.</p>}
+                    {emailVal ? "" : <p style={{color:'#e45a41', fontSize:'15px',  fontWeight:'500'}}>아이디를 이메일 형식으로 입력해주세요.</p>}
                     {ableEmail ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>아이디 중복확인 해주세요.</p>}
                 </div>
                 <div>
@@ -220,14 +218,13 @@ function UserInfo() {
                     </Modal>
                 </div>
                 <div css={input_box} >
-                    {nicknameVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', paddingBottom:'2%', fontWeight:'500'}}>닉네임을 입력해주세요.</p>}
+                    {nicknameVal ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>닉네임을 입력해주세요.</p>}
                     {ableName ? "" : <p style={{color:'#e45a41', fontSize:'15px', fontWeight:'500'}}>닉네임 중복확인 해주세요.</p>}
                 </div>
             </div>
             <div css={option_box}>
-                <p css={option_title}>선택사항</p>
                 <div>
-                    <h4 css={option_sub_title}>프로필 사진</h4>
+                    <h6 css={option_sub_title}>프로필 사진(선택사항)</h6>
                     <div css={profile_img}>
                         <Avatar alt="profile img" src={typeof profileImage == "string" ? profileImage : ""} sx={{ width: 112, height: 112 }}/>
                         <input 
@@ -235,17 +232,6 @@ function UserInfo() {
                             accept="image/*" 
                             css={file_select}
                             onChange={handleImage}
-                        />
-                    </div>
-                    <br />
-                    <h4 css={option_sub_title}>한줄 소개</h4>
-                    <div>
-                        <textarea 
-                            id="introduction" name="introduction" 
-                            cols={54} rows={5} 
-                            placeholder="한줄 소개를 작성해주세요."
-                            css={introText}
-                            onChange={(e) => setIntro(e.target.value)}
                         />
                     </div>
                 </div>
@@ -274,7 +260,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 200,
+    width: '17%',
     bgcolor: 'white',
     border: '10px solid white',
     color : '#ED6C02',
