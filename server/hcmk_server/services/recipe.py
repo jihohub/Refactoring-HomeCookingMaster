@@ -6,9 +6,15 @@ from hcmk_server.models.user import User
 from hcmk_server.models.recipe_ingredient import RecipeIngredient
 from hcmk_server.models.recipe_process import RecipeProcess
 
-def get_recipe(recipe_id):
+def get_recipe(recipe_id, user_id):
     data = {}
     try:
+        '''사용자 좋아요 유무 리턴'''
+        data['did_u_liked'] = False
+        if user_id is not None:
+            did_u_liked = RecipeLike.query.filter((RecipeLike.recipe_id == recipe_id) & (RecipeLike.user_id == user_id)).first()
+            if did_u_liked is not None:
+                data['did_u_liked'] = True
         try:
             '''1. 레시피 데이터 가져오기'''
             recipe = Recipe.query.filter(Recipe.id == recipe_id).one()
@@ -57,9 +63,9 @@ def get_recipe(recipe_id):
                     p_dict = post.to_dict()
                     user = User.query.filter(User.id == p_dict['user_id']).first()
                     p_dict["nickname"] = user.nickname
+                    p_dict["profile_img"] = user.img
                     post_dict.append(p_dict)
                 data['post_info'] = post_dict
-
         except Exception:
             db.session.rollback()
             raise
@@ -93,7 +99,7 @@ def edit_like(recipe_id, toggle):
 def check_likes(recipe_id, user_id):
     try:
         data = RecipeLike.query.filter((RecipeLike.recipe_id == recipe_id) & (RecipeLike.user_id == user_id)).first()
-        print(data)
+        
         if data is None:
             new_value = RecipeLike(
                 recipe_id=recipe_id,
@@ -140,6 +146,8 @@ def add_post(user_id, recipe_id, post, image_url):
                 p_dict = post.to_dict()
                 user = User.query.filter(User.id == p_dict['user_id']).first()
                 p_dict["nickname"] = user.nickname
+                p_dict["profile_img"] = user.img
+                
                 post_dict.append(p_dict)
             data['post_info'] = post_dict
 
