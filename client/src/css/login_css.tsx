@@ -26,11 +26,16 @@ export const loign_box = css`
 `
 
 export const to_register = css`
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     /* padding-left: 20rem; */
+`;
+
+export const to_register_p = css`
+    margin-top: 15px;
+    font-weight: 550;
 `;
 
 // export const to_register_cnt = css`
@@ -38,7 +43,7 @@ export const to_register = css`
 // `;
 
 export const to_register_button = css`
-    padding-left: 2rem;
+    padding-left: 1rem;
     text-decoration: none;
 `;
 

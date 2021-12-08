@@ -1,6 +1,8 @@
 from flask import request, jsonify
-from flask_restx import Resource, Namespace, fields, reqparse
-from hcmk_server.services.main import get_food_list, get_ranking
+from flask_restx import Resource, Namespace, fields
+from hcmk_server.services.main import get_food_list, get_ranking, get_equal_rate
+import json
+
 
 main_ns = Namespace(
     name="main",
@@ -53,3 +55,15 @@ class TodayRanking(Resource):
         result = get_ranking()
         return result
 
+
+
+
+@main_ns.route('/search/img')
+@main_ns.response(200, "success")
+@main_ns.response(500, "Failed")
+class test(Resource):
+    def post(self):
+        """현재 가장 인기있는 음식의 레시피를 반환합니다."""
+        image = request.files.get('img')
+        result_data, result, message = get_equal_rate(image)
+        return jsonify(result=result, message=message, data=result_data)
