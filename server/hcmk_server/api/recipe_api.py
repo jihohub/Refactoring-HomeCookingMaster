@@ -193,13 +193,10 @@ class AddPost(Resource):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
         user_id = request.form.get("user_id")
         post = request.form.get("post")
-        toggle = False
         try:
             img = request.files["img"]
-            
         except Exception:
-            toggle = False
-        print(toggle)
+            pass
         try:
             if img.filename == "":
                 image_url = None
