@@ -159,3 +159,17 @@ def add_post(user_id, recipe_id, post, image_url):
             "message" : "댓글을 추가하였습니다.",
             "data": data
         }
+
+def delete_post(recipe_id, post_id):
+    try:
+        posts = Post.query.filter((Post.recipe_id == recipe_id) & (Post.id == post_id)).first()
+        db.session.delete(posts)
+        db.session.commit()
+
+    except Exception:
+        db.session.rollback()
+        raise
+    return {
+            "result" : "Success",
+            "message" : "댓글을 삭제하였습니다."
+        }

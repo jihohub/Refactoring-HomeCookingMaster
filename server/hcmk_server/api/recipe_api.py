@@ -9,6 +9,7 @@ from hcmk_server.services.recipe import (
     get_recipe,
     check_likes,
     add_post,
+    delete_post,
 )
 recipe_ns = Namespace(
     name="recipe",
@@ -141,8 +142,8 @@ class AddLike(Resource):
         return result
 
 '''AddPost Models'''
-get_post_data_fields = recipe_ns.model(
-    "get_post_data",
+add_post_data_fields = recipe_ns.model(
+    "add_post_data",
     {
         "post_info": fields.List(fields.Nested(get_recipe_post_info_fields)),
     }
@@ -153,7 +154,7 @@ add_post_fields = recipe_ns.model(
     {
         "result": fields.String,
         "message": fields.String,
-        "data": fields.Nested(get_post_data_fields)
+        "data": fields.Nested(add_post_data_fields)
     }
 )
 
@@ -187,4 +188,33 @@ class AddPost(Resource):
             raise
 
         result = add_post(user_id, recipe_id, post, image_url)
+        return result
+
+'''DeletePost Models'''
+
+delete_post_fields = recipe_ns.model(
+    "delete_post",
+    {
+        "result": fields.String,
+        "message": fields.String,
+    }
+)
+
+delete_post_expect_fields = recipe_ns.model(
+    "delete_post_expect",
+    {
+        "post_id": fields.Integer,
+    }
+)
+
+@recipe_ns.route('/<int:recipe_id>/del')
+@recipe_ns.response(200, "success")
+@recipe_ns.response(500, "Failed")
+class DeletePost(Resource):
+    @recipe_ns.expect(delete_post_expect_fields)
+    @recipe_ns.marshal_with(delete_post_fields)
+    def delete(self, recipe_id):
+        """해당 레시피의 좋아요를 관리하는 api"""
+        post_id = request.json.get("post_id")
+        result = delete_post(recipe_id, post_id)
         return result
