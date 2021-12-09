@@ -173,7 +173,8 @@ const MainRanking = () => {
                             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title}
                             loading="lazy"
-                            style={{width:'100%', height:'17rem'}}
+                            style={{width:'100%', height:'17rem', cursor:'pointer'}}
+                            onClick={() => navigate(`/recipe/${item.id}`)}
                         />
                         <ImageListItemBar
                             title={item.name}

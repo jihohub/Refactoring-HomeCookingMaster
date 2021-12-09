@@ -146,14 +146,14 @@ function IntroMe() {
                                 >
                                     {myInfo.data.user_info.nickname}
                                 </Typography>
-                                <Typography
+                                {/* <Typography
                                     variant="subtitle1"
                                     gutterBottom
                                     component="div"
                                     sx={{ pl: 4, pb: 1 }}
                                 >
                                     Lv. {myInfo.data.user_info.exp}
-                                </Typography>
+                                </Typography> */}
                             </Box>
                             <Box
                                 component="div"

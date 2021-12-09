@@ -44,7 +44,7 @@ function Login() {
             sessionStorage.setItem("user_id", token.user_id);
             sessionStorage.setItem("nickname", token.nickname);
             sessionStorage.setItem("img", token.img);
-            navigate(-1);
+            navigate('/');
         }
     },[token])
 

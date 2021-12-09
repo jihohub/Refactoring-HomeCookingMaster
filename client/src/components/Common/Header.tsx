@@ -431,5 +431,5 @@ const Header = (props: Props) => {
             </ScrollTop>
         </>
     );
-};;;;;;
+};
 export default Header;

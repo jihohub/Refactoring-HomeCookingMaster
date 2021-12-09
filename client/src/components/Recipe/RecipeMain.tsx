@@ -41,7 +41,7 @@ function RecipeMain(props: any) {
     const id = open ? "simple-popover" : undefined;
     
     return (
-        <div>
+        <>
             <Box sx={{ width: "70vw", maxWidth: "1080px", height: "50px" }} />
             <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
                 <Typography
@@ -64,7 +64,7 @@ function RecipeMain(props: any) {
             >
                 <img
                     src={recipe_info.img}
-                    style={{ width: "70%", minWidth: "70%", boxShadow:'2px 2px 10px gray', borderRadius:'20px', marginTop:'15px' }}
+                    style={{ width: "70%", minWidth: "70%" }}
                     alt="food"
                 />
             </Box>
@@ -149,7 +149,7 @@ function RecipeMain(props: any) {
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        <Popover
+                        {/* <Popover
                             id={id}
                             open={open}
                             anchorEl={anchorEl}
@@ -162,7 +162,7 @@ function RecipeMain(props: any) {
                             <Typography sx={{ p: 2, fontFamily: "Elice" }}>
                                 좋아요를 취소하셨습니다.
                             </Typography>
-                        </Popover>
+                        </Popover> */}
                     </Typography>
                 )}
                 {user_id && !did_u_liked && (
@@ -175,7 +175,7 @@ function RecipeMain(props: any) {
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        <Popover
+                        {/* <Popover
                             id={id}
                             open={open}
                             anchorEl={anchorEl}
@@ -188,7 +188,7 @@ function RecipeMain(props: any) {
                             <Typography sx={{ p: 2, fontFamily: "Elice" }}>
                                 이 레시피에 좋아요를 누르셨습니다.
                             </Typography>
-                        </Popover>
+                        </Popover> */}
                     </Typography>
                 )}
                 {!user_id && (
@@ -201,7 +201,7 @@ function RecipeMain(props: any) {
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        <Popover
+                        {/* <Popover
                             id={id}
                             open={open}
                             anchorEl={anchorEl}
@@ -214,7 +214,7 @@ function RecipeMain(props: any) {
                             <Typography sx={{ p: 2, fontFamily: "Elice" }}>
                                 로그인 후 이용해주세요.
                             </Typography>
-                        </Popover>
+                        </Popover> */}
                     </Typography>
                 )}
             </Box>
@@ -324,7 +324,7 @@ function RecipeMain(props: any) {
                 </>
             ))}
             <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
-        </div>
+        </>
     );
 }
 

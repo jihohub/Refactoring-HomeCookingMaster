@@ -66,7 +66,7 @@ const OkButton = styled(Button)({
     fontWeight:'600',
     width: '10rem',
     height: '2.5rem',
-    marginLeft : '30rem',
+    marginLeft : '32rem',
     marginTop:'2rem',
     '&:hover': {
         borderColor: '#fad324',
