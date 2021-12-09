@@ -13,7 +13,7 @@ import ResultPage from "./pages/Result/ResultPage";
 import RecipePage from "./pages/Recipe/RecipePage";
 import MyPage from "./pages/Mypage/MyPage";
 import ScrollToTop from "./components/Common/ScrollToTop";
-import ImgResultPage from "./pages/Result/ImgResultPage";
+import Footer from "./components/Common/Footer";
 
 function Router() {
     return (
@@ -24,7 +24,6 @@ function Router() {
                 <Route path="/" element={<MainPage />} />
                 <Route path="/recipe/:id" element={<RecipePage />} />
                 <Route path="/result" element={<ResultPage />} />
-                <Route path="/result/img" element={<ImgResultPage />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register/termsNConditions" element={<TermsNConditionsPage />} />

@@ -11,10 +11,10 @@ const initialState : stateType = {
     list : [],
 }
 
-export const getImgResult = createAsyncThunk("POST_IMGRESULT", async (args: any) => {
-    console.log('<search by image> : ',args)
+export const getImgResult = createAsyncThunk("POST_IMGRESULT", async (formData: any) => {
+    console.log('<search by image> : ',formData)
     try{
-        const response = await axios.post("/api/main/search/img", args.formData, {
+        const response = await axios.post("/api/main/search/img", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },

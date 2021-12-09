@@ -19,10 +19,12 @@ export const btn = css`
 export const btnDiv = css`
     display:flex;
     justify-content:center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
 `;
 
 export const imgGuide  = css`
-    padding-right: 13rem;
+    padding-right: 10rem;
     width:40%;
     margin-top: 2rem;
 `;
