@@ -10,11 +10,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { useEffect, useState } from "react";
+import Avatar from '@mui/material/Avatar';
 
 function ImageResult() {
     const [img, setImg] = useState(false);
     const [resultState, setResultState] = useState(false);
-    const [resultImg, setResultImg] = useState('');
+    const [resultImg, setResultImg] = useState<String | ArrayBuffer | null>("");
     const [resultName, setResultName] = useState('');
     const [resultRate, setResultRate] = useState('');
     const dispatch = useDispatch();
@@ -64,7 +65,13 @@ function ImageResult() {
     // console.log('previewUrlpreviewUrl', previewUrl)
 
     useEffect(() => {
-        setResultImg(searchImg);
+        let reader = new FileReader();
+        let file = searchImg;
+
+        reader.onloadend = () => {
+            setResultImg(reader.result);
+        }
+        reader.readAsDataURL(file);
     },[searchImg])
 
 
@@ -115,8 +122,9 @@ function ImageResult() {
                     <CardMedia
                         component="img"
                         height="400"
-                        image={resultImg}
+                        image={typeof resultImg == "string" ? resultImg : ""}
                         alt="resultImg"
+                        
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div" sx={{fontFamily:'Elice'}}>

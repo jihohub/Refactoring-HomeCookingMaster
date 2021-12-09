@@ -31,6 +31,7 @@ function Router() {
                 <Route path="/register/complete" element={<RegisterCompletePage />} />
                 <Route path="/about" element={<AboutPage />} />
             </Routes>
+            <Footer/>
         </BrowserRouter>
     );
 }

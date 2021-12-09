@@ -39,7 +39,7 @@ export const guideTitle = css`
 export const rankingTitle = css`
     text-align: center;
     margin-top: 9rem;
-    margin-bottom: 9rem;
+    margin-bottom: 6rem;
     font-weight: 700;
     font-size: 4rem;
     color:#897A5F;
@@ -54,26 +54,29 @@ export const rankingDiv = css`
 
 export const top3TopDiv = css`
     display: flex;
-    padding-left: 20%;
-    flex-direction: column;
-    margin-bottom: 5rem;
+    /* padding-left: 20%; */
+    /* flex-direction: column; */
+    margin-bottom: 3rem;
+    justify-content: center;
 `;
 
 export const top3ItemDiv = css`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-bottom: 5rem;
+    padding: 2rem;
 `;
 
 export const top3Div = css`
-    margin-right: 5rem;
+    /* margin-right: 5rem; */
 `;
 
 export const top3Name = css`
-    margin-left: 5rem;
+    /* margin-left: 5rem; */
+    /* width: 20% */
 `;
 
 export const top3Img = css`
-    width:20rem;
-    height:20rem;
+    width:22rem;
+    height:22rem;
 `;

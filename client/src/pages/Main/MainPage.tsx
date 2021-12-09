@@ -76,7 +76,6 @@ const MainSearch = () => {
             <div css={imgSearch}>
                 <h2 css={imageTitle}>이미지 검색</h2>
                 <DropZone />
-                <DragDrop />
             </div>
             <div css={imgGuide}>
                 <h2 css={guideTitle}>이렇게 찍어주세요!</h2>
@@ -129,7 +128,7 @@ const MainRanking = () => {
             <div css={top3TopDiv}>
                 {top3List ? top3List.map((item:any) => (
                     <div css={top3ItemDiv} key={item.name}>
-                        <div css={top3Div}>
+                        <div >
                             <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold'}}>
                                 {top3List.indexOf(item)+1}
                             </Typography>
@@ -142,7 +141,7 @@ const MainRanking = () => {
                             style={{cursor:'pointer'}}
                             ></img>
                         <div css={top3Name}>
-                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice'}}>
+                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice', width:'20rem'}}>
                                     {item.name}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom component="p" sx={{fontFamily:'Elice'}}>

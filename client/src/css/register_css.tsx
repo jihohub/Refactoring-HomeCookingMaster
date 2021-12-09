@@ -98,7 +98,7 @@ export const userInfo = css `
     display: flex;
     flex-direction: column;
     width: 40rem;
-    height: 90%;
+    height:60rem;
     position:absolute;
     left:40%;
     top:40%;
