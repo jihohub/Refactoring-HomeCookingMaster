@@ -12,6 +12,7 @@ import logonohat from "../../assets/hatNoo.png";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../../modules/userLogin";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -92,12 +93,15 @@ interface Props {
 
 const Header = (props: Props) => {
     const navigate = useNavigate();
-    const user_info = useSelector((state:RootStateOrAny) => state.getUserInfo);
+    const dispatch = useDispatch();
+    const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
 
     const [logCheck, setLogCheck] = useState<boolean>(false);
 
     const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
     const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
+    const nickname = sessionStorage.getItem("nickname"); // access_token
+    const user_img = sessionStorage.getItem("img"); // access_token
 
     useEffect(() => {
         if (refreshTkn) {
@@ -121,6 +125,7 @@ const Header = (props: Props) => {
         console.log("<Header> : logout");
         sessionStorage.removeItem("usrRfshTkn");
         sessionStorage.removeItem("usrAcsTkn");
+        dispatch(setUser());
         navigate("/");
     };
 
@@ -320,21 +325,23 @@ const Header = (props: Props) => {
                                                 fontWeight: "800",
                                             }}
                                         >
-                                            {`${user_info.nickname}`}
+                                            {`${nickname}`}
                                         </Typography>
                                     </Box>
                                     <Box sx={{ flexGrow: 0 }}>
                                         <Tooltip
-                                            title={`${user_info.nickname}님의 마이페이지`}
+                                            title={`${nickname}님의 마이페이지`}
                                         >
                                             <IconButton
                                                 onClick={handleOpenUserMenu}
                                                 sx={{ p: 0 }}
                                             >
-                                                <Avatar
-                                                    alt="profile image on the header bar"
-                                                    src={user_info.img}
-                                                />
+                                                {user_img &&
+                                                    <Avatar
+                                                        alt="profile image on the header bar"
+                                                        src={user_img}
+                                                    />
+                                                }
                                             </IconButton>
                                         </Tooltip>
                                         <Menu
@@ -416,5 +423,5 @@ const Header = (props: Props) => {
             </ScrollTop>
         </>
     );
-};;;
+};;;;;
 export default Header;

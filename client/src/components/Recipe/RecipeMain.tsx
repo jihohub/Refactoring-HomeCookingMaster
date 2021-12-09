@@ -19,7 +19,9 @@ function RecipeMain(props: any) {
 
     const { did_u_liked, recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
     const recipe_id = recipe_info.id
-    const user_id = props.user_id;
+    const user_id = String(sessionStorage.getItem("user_id")); // user_id
+
+    console.log("그냥 페이지에서", typeof props.user_id);
 
     const handleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -321,28 +323,6 @@ function RecipeMain(props: any) {
                     </Box>
                 </>
             ))}
-            <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
-            <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
-                <Typography
-                    sx={{
-                        fontSize: "1.75rem",
-                        color: "#897A5F",
-                        fontFamily: "Elice",
-                    }}
-                >
-                    다른 레시피 보기
-                </Typography>
-            </Box>
-            <Box
-                sx={{
-                    width: "70vw",
-                    maxWidth: "1080px",
-                    margin: "0 auto",
-                    textAlign: "center",
-                }}
-            >
-                <Divider />
-            </Box>
             <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
         </>
     );

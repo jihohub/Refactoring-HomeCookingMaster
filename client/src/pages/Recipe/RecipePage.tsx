@@ -8,16 +8,17 @@ import { getRecipe, clearRecipe } from "../../modules/recipeSlice";
 import RecipeMain from "../../components/Recipe/RecipeMain";
 import ReviewList from "../../components/Recipe/ReviewList";
 import RecipeBoard from "../../components/Recipe/RecipeBoard";
+import RecipeShowOthers from "../../components/Recipe/RecipeShowOthers";
 
 function RecipePage() {
     const dispatch = useDispatch();
     const params = useParams();
     const recipe_id = Number(params.id);
-    const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
     const recipe = useSelector((state: RootStateOrAny) => state.recipeSlice);
+    const user_id = String(sessionStorage.getItem("user_id")); // user_id
 
-    const { user_id } = user_info;
-    console.log("ui", user_info);
+    console.log("세션스토리지", user_id);
+
     useEffect(() => {
         dispatch(getRecipe({ recipe_id, user_id }));
         return () => {
@@ -27,7 +28,8 @@ function RecipePage() {
 
     return (
         <div>
-            <RecipeMain recipe={recipe} user_id={user_id} />
+            <RecipeMain recipe={recipe} />
+            <RecipeShowOthers recipe={recipe} />
             <ReviewList post={recipe.post_info} />
             <RecipeBoard recipe_id={recipe_id} />
         </div>
