@@ -166,7 +166,7 @@ const MainRanking = () => {
                 {othersList ? othersList.map((item:any) => (
                     <ImageListItem 
                         key={item.img} 
-                        sx={{width:'20%', height:'10rem', boxShadow:'10px 5px 20px gray'}}
+                        sx={{width:'20%', height:'10rem'}}
                         >
                         <img
                             src={`${item.img}?w=248&fit=crop&auto=format`}
@@ -177,6 +177,8 @@ const MainRanking = () => {
                         />
                         <ImageListItemBar
                             title={item.name}
+                            position="below"
+                            sx={{fontFamily:'Elice'}}
                             actionIcon={
                                 <IconButton
                                     sx={{ color: 'rgba(255, 255, 255, 0.54)', cursor:'pointer' }}
@@ -244,3 +246,5 @@ export default MainPage;
 //                     })}
 //                 </Grid>
 //             </div>
+
+// , boxShadow:'10px 5px 20px gray'

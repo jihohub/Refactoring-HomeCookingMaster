@@ -126,7 +126,7 @@ function ImageResult() {
                         alt="resultImg"
                         
                     />
-                    <CardContent>
+                    <CardContent sx={{textAlign:'center'}}>
                         <Typography gutterBottom variant="h5" component="div" sx={{fontFamily:'Elice'}}>
                         {resultName}
                         </Typography>
@@ -160,11 +160,13 @@ function ImageResult() {
                     <CardActions sx={{display:'flex', justifyContent:'center'}}>
                         <OkButton size="small" onClick={() => navigate('/')} >다시 검색하기</OkButton>
                     </CardActions>
-                    {firstCheck || secondCheck || thirdCheck ? <p style={{marginTop:'1rem', marginLeft:'3rem'}}>유사 검색어</p> : ""}
-                    <div style={{paddingLeft:'1rem',paddingBottom:'1rem'}}>
-                        {firstCheck ? <ItemBox variant="outlined" onClick={() => navigate(`/result?data=${resultFirstName}`)}>{resultFirstName}</ItemBox> : ""}
-                        {secondCheck ? <ItemBox variant="outlined" onClick={() => navigate(`/result?data=${resultSecondName}`)}>{resultSecondName}</ItemBox> : ""}
-                        {thirdCheck ? <ItemBox variant="outlined" onClick={() => navigate(`/result?data=${resultThirdName}`)} >{resultThirdName}</ItemBox> : ""}
+                    <div style={{textAlign:'center'}}>
+                        {firstCheck || secondCheck || thirdCheck ? <p style={{marginTop:'1rem', fontSize:'5'}}>혹시 이건 아닐까요?</p> : ""}
+                        <div style={{paddingBottom:'1rem'}}>
+                            {firstCheck ? <ItemBox variant="outlined" onClick={() => navigate(`/result?data=${resultFirstName}`)}>{resultFirstName}</ItemBox> : ""}
+                            {secondCheck ? <ItemBox variant="outlined" onClick={() => navigate(`/result?data=${resultSecondName}`)}>{resultSecondName}</ItemBox> : ""}
+                            {thirdCheck ? <ItemBox variant="outlined" onClick={() => navigate(`/result?data=${resultThirdName}`)} >{resultThirdName}</ItemBox> : ""}
+                        </div>
                     </div>
                 </Card>
                 : ""}

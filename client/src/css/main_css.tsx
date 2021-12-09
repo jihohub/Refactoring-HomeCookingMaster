@@ -46,7 +46,7 @@ export const rankingTitle = css`
 `;
 
 export const rankingDiv = css`
-    text-align: center;
+    /* text-align: center; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,7 +64,7 @@ export const top3ItemDiv = css`
     display: flex;
     flex-direction: column;
     margin-bottom: 5rem;
-    padding: 2rem;
+    padding: 1rem;
 `;
 
 export const top3Div = css`

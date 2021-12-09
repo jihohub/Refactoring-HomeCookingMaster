@@ -3,6 +3,7 @@ import main1 from "../../assets/main1.png";
 import main2 from "../../assets/main2.jpg";
 import main3 from "../../assets/main3.png";
 import main4 from "../../assets/main4.jpg";
+import logo from "../../assets/loogo.png";
 import { Carousel, Image } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
 import { styled } from '@mui/material/styles';
@@ -44,9 +45,10 @@ function MainSlide() {
                     />
                 </Carousel.Item>
             </Carousel>
-            <Carousel.Caption style={{marginBottom:'23rem'}} >
-                    <h2 style={{fontSize:'5rem', textShadow:'2px 2px 6px black', color:'#fffff'}}>집밥꼬꼬선생</h2>
-                    <p style={{ fontSize:'1.2rem', fontWeight:'600', color:'#191919'}}>집밥 레시피 검색 플랫폼</p>
+            <Carousel.Caption style={{marginBottom:'18rem',display:'flex', flexDirection:'column',marginLeft:'18',marginTop :'5rem'}} >
+                    <img src={logo} alt='logo' style={{width:'35rem', height:'18rem'}} />
+                    {/* <h2 style={{fontSize:'5rem', textShadow:'2px 2px 6px black', color:'#524835'}}>집밥꼬꼬선생</h2>
+                    <p style={{ fontSize:'1.2rem', fontWeight:'600', color:'#191919'}}>집밥 레시피 검색 플랫폼</p> */}
                     <OkButton onClick={() => window.scrollTo(0,1000)}>이미지 검색하기</OkButton>
             </Carousel.Caption>
         </>
@@ -64,6 +66,8 @@ const OkButton = styled(Button)({
     fontWeight:'600',
     width: '10rem',
     height: '2.5rem',
+    marginLeft : '13rem',
+    marginTop:'2rem',
     '&:hover': {
         borderColor: '#897A5F',
     },
