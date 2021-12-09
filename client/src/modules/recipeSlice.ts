@@ -42,6 +42,17 @@ interface RecipeState {
         nickname: string;
         recipe_id: number;
     }>;
+    other_recipes_info: Array<{
+        id: number;
+        name: string;
+        img: string;
+        views: number;
+        likes: number;
+        servings: string;
+        difficulty: string;
+        cooking_time: string;
+        food_id: number;
+    }>;
     loading: boolean;
     error: string;
 }
@@ -57,18 +68,19 @@ const initialState: RecipeState = {
         servings: "",
         difficulty: "",
         cooking_time: "",
-        food_id: 0
+        food_id: 0,
     },
     food_info: {
         id: 0,
         name: "",
         category_l: "",
         category_m: "",
-        category_s: ""
+        category_s: "",
     },
     ingredient_info: [],
     process_info: [],
     post_info: [],
+    other_recipes_info: [],
     loading: false,
     error: "",
 };
@@ -115,6 +127,7 @@ export const recipeSlice = createSlice({
             state.ingredient_info = [];
             state.process_info = [];
             state.post_info = [];
+            state.other_recipes_info = [];
             state.loading = false;
             state.error = "";
         },
@@ -145,6 +158,7 @@ export const recipeSlice = createSlice({
                 state.ingredient_info = action.payload.ingredient_info;
                 state.process_info = action.payload.process_info;
                 state.post_info = action.payload.post_info;
+                state.other_recipes_info = action.payload.other_recipes_info;
             }
         );
     },

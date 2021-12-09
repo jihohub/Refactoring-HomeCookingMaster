@@ -18,14 +18,22 @@ function DropZone() {
     
     const handleDrop = (acceptedFiles: any) => {
         const formData = new FormData();
+        console.log("img", acceptedFiles);
         formData.append("image", acceptedFiles[0]);
         dispatch(searchByImage(formData));
     };
 
     return (
         <div>
-            <Box  sx={{ border: "1px dashed black", width: "30rem", height: "25rem", textAlign:'center' }}>
-                <Dropzone>
+            <Box
+                sx={{
+                    border: "1px dashed black",
+                    width: "30rem",
+                    height: "25rem",
+                    textAlign: "center",
+                }}
+            >
+                <Dropzone onDrop={(acceptedFiles) => handleDrop(acceptedFiles)}>
                     {({ getRootProps, getInputProps }) => (
                         <section
                             {...getRootProps()}
@@ -38,23 +46,15 @@ function DropZone() {
                         >
                             <input {...getInputProps()} />
                             <div>
-                                <GrImage css={info} size="70"/>
-                                <p>드래그 앤 드롭으로 이미지 파일을 추가하세요.</p>
+                                <GrImage css={info} size="70" />
+                                <p>
+                                    드래그 앤 드롭으로 이미지 파일을 추가하세요.
+                                </p>
                             </div>
                         </section>
                     )}
                 </Dropzone>
             </Box>
-            <div css={btnDiv}>
-                    <OkButton
-                        id="nextBtn" 
-                        variant="contained" 
-                        css={btn}
-                        onClick={(acceptedFiles) => handleDrop(acceptedFiles)}
-                    >
-                        검색
-                    </OkButton>
-                </div>
         </div>
     );
 }

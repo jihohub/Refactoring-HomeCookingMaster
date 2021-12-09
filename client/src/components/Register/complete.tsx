@@ -16,12 +16,7 @@ const OkButton = styled(Button)({
 });
 
 function Complete() {
-    const location = useLocation();
-    console.log(location)
-
-    const userInfo = useSelector(
-        (state: RootStateOrAny) => state.registerInfoSlice
-    );
+    const userInfo = useSelector((state: RootStateOrAny) => state.registerInfoSlice);
 
     return (
         <div css={complete}>
