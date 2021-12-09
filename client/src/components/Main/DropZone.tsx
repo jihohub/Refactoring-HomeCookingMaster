@@ -65,7 +65,6 @@ function DropZone() {
 
     return (
         <div>
-<<<<<<< HEAD
             <Box
                 sx={{
                     border: "1px dashed black",
@@ -74,9 +73,7 @@ function DropZone() {
                     textAlign: "center",
                 }}
             >
-=======
             <Box  sx={{ border: "1px dashed black", width: "30rem", height: "25rem", textAlign:'center' }}>
->>>>>>> 8ef2920ff3f3b673f715f0522ee3b201da0173f2
                 <Dropzone onDrop={(acceptedFiles) => handleDrop(acceptedFiles)}>
                     {({ getRootProps, getInputProps }) => (
                         <section
@@ -98,15 +95,11 @@ function DropZone() {
                         </section>
                     )}
                 </Dropzone>
-<<<<<<< HEAD
             </Box>
-=======
                 <div css={btnDiv}>
                     <p >이미지 업로드시 바로 검색됩니다.</p>
                 </div>
             </Box>
-            
->>>>>>> 8ef2920ff3f3b673f715f0522ee3b201da0173f2
         </div>
     );
 }
