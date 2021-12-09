@@ -2,6 +2,7 @@ import os
 import uuid
 import boto3
 from dotenv import load_dotenv
+from PIL import Image
 
 # Load AWS KEY Values
 load_dotenv()
@@ -51,4 +52,16 @@ def boto3_image_delete(image_url):
 # boto3_image_delete(tmp_url)
 
 def default_profile_img():
-    return "https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/uploaded_images/default_profile_img.png"
+    # img = open('./mainavatar.png', 'r')
+    # file_name = uuid.uuid4().hex
+    # file_type = img.name.split(".")[-1]
+    # file_path = f"uploaded_images/{file_name}.{file_type}"
+    # s3_client.put_object(
+    #     ACL='public-read',  # 읽기 권한 부여
+    #     Bucket=BUCKET_NAME, 
+    #     Body=img, 
+    #     Key=file_path, 
+    #     ContentType= f"image/{file_type}",
+    # )
+    # result = aws_public_root_url + file_path
+    return 'https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/uploaded_images/mainAvatar.png'
