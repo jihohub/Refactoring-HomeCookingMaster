@@ -19,15 +19,15 @@ function RecipeMain(props: any) {
 
     const { did_u_liked, recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
     const recipe_id = recipe_info.id
-    const user_id = String(sessionStorage.getItem("user_id")); // user_id
+    const user_id = props.user_id;
 
-    console.log("그냥 페이지에서", typeof props.user_id);
-
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    
     const handleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
-        console.log("라이크 누를 때", user_id);
-        console.log("라이크 누를 때", recipe_id);
-        await dispatch(recipeLike({ recipe_id, user_id }));
+        await dispatch(recipeLike({ user_id, recipe_id }));
         dispatch(getRecipe({ recipe_id, user_id }));
     };
 
@@ -195,7 +195,7 @@ function RecipeMain(props: any) {
                     <Typography
                         sx={{ fontSize: "2.3rem", fontFamily: "Elice" }}
                     >
-                        <IconButton onClick={handleLike}>
+                        <IconButton onClick={handleClick}>
                             <FavoriteBorderIcon
                                 sx={{ color: "#897A5F", fontSize: "2.5rem" }}
                             />
