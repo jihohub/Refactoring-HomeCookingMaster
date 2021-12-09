@@ -3,8 +3,10 @@ import UserInfo from '../../components/Register/userInfo';
 
 function RegisterUserInfoPage() {
     return (
-        <div>
-            <UserInfo />
+        <div style={{width:'100vw', height:'130vh'}}>
+            <div>
+                <UserInfo />
+            </div>
         </div>
     );
 }

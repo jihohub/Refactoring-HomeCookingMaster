@@ -235,7 +235,7 @@ const OkButton = styled(Button)({
     // backgroundColor: '#897A5F',
     marginTop:'0.5rem',
     borderColor: '#897A5F',
-    color : '#584f3d',
+    color : '#897A5F',
     '&:hover': {
         borderColor: '#897A5F',
     },
@@ -250,7 +250,7 @@ const style = {
     width: '17%',
     bgcolor: 'white',
     border: '10px solid white',
-    color : '#ED6C02',
+    color : '#897A5F',
     boxShadow: 24,
     p: 4,
 };
@@ -258,8 +258,8 @@ const style = {
 // 중복확인 모달 내 확인 버튼
 const CheckButton = styled(Button)({
     marginTop:'20px',
-    backgroundColor: '#ED6C02',
-    borderColor: '#ED6C02',
+    backgroundColor: '#897A5F',
+    borderColor: '#897A5F',
     color:'white',
     '&:hover': {
         backgroundColor: '#897A5F',
