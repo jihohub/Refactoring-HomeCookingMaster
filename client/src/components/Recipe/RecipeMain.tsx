@@ -19,9 +19,11 @@ function RecipeMain(props: any) {
 
     const { did_u_liked, recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
     const recipe_id = recipe_info.id
-    const user_id = String(sessionStorage.getItem("user_id")); // user_id
+    let user_id = sessionStorage.getItem("user_id") ? String(sessionStorage.getItem("user_id")) : null; // user_id
 
-    console.log("그냥 페이지에서", typeof props.user_id);
+    console.log("그냥 페이지에서", user_id);
+    console.log("그냥 페이지에서", did_u_liked, recipe_info, food_info, ingredient_info, process_info, post_info);
+
 
     const handleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);

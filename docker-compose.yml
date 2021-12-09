@@ -23,6 +23,8 @@ services:
       # -v 옵션 (다렉토리 마운트 설정)
       - ./database/data:/var/lib/mysql
       - ./data:/app/data
+    networks:
+      - backnet
 
   backend:
     build:
@@ -32,7 +34,28 @@ services:
       # venv 파일은 참초하지 않도록 세팅 (본인 로컬에 맞게 절대경로로 세팅 필요)
       # - C:\\Users\\gmlwo\\Desktop\\곰돌희\\취뽀\\elice\\프로젝트\\3. 인공지능 프로젝트\\project-template\\server\\venv
       - ./server:/server
-    ports:
-      - 5000:5000
+    # ports:
+    #   - 5000:5000
+    expose:
+      - 5000
     # depends_on:
     #   - HCMK-mysql
+    networks:
+      - frontnet
+      - backnet
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+    networks:
+      - frontnet
+
+networks:
+  backnet:
+  frontnet:

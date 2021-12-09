@@ -100,8 +100,8 @@ const Header = (props: Props) => {
 
     const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
     const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
-    const nickname = sessionStorage.getItem("nickname"); // access_token
-    const user_img = sessionStorage.getItem("img"); // access_token
+    const nickname = sessionStorage.getItem("nickname"); // nickname
+    const user_img = sessionStorage.getItem("img"); // img
 
     useEffect(() => {
         if (refreshTkn) {
@@ -123,8 +123,7 @@ const Header = (props: Props) => {
     const handleLog = () => {
         handleLogout();
         console.log("<Header> : logout");
-        sessionStorage.removeItem("usrRfshTkn");
-        sessionStorage.removeItem("usrAcsTkn");
+        sessionStorage.clear();
         dispatch(setUser());
         navigate("/");
     };
@@ -336,12 +335,12 @@ const Header = (props: Props) => {
                                                 onClick={handleOpenUserMenu}
                                                 sx={{ p: 0 }}
                                             >
-                                                {user_img &&
+                                                {user_img && (
                                                     <Avatar
                                                         alt="profile image on the header bar"
                                                         src={user_img}
                                                     />
-                                                }
+                                                )}
                                             </IconButton>
                                         </Tooltip>
                                         <Menu
@@ -423,5 +422,5 @@ const Header = (props: Props) => {
             </ScrollTop>
         </>
     );
-};;;;;
+};;;;;;
 export default Header;
