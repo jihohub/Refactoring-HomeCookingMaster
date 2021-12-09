@@ -54,7 +54,7 @@ export const to_register_button = css`
 // `;
 
 export const login_all = css`
-        display: flex;
+    display: flex;
     flex-direction: column;
     width: 30rem;
     position:absolute;
@@ -62,6 +62,8 @@ export const login_all = css`
     top:45%;
     margin-left:-140px;
     margin-top:-150px;
+    background-color:#fbfbf9;
+    padding: 3rem;
 `;
 
 export const input_box = css`

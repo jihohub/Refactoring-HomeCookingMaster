@@ -5,13 +5,13 @@ import { Outlet } from "react-router";
 import ImageResult from "../../components/Result/imageResult";
 
 
-function ResultPage() {
+function ImgResultPage() {
     
 
     return (
-        <div style={{marginTop:'12rem', paddingBottom:'7rem', backgroundColor:'#fbfbf9', paddingTop:'5%', width:'80%', marginLeft:'10%'}}>
-            <TextSearchBar/>
+        <div style={{marginTop:'12rem', paddingBottom:'7rem'}}>
             <ImageResult/>
+            <TextSearchBar/>
             <ItemList />
 
             <Outlet />
@@ -19,4 +19,4 @@ function ResultPage() {
     );
 }
 
-export default ResultPage;
+export default ImgResultPage;

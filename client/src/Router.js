@@ -13,6 +13,7 @@ import ResultPage from "./pages/Result/ResultPage";
 import RecipePage from "./pages/Recipe/RecipePage";
 import MyPage from "./pages/Mypage/MyPage";
 import ScrollToTop from "./components/Common/ScrollToTop";
+import Footer from "./components/Common/Footer";
 
 function Router() {
     return (
