@@ -17,7 +17,7 @@ const initialState: RegisterState = {
 
 /* 레시피 좋아요 */
 export const sendRegister = createAsyncThunk(
-    "RECIPE_LIKE",
+    "SEND_REGISTER",
     async (formData: any) => {
         /* 백엔드 [POST] /recipe/<recipe_id>/like 요청 */
         const response = await axios.post("/api/auth/signup", formData, {

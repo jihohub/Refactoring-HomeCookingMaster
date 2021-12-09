@@ -15,9 +15,7 @@ function RecipePage() {
     const params = useParams();
     const recipe_id = Number(params.id);
     const recipe = useSelector((state: RootStateOrAny) => state.recipeSlice);
-    const user_id = String(sessionStorage.getItem("user_id")); // user_id
-
-    console.log("세션스토리지", user_id);
+    const user_id = sessionStorage.getItem("user_id"); // user_id
 
     useEffect(() => {
         dispatch(getRecipe({ recipe_id, user_id }));
@@ -28,7 +26,7 @@ function RecipePage() {
 
     return (
         <div>
-            <RecipeMain recipe={recipe} />
+            <RecipeMain recipe={recipe} user_id={user_id} />
             <RecipeShowOthers recipe={recipe} />
             <ReviewList post={recipe.post_info} />
             <RecipeBoard recipe_id={recipe_id} />

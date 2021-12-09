@@ -10,7 +10,6 @@ import { Box, Typography, Divider, ImageList, ImageListItem, ImageListItemBar, I
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
-
 function RecipeShowOthers(props: any) {
     const navigate = useNavigate();
     const params = useParams();
