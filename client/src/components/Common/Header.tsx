@@ -101,11 +101,12 @@ const Header = (props: Props) => {
     const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
     const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
     const nickname = sessionStorage.getItem("nickname"); // nickname
-    const user_img = sessionStorage.getItem("img"); // img
+    const user_img = user_info.img;
 
     useEffect(() => {
         if (refreshTkn) {
             setLogCheck(true);
+            setAnchorElNav(null);
         } else {
             setLogCheck(false);
         }
@@ -128,8 +129,8 @@ const Header = (props: Props) => {
         navigate("/");
     };
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
 
     const handleOpenNavMenu = (event: any) => {
         setAnchorElNav(event.currentTarget);
@@ -239,6 +240,7 @@ const Header = (props: Props) => {
                                         >
                                             <Typography
                                                 textAlign="center"
+                                                sx={{ fontFamily: "Elice" }}
                                                 onClick={() =>
                                                     navigate(`${page.path}`)
                                                 }
@@ -329,7 +331,13 @@ const Header = (props: Props) => {
                                     </Box>
                                     <Box sx={{ flexGrow: 0 }}>
                                         <Tooltip
-                                            title={`${nickname}님의 마이페이지`}
+                                            title={
+                                                <Typography
+                                                    sx={{ fontFamily: "Elice" }}
+                                                >
+                                                    {`${nickname}님 반가워요!`}
+                                                </Typography>
+                                            }
                                         >
                                             <IconButton
                                                 onClick={handleOpenUserMenu}
@@ -373,6 +381,7 @@ const Header = (props: Props) => {
                                                         }
                                                         sx={{
                                                             color: "#897A5F",
+                                                            fontFamily: "Elice",
                                                         }}
                                                     >
                                                         {item.text}

@@ -22,8 +22,8 @@ export const sendRegister = createAsyncThunk(
         /* 백엔드 [POST] /recipe/<recipe_id>/like 요청 */
         const response = await axios.post("/api/auth/signup", formData, {
             headers: {
-                "Content-Type": "multipart/form-data",
-            },
+                "Content-Type": "multipart/form-data"
+            }
         });
 
         return response.data.data;

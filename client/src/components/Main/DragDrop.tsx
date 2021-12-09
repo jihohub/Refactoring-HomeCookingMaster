@@ -70,12 +70,14 @@ const DragDrop = () => {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
+        console.log("파일추가", e.target);
         reader.readAsDataURL(file);
 
         reader.onload = (e: any) => {
             dispatch(setImageFile(file));
             dispatch(setPreviewUrl(e.target.result));
             // navigate("/result");
+            console.log(reader.readAsDataURL(file));
         }
     };
 

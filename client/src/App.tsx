@@ -15,6 +15,7 @@ import getSearchList from "./modules/searchList";
 import getUserInfo from "./modules/userLogin";
 import getMyInfoList from "./modules/myInfo";
 import getNewAccessList from './modules/newToken'
+import mypageEditImgSlice from "./modules/mypageEditImgSlice";
 import "./App.css";
 
 function App() {
@@ -29,8 +30,9 @@ function App() {
         searchText: searchText,
         getSearchList: getSearchList,
         getUserInfo: getUserInfo,
-        getMyInfoList : getMyInfoList,
-        getNewAccessList:getNewAccessList
+        getMyInfoList: getMyInfoList,
+        getNewAccessList: getNewAccessList,
+        mypageEditImgSlice: mypageEditImgSlice
     });
 
     const store = configureStore({

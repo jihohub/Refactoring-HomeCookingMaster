@@ -2,7 +2,7 @@ import os
 import uuid
 import boto3
 from dotenv import load_dotenv
-from PIL import Image
+# from PIL import Image
 
 # Load AWS KEY Values
 load_dotenv()

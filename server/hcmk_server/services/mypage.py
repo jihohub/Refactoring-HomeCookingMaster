@@ -58,6 +58,15 @@ def edit_img(user_id, img):
     user = User.query.filter(User.id == user_id).first()
     
     try:
+        if img == None:
+            return {
+            "result" : "failed",
+            "message" : "프로필 사진을 수정되지 않았습니다.",
+            "data": 
+            {
+                "img": user.img
+            }
+        }, 200
         if img.filename == "":
             return {
             "result" : "failed",
