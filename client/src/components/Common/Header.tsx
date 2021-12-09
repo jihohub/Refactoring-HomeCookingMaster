@@ -12,6 +12,7 @@ import logonohat from "../../assets/hatNoo.png";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../../modules/userLogin";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -28,6 +29,22 @@ import MenuItem from "@mui/material/MenuItem";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import background from "../../assets/bg2.jpeg";
+
+const styles = {
+    "&.MuiFab-secondary": {
+        // border: "1px black solid",
+        backgroundColor: "#897A5F",
+    },
+    // "&.MuiButton-text": {
+    //     color: "grey",
+    // },
+    // "&.MuiButton-contained": {
+    //     color: "yellow",
+    // },
+    // "&.MuiButton-outlined": {
+    //     color: "brown",
+    // },
+};
 
 const pages = [
     {
@@ -76,17 +93,20 @@ interface Props {
 
 const Header = (props: Props) => {
     const navigate = useNavigate();
-    const user_info = useSelector((state:RootStateOrAny) => state.getUserInfo);
+    const dispatch = useDispatch();
+    const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
 
     const [logCheck, setLogCheck] = useState<boolean>(false);
 
     const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
     const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
+    const nickname = sessionStorage.getItem("nickname"); // nickname
     const user_img = user_info.img;
 
     useEffect(() => {
         if (refreshTkn) {
             setLogCheck(true);
+            setAnchorElNav(null);
         } else {
             setLogCheck(false);
         }
@@ -104,15 +124,13 @@ const Header = (props: Props) => {
     const handleLog = () => {
         handleLogout();
         console.log("<Header> : logout");
-        sessionStorage.removeItem("usrRfshTkn");
-        sessionStorage.removeItem("usrAcsTkn");
-        sessionStorage.removeItem("user_id");
-        sessionStorage.removeItem("user_img");
-        window.location.replace("/");
+        sessionStorage.clear();
+        dispatch(setUser());
+        navigate("/");
     };
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
 
     const handleOpenNavMenu = (event: any) => {
         setAnchorElNav(event.currentTarget);
@@ -222,6 +240,7 @@ const Header = (props: Props) => {
                                         >
                                             <Typography
                                                 textAlign="center"
+                                                sx={{ fontFamily: "Elice" }}
                                                 onClick={() =>
                                                     navigate(`${page.path}`)
                                                 }
@@ -307,21 +326,29 @@ const Header = (props: Props) => {
                                                 fontWeight: "800",
                                             }}
                                         >
-                                            {`${user_info.nickname}`}
+                                            {`${nickname}`}
                                         </Typography>
                                     </Box>
                                     <Box sx={{ flexGrow: 0 }}>
                                         <Tooltip
-                                            title={`${user_info.nickname}님의 마이페이지`}
+                                            title={
+                                                <Typography
+                                                    sx={{ fontFamily: "Elice" }}
+                                                >
+                                                    {`${nickname}님 반가워요!`}
+                                                </Typography>
+                                            }
                                         >
                                             <IconButton
                                                 onClick={handleOpenUserMenu}
                                                 sx={{ p: 0 }}
                                             >
-                                                <Avatar
-                                                    alt="profile image on the header bar"
-                                                    src={user_info.img}
-                                                />
+                                                {user_img && (
+                                                    <Avatar
+                                                        alt="profile image on the header bar"
+                                                        src={user_img}
+                                                    />
+                                                )}
                                             </IconButton>
                                         </Tooltip>
                                         <Menu
@@ -354,6 +381,7 @@ const Header = (props: Props) => {
                                                         }
                                                         sx={{
                                                             color: "#897A5F",
+                                                            fontFamily: "Elice",
                                                         }}
                                                     >
                                                         {item.text}
@@ -396,11 +424,12 @@ const Header = (props: Props) => {
                     color="secondary"
                     size="small"
                     aria-label="scroll back to top"
+                    sx={styles}
                 >
                     <KeyboardArrowUpIcon />
                 </Fab>
             </ScrollTop>
         </>
     );
-};;;
+};;;;;;
 export default Header;

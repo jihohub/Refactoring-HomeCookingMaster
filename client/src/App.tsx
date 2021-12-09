@@ -8,14 +8,17 @@ import recipeReviewSlice from "./modules/recipeReviewSlice";
 import recipeLikeSlice from "./modules/recipeLikeSlice";
 import rankingSlice from "./modules/rankingSlice";
 import searchedByImageSlice from "./modules/searchByImageSlice";
-import searchedImageSlice from "./components/Result/searchedImageSlice";
+import searchedImageSlice from "./modules/searchedImageSlice";
 import registerInfoSlice from "./modules/registerInfoSlice";
-import loginInfoSlice from "./modules/loginInfoSlice";
 import searchText from "./modules/search";
 import getSearchList from "./modules/searchList";
 import getUserInfo from "./modules/userLogin";
 import getMyInfoList from "./modules/myInfo";
 import getNewAccessList from './modules/newToken'
+import mypageEditImgSlice from "./modules/mypageEditImgSlice";
+import getResultByImg from "./modules/searchByImageSlice";
+import checkImgStatus from "./modules/checkImg";
+import userSearchImg from "./modules/userSearchImg";
 import "./App.css";
 
 function App() {
@@ -27,12 +30,15 @@ function App() {
         rankingSlice: rankingSlice,
         searchedImageSlice: searchedImageSlice,
         registerInfoSlice: registerInfoSlice,
-        loginInfoSlice: loginInfoSlice,
         searchText: searchText,
         getSearchList: getSearchList,
         getUserInfo: getUserInfo,
-        getMyInfoList : getMyInfoList,
-        getNewAccessList:getNewAccessList
+        mypageEditImgSlice: mypageEditImgSlice,
+        getMyInfoList: getMyInfoList,
+        getNewAccessList: getNewAccessList,
+        getResultByImg: getResultByImg,
+        checkImgStatus : checkImgStatus,
+        userSearchImg : userSearchImg
     });
 
     const store = configureStore({

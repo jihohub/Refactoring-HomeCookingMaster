@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { userInfo,terms_title,line,input_box,check_box,option_title,profile_img,btn,option_box, file_select,option_sub_title, introText } from "../../css/register_css";
+import { userInfo,terms_title,line,input_box,check_box,option_title,profile_img,btn,option_box, file_select,option_sub_title, introText,rebtn } from "../../css/register_css";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { sendRegister } from "../../modules/registerInfoSlice";
 import TextField from '@mui/material/TextField';
@@ -245,7 +245,7 @@ function UserInfo() {
             <div>
                 <OkButton 
                     variant="contained"
-                    css={btn} onClick={signup}
+                    css={rebtn} onClick={signup}
                     disabled={ableSignUp ? false : true}
                 >
                     가입완료

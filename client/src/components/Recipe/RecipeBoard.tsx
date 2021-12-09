@@ -5,6 +5,22 @@ import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { recipeReview } from "../../modules/recipeReviewSlice";
 import { getRecipe } from "../../modules/recipeSlice";
 
+const styles = {
+    "&.MuiButton-root": {
+        // border: "1px black solid",
+        backgroundColor: "#897A5F",
+    },
+    // "&.MuiButton-text": {
+    //     color: "grey",
+    // },
+    "&.MuiButton-contained": {
+        fontFamily: "Elice",
+    },
+    // "&.MuiButton-outlined": {
+    //     color: "brown",
+    // },
+};
+
 function RecipeBoard(props: any) {
     const dispatch = useDispatch();
     const [post, setPost] = useState<string>("");
@@ -31,11 +47,11 @@ function RecipeBoard(props: any) {
     };
 
     return (
-        <Box sx={{ width: "70vw", maxWidth: "750px", margin: "0 auto" }}>
+        <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
             <Box
                 sx={{
                     width: "70vw",
-                    maxWidth: "750px",
+                    maxWidth: "1080px",
                     margin: "0 auto",
                     height: "30px",
                 }}
@@ -43,7 +59,11 @@ function RecipeBoard(props: any) {
             <TextField
                 id="outlined-basic"
                 variant="outlined"
-                sx={{ width: "100%", height: "100%", lineHeight: "100%" }}
+                sx={{
+                    width: "100%",
+                    height: "100%",
+                    lineHeight: "100%",
+                }}
                 minRows="5"
                 multiline={true}
                 onChange={handleText}
@@ -51,7 +71,7 @@ function RecipeBoard(props: any) {
             <Box
                 sx={{
                     width: "70vw",
-                    maxWidth: "750px",
+                    maxWidth: "1080px",
                     margin: "0 auto",
                     height: "10px",
                 }}
@@ -73,14 +93,14 @@ function RecipeBoard(props: any) {
                         <AddAPhotoRoundedIcon />
                     </IconButton>
                 </label>
-                <Button variant="contained" onClick={handleSubmit}>
+                <Button variant="contained" sx={styles} onClick={handleSubmit}>
                     등록
                 </Button>
             </form>
             <Box
                 sx={{
                     width: "70vw",
-                    maxWidth: "750px",
+                    maxWidth: "1080px",
                     margin: "0 auto",
                     height: "30px",
                 }}

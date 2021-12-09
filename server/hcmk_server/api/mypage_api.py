@@ -80,7 +80,7 @@ edit_img_fields = mypage_ns.model(
 edit_img_expect_fields = mypage_ns.model(
     "edit_img_expect",
     {
-        "post_id": fields.Integer,
+        "user_id": fields.Integer,
     }
 )
 
@@ -96,6 +96,7 @@ class EditImg(Resource):
         try:
             img = request.files["img"]
         except Exception:
-            img = None
+            # img = None
+            pass
         result = edit_img(user_id, img)
         return result
