@@ -56,13 +56,29 @@ def get_mypage ():
 
 def edit_img(user_id, img):
     user = User.query.filter(User.id == user_id).first()
+    
     try:
-        boto3_image_delete(user.img)
-        img_url = boto3_image_upload(img)
-    except Exception:
-        raise
+        if img.filename == "":
+            return {
+            "result" : "failed",
+            "message" : "프로필 사진을 수정되지 않았습니다.",
+            "data": 
+            {
+                "img": user.img
+            }
+        }, 200
+        image_url = boto3_image_upload(img)
+    except UnboundLocalError:
+        return {
+        "result" : "failed",
+        "message" : "프로필 사진을 수정되지 않았습니다.",
+        "data": 
+        {
+            "img": user.img
+        }
+    }, 200
 
-    user.img = img_url
+    user.img = image_url
     db.session.add(user)
     db.session.commit()
     return {
@@ -70,6 +86,6 @@ def edit_img(user_id, img):
         "message" : "프로필 사진을 수정하였습니다.",
         "data": 
         {
-            "img": img_url
+            "img": image_url
         }
     }, 200
