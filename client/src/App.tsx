@@ -8,9 +8,8 @@ import recipeReviewSlice from "./modules/recipeReviewSlice";
 import recipeLikeSlice from "./modules/recipeLikeSlice";
 import rankingSlice from "./modules/rankingSlice";
 import searchedByImageSlice from "./modules/searchByImageSlice";
-import searchedImageSlice from "./components/Result/searchedImageSlice";
+import searchedImageSlice from "./modules/searchedImageSlice";
 import registerInfoSlice from "./modules/registerInfoSlice";
-import loginInfoSlice from "./modules/loginInfoSlice";
 import searchText from "./modules/search";
 import getSearchList from "./modules/searchList";
 import getUserInfo from "./modules/userLogin";
@@ -27,7 +26,6 @@ function App() {
         rankingSlice: rankingSlice,
         searchedImageSlice: searchedImageSlice,
         registerInfoSlice: registerInfoSlice,
-        loginInfoSlice: loginInfoSlice,
         searchText: searchText,
         getSearchList: getSearchList,
         getUserInfo: getUserInfo,

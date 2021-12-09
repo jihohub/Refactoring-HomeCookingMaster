@@ -41,6 +41,9 @@ function Login() {
             console.log("<login> : token true");
             sessionStorage.setItem("usrRfshTkn", token.refresh_token);
             sessionStorage.setItem("usrAcsTkn", token.access_token);
+            sessionStorage.setItem("user_id", token.user_id);
+            sessionStorage.setItem("nickname", token.nickname);
+            sessionStorage.setItem("img", token.img);
             navigate(-1);
         }
     },[token])

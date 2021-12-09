@@ -5,7 +5,7 @@ import React, { ChangeEvent, useCallback, useRef, useState, useEffect } from "re
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { setImageFile, setPreviewUrl } from "../Result/searchedImageSlice";
+import { setImageFile, setPreviewUrl } from "../../modules/searchedImageSlice";
 import maincharacter from "../../assets/maincharacter.png";
 
 
