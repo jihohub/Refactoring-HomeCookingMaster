@@ -27,8 +27,8 @@ RUN pip3 install -r requirements.txt
 ENV FLASK_ENV production
 
 # flask run 실행
-ENTRYPOINT ["flask"]
-CMD ["run", "--host", "0.0.0.0"]
+# ENTRYPOINT ["flask"]
+# CMD ["run", "--host", "0.0.0.0"]
 
 # gunicorn 실행
-# CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8000"]
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:5000"]

@@ -32,7 +32,11 @@ function Login() {
         // console.log("<login> : useEffect token : ", token)
 
         if (!token.refresh_token && !token.access_token) {
+<<<<<<< HEAD
             // console.log("<login> : token empty");
+=======
+            console.log("<login> : token empty");
+>>>>>>> 6fe1c0d392776dd9dd249364c1f73afaa2cfb7f5
             setCheck(false);
         } else if (!token) {
             // console.log("<login> : token false");

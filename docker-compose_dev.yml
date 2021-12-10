@@ -25,37 +25,14 @@ services:
       - ./data:/app/data
 
   backend:
-    container_name: HCMK-backend
     build:
       context: ./server
       dockerfile: Dockerfile
     volumes:
+      # venv 파일은 참초하지 않도록 세팅 (본인 로컬에 맞게 절대경로로 세팅 필요)
+      # - C:\\Users\\gmlwo\\Desktop\\곰돌희\\취뽀\\elice\\프로젝트\\3. 인공지능 프로젝트\\project-template\\server\\venv
       - ./server:/server
     ports:
       - 5000:5000
-
-  machinelearning:
-    # 컨테이너 이름 설정
-    container_name: HCMK-machinelearning
-    build:
-      context: ./machinelearning
-      dockerfile: Dockerfile
-    volumes:
-      - ./machinelearning:/opt/server
-    runtime: nvidia
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=0
-    ports:
-      - 8000:8000
-
-  frontend:
-    # 컨테이너 이름 설정
-    container_name: HCMK-frontend
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /home/ubuntu/ssl:/etc/nginx/certs
+    # depends_on:
+    #   - HCMK-mysql
