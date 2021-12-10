@@ -17,6 +17,7 @@ import Modal from '@mui/material/Modal';
 function IntroMe() {
     const dispatch = useDispatch();
     const refreshTkn = sessionStorage.getItem("usrRfshTkn");
+    const user_id = String(sessionStorage.getItem("user_id"));
     const user_img = sessionStorage.getItem("img");
     const [isInfo, setIsInfo] = useState(false);
     const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
@@ -70,7 +71,6 @@ function IntroMe() {
     }, [dispatch, newToken]);
 
     // 프로필 사진 수정 api
-    const user_id = String(sessionStorage.getItem("user_id"));
     const formData = new FormData();
 
     // 프로필 수정 버튼 - 모달
@@ -85,7 +85,7 @@ function IntroMe() {
     const handleImage = (e: any) => {
         let reader = new FileReader();
         let file = e.target.files[0];
-        formData.set("img", file);
+        formData.append("img", file);
         // console.log(file);
 
         reader.onloadend = () => {
@@ -139,7 +139,7 @@ function IntroMe() {
                                     variant="h4"
                                     gutterBottom
                                     component="div"
-                                    sx={{fontFamily:'Elice'}}
+                                    sx={{ fontFamily: "Elice" }}
                                 >
                                     {myInfo.data.user_info.nickname}
                                 </Typography>
@@ -163,15 +163,16 @@ function IntroMe() {
                                     variant="subtitle1"
                                     gutterBottom
                                     component="div"
-                                    sx={{fontFamily:'Elice'}}
+                                    sx={{ fontFamily: "Elice" }}
                                 >
-                                    댓글작성한 레시피 {myInfo.data.my_post.length}
+                                    댓글작성한 레시피{" "}
+                                    {myInfo.data.my_post.length}
                                 </Typography>
                                 <Typography
                                     variant="subtitle1"
                                     gutterBottom
                                     component="div"
-                                    sx={{fontFamily:'Elice', pl: 2}}
+                                    sx={{ fontFamily: "Elice", pl: 2 }}
                                 >
                                     스크랩 레시피{" "}
                                     {myInfo.data.liked_recipe.length}
@@ -181,7 +182,7 @@ function IntroMe() {
                                 <OkButton
                                     variant="outlined"
                                     onClick={modifyImg}
-                                    sx={{fontFamily:'Elice'}}
+                                    sx={{ fontFamily: "Elice" }}
                                 >
                                     프로필 사진 수정
                                 </OkButton>
@@ -200,22 +201,30 @@ function IntroMe() {
                                             height: 112,
                                         }}
                                     />
-                                    <input
-                                        type="file"
-                                        id="profile"
-                                        name="profile"
-                                        accept="image/*"
-                                        onChange={handleImage}
-                                    />
-                                    <CheckButton
-                                        onClick={handleSubmit}
-                                        sx={{
-                                            fontWeight: 700,
-                                            fontSize: "15px",
-                                        }}
+                                    <form
+                                        id="formElem"
+                                        encType="multipart/form-data"
+                                        style={{ textAlign: "right" }}
                                     >
-                                        확인
-                                    </CheckButton>
+                                        <label htmlFor="icon-button-file">
+                                            <input
+                                                type="file"
+                                                id="profile"
+                                                name="profile"
+                                                accept="image/*"
+                                                onChange={handleImage}
+                                            />
+                                        </label>
+                                        <CheckButton
+                                            onClick={handleSubmit}
+                                            sx={{
+                                                fontWeight: 700,
+                                                fontSize: "15px",
+                                            }}
+                                        >
+                                            확인
+                                        </CheckButton>
+                                    </form>
                                 </Box>
                             </Modal>
                         </Box>

@@ -75,7 +75,7 @@ const Header = (props: Props) => {
     useEffect(() => {
         if (refreshTkn) {
             setLogCheck(true);
-            setAnchorElNav(null);
+            setAnchorElUser(null);
         } else {
             setLogCheck(false);
         }
@@ -121,7 +121,7 @@ const Header = (props: Props) => {
         {
             text: "마이페이지",
             path: "/mypage",
-            func: handleCloseNavMenu,
+            func: handleCloseUserMenu,
         },
         {
             text: "로그아웃",
@@ -397,4 +397,5 @@ const Header = (props: Props) => {
         </>
     );
 };
+
 export default Header;

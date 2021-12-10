@@ -27,7 +27,7 @@ export const getUser = createAsyncThunk(
     "POST_USER",
     async (userList: any) => {
         /* 백엔드 [POST] /api/auth/login 요청 */
-        const response = await axios.post("/api/auth/login", userList)
+        const response = await axios.post("/api/auth/login", userList);
         return response.data.data;
 })
 
@@ -65,7 +65,6 @@ export const getUserInfo = createSlice({
         builder.addCase(
             getUser.fulfilled,
             (state, action: PayloadAction<any>) => {
-                console.log("action.payload", action.payload);
                 state.access_token = action.payload.access_token;
                 state.refresh_token = action.payload.refresh_token;
                 state.user_id = action.payload.user_id;
