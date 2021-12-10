@@ -35,9 +35,9 @@ def receive():
 
         s_filename = secure_filename(f.filename) # 파일명 저장
         file_dir = '/opt/server/static/uploads/' + s_filename # 파일을 저장하기 위한 경로 지정
- 
+
         f.save(file_dir) # 파일 저장
- 
+
         # upload = {'img': open(file_dir, 'rb') } # 업로드하기위한 파일
 
         food = FoodClassification(model)
@@ -45,17 +45,26 @@ def receive():
 
         # 어떤 형태로 프론트에서 받을건지 정해야 함
         # 1. PIL 사용
-        image = Image.open(file_dir)
-        image_array = np.array(image)
+        img = Image.open(file_dir)
+        
+        # png 파일은 jpg로 변환하여 다시 불러오기
+        if file_dir[-3:] in ['png', 'PNG']:
+            im = img.convert("RGB")
+            file_dir = file_dir[:-3] + 'png'
+            # file_dir = file_dir.replace('png', 'jpg')
+            im.save(file_dir)
+            img = Image.open(file_dir)
+
+        img_array = np.array(img)
 
         # 2. np.frombuffer 사용
         # bytes_img = data['img']
-        # image_array = np.from_buffer(shape=(), buf=bytes_img) #AI 개발자한테 맞춰주기 위해 np사용
+        # img_array = np.from_buffer(shape=(), buf=bytes_img) #AI 개발자한테 맞춰주기 위해 np사용
         # 모델 불러오기
         # global model
         
         # 전처리
-        processed_img = food.preprocessing(image_array)
+        processed_img = food.preprocessing(img_array)
         
         # 예측
         recipe_class = food.predict(processed_img)
