@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 import Typography from '@mui/material/Typography';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
