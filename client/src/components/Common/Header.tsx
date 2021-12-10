@@ -397,5 +397,9 @@ const Header = (props: Props) => {
         </>
     );
 };
+<<<<<<< HEAD
 
 export default Header;
+=======
+export default Header;
+>>>>>>> 34f0db5cbf17efe8fd308a5da376db370c443349
