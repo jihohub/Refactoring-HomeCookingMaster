@@ -90,7 +90,6 @@ function ItemList(){
             setFoodList(Object.keys(resultList));
             setRecipeList([]);
             setIsReciptList(true);
-            console.log('after',foodList)
             if(searchWord in resultList){
                 setRecipeList(resultList[searchWord])
                 // let tmpList = foodList.filter((element:any) => element !== searchWord);
