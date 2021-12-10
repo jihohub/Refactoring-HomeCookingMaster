@@ -12,14 +12,14 @@ const initialState : stateType = {
 }
 
 export const getImgResult = createAsyncThunk("POST_IMGRESULT", async (formData: any) => {
-    console.log('<search by image> : ',formData)
+    // console.log('<search by image> : ',formData)
     try{
         const response = await axios.post("/api/main/search/img", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
-        console.log('<search by image> : ',response.data)
+        // console.log('<search by image> : ',response.data)
         return response.data.data;
     }catch(e){
         return false
@@ -39,7 +39,7 @@ export const getResultByImg = createSlice({
             getImgResult.fulfilled,
             (state, action: PayloadAction<any>) => {
                 state.list = action.payload;
-                console.log('<search by image> : state.list ',state.list)
+                // console.log('<search by image> : state.list ',state.list)
             }
         );
     },

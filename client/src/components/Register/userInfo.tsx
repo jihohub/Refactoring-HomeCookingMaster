@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { userInfo,terms_title,line,input_box,check_box,option_title,profile_img,btn,option_box, file_select,option_sub_title, introText,rebtn } from "../../css/register_css";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { userInfo, terms_title, input_box, check_box, profile_img, option_box, file_select, option_sub_title, rebtn } from "../../css/register_css";
+import { useDispatch } from "react-redux";
 import { sendRegister } from "../../modules/registerInfoSlice";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -41,11 +41,9 @@ function UserInfo() {
     const [pwCheck, setPwCheck] = useState<boolean>(true); // 비밀번호 일치 여부
     const [nicknameVal, setNicknameVal] = useState<boolean>(false); // 닉네임 유효성 여부
 
-    const emailForm = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    const number = /[0-9]/;
-    const english = /[a-zA-Z]/;
-
     useEffect(() => {
+        const emailForm = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        
         if (emailForm.test(email)) {
             setEmailVal(true);
         } else {
@@ -54,6 +52,9 @@ function UserInfo() {
     }, [email]);
     
     useEffect(() => {
+        const number = /[0-9]/;
+        const english = /[a-zA-Z]/;
+
         if (
             pw.length > 7 &&
             pw.length < 17 &&
@@ -256,9 +257,6 @@ function UserInfo() {
 }
 
 export default UserInfo;
-
-
-
 
 // 중복확인 모달
 const style = {

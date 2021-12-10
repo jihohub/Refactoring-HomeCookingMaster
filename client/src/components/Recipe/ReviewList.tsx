@@ -1,11 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import ImageIcon from "@mui/icons-material/Image";
-import ListSubheader from "@mui/material/ListSubheader";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { Box, Typography, Divider, Collapse, IconButton, List, ListItemButton, ListItemText, Modal } from "@mui/material";

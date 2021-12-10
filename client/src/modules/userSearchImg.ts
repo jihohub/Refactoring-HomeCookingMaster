@@ -16,14 +16,11 @@ export const userSearchImg = createSlice({
     reducers: {
         setSearchImg(state, action : PayloadAction<Boolean>) {
             state.searchImg = action.payload
-            console.log('<setSearchImg> state.status : ',  state.searchImg)
+            // console.log('<setSearchImg> state.status : ',  state.searchImg)
         },
     },
 
 });
 
 export const { setSearchImg } = userSearchImg.actions;
-
 export default userSearchImg.reducer;
-
-

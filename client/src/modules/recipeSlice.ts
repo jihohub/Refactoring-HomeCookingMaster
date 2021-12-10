@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface RecipeState {
     did_u_liked: boolean;
@@ -93,9 +93,9 @@ export const getRecipe = createAsyncThunk(
         let response = await axios.post(`/api/recipe/${args.recipe_id}`, {
             user_id: args.user_id,
         });
-        console.log("recip_id", args.recipe_id);
-        console.log("user_id", args.user_id);
-        console.log("res", response.data);
+        // console.log("recip_id", args.recipe_id);
+        // console.log("user_id", args.user_id);
+        // console.log("res", response.data);
         return response.data.data;
     }
 );

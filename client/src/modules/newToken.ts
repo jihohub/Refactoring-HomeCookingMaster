@@ -12,13 +12,13 @@ const initialState : stateType = {
 }
 
 export const getNewAccess = createAsyncThunk("POST_ACCESS", async (refresh : any) => {
-    console.log('<NewToken> : before axios')
+    // console.log('<NewToken> : before axios')
     try{
         const response = await axios.post("/api/auth/refresh", refresh)
-        console.log('<NewToken> : res : ',response.data)
+        // console.log('<NewToken> : res : ',response.data)
         return response.data;
     }catch(e){
-        console.log('<NewToken> : false')
+        // console.log('<NewToken> : false')
         return false
     }
 })
@@ -44,5 +44,4 @@ export const getNewAccessList = createSlice({
 });
 
 export const { setAccess } = getNewAccessList.actions;
-
 export default getNewAccessList.reducer;
