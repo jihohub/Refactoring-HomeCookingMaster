@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
 // import { setStatus } from "../../modules/checkImg";
 import { useNavigate } from "react-router-dom"
 import { setImgResult } from "../../modules/searchByImageSlice";
@@ -22,7 +22,6 @@ function ImageResult() {
     const [resultRate, setResultRate] = useState('');
     // const dispatch = useDispatch();
     const navigate = useNavigate();
-
 
     const [resultFirstName, setResultFirstName] = useState('');
     const [firstCheck, setFirstCheck] = useState(false);

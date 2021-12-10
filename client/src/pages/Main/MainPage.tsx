@@ -10,7 +10,7 @@ import background from "../../assets/main.jpg";
 import DropZone from "../../components/Main/DropZone";
 
 import MainSlide from "../../components/Main/mainSlide";
-import { imageTitle, img, imgSearch, imgGuide, guideTitle, rankingTitle, rankingDiv, top3Img, top3ItemDiv, top3TopDiv, top3Name } from "../../css/main_css";
+import { imageTitle, imgSearch, imgGuide, guideTitle, rankingTitle, rankingDiv, top3Img, top3ItemDiv, top3TopDiv, top3Name,img } from "../../css/main_css";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
@@ -124,7 +124,7 @@ const MainRanking = () => {
                 {top3List ? top3List.map((item:any) => (
                     <div css={top3ItemDiv} key={item.name}>
                         <div >
-                            <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold', color:'#fbd62e'}}>
+                            <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold'}}>
                                 {top3List.indexOf(item)+1}
                             </Typography>
                         </div>
@@ -135,11 +135,8 @@ const MainRanking = () => {
                             onClick={() => navigate(`/recipe/${item.id}`)}
                             ></img>
                         <div css={top3Name}>
-                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice', width:'20rem'}}>
+                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice', width:'20rem', fontWeight: '600'}}>
                                     {item.name}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom component="p" sx={{fontFamily:'Elice'}}>
-                                    {item.cooking_time}, {item.servings}, {item.difficulty}
                             </Typography>
                         </div>
                     </div>
@@ -171,7 +168,7 @@ const MainRanking = () => {
                         <ImageListItemBar
                             title={item.name}
                             position="below"
-                            sx={{fontFamily:'Elice'}}
+                            sx={{fontFamily:'Elice', fontWeight: '600'}}
                             actionIcon={
                                 <IconButton
                                     sx={{ color: 'rgba(255, 255, 255, 0.54)', cursor:'pointer' }}

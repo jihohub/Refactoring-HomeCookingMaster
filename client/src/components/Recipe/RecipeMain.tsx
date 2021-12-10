@@ -40,7 +40,7 @@ function RecipeMain(props: any) {
     const id = open ? "simple-popover" : undefined;
     
     return (
-        <>
+        <div>
             <Box sx={{ width: "70vw", maxWidth: "1080px", height: "50px" }} />
             <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
                 <Typography
@@ -48,6 +48,7 @@ function RecipeMain(props: any) {
                         color: "#897A5F",
                         fontSize: "1.5rem",
                         fontFamily: "Elice",
+                        marginBottom:'2rem'
                     }}
                 >
                     {`${food_info.category_l} > ${food_info.category_m} > ${food_info.category_s}`}
@@ -63,7 +64,7 @@ function RecipeMain(props: any) {
             >
                 <img
                     src={recipe_info.img}
-                    style={{ width: "70%", minWidth: "70%" }}
+                    style={{ width: "70%", minWidth: "70%", boxShadow:'2px 2px 10px gray', borderRadius:'20px', marginTop:'15px' }}
                     alt="food"
                 />
             </Box>
@@ -295,7 +296,7 @@ function RecipeMain(props: any) {
                 </Box>
             ))}
             <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
-        </>
+        </div>
     );
 }
 

@@ -38,6 +38,9 @@ export const toImage = css`
     margin-left: 61%;
     padding-top: 1.5em;
     width: 10%;
+    cursor: pointer;
+    color : #897A5F;
+    font-weight: 700;
     :hover{
         color:#c7b595;
     }
@@ -94,4 +97,22 @@ export const img = css`
         transform: scale(1.1);
         transition:.5s;
     }
+`;
+
+export const imgResult = css`
+    width:100%;
+    height:17rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px gray;
+    margin-bottom: 4%;
+    :hover{
+        transform: scale(1.1);
+        transition:.5s;
+    }
+`;
+
+export const itemsTitle = css`
+    font-family:'Elice';
+    font-weight :'60px'
+    
 `;

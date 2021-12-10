@@ -33,7 +33,7 @@ function MyPost(){
         }
     },[postList])
 
-    return(
+    return (
         <>
             {/* {isPostList ? 
                 <ImageList 
@@ -78,47 +78,78 @@ function MyPost(){
                 </ImageList>
             : ""} */}
 
-            {isPostList ?
-            <ImageList 
-                sx={{ 
-                width: '100%', 
-                // height: 400, 
-                // justifyContent: 'center', 
-                marginLeft:'15%',
-                mt:8,
-            }}>
-            <ImageListItem key="Subheader" cols={3}>
-            <ListSubheader sx={{  width:'70%', backgroundColor:'#897A5F', color:'white'}} component="div">작성리뷰</ListSubheader>
-            {isEmpty ? "" : 
-                <Typography 
-                    variant="subtitle1" 
-                    gutterBottom component="div" 
-                    sx={{ fontWeight : '600'}}
+            {isPostList ? (
+                <ImageList
+                    sx={{
+                        width: "100%",
+                        // height: 400,
+                        // justifyContent: 'center',
+                        marginLeft: "15%",
+                        mt: 8,
+                    }}
                 >
-                    준비된 레시피를 따라 요리를 해보고 리뷰를 작성해보세요!
-                </Typography>
-            }
-            </ImageListItem>
-            <ImageList  key="Subheader" cols={3} style={{marginBottom:'10rem',width:'140%'}}>
-                {postList.data.my_post.map((item:any) => (
-                <ImageListItem key={item.recipe_img} sx={{width:'100'}} css={tmp}>
-                    <img
-                    src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
-                    srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                    alt={item.recipe_id}
-                    loading="lazy"
-                    onClick={() => navigate(`/recipe/${item.recipe_id}`)}
-                    css={img}
-                    />
-                    <ImageListItemBar
-                    title={item.recipe_name}
-                    />
-                </ImageListItem>
-                ))}
-            </ImageList>
-            </ImageList> : ""}
+                    <ImageListItem key="Subheader" cols={3}>
+                        <ListSubheader
+                            sx={{
+                                width: "70%",
+                                backgroundColor: "#897A5F",
+                                color: "white",
+                            }}
+                            component="div"
+                        >
+                            작성리뷰
+                        </ListSubheader>
+                        {isEmpty ? (
+                            ""
+                        ) : (
+                            <Typography
+                                variant="subtitle1"
+                                gutterBottom
+                                component="div"
+                                sx={{ fontWeight: "600" }}
+                            >
+                                준비된 레시피를 따라 요리를 해보고 리뷰를
+                                작성해보세요!
+                            </Typography>
+                        )}
+                    </ImageListItem>
+                    <ImageList
+                        key="imageList"
+                        cols={3}
+                        style={{ marginBottom: "10rem", width: "140%" }}
+                    >
+                        {postList.data.my_post.map(
+                            (item: any, index: number) => (
+                                <ImageListItem
+                                    key={index}
+                                    sx={{ width: "100" }}
+                                    css={tmp}
+                                >
+                                    <img
+                                        src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
+                                        srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                        alt={item.recipe_id}
+                                        loading="lazy"
+                                        onClick={() =>
+                                            navigate(
+                                                `/recipe/${item.recipe_id}`
+                                            )
+                                        }
+                                        css={img}
+                                    />
+                                    <ImageListItemBar
+                                        title={item.recipe_name}
+                                    />
+                                </ImageListItem>
+                            )
+                        )}
+                    </ImageList>
+                </ImageList>
+            ) : (
+                ""
+            )}
         </>
-    )
+    );
 }
 
 export default MyPost;

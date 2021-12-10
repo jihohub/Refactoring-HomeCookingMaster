@@ -4,13 +4,14 @@ import { Box, Typography } from "@mui/material";
 function AboutPage() {
     return (
         <>
-            <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "300px auto" }}>
+            <Box sx={{ width: "100vw", margin: "auto 0" }}>
                 <Typography
                     sx={{
                         fontSize: "1.75rem",
                         color: "#897A5F",
                         fontFamily: "Elice",
-                        textAlign: "center"
+                        textAlign: "center",
+                        padding: "35% 0"
                     }}
                 >
                     준비중입니다!
