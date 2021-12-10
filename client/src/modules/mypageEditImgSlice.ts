@@ -1,13 +1,13 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface EditImgState {
-    img: string | null;
+    formData: FormData | null;
     loading: boolean;
     error: string;
 }
 
 const initialState: EditImgState = {
-    img: null,
+    formData: null,
     loading: false,
     error: "",
 };
@@ -17,12 +17,12 @@ export const editImg = createAsyncThunk("EDIT_IMAGE", async (formData: any) => {
     /* 백엔드 [POST] /api/mypage/editimg 요청 */
     const response = await axios.post("/api/mypage/editimg", formData, {
         headers: {
-            "Content-Type": "multipart/form-data"
-        }
+            "Content-Type": "multipart/form-data",
+        },
     });
-    // console.log(response);
+    sessionStorage.setItem("img", response.data.data.img);
 
-    return response.data.data.img;
+    return response.data;
 });
 
 export const myPageEditImgSlice = createSlice({
@@ -30,34 +30,10 @@ export const myPageEditImgSlice = createSlice({
     initialState,
     reducers: {
         clearEdit(state) {
-            state.img = null;
+            state.formData = null;
             state.loading = false;
             state.error = "";
         },
-    },
-    extraReducers: (builder) => {
-        builder.addCase(
-            editImg.rejected,
-            (state, action: PayloadAction<any>) => {
-                state.loading = false;
-                state.error = action.payload;
-            }
-        );
-
-        builder.addCase(
-            editImg.pending,
-            (state, action: PayloadAction<any>) => {
-                state.loading = true;
-                state.error = "";
-            }
-        );
-
-        builder.addCase(
-            editImg.fulfilled,
-            (state, action: PayloadAction<any>) => {
-                state.img = action.payload.img;
-            }
-        );
     },
 });
 
