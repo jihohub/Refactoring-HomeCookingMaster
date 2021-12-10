@@ -81,6 +81,7 @@ export const top3Img = css`
     height:22rem;
     cursor: pointer;
     box-shadow: 2px 2px 6px gray;
+    margin-bottom: 5%;
     :hover{
         transform: scale(1.1);
         transition:.5s;
@@ -92,6 +93,7 @@ export const img = css`
     height:17rem;
     cursor: pointer;
     box-shadow: 2px 2px 6px gray;
+    margin-bottom: 5%;
     :hover{
         transform: scale(1.1);
         transition:.5s;

@@ -16,9 +16,9 @@ function DropZone() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        dispatch(getImgResult([]));
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getImgResult([]));
+    // }, [dispatch]);
 
     const handleDrop = (acceptedFiles: any) => {
 
@@ -50,7 +50,7 @@ function DropZone() {
                 rateResult == null ||
                 rateResult === ""
             ) {
-                // console.log("<rateResult> : empty")
+                console.log("<rateResult> : empty")
             } else {
                 if (rateResult[0]["rate"] > 0.7) {
                     const result = rateResult[0]["name"];
@@ -62,7 +62,7 @@ function DropZone() {
                 }
             }
         } else {
-            // console.log("<imgResult> : imgResult empty")
+            console.log("<imgResult> : imgResult empty")
         }
     }, [navigate, imgResult]);
 

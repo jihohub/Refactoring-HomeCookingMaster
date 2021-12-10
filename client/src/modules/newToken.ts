@@ -36,7 +36,7 @@ export const getNewAccessList = createSlice({
             getNewAccess.fulfilled,
             (state, action: PayloadAction<any>) => {
                 state.list = action.payload;
-                console.log('<NewToken> : token : ',state.list)
+                // console.log('<NewToken> : token : ',state.list)
             }
         );
     },

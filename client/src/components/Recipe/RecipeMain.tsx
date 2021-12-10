@@ -48,6 +48,7 @@ function RecipeMain(props: any) {
                         color: "#897A5F",
                         fontSize: "1.5rem",
                         fontFamily: "Elice",
+                        marginBottom:'2rem'
                     }}
                 >
                     {`${food_info.category_l} > ${food_info.category_m} > ${food_info.category_s}`}

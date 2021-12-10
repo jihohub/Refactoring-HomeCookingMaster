@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from "react";
-import { useSelector, RootStateOrAny } from "react-redux";
+import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
 // import { setStatus } from "../../modules/checkImg";
 import { useNavigate } from "react-router-dom"
 import Card from '@mui/material/Card';
@@ -20,7 +20,6 @@ function ImageResult() {
     const [resultRate, setResultRate] = useState('');
     // const dispatch = useDispatch();
     const navigate = useNavigate();
-
 
     const [resultFirstName, setResultFirstName] = useState('');
     const [firstCheck, setFirstCheck] = useState(false);
@@ -64,17 +63,17 @@ function ImageResult() {
     // console.log('searchImgsearchImg', searchImg)
     // console.log('previewUrlpreviewUrl', previewUrl)
 
-    useEffect(() => {
-        let reader = new FileReader();
-        let file = searchImg;
+    // useEffect(() => {
+    //     let reader = new FileReader();
+    //     let file = searchImg;
 
-        reader.onloadend = () => {
-            setResultImg(reader.result);
-        }
-        if(file){
-            reader.readAsDataURL(file);
-        }
-    },[searchImg])
+    //     reader.onloadend = () => {
+    //         setResultImg(reader.result);
+    //     }
+    //     if(file){
+    //         reader.readAsDataURL(file);
+    //     }
+    // },[searchImg])
 
 
     // 이미지 검색 결과

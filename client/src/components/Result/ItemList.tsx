@@ -12,11 +12,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { MdPersonSearch } from "react-icons/md";
-import { img } from '../../css/result_csst';
+import { imgResult,itemsTitle } from '../../css/result_csst';
 
 function ItemList(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [searchWord, setSearchWord] = useState<any>();
 
     // 쿼리 스트링
     const location = useLocation();
@@ -28,10 +29,12 @@ function ItemList(){
         if (query) {
             // console.log('<itemList> queryData : before dispatch')
             dispatch(getList(query));
+            setSearchWord(query);
             // console.log('<itemList> queryData : after dispatch')
         } else {
             // console.log('<itemList> null : before dispatch')
             dispatch(getList(""));
+            setSearchWord(query);
             // console.log('<itemList> null : after dispatch')
         }
     }, [dispatch, query]);
@@ -61,7 +64,7 @@ function ItemList(){
     const [recipeList, setRecipeList] = useState<any[]>([]);
     // 검색결과 > 1 -> 음식명 리스트
     const [foodList, setFoodList] = useState<any[]>([]);
-    
+
     useEffect(() => {
         const tmpList: string[] = [];
         const randomList = function () {
@@ -71,6 +74,8 @@ function ItemList(){
             }
         };
         randomList();
+
+
 
         const foodNumbers = Object.keys(resultList).length;
         if (foodNumbers === 1) {
@@ -85,20 +90,26 @@ function ItemList(){
             setFoodList(Object.keys(resultList));
             setRecipeList([]);
             setIsReciptList(true);
+            console.log('after',foodList)
+            if(searchWord in resultList){
+                setRecipeList(resultList[searchWord])
+                // let tmpList = foodList.filter((element:any) => element !== searchWord);
+                // console.log('before',tmpList)
+                // setFoodList(tmpList);
+            }
         }
-    }, [resultList]);
-
+    }, [resultList,searchWord]);
 
     return(
         <>
             <Typography 
                 variant="h6" 
                 gutterBottom component="div" 
-                sx={{ fontWeight : '600', ml:'15%', mt:5, mb:5, fontFamily:'EliceBold'}}
+                sx={{ fontWeight : '600', ml:'17%', mt:5, mb:5, fontFamily:'EliceBold'}}
             >
                 {query ? `${query} 검색결과 입니다.` : <p><MdPersonSearch size='30'/> 추천검색어</p>}
             </Typography>
-            <Box component="div" sx={{width:'80%', marginLeft:'12%'}}>
+            <Box component="div" sx={{width:'80%', marginLeft:'15%', marginBottom:'1rem'}}>
             {isRecipeList ? foodList.map((item:any) => (
                     <ItemBox 
                         variant="outlined" 
@@ -122,15 +133,12 @@ function ItemList(){
                             srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.id}
                             onClick={() => navigate(`/recipe/${item.id}`)}
-                            css={img}
+                            css={imgResult}
                         />
                         <ImageListItemBar 
                             title={item.name}
-                            subtitle={
-                                <span>스크랩수 {item.likes}, 조회수 {item.views}</span>
-                            }
                             position="below"
-                            sx={{fontFamily:'Elice'}}
+                            css={itemsTitle}
                         />
                     </ImageListItem>
                 )) : ""}
