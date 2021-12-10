@@ -121,7 +121,7 @@ const Header = (props: Props) => {
         {
             text: "마이페이지",
             path: "/mypage",
-            func: handleCloseNavMenu,
+            func: handleCloseUserMenu,
         },
         {
             text: "로그아웃",
