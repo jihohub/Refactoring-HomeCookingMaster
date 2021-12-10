@@ -114,8 +114,8 @@ const MainRanking = () => {
             setOthersList([ranking[3], ranking[4], ranking[5],ranking[6], ranking[7], ranking[8],ranking[9], ranking[10]]);
         }
     },[ranking])
-    console.log(top3List)
-    console.log(othersList)
+    // console.log(top3List)
+    // console.log(othersList)
 
     return (
         <div style={{backgroundColor:'#fbfbf9', width:'80%', margin:'10%', paddingTop:'0.5%', marginBottom:'10%', height:'80%'}}>
