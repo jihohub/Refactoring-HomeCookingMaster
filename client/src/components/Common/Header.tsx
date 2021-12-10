@@ -75,7 +75,7 @@ const Header = (props: Props) => {
     useEffect(() => {
         if (refreshTkn) {
             setLogCheck(true);
-            setAnchorElNav(null);
+            setAnchorElUser(null);
         } else {
             setLogCheck(false);
         }
@@ -397,4 +397,5 @@ const Header = (props: Props) => {
         </>
     );
 };
+
 export default Header;

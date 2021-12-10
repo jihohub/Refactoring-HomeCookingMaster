@@ -1,24 +1,34 @@
 /** @jsxImportSource @emotion/react */
+import { Box, Typography } from "@mui/material";
 import avatar from "../../assets/avatar.png";
 
 const Footer = () => {
-    return(
-        <div style={{height:'6rem', backgroundColor:'#b4a58a'}}>
-            <img 
+    return (
+        <Box
+            sx={{
+                height: "6rem",
+                backgroundColor: "#b4a58a",
+                display: "flex",
+                alignItems: "center",
+            }}
+        >
+            <img
                 src={avatar}
                 style={{
-                    height: "5rem",
+                    height: "4rem",
                     cursor: "pointer",
-                    margin: '1rem',
-                    paddingBottom: '1rem',
+                    margin: "20px"
                 }}
                 alt="main avatar"
-                />
-                <span ><strong>@집밥꼬꼬선생&nbsp;&nbsp; </strong></span>
-                <span> 서비스소개 | 이용약관 | 비즈니스 | 공지사항 | 고객센터 </span>
-                
-        </div>
-    )
+            />
+            <Typography sx={{ fontFamily: "EliceBold" }}>
+                {"@집밥꼬꼬선생"}
+            </Typography>
+            <Typography sx={{ fontFamily: "Elice", marginLeft: 1 }}>
+                {" 서비스소개 | 이용약관 | 비즈니스 | 공지사항 | 고객센터"}
+            </Typography>
+        </Box>
+    );
 }
 
 export default Footer;

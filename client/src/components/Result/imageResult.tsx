@@ -79,7 +79,7 @@ function ImageResult() {
 
     // 이미지 검색 결과
     const imgResult = useSelector((state:RootStateOrAny) => state.getResultByImg.list)
-    console.log('imgResult', imgResult)
+    // console.log('imgResult', imgResult)
 
     // 소수점 조절
     function financial(x:any) {
@@ -89,22 +89,22 @@ function ImageResult() {
     useEffect(() => {
         if(imgResult){
             const rateResult = imgResult['equal_rate'];
-            console.log("<검색결과페이지> : 검색결과페이지 true", rateResult)
+            // console.log("<검색결과페이지> : 검색결과페이지 true", rateResult)
             if(typeof rateResult == "undefined" || rateResult == null || rateResult === ""){
-                console.log("<검색결과페이지> : empty")
+                // console.log("<검색결과페이지> : empty")
             }else{
                 if(rateResult[0]['rate'] > 0.7){
                     const name = rateResult[0]['name']
                     const rate = rateResult[0]['rate'] * 100
                     const rate_ = financial(rate)
-                    console.log('<검색결과페이지> : name 처리', typeof(rate))
+                    // console.log('<검색결과페이지> : name 처리', typeof(rate))
                     setResultName(name)
                     setResultRate(rate_)
                     // checkRate2(rateResult[1])
                     // checkRate3(rateResult[2])
                     setImg(true);
                 }else{
-                    console.log('<imgResult> : 값 < 0.7')
+                    // console.log('<imgResult> : 값 < 0.7')
                     // navigate('/result')
                     checkRate1(rateResult[0])
                     checkRate2(rateResult[1])
