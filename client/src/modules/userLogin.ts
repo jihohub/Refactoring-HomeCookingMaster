@@ -77,5 +77,4 @@ export const getUserInfo = createSlice({
 });
 
 export const { setUser } = getUserInfo.actions;
-
 export default getUserInfo.reducer;

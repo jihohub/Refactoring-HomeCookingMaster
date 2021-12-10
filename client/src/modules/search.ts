@@ -17,7 +17,7 @@ export const searchText = createSlice({
     reducers : {
         setWord(state,action : PayloadAction<String>){
             state.word = action.payload;
-            console.log('<setWord> : 검색한 값 : ', state.word);
+            // console.log('<setWord> : 검색한 값 : ', state.word);
         }
     },
 });

@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Box, Paper, TextField, Button, IconButton } from "@mui/material";
+import React, { useState } from "react";
+import { Box, TextField, Button, IconButton } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { recipeReview } from "../../modules/recipeReviewSlice";
+import { useDispatch } from "react-redux";
+import { clearPost, recipeReview } from "../../modules/recipeReviewSlice";
 import { getRecipe } from "../../modules/recipeSlice";
 
 const styles = {
     "&.MuiButton-root": {
-        // border: "1px black solid",
         backgroundColor: "#897A5F",
     },
-    // "&.MuiButton-text": {
-    //     color: "grey",
-    // },
     "&.MuiButton-contained": {
         fontFamily: "Elice",
     },
-    // "&.MuiButton-outlined": {
-    //     color: "brown",
-    // },
 };
 
 function RecipeBoard(props: any) {
@@ -44,6 +37,7 @@ function RecipeBoard(props: any) {
         await formData.set("post", post);
         await dispatch(recipeReview({ formData, recipe_id }));
         dispatch(getRecipe({ recipe_id, user_id }));
+        dispatch(clearPost());
     };
 
     return (

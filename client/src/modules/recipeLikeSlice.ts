@@ -1,6 +1,5 @@
-import axios, { AxiosResponse } from "axios";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ConnectingAirportsOutlined } from "@mui/icons-material";
+import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface LikeState {
     loading: boolean;
@@ -23,7 +22,7 @@ export const recipeLike = createAsyncThunk(
             }
         );
 
-    return null;
+    return response.data;
 });
 
 export const recipeLikeSlice = createSlice({

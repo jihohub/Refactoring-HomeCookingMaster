@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import {Link} from 'react-router-dom';
-import { to_register,to_register_button,to_register_p } from "../../css/login_css";
+import { Link } from 'react-router-dom';
+import { to_register, to_register_button, to_register_p } from "../../css/login_css";
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+// import { styled } from '@mui/material/styles';
 
 function ToRegister() {
 
@@ -19,11 +19,11 @@ function ToRegister() {
 export default ToRegister;
 
 
-const OkButton = styled(Button)({
-    backgroundColor: '#897A5F',
-    borderColor: '#897A5F',
-    '&:hover': {
-        backgroundColor: '#c7b595',
-        borderColor: '#c7b595',
-    },
-});
+// const OkButton = styled(Button)({
+//     backgroundColor: '#897A5F',
+//     borderColor: '#897A5F',
+//     '&:hover': {
+//         backgroundColor: '#c7b595',
+//         borderColor: '#c7b595',
+//     },
+// });

@@ -2,7 +2,6 @@
 import Login from "../../components/Login/login";
 import { login_all, login_title } from "../../css/login_css";
 import ToRegister from "../../components/Login/to_register";
-import Footer from "../../components/Common/Footer";
 
 function LoginPage() {
     return (

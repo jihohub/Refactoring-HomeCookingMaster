@@ -1,6 +1,5 @@
-import axios, { AxiosResponse } from "axios";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 interface PostState {
     formData: FormData | null;
     loading: boolean;
@@ -24,7 +23,7 @@ export const recipeReview = createAsyncThunk(
             },
         });
 
-        return null;
+        return response.data;
     }
 );
 

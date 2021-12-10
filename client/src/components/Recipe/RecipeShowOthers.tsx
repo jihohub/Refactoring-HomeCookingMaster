@@ -1,7 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getRecipe, clearRecipe } from "../../modules/recipeSlice";
@@ -25,7 +23,7 @@ function RecipeShowOthers(props: any) {
         return () => {
             dispatch(clearRecipe());
         };
-    }, [params]);
+    }, [dispatch, recipe_id, user_id]);
 
     return (
         <>
