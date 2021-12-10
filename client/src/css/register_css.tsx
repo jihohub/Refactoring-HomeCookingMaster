@@ -13,12 +13,23 @@ export const terms = css `
     top:45%;
     margin-left:-140px;
     margin-top:-150px;
+    background-color: #fbfbf9;
+    padding: 4rem;
 `;
 
 export const terms_title = css`
     font-size: 37px;
     font-weight: 700;
     color : #897A5F;
+    /* margin-left: 10rem; */
+`;
+
+
+export const terms_title_com = css`
+    font-size: 37px;
+    font-weight: 700;
+    color : #897A5F;
+    margin-left: 10rem;
 `;
 
 export const line = css`
@@ -76,8 +87,8 @@ export const more_btn_show =css`
 
 export const btn = css`
     margin-top: 4rem;
-    width: 30rem;
-`;
+    width: 22rem;
+`
 
 export const agree_btn = css`
     /* font-size: 2rem;
@@ -95,13 +106,17 @@ export const agree_btn = css`
 export const userInfo = css `
     display: flex;
     flex-direction: column;
-    width: 30rem;
-    height: 140%;
+    width: 40rem;
+    height:60rem;
     position:absolute;
-    left:45%;
-    top:45%;
+    left:40%;
+    top:40%;
     margin-left:-140px;
-    margin-top:-150px;
+    margin-top:-155px;
+    padding-top: 4rem;
+    padding-left: 5rem;
+    padding-right: 4rem;
+    background-color: #fbfbf9;
 `;
 
 export const input_box = css`
@@ -154,6 +169,11 @@ export const introText = css`
     margin-left: 4%;   
 `;
 
+export const rebtn = css`
+    margin-top: 4rem;
+    width: 30rem;
+`
+
 // ==========================
 // ===== 가입완료 페이지 ========
 // ==========================
@@ -194,6 +214,6 @@ export const to_login = css`
 export const userName = css`
     font-size : 30px;
     font-weight: 700;
-    color : #ED6C02;
+    color : #f0b433;
 `;
 

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { RootStateOrAny } from 'react-redux';
 import { loign_box, input_box } from "../../css/login_css";
 import TextField from '@mui/material/TextField';
@@ -19,29 +20,31 @@ const OkButton = styled(Button)({
 
 function Login() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [id, setId] = useState<string>("");
     const [pw, setPw] = useState<string>("");
     const [check, setCheck] = useState<boolean>(true) // 아이디, 비밀번호 모두 입력됐는지 확인
 
-    const token = useSelector((state:RootStateOrAny) => state.getUserInfo.list);
+    const token = useSelector((state:RootStateOrAny) => state.getUserInfo);
 
     useEffect(() => {
         console.log("<login> : useEffect token : ", token)
 
-        if(Array.isArray(token) && token.length === 0){
-            console.log("<login> : token empty")
+        if (!token.refresh_token && !token.access_token) {
+            console.log("<login> : token empty");
             // setCheck(false);
-        }else if(!token){
-            console.log("<login> : token false")
+        } else if (!token) {
+            console.log("<login> : token false");
             setCheck(false);
-        }else{
-            console.log("<login> : token true")
-            sessionStorage.setItem('usrRfshTkn', token['refresh_token'])
-            sessionStorage.setItem('usrAcsTkn', token['access_token'])
-            sessionStorage.setItem("user_id", token["user_id"]);
-            sessionStorage.setItem("user_img", token["img"]);
-            window.location.replace('/')
+        } else {
+            console.log("<login> : token true");
+            sessionStorage.setItem("usrRfshTkn", token.refresh_token);
+            sessionStorage.setItem("usrAcsTkn", token.access_token);
+            sessionStorage.setItem("user_id", token.user_id);
+            sessionStorage.setItem("nickname", token.nickname);
+            sessionStorage.setItem("img", token.img);
+            navigate('/');
         }
     },[token])
 
@@ -68,7 +71,7 @@ function Login() {
     }
 
     return (
-        <div>
+        <div >
             <div className="login" css={loign_box}>
                 <TextField 
                     id="email" 

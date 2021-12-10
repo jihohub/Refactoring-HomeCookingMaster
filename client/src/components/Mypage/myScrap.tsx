@@ -38,7 +38,7 @@ function MyScrap(){
 
     return(
         <>
-            {isScrapList ? 
+            {/* {isScrapList ? 
                 <ImageList 
                     sx={{ 
                         width: '100%', 
@@ -79,7 +79,47 @@ function MyScrap(){
                         </ImageListItem>
                     ))}
                 </ImageList>
-            : ""}
+            : ""} */}
+
+{isScrapList ?
+            <ImageList 
+                sx={{ 
+                width: '100%', 
+                // height: 400, 
+                // justifyContent: 'center', 
+                marginLeft:'25%',
+                mt:8,
+            }}>
+            <ImageListItem key="Subheader" cols={3}>
+            <ListSubheader sx={{  width:'52rem', backgroundColor:'#897A5F', color:'white'}} component="div">스크랩레시피</ListSubheader>
+            {isEmpty ? "" : 
+                <Typography 
+                    variant="subtitle1" 
+                    gutterBottom component="div" 
+                    sx={{ fontWeight : '600'}}
+                >
+                    준비된 레시피를 따라 요리를 해보고 리뷰를 작성해보세요!
+                </Typography>
+            }
+            </ImageListItem>
+            <ImageList  key="Subheader" cols={3} style={{marginBottom:'10rem'}}>
+                {scarpList.data.liked_recipe.map((item:any) => (
+                <ImageListItem key={item.recipe_img} sx={{width:'100'}}>
+                    <img
+                    src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
+                    srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    alt={item.recipe_id}
+                    loading="lazy"
+                    onClick={() => navigate(`/recipe/${item.recipe_id}`)}
+                    style={{width:'100%', height:'15rem'}}
+                    />
+                    <ImageListItemBar
+                    title={item.recipe_name}
+                    />
+                </ImageListItem>
+                ))}
+            </ImageList>
+            </ImageList> : ""}
         </>
     )
 }

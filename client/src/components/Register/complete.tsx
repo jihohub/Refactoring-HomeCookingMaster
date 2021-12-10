@@ -2,7 +2,7 @@
 import {Link} from 'react-router-dom';
 import { useLocation } from "react-router";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { complete, terms_title, line, complete_cnt, to_login, to_login_btn,userName } from "../../css/register_css";
+import { complete, terms_title, line, complete_cnt, to_login, to_login_btn,userName,terms_title_com } from "../../css/register_css";
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
@@ -10,22 +10,17 @@ const OkButton = styled(Button)({
     backgroundColor: '#897A5F',
     borderColor: '#897A5F',
     '&:hover': {
-        backgroundColor: '#ED6C02',
-        borderColor: '#ED6C02',
+        backgroundColor: '#c7b595',
+        borderColor: '#c7b595',
     },
 });
 
 function Complete() {
-    const location = useLocation();
-    console.log(location)
-
-    const userInfo = useSelector(
-        (state: RootStateOrAny) => state.registerInfoSlice
-    );
+    const userInfo = useSelector((state: RootStateOrAny) => state.registerInfoSlice);
 
     return (
         <div css={complete}>
-            <h2 css={terms_title}>가입완료</h2>
+            <h2 css={terms_title_com}>가입완료</h2>
             {/* <div css={line}></div> */}
             <div>
                 <p css={complete_cnt}>

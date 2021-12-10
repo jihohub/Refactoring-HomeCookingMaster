@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom';
 import { Grid, Card, CardMedia, CardContent, CardActionArea, Typography } from "@mui/material";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { useNavigate } from "react-router-dom"
-import { setImageFile, setPreviewUrl } from "../../components/Result/searchedImageSlice";
+import { setImageFile, setPreviewUrl } from "../../modules/searchedImageSlice";
 import { getRanking, clearRanking } from "../../modules/rankingSlice";
 import background from "../../assets/main.jpg";
 import DropZone from "../../components/Main/DropZone";
+import DragDrop from "../../components/Main/DragDrop";
 
 import MainSlide from "../../components/Main/mainSlide";
 import { styled } from '@mui/material/styles';
@@ -23,8 +24,10 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 const mainWrapperStyle = css`
-    width: 100%;
+    width: 80%;
     height: 45rem;
+    background-color: #fbfbf9;
+    margin-left: 10%;
     /* background-image: url(${background}); */
     /* background-size: cover; */
     /* position: relative; */
@@ -32,7 +35,7 @@ const mainWrapperStyle = css`
 
 const searchDivStyle = css`
     /* margin: 0 auto; */
-    margin-top: 3rem;
+    margin-top: 5rem;
     display: flex;
     position: relative;
     /* max-width: 810px; */
@@ -82,7 +85,7 @@ const MainSearch = () => {
                     <h4>2. 화질이 나쁜 사진은 검색이 어렵습니다.</h4>
                     <p>이미지의 화질이 너무 안좋은 사진으로 검색할 경우, 원하는 결과를 얻기 어렵습니다.</p>
                     <h4>3. 음식이 잘보이는 사진일수록 더욱 정확한 결과를 얻을 수 있습니다.</h4>
-                    <p>이미지 내에 음식 크기가 너무 작을 경우 이미지 인식이 어려워 정확한 결과를 얻을 확률이 낮아집니다. 결과의 정확도를 위해 음식이 잘 보이는 사진으로 검색해주세요!</p>
+                    <p>이미지 내에 음식 크기가 너무 작을 경우, 이미지 인식이 어려워 정확한 결과를 얻을 확률이 낮아집니다. 결과의 정확도를 위해 음식이 잘 보이는 사진으로 검색해주세요!</p>
                 </div>
             </div>
         </div>
@@ -106,7 +109,6 @@ const MainRanking = () => {
     }
 
     const ranking = useSelector((state: RootStateOrAny) => state.rankingSlice.ranking);
-    console.log("page", ranking);
 
     // 순위 3위 전후로 나누기
     const [top3List, setTop3List] = useState<any[]>([]);
@@ -121,19 +123,25 @@ const MainRanking = () => {
     console.log(othersList)
 
     return (
-        <div>
+        <div style={{backgroundColor:'#fbfbf9', width:'80%', margin:'10%', paddingTop:'0.5%', marginBottom:'10%', height:'80%'}}>
             <h1 css={rankingTitle}>레시피 랭킹</h1>
             <div css={top3TopDiv}>
                 {top3List ? top3List.map((item:any) => (
                     <div css={top3ItemDiv} key={item.name}>
-                        <div css={top3Div}>
+                        <div >
                             <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold'}}>
                                 {top3List.indexOf(item)+1}
                             </Typography>
                         </div>
-                        <img src={item.img} css={top3Img} alt={item.name}></img>
+                        <img 
+                            src={item.img} 
+                            css={top3Img} 
+                            alt={item.name}
+                            onClick={() => navigate(`/recipe/${item.id}`)}
+                            style={{cursor:'pointer'}}
+                            ></img>
                         <div css={top3Name}>
-                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice'}}>
+                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice', width:'20rem'}}>
                                     {item.name}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom component="p" sx={{fontFamily:'Elice'}}>
@@ -158,17 +166,20 @@ const MainRanking = () => {
                 {othersList ? othersList.map((item:any) => (
                     <ImageListItem 
                         key={item.img} 
-                        sx={{width:'20%', height:'10rem', boxShadow:'10px 5px 20px gray'}}
+                        sx={{width:'20%', height:'10rem'}}
                         >
                         <img
                             src={`${item.img}?w=248&fit=crop&auto=format`}
                             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title}
                             loading="lazy"
-                            style={{width:'100%', height:'17rem'}}
+                            style={{width:'100%', height:'17rem', cursor:'pointer'}}
+                            onClick={() => navigate(`/recipe/${item.id}`)}
                         />
                         <ImageListItemBar
                             title={item.name}
+                            position="below"
+                            sx={{fontFamily:'Elice'}}
                             actionIcon={
                                 <IconButton
                                     sx={{ color: 'rgba(255, 255, 255, 0.54)', cursor:'pointer' }}
@@ -236,3 +247,5 @@ export default MainPage;
 //                     })}
 //                 </Grid>
 //             </div>
+
+// , boxShadow:'10px 5px 20px gray'

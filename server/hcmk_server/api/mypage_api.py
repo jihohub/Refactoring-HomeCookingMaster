@@ -80,7 +80,7 @@ edit_img_fields = mypage_ns.model(
 edit_img_expect_fields = mypage_ns.model(
     "edit_img_expect",
     {
-        "post_id": fields.Integer,
+        "user_id": fields.Integer,
     }
 )
 
@@ -93,6 +93,10 @@ class EditImg(Resource):
     def post(self):
         """해당 레시피의 좋아요를 관리하는 api"""
         user_id = request.form.get("user_id")
-        img = request.files["img"]
+        try:
+            img = request.files["img"]
+        except Exception:
+            # img = None
+            pass
         result = edit_img(user_id, img)
         return result
