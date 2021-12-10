@@ -21,6 +21,7 @@ export const terms_title = css`
     font-size: 37px;
     font-weight: 700;
     color : #897A5F;
+    margin-left: 10rem;
 `;
 
 export const line = css`
@@ -205,6 +206,6 @@ export const to_login = css`
 export const userName = css`
     font-size : 30px;
     font-weight: 700;
-    color : #ED6C02;
+    color : #f0b433;
 `;
 

@@ -8,6 +8,7 @@ import RecipeMain from "../../components/Recipe/RecipeMain";
 import ReviewList from "../../components/Recipe/ReviewList";
 import RecipeBoard from "../../components/Recipe/RecipeBoard";
 import RecipeShowOthers from "../../components/Recipe/RecipeShowOthers";
+import { Box  } from "@mui/material";
 
 function RecipePage() {
     const dispatch = useDispatch();
@@ -24,12 +25,12 @@ function RecipePage() {
     }, [dispatch, recipe_id, user_id]);
 
     return (
-        <div>
+        <Box sx={{backgroundColor:'#fbfbf9', width:'70vw', marginLeft:'17rem', marginTop:'10rem', marginBottom:'10rem'}} >
             <RecipeMain recipe={recipe} user_id={user_id} />
             <RecipeShowOthers recipe={recipe} />
             <ReviewList post={recipe.post_info} />
             <RecipeBoard recipe_id={recipe_id} />
-        </div>
+        </Box>
     );
 }
 
