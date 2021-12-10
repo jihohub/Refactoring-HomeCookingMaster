@@ -10,7 +10,7 @@ import background from "../../assets/main.jpg";
 import DropZone from "../../components/Main/DropZone";
 
 import MainSlide from "../../components/Main/mainSlide";
-import { imageTitle, imgSearch, imgGuide, guideTitle, rankingTitle, rankingDiv, top3Img, top3ItemDiv, top3TopDiv, top3Name } from "../../css/main_css";
+import { imageTitle, img, imgSearch, imgGuide, guideTitle, rankingTitle, rankingDiv, top3Img, top3ItemDiv, top3TopDiv, top3Name } from "../../css/main_css";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
