@@ -42,7 +42,8 @@ def get_equal_rate(image):
     # 버퍼로 변환
     image = BufferedReader(image)
     # 머신러닝 서버로 이미지 전송
-    response = requests.post('http://elice-kdt-2nd-team5.koreacentral.cloudapp.azure.com/receive', files={'img': image}).json()
+    # response = requests.post('http://elice-kdt-2nd-team5.koreacentral.cloudapp.azure.com/receive', files={'img': image}).json()
+    response = requests.post('http://machinelearning:8000/receive', files={'img': image}).json()
 
     # 결과값 넣을 딕셔너리, 음식 이름명 넣을 리스트
     result = {}
