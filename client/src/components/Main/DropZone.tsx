@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Dropzone from "react-dropzone";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector,RootStateOrAny } from "react-redux";
-import { getImgResult } from "../../modules/searchByImageSlice";
+import { getImgResult, setImgResult } from "../../modules/searchByImageSlice";
 // import { setStatus } from "../../modules/checkImg";
 import { setSearchImg } from "../../modules/userSearchImg";
 import { GrImage } from "react-icons/gr";
@@ -16,9 +16,9 @@ function DropZone() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        dispatch(getImgResult([]));
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getImgResult([]));
+    // }, []);
 
     const handleDrop = (acceptedFiles: any) => {
 
@@ -35,7 +35,7 @@ function DropZone() {
         const formData = new FormData();
         formData.append("img", acceptedFiles[0]);
         dispatch(getImgResult(formData));       // 이미지 검색 결과
-        dispatch(setSearchImg(acceptedFiles[0]));           // 검색한 이미지 
+        dispatch(setSearchImg(acceptedFiles[0]));           // 검색한 이미지
     };
     
     const imgResult = useSelector((state:RootStateOrAny) => state.getResultByImg.list)
@@ -64,7 +64,7 @@ function DropZone() {
         } else {
             // console.log("<imgResult> : imgResult empty")
         }
-    }, [navigate, imgResult]);
+    }, [imgResult]);
 
 
     return (
