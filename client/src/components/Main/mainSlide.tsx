@@ -46,7 +46,7 @@ function MainSlide() {
                 </Carousel.Item>
             </Carousel>
             <Carousel.Caption style={{marginBottom:'18rem',display:'flex', flexDirection:'column',marginLeft:'18',marginTop :'5rem'}} >
-                    <img src={logo} alt='logo' style={{width:'35rem', height:'18rem'}} />
+                    <img src={logo} alt='logo' style={{width:'35rem', height:'18rem', marginLeft:'18rem', marginTop:'2rem'}} />
                     {/* <h2 style={{fontSize:'5rem', textShadow:'2px 2px 6px black', color:'#524835'}}>집밥꼬꼬선생</h2>
                     <p style={{ fontSize:'1.2rem', fontWeight:'600', color:'#191919'}}>집밥 레시피 검색 플랫폼</p> */}
                     <OkButton onClick={() => window.scrollTo(0,1000)}>이미지 검색하기</OkButton>
@@ -59,16 +59,16 @@ export default MainSlide;
 
 const OkButton = styled(Button)({
     borderRadius:'30px',
-    backgroundColor: '#897A5F',
-    borderColor: '#897A5F',
-    color : 'white',
+    backgroundColor: '#fad324',
+    borderColor: '#fad324',
+    color : '#524835',
     fontFamily:'Elice',
     fontWeight:'600',
     width: '10rem',
     height: '2.5rem',
-    marginLeft : '13rem',
+    marginLeft : '30rem',
     marginTop:'2rem',
     '&:hover': {
-        borderColor: '#897A5F',
+        borderColor: '#fad324',
     },
 });

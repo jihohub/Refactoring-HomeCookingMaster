@@ -9,8 +9,8 @@ const OkButton = styled(Button)({
     backgroundColor: '#897A5F',
     borderColor: '#897A5F',
     '&:hover': {
-        backgroundColor: '#ED6C02',
-        borderColor: '#ED6C02',
+        backgroundColor: '#c7b595',
+        borderColor: '#c7b595',
     },
 });
 
