@@ -19,7 +19,7 @@ function Complete() {
 
     return (
         <div css={complete}>
-            <h2 css={terms_title}>가입완료</h2>
+            <h2 css={terms_title_com}>가입완료</h2>
             {/* <div css={line}></div> */}
             <div>
                 <p css={complete_cnt}>
