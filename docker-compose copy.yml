@@ -34,19 +34,19 @@ services:
     ports:
       - 5000:5000
 
-  machinelearning:
-    # 컨테이너 이름 설정
-    container_name: HCMK-machinelearning
-    build:
-      context: ./machinelearning
-      dockerfile: Dockerfile
-    volumes:
-      - ./machinelearning:/opt/server
-    runtime: nvidia
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=0
-    ports:
-      - 8000:8000
+  # machinelearning:
+  #   # 컨테이너 이름 설정
+  #   container_name: HCMK-machinelearning
+  #   build:
+  #     context: ./machinelearning
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./machinelearning:/opt/server
+  #   runtime: nvidia
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=0
+  #   ports:
+  #     - 8000:8000
 
   frontend:
     # 컨테이너 이름 설정
@@ -56,6 +56,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
-      - 443:443
     volumes:
       - /home/ubuntu/ssl:/etc/nginx/certs
