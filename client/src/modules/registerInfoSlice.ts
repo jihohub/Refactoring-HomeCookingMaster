@@ -1,6 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 interface RegisterState {
     user_id: number | null;
     nickname: string;

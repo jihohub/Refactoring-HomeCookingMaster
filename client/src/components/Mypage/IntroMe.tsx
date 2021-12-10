@@ -10,13 +10,15 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { editImg } from "../../modules/mypageEditImgSlice";
 import Modal from '@mui/material/Modal';
-import { profile_img, option_box, file_select } from "../../css/register_css";
+// import { profile_img, option_box, file_select } from "../../css/register_css";
 
-import {avatar} from '../../assets/mainAvatar.png'
+// import {avatar} from '../../assets/mainAvatar.png'
 
 function IntroMe() {
     const dispatch = useDispatch();
     const refreshTkn = sessionStorage.getItem("usrRfshTkn");
+    const user_id = String(sessionStorage.getItem("user_id"));
+    const user_img = sessionStorage.getItem("img");
     const [isInfo, setIsInfo] = useState(false);
     const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
 
@@ -26,55 +28,49 @@ function IntroMe() {
     );
 
     useEffect(() => {
-        console.log("<IntroMe> : dispatch > getMyInfo");
+        // console.log("<IntroMe> : dispatch > getMyInfo");
         dispatch(getMyInfo());
-    }, []);
+    }, [dispatch]);
 
     const myInfo = useSelector(
         (state: RootStateOrAny) => state.getMyInfoList.list
     );
 
-    const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
-
+    // const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
 
     useEffect(() => {
-        console.log("<IntroMe> : myInfo : ", myInfo);
+        // console.log("<IntroMe> : myInfo : ", myInfo);
         if (Array.isArray(myInfo) && myInfo.length === 0) {
-            console.log("<IntroMe> : myInfo empty");
+            // console.log("<IntroMe> : myInfo empty");
         } else if (!myInfo) {
-            console.log("<IntroMe> : myInfo false");
-            handleToken();
+            // console.log("<IntroMe> : myInfo false");
+            dispatch(
+                getNewAccess({
+                    refresh_token: refreshTkn,
+                })
+            );
         } else {
-            console.log("<IntroMe> : myInfo true ", myInfo.data.user_info);
+            // console.log("<IntroMe> : myInfo true ", myInfo.data.user_info);
             setIsInfo(true);
         }
-    }, [myInfo]);
-
-    const handleToken = () => {
-        dispatch(
-            getNewAccess({
-                refresh_token: refreshTkn,
-            })
-        );
-    };
+    }, [dispatch, myInfo, refreshTkn]);
 
     useEffect(() => {
-        console.log("<newToken> : ", newToken);
+        // console.log("<newToken> : ", newToken);
         if (Array.isArray(newToken) && newToken.length === 0) {
-            console.log("<newToken> : token empty");
+            // console.log("<newToken> : token empty");
         } else if (!newToken) {
-            console.log("<newToken> : token false");
+            // console.log("<newToken> : token false");
         } else {
-            console.log("<newToken> : token true ", newToken.data);
+            // console.log("<newToken> : token true ", newToken.data);
             sessionStorage.removeItem("usrAcsTkn");
             sessionStorage.setItem("usrAcsTkn", newToken.data["access_token"]);
-            console.log("<newToken> : dispatch > again");
+            // console.log("<newToken> : dispatch > again");
             dispatch(getMyInfo());
         }
-    }, [newToken]);
+    }, [dispatch, newToken]);
 
     // 프로필 사진 수정 api
-    const user_id = String(sessionStorage.getItem("user_id"));
     const formData = new FormData();
 
     // 프로필 수정 버튼 - 모달
@@ -89,8 +85,8 @@ function IntroMe() {
     const handleImage = (e: any) => {
         let reader = new FileReader();
         let file = e.target.files[0];
-        formData.set("img", file);
-        console.log(file);
+        formData.append("img", file);
+        // console.log(file);
 
         reader.onloadend = () => {
             setProfileImage(reader.result);
@@ -115,12 +111,12 @@ function IntroMe() {
                             display: "flex",
                             // justifyContent: 'center',
                             flexDirection: "row",
-                            marginLeft: "25%",
+                            marginLeft: "15%",
                         }}
                     >
                         <Avatar
                             alt={myInfo.data.user_info.nickname}
-                            src={myInfo.data.user_info.img}
+                            src={typeof user_img == "string" ? user_img : ""}
                             sx={{ width: 128, height: 128 }}
                         />
                         <Box
@@ -143,6 +139,7 @@ function IntroMe() {
                                     variant="h4"
                                     gutterBottom
                                     component="div"
+                                    sx={{ fontFamily: "Elice" }}
                                 >
                                     {myInfo.data.user_info.nickname}
                                 </Typography>
@@ -166,16 +163,18 @@ function IntroMe() {
                                     variant="subtitle1"
                                     gutterBottom
                                     component="div"
+                                    sx={{ fontFamily: "Elice" }}
                                 >
-                                    작성리뷰 {myInfo.data.my_post.length}
+                                    댓글작성한 레시피{" "}
+                                    {myInfo.data.my_post.length}
                                 </Typography>
                                 <Typography
                                     variant="subtitle1"
                                     gutterBottom
                                     component="div"
-                                    sx={{ pl: 2 }}
+                                    sx={{ fontFamily: "Elice", pl: 2 }}
                                 >
-                                    스크랩레시피{" "}
+                                    스크랩 레시피{" "}
                                     {myInfo.data.liked_recipe.length}
                                 </Typography>
                             </Box>
@@ -183,6 +182,7 @@ function IntroMe() {
                                 <OkButton
                                     variant="outlined"
                                     onClick={modifyImg}
+                                    sx={{ fontFamily: "Elice" }}
                                 >
                                     프로필 사진 수정
                                 </OkButton>
@@ -201,22 +201,30 @@ function IntroMe() {
                                             height: 112,
                                         }}
                                     />
-                                    <input
-                                        type="file"
-                                        id="profile"
-                                        name="profile"
-                                        accept="image/*"
-                                        onChange={handleImage}
-                                    />
-                                    <CheckButton
-                                        onClick={handleSubmit}
-                                        sx={{
-                                            fontWeight: 700,
-                                            fontSize: "15px",
-                                        }}
+                                    <form
+                                        id="formElem"
+                                        encType="multipart/form-data"
+                                        style={{ textAlign: "right" }}
                                     >
-                                        확인
-                                    </CheckButton>
+                                        <label htmlFor="icon-button-file">
+                                            <input
+                                                type="file"
+                                                id="profile"
+                                                name="profile"
+                                                accept="image/*"
+                                                onChange={handleImage}
+                                            />
+                                        </label>
+                                        <CheckButton
+                                            onClick={handleSubmit}
+                                            sx={{
+                                                fontWeight: 700,
+                                                fontSize: "15px",
+                                            }}
+                                        >
+                                            확인
+                                        </CheckButton>
+                                    </form>
                                 </Box>
                             </Modal>
                         </Box>

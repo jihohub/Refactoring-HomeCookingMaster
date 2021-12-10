@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { useDispatch,useSelector,RootStateOrAny } from "react-redux";
-import { setStatus } from "../../modules/checkImg";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+// import { setStatus } from "../../modules/checkImg";
 import { useNavigate } from "react-router-dom"
+import { setImgResult } from "../../modules/searchByImageSlice";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,16 +11,16 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import { useEffect, useState } from "react";
-import Avatar from '@mui/material/Avatar';
+
 
 function ImageResult() {
+    const dispatch = useDispatch();
     const [img, setImg] = useState(false);
     const [resultState, setResultState] = useState(false);
     const [resultImg, setResultImg] = useState<String | ArrayBuffer | null>("");
     const [resultName, setResultName] = useState('');
     const [resultRate, setResultRate] = useState('');
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
 
 
@@ -71,13 +73,15 @@ function ImageResult() {
         reader.onloadend = () => {
             setResultImg(reader.result);
         }
-        reader.readAsDataURL(file);
+        if(file){
+            reader.readAsDataURL(file);
+        }
     },[searchImg])
 
 
     // 이미지 검색 결과
     const imgResult = useSelector((state:RootStateOrAny) => state.getResultByImg.list)
-    console.log('imgResult', imgResult)
+    // console.log('imgResult', imgResult)
 
     // 소수점 조절
     function financial(x:any) {
@@ -87,27 +91,29 @@ function ImageResult() {
     useEffect(() => {
         if(imgResult){
             const rateResult = imgResult['equal_rate'];
-            console.log("<검색결과페이지> : 검색결과페이지 true", rateResult)
+            // console.log("<검색결과페이지> : 검색결과페이지 true", rateResult)
             if(typeof rateResult == "undefined" || rateResult == null || rateResult === ""){
-                console.log("<검색결과페이지> : empty")
+                // console.log("<검색결과페이지> : empty")
             }else{
                 if(rateResult[0]['rate'] > 0.7){
                     const name = rateResult[0]['name']
                     const rate = rateResult[0]['rate'] * 100
                     const rate_ = financial(rate)
-                    console.log('<검색결과페이지> : name 처리', typeof(rate))
+                    // console.log('<검색결과페이지> : name 처리', typeof(rate))
                     setResultName(name)
                     setResultRate(rate_)
                     // checkRate2(rateResult[1])
                     // checkRate3(rateResult[2])
                     setImg(true);
+                    dispatch(setImgResult());
                 }else{
-                    console.log('<imgResult> : 값 < 0.7')
+                    // console.log('<imgResult> : 값 < 0.7')
                     // navigate('/result')
                     checkRate1(rateResult[0])
                     checkRate2(rateResult[1])
                     checkRate3(rateResult[2])
                     setResultState(true)
+                    dispatch(setImgResult());
                 }
             }
         }

@@ -1,12 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -19,18 +17,12 @@ function MyScrap(){
     const scarpList = useSelector((state:RootStateOrAny) => state.getMyInfoList.list)
 
     useEffect(() => {
-        console.log("<scarpList> : ", scarpList)
-        if(Array.isArray(scarpList) && scarpList.length === 0){
-            console.log("<scarpList> : scarpList empty", isScrapList)
-        }else if(!scarpList){
-            console.log("<scarpList> : scarpList false", isScrapList)
-        }else{
+        if (Array.isArray(scarpList) && scarpList.length === 0) {
+        } else if (!scarpList) {
+        } else {
             setIsScrapList(true);
-            console.log("<scarpList> : scarpList true", isScrapList);
-            if(Array.isArray(scarpList.data.liked_recipe) && scarpList.data.liked_recipe.length === 0){
-                console.log("<scarpList> : real scarpList empty", scarpList.data.liked_recipe)
-                console.log("<scarpList> : real scarpList empty false", isEmpty);
-            }else{
+            if (Array.isArray(scarpList.data.liked_recipe) && scarpList.data.liked_recipe.length === 0){
+            } else {
                 setIsEmpty(true)
             }
         }
@@ -87,31 +79,32 @@ function MyScrap(){
                 width: '100%', 
                 // height: 400, 
                 // justifyContent: 'center', 
-                marginLeft:'25%',
+                marginLeft:'15%',
                 mt:8,
             }}>
             <ImageListItem key="Subheader" cols={3}>
-            <ListSubheader sx={{  width:'52rem', backgroundColor:'#897A5F', color:'white'}} component="div">스크랩레시피</ListSubheader>
+            <ListSubheader sx={{  width:'70%', backgroundColor:'#897A5F', color:'white'}} component="div">스크랩레시피</ListSubheader>
             {isEmpty ? "" : 
                 <Typography 
                     variant="subtitle1" 
                     gutterBottom component="div" 
                     sx={{ fontWeight : '600'}}
                 >
-                    준비된 레시피를 따라 요리를 해보고 리뷰를 작성해보세요!
+                    원하는 레시피를 스크랩해보세요!
                 </Typography>
             }
             </ImageListItem>
-            <ImageList  key="Subheader" cols={3} style={{marginBottom:'10rem'}}>
+            <ImageList  key="Subheader" cols={3} style={{marginBottom:'10rem',width:'140%'}} >
                 {scarpList.data.liked_recipe.map((item:any) => (
-                <ImageListItem key={item.recipe_img} sx={{width:'100'}}>
+                <ImageListItem key={item.recipe_img} sx={{width:'100'}} css={tmp}>
                     <img
                     src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
                     srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={item.recipe_id}
                     loading="lazy"
                     onClick={() => navigate(`/recipe/${item.recipe_id}`)}
-                    style={{width:'100%', height:'15rem'}}
+                    css={img}
+
                     />
                     <ImageListItemBar
                     title={item.recipe_name}
@@ -125,3 +118,20 @@ function MyScrap(){
 }
 
 export default MyScrap;
+
+const img = css`
+    width:100%;
+    height:15rem;
+    cursor: pointer;
+    /* box-shadow: 2px 2px 6px gray; */
+`;
+
+const tmp = css`
+    cursor: pointer;
+    /* box-shadow: 2px 2px 6px gray; */
+    :hover{
+        transform: scale(1.1);
+        transition:.5s;
+    }
+`;
+

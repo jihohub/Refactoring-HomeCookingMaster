@@ -16,7 +16,7 @@ export const checkImgStatus = createSlice({
     reducers: {
         setStatus(state, action : PayloadAction<Boolean>) {
             state.status = action.payload
-            console.log('<img> state.status : ',  state.status)
+            // console.log('<img> state.status : ',  state.status)
         },
     },
 

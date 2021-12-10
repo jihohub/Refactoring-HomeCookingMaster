@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import {getList} from "../../modules/searchList"
+import { getList } from "../../modules/searchList"
 import queryString from 'query-string';
 import { useLocation, useNavigate } from 'react-router';
 import ImageList from '@mui/material/ImageList';
@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { MdPersonSearch } from "react-icons/md";
+import { img } from '../../css/result_csst';
 
 function ItemList(){
     const dispatch = useDispatch();
@@ -24,20 +25,19 @@ function ItemList(){
     // console.log('<itemList> : query data : ',query)
 
     useEffect(() => {
-        if(query){
+        if (query) {
             // console.log('<itemList> queryData : before dispatch')
-            dispatch(getList(query))
+            dispatch(getList(query));
             // console.log('<itemList> queryData : after dispatch')
-        }
-        else{
+        } else {
             // console.log('<itemList> null : before dispatch')
-            dispatch(getList(""))
+            dispatch(getList(""));
             // console.log('<itemList> null : after dispatch')
         }
-    },[query])
+    }, [dispatch, query]);
 
     const resultList = useSelector((state:RootStateOrAny) => state.getSearchList.list)
-    console.log('<itemList> : resultList : ', resultList)
+    // console.log('<itemList> : resultList : ', resultList)
 
     // 음식명 랜덤으로 뽑기
     const randomProperty = function (obj:any) {
@@ -63,21 +63,30 @@ function ItemList(){
     const [foodList, setFoodList] = useState<any[]>([]);
     
     useEffect(() => {
+        const tmpList: string[] = [];
+        const randomList = function () {
+            for (let i = 0; i < 10; i++) {
+                const ran = randomProperty(resultList);
+                tmpList.push(ran);
+            }
+        };
+        randomList();
+
         const foodNumbers = Object.keys(resultList).length;
-        if(foodNumbers === 1){
-            const tmp: any[] = Object.values(resultList)
-            setRecipeList(tmp[0])
+        if (foodNumbers === 1) {
+            const tmp: any[] = Object.values(resultList);
+            setRecipeList(tmp[0]);
             setIsReciptList(false);
-        }else if(foodNumbers > 200){
+        } else if (foodNumbers > 200) {
             setFoodList(tmpList);
-            setRecipeList([])
+            setRecipeList([]);
             setIsReciptList(true);
-        }else{
-            setFoodList(Object.keys(resultList))
-            setRecipeList([])
+        } else {
+            setFoodList(Object.keys(resultList));
+            setRecipeList([]);
             setIsReciptList(true);
         }
-    },[resultList])
+    }, [resultList]);
 
 
     return(
@@ -113,7 +122,7 @@ function ItemList(){
                             srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.id}
                             onClick={() => navigate(`/recipe/${item.id}`)}
-                            style={{width:'100%', height:'17rem'}}
+                            css={img}
                         />
                         <ImageListItemBar 
                             title={item.name}

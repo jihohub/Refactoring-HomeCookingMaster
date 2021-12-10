@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setImageFile, setPreviewUrl } from "../../modules/searchedImageSlice";
 
-import { Paper, Input, InputBase, Divider, IconButton, Button } from "@mui/material";
+import { Paper, InputBase, IconButton, Button } from "@mui/material";
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 
 const SearchBar = () => {

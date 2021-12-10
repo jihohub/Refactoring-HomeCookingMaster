@@ -1,11 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
-import { useEffect, useState, useRef } from "react";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { recipeLike } from "../../modules/recipeLikeSlice";
 import { getRecipe } from "../../modules/recipeSlice";
-import { Box, Typography, Button, IconButton, Divider, Popover  } from "@mui/material";
+import { Box, Typography, IconButton, Divider, Popover  } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import AlarmIcon from "@mui/icons-material/Alarm";
 import QuizIcon from "@mui/icons-material/Quiz";
@@ -14,10 +12,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
+
 function RecipeMain(props: any) {
     const dispatch = useDispatch();
 
-    const { did_u_liked, recipe_info, food_info, ingredient_info, process_info, post_info } = props.recipe;
+    const { did_u_liked, recipe_info, food_info, ingredient_info, process_info } = props.recipe;
     const recipe_id = recipe_info.id
     const user_id = props.user_id;
 
@@ -145,24 +144,10 @@ function RecipeMain(props: any) {
                     >
                         <IconButton onClick={handleLike}>
                             <FavoriteIcon
-                                sx={{ color: "#897A5F", fontSize: "2.5rem" }}
+                                sx={{ color: "#897A5F", fontSize: "3rem" }}
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        {/* <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "left",
-                            }}
-                        >
-                            <Typography sx={{ p: 2, fontFamily: "Elice" }}>
-                                좋아요를 취소하셨습니다.
-                            </Typography>
-                        </Popover> */}
                     </Typography>
                 )}
                 {user_id && !did_u_liked && (
@@ -171,24 +156,10 @@ function RecipeMain(props: any) {
                     >
                         <IconButton onClick={handleLike}>
                             <FavoriteBorderIcon
-                                sx={{ color: "#897A5F", fontSize: "2.5rem" }}
+                                sx={{ color: "#897A5F", fontSize: "3rem" }}
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        {/* <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "left",
-                            }}
-                        >
-                            <Typography sx={{ p: 2, fontFamily: "Elice" }}>
-                                이 레시피에 좋아요를 누르셨습니다.
-                            </Typography>
-                        </Popover> */}
                     </Typography>
                 )}
                 {!user_id && (
@@ -201,7 +172,7 @@ function RecipeMain(props: any) {
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        {/* <Popover
+                        <Popover
                             id={id}
                             open={open}
                             anchorEl={anchorEl}
@@ -214,7 +185,7 @@ function RecipeMain(props: any) {
                             <Typography sx={{ p: 2, fontFamily: "Elice" }}>
                                 로그인 후 이용해주세요.
                             </Typography>
-                        </Popover> */}
+                        </Popover>
                     </Typography>
                 )}
             </Box>
@@ -275,7 +246,7 @@ function RecipeMain(props: any) {
                 <Divider />
             </Box>
             {process_info.map((item: any, index: number) => (
-                <>
+                <Box key={index}>
                     <Box
                         sx={{
                             width: "70vw",
@@ -321,7 +292,7 @@ function RecipeMain(props: any) {
                             {`${item.recipe}`}
                         </Typography>
                     </Box>
-                </>
+                </Box>
             ))}
             <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
         </>

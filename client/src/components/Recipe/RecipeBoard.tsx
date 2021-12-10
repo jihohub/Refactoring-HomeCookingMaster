@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Box, Paper, TextField, Button, IconButton } from "@mui/material";
+import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
+import { Box, TextField, Button, IconButton } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { recipeReview } from "../../modules/recipeReviewSlice";
+import { clearPost, recipeReview } from "../../modules/recipeReviewSlice";
 import { getRecipe } from "../../modules/recipeSlice";
 
 const styles = {
     "&.MuiButton-root": {
-        // border: "1px black solid",
         backgroundColor: "#897A5F",
     },
-    // "&.MuiButton-text": {
-    //     color: "grey",
-    // },
     "&.MuiButton-contained": {
         fontFamily: "Elice",
     },
-    // "&.MuiButton-outlined": {
-    //     color: "brown",
-    // },
 };
 
 function RecipeBoard(props: any) {
     const dispatch = useDispatch();
-    const [post, setPost] = useState<string>("");
+    const params = useParams();
+    const [post, setPost] = useState<string>("");    
 
     const recipe_id = props.recipe_id;
     // const user_id = props.user_id;
@@ -39,11 +34,17 @@ function RecipeBoard(props: any) {
         formData.set("img", imageFile);
     };
 
+    useEffect(() => {
+        setPost("");
+    }, [params]);
+
     const handleSubmit = async () => {
         await formData.set("user_id", user_id);
         await formData.set("post", post);
         await dispatch(recipeReview({ formData, recipe_id }));
         dispatch(getRecipe({ recipe_id, user_id }));
+        dispatch(clearPost());
+        setPost("");
     };
 
     return (
@@ -67,6 +68,7 @@ function RecipeBoard(props: any) {
                 minRows="5"
                 multiline={true}
                 onChange={handleText}
+                value={post}
             />
             <Box
                 sx={{

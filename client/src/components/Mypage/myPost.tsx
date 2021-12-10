@@ -1,12 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom"
@@ -18,17 +16,17 @@ function MyPost(){
     const postList = useSelector((state:RootStateOrAny) => state.getMyInfoList.list)
 
     useEffect(() => {
-        console.log("<postList> : ", postList)
+        // console.log("<postList> : ", postList)
         if(Array.isArray(postList) && postList.length === 0){
-            console.log("<postList> : postList empty", isPostList)
+            // console.log("<postList> : postList empty", isPostList)
         }else if(!postList){
-            console.log("<postList> : postList false", isPostList)
+            // console.log("<postList> : postList false", isPostList)
         }else{
             setIsPostList(true);
-            console.log("<postList> : postList true", isPostList);
+            // console.log("<postList> : postList true", isPostList);
             if(Array.isArray(postList.data.my_post) && postList.data.my_post.length === 0){
-                console.log("<postList> : real postList empty", postList.data.my_post)
-                console.log("<postList> : real post empty false", isEmpty);
+                // console.log("<postList> : real postList empty", postList.data.my_post)
+                // console.log("<postList> : real post empty false", isEmpty);
             }else{
                 setIsEmpty(true)
             }
@@ -86,11 +84,11 @@ function MyPost(){
                 width: '100%', 
                 // height: 400, 
                 // justifyContent: 'center', 
-                marginLeft:'25%',
+                marginLeft:'15%',
                 mt:8,
             }}>
             <ImageListItem key="Subheader" cols={3}>
-            <ListSubheader sx={{  width:'52rem', backgroundColor:'#897A5F', color:'white'}} component="div">작성리뷰</ListSubheader>
+            <ListSubheader sx={{  width:'70%', backgroundColor:'#897A5F', color:'white'}} component="div">작성리뷰</ListSubheader>
             {isEmpty ? "" : 
                 <Typography 
                     variant="subtitle1" 
@@ -101,16 +99,16 @@ function MyPost(){
                 </Typography>
             }
             </ImageListItem>
-            <ImageList  key="Subheader" cols={3}>
+            <ImageList  key="Subheader" cols={3} style={{marginBottom:'10rem',width:'140%'}}>
                 {postList.data.my_post.map((item:any) => (
-                <ImageListItem key={item.recipe_img} sx={{width:'100'}}>
+                <ImageListItem key={item.recipe_img} sx={{width:'100'}} css={tmp}>
                     <img
                     src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
                     srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={item.recipe_id}
                     loading="lazy"
                     onClick={() => navigate(`/recipe/${item.recipe_id}`)}
-                    style={{width:'100%', height:'15rem'}}
+                    css={img}
                     />
                     <ImageListItemBar
                     title={item.recipe_name}
@@ -125,3 +123,19 @@ function MyPost(){
 
 export default MyPost;
 
+
+const img = css`
+    width:100%;
+    height:15rem;
+    cursor: pointer;
+    /* box-shadow: 2px 2px 6px gray; */
+`;
+
+const tmp = css`
+    cursor: pointer;
+    /* box-shadow: 2px 2px 6px gray; */
+    :hover{
+        transform: scale(1.1);
+        transition:.5s;
+    }
+`;

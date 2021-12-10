@@ -1,21 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-
-import { Grid, Card, CardMedia, CardContent, CardActionArea, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { useNavigate } from "react-router-dom"
-import { setImageFile, setPreviewUrl } from "../../modules/searchedImageSlice";
+// import { setImageFile, setPreviewUrl } from "../../modules/searchedImageSlice";
 import { getRanking, clearRanking } from "../../modules/rankingSlice";
 import background from "../../assets/main.jpg";
 import DropZone from "../../components/Main/DropZone";
-import DragDrop from "../../components/Main/DragDrop";
 
 import MainSlide from "../../components/Main/mainSlide";
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import { imageTitle, btn, btnDiv,imgSearch,imgGuide,guideTitle,rankingTitle, rankingDiv, top3Div, top3Img,top3ItemDiv, top3TopDiv, top3Name } from "../../css/main_css";
+import { imageTitle, img, imgSearch, imgGuide, guideTitle, rankingTitle, rankingDiv, top3Img, top3ItemDiv, top3TopDiv, top3Name } from "../../css/main_css";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
@@ -101,12 +96,12 @@ const MainRanking = () => {
         return () => {
             dispatch(clearRanking());
         };
-    }, []);
+    }, [dispatch]);
 
-    const handleClick = (item: any) => {
-        navigate(`/recipe/${item.id}`);
-        return;
-    }
+    // const handleClick = (item: any) => {
+    //     navigate(`/recipe/${item.id}`);
+    //     return;
+    // }
 
     const ranking = useSelector((state: RootStateOrAny) => state.rankingSlice.ranking);
 
@@ -119,8 +114,8 @@ const MainRanking = () => {
             setOthersList([ranking[3], ranking[4], ranking[5],ranking[6], ranking[7], ranking[8],ranking[9], ranking[10]]);
         }
     },[ranking])
-    console.log(top3List)
-    console.log(othersList)
+    // console.log(top3List)
+    // console.log(othersList)
 
     return (
         <div style={{backgroundColor:'#fbfbf9', width:'80%', margin:'10%', paddingTop:'0.5%', marginBottom:'10%', height:'80%'}}>
@@ -129,7 +124,7 @@ const MainRanking = () => {
                 {top3List ? top3List.map((item:any) => (
                     <div css={top3ItemDiv} key={item.name}>
                         <div >
-                            <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold'}}>
+                            <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold', color:'#fbd62e'}}>
                                 {top3List.indexOf(item)+1}
                             </Typography>
                         </div>
@@ -138,7 +133,6 @@ const MainRanking = () => {
                             css={top3Img} 
                             alt={item.name}
                             onClick={() => navigate(`/recipe/${item.id}`)}
-                            style={{cursor:'pointer'}}
                             ></img>
                         <div css={top3Name}>
                             <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice', width:'20rem'}}>
@@ -170,10 +164,8 @@ const MainRanking = () => {
                         >
                         <img
                             src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title}
-                            loading="lazy"
-                            style={{width:'100%', height:'17rem', cursor:'pointer'}}
+                            css={img}
                             onClick={() => navigate(`/recipe/${item.id}`)}
                         />
                         <ImageListItemBar

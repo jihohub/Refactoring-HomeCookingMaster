@@ -1,6 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 interface RankingState {
     ranking: [];
     loading: boolean;
@@ -19,7 +18,7 @@ export const getRanking = createAsyncThunk(
     async () => {
         /* 백엔드 [GET] /recipe/<recipe_id> 요청 */
         let response = await axios.get(`/api/main/ranking`);
-        console.log("res", response.data.data);
+        // console.log("res", response.data.data);
         return response.data.data;
     }
 );

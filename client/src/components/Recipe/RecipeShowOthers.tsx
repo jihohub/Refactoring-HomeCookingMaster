@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
-import React, { useEffect, useState } from "react";
-
+import { css } from "@emotion/react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getRecipe, clearRecipe } from "../../modules/recipeSlice";
@@ -25,7 +24,7 @@ function RecipeShowOthers(props: any) {
         return () => {
             dispatch(clearRecipe());
         };
-    }, [params]);
+    }, [dispatch, recipe_id, user_id]);
 
     return (
         <>
@@ -81,13 +80,16 @@ function RecipeShowOthers(props: any) {
                                         height: "7rem",
                                         boxShadow: "5px 2px 10px gray",
                                     }}
+                                    css={img}
+                                    onClick={() =>
+                                        navigate(`/recipe/${item.id}`, { replace: true })
+                                    }
                                 >
                                     <img
                                         src={`${item.img}?w=124&fit=crop&auto=format`}
                                         srcSet={`${item.img}?w=124&fit=crop&auto=format&dpr=2 2x`}
                                         alt={item.title}
-                                        loading="lazy"
-                                        style={{ width: "100%", height: "10rem" }}
+                                        style={{width:'100%', height:'10rem'}}
                                     />
                                     <ImageListItemBar
                                         title={
@@ -106,9 +108,6 @@ function RecipeShowOthers(props: any) {
                                                     cursor: "pointer",
                                                 }}
                                                 aria-label={`info about ${item.name}`}
-                                                onClick={() =>
-                                                    navigate(`/recipe/${item.id}`, { replace: true })
-                                                }
                                             >
                                                 <ArrowForwardIcon />
                                             </IconButton>
@@ -124,3 +123,15 @@ function RecipeShowOthers(props: any) {
 }
 
 export default RecipeShowOthers;
+
+
+const img = css`
+    /* width:100%;
+    height:10rem; */
+    cursor: pointer;
+    /* box-shadow: 2px 2px 6px gray; */
+    :hover{
+        transform: scale(1.1);
+        transition:.5s;
+    }
+`;

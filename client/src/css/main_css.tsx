@@ -1,4 +1,4 @@
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 
 export const imgSearch = css`
     padding-left: 10rem;
@@ -79,4 +79,22 @@ export const top3Name = css`
 export const top3Img = css`
     width:22rem;
     height:22rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px gray;
+    :hover{
+        transform: scale(1.1);
+        transition:.5s;
+    }
+`;
+
+export const img = css`
+    width:100%;
+    height:17rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px gray;
+    :hover{
+        transform: scale(1.1);
+        transition:.5s;
+    }
+    
 `;
