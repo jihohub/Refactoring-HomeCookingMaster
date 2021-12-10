@@ -28,7 +28,7 @@ function MyScrap(){
         }
     },[scarpList])
 
-    return(
+    return (
         <>
             {/* {isScrapList ? 
                 <ImageList 
@@ -73,48 +73,77 @@ function MyScrap(){
                 </ImageList>
             : ""} */}
 
-{isScrapList ?
-            <ImageList 
-                sx={{ 
-                width: '100%', 
-                // height: 400, 
-                // justifyContent: 'center', 
-                marginLeft:'15%',
-                mt:8,
-            }}>
-            <ImageListItem key="Subheader" cols={3}>
-            <ListSubheader sx={{  width:'70%', backgroundColor:'#897A5F', color:'white'}} component="div">스크랩레시피</ListSubheader>
-            {isEmpty ? "" : 
-                <Typography 
-                    variant="subtitle1" 
-                    gutterBottom component="div" 
-                    sx={{ fontWeight : '600'}}
+            {isScrapList ? (
+                <ImageList
+                    sx={{
+                        width: "100%",
+                        // height: 400,
+                        // justifyContent: 'center',
+                        marginLeft: "15%",
+                        mt: 8,
+                    }}
                 >
-                    원하는 레시피를 스크랩해보세요!
-                </Typography>
-            }
-            </ImageListItem>
-            <ImageList  key="Subheader" cols={3} style={{marginBottom:'10rem',width:'140%'}} >
-                {scarpList.data.liked_recipe.map((item:any) => (
-                <ImageListItem key={item.recipe_img} sx={{width:'100'}} css={tmp}>
-                    <img
-                    src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
-                    srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                    alt={item.recipe_id}
-                    loading="lazy"
-                    onClick={() => navigate(`/recipe/${item.recipe_id}`)}
-                    css={img}
-
-                    />
-                    <ImageListItemBar
-                    title={item.recipe_name}
-                    />
-                </ImageListItem>
-                ))}
-            </ImageList>
-            </ImageList> : ""}
+                    <ImageListItem key="Subheader" cols={3}>
+                        <ListSubheader
+                            sx={{
+                                width: "70%",
+                                backgroundColor: "#897A5F",
+                                color: "white",
+                            }}
+                            component="div"
+                        >
+                            스크랩레시피
+                        </ListSubheader>
+                        {isEmpty ? (
+                            ""
+                        ) : (
+                            <Typography
+                                variant="subtitle1"
+                                gutterBottom
+                                component="div"
+                                sx={{ fontWeight: "600" }}
+                            >
+                                원하는 레시피를 스크랩해보세요!
+                            </Typography>
+                        )}
+                    </ImageListItem>
+                    <ImageList
+                        key="imageList"
+                        cols={3}
+                        style={{ marginBottom: "10rem", width: "140%" }}
+                    >
+                        {scarpList.data.liked_recipe.map(
+                            (item: any, index: number) => (
+                                <ImageListItem
+                                    key={index}
+                                    sx={{ width: "100" }}
+                                    css={tmp}
+                                >
+                                    <img
+                                        src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
+                                        srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                        alt={item.recipe_id}
+                                        loading="lazy"
+                                        onClick={() =>
+                                            navigate(
+                                                `/recipe/${item.recipe_id}`
+                                            )
+                                        }
+                                        css={img}
+                                    />
+                                    <ImageListItemBar
+                                        title={item.recipe_name}
+                                    />
+                                </ImageListItem>
+                            )
+                        )}
+                    </ImageList>
+                </ImageList>
+            ) : (
+                ""
+            )}
         </>
-    )
+    );
 }
 
 export default MyScrap;

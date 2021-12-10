@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { getMyInfo } from "../../modules/myInfo";
 import { getNewAccess } from "../../modules/newToken";
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { IconButton } from "@mui/material";
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { editImg } from "../../modules/mypageEditImgSlice";
@@ -14,14 +16,19 @@ import Modal from '@mui/material/Modal';
 
 // import {avatar} from '../../assets/mainAvatar.png'
 
+const Input = styled("input")({
+    display: "none",
+});
+
 function IntroMe() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const refreshTkn = sessionStorage.getItem("usrRfshTkn");
     const user_id = String(sessionStorage.getItem("user_id"));
     const user_img = sessionStorage.getItem("img");
-    const [isInfo, setIsInfo] = useState(false);
-    const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
+    const formData = new FormData();
 
+    const [isInfo, setIsInfo] = useState(false);
 
     const newToken = useSelector(
         (state: RootStateOrAny) => state.getNewAccessList.list
@@ -71,8 +78,6 @@ function IntroMe() {
     }, [dispatch, newToken]);
 
     // 프로필 사진 수정 api
-    const formData = new FormData();
-
     // 프로필 수정 버튼 - 모달
     const modifyImg = () => {
         handleOpen1();
@@ -82,23 +87,15 @@ function IntroMe() {
     const handleOpen1 = () => setOpen1(true);
     const handleClose1 = () => setOpen1(false);
 
-    const handleImage = (e: any) => {
-        let reader = new FileReader();
+    const handleImage = async (e: any) => {
         let file = e.target.files[0];
-        formData.append("img", file);
-        // console.log(file);
 
-        reader.onloadend = () => {
-            setProfileImage(reader.result);
-        };
-        reader.readAsDataURL(file);
-    };
+        await formData.set("user_id", user_id);
+        await formData.set("img", file);
 
-    const handleSubmit = () => {
-        formData.set("user_id", user_id);
-        dispatch(editImg(formData));
+        await dispatch(editImg(formData));
         handleClose1();
-        // sessionStorage.setItem("img", new_image);
+        navigate("/mypage");
     };
 
     return (
@@ -187,44 +184,47 @@ function IntroMe() {
                                     프로필 사진 수정
                                 </OkButton>
                             </Box>
-                            <Modal open={open1} onClose={handleClose1}>
+                            <Modal
+                                open={open1}
+                                onClose={handleClose1}
+                                sx={{ textAlign: "center" }}
+                            >
                                 <Box sx={style}>
-                                    <Avatar
-                                        alt="profile image on the header bar"
-                                        src={
-                                            typeof profileImage == "string"
-                                                ? profileImage
-                                                : ""
-                                        }
-                                        sx={{
-                                            width: 112,
-                                            height: 112,
-                                        }}
-                                    />
-                                    <form
-                                        id="formElem"
-                                        encType="multipart/form-data"
-                                        style={{ textAlign: "right" }}
-                                    >
-                                        <label htmlFor="icon-button-file">
-                                            <input
-                                                type="file"
-                                                id="profile"
-                                                name="profile"
-                                                accept="image/*"
-                                                onChange={handleImage}
-                                            />
-                                        </label>
-                                        <CheckButton
-                                            onClick={handleSubmit}
-                                            sx={{
-                                                fontWeight: 700,
-                                                fontSize: "15px",
-                                            }}
+                                    <label htmlFor="icon-button-file">
+                                        <Input
+                                            type="file"
+                                            id="icon-button-file"
+                                            accept="image/*"
+                                            onChange={handleImage}
+                                        />
+                                        <IconButton
+                                            aria-label="upload picture"
+                                            component="span"
                                         >
-                                            확인
-                                        </CheckButton>
-                                    </form>
+                                            <Avatar
+                                                alt="profile image on the header bar"
+                                                src={
+                                                    typeof user_img == "string"
+                                                        ? user_img
+                                                        : ""
+                                                }
+                                                sx={{
+                                                    width: 112,
+                                                    height: 112,
+                                                }}
+                                                component="span"
+                                            />
+                                        </IconButton>
+                                    </label>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Elice",
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        위 이미지를 클릭 후 프로필 이미지를
+                                        업로드하세요.
+                                    </Typography>
                                 </Box>
                             </Modal>
                         </Box>
@@ -255,7 +255,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '17%',
+    width: '27%',
     bgcolor: 'white',
     border: '10px solid white',
     color : '#897A5F',
