@@ -33,7 +33,7 @@ function Login() {
 
         if (!token.refresh_token && !token.access_token) {
             console.log("<login> : token empty");
-            // setCheck(false);
+            setCheck(false);
         } else if (!token) {
             console.log("<login> : token false");
             setCheck(false);

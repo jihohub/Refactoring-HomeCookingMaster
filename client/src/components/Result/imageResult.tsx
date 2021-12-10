@@ -71,7 +71,9 @@ function ImageResult() {
         reader.onloadend = () => {
             setResultImg(reader.result);
         }
-        reader.readAsDataURL(file);
+        if(file){
+            reader.readAsDataURL(file);
+        }
     },[searchImg])
 
 

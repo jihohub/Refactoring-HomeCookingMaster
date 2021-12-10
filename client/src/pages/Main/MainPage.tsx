@@ -15,7 +15,7 @@ import DragDrop from "../../components/Main/DragDrop";
 import MainSlide from "../../components/Main/mainSlide";
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { imageTitle, btn, btnDiv,imgSearch,imgGuide,guideTitle,rankingTitle, rankingDiv, top3Div, top3Img,top3ItemDiv, top3TopDiv, top3Name } from "../../css/main_css";
+import { imageTitle, btn, btnDiv,imgSearch,imgGuide,guideTitle,rankingTitle, rankingDiv, top3Div, top3Img,top3ItemDiv, top3TopDiv, top3Name,img } from "../../css/main_css";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
@@ -129,7 +129,7 @@ const MainRanking = () => {
                 {top3List ? top3List.map((item:any) => (
                     <div css={top3ItemDiv} key={item.name}>
                         <div >
-                            <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold'}}>
+                            <Typography variant="h2" gutterBottom component="p" sx={{fontFamily:'EliceBold', color:'#fbd62e'}}>
                                 {top3List.indexOf(item)+1}
                             </Typography>
                         </div>
@@ -138,7 +138,6 @@ const MainRanking = () => {
                             css={top3Img} 
                             alt={item.name}
                             onClick={() => navigate(`/recipe/${item.id}`)}
-                            style={{cursor:'pointer'}}
                             ></img>
                         <div css={top3Name}>
                             <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice', width:'20rem'}}>
@@ -170,10 +169,8 @@ const MainRanking = () => {
                         >
                         <img
                             src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title}
-                            loading="lazy"
-                            style={{width:'100%', height:'17rem', cursor:'pointer'}}
+                            css={img}
                             onClick={() => navigate(`/recipe/${item.id}`)}
                         />
                         <ImageListItemBar

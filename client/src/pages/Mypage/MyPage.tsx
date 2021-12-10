@@ -5,10 +5,12 @@ import MyScrap from '../../components/Mypage/myScrap'
 
 function MyPage() {
     return (
-        <div style={{marginTop:'10rem'}}>
-            <IntroMe />
-            <MyPost />
-            <MyScrap />
+        <div style={{marginTop:'10rem', display:'flex',alignContent:'center', justifyContent:'center', marginBottom:'10rem'}}>
+            <div style={{backgroundColor:'white', width:'70%', paddingTop:'5rem'}}>
+                <IntroMe />
+                <MyPost />
+                <MyScrap />
+            </div>
         </div>
     );
 }

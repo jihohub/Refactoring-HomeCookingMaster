@@ -154,11 +154,6 @@ const Header = (props: Props) => {
             func: handleCloseNavMenu,
         },
         {
-            text: "회원정보수정",
-            path: "/modifyInfo",
-            func: handleCloseNavMenu,
-        },
-        {
             text: "로그아웃",
             path: "/",
             func: handleLog,

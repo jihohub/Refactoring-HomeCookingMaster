@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css, jsx } from "@emotion/react";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
@@ -87,31 +88,32 @@ function MyScrap(){
                 width: '100%', 
                 // height: 400, 
                 // justifyContent: 'center', 
-                marginLeft:'25%',
+                marginLeft:'15%',
                 mt:8,
             }}>
             <ImageListItem key="Subheader" cols={3}>
-            <ListSubheader sx={{  width:'52rem', backgroundColor:'#897A5F', color:'white'}} component="div">스크랩레시피</ListSubheader>
+            <ListSubheader sx={{  width:'70%', backgroundColor:'#897A5F', color:'white'}} component="div">스크랩레시피</ListSubheader>
             {isEmpty ? "" : 
                 <Typography 
                     variant="subtitle1" 
                     gutterBottom component="div" 
                     sx={{ fontWeight : '600'}}
                 >
-                    준비된 레시피를 따라 요리를 해보고 리뷰를 작성해보세요!
+                    원하는 레시피를 스크랩해보세요!
                 </Typography>
             }
             </ImageListItem>
-            <ImageList  key="Subheader" cols={3} style={{marginBottom:'10rem'}}>
+            <ImageList  key="Subheader" cols={3} style={{marginBottom:'10rem',width:'140%'}} >
                 {scarpList.data.liked_recipe.map((item:any) => (
-                <ImageListItem key={item.recipe_img} sx={{width:'100'}}>
+                <ImageListItem key={item.recipe_img} sx={{width:'100'}} css={tmp}>
                     <img
                     src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
                     srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={item.recipe_id}
                     loading="lazy"
                     onClick={() => navigate(`/recipe/${item.recipe_id}`)}
-                    style={{width:'100%', height:'15rem'}}
+                    css={img}
+
                     />
                     <ImageListItemBar
                     title={item.recipe_name}
@@ -125,3 +127,20 @@ function MyScrap(){
 }
 
 export default MyScrap;
+
+const img = css`
+    width:100%;
+    height:15rem;
+    cursor: pointer;
+    /* box-shadow: 2px 2px 6px gray; */
+`;
+
+const tmp = css`
+    cursor: pointer;
+    /* box-shadow: 2px 2px 6px gray; */
+    :hover{
+        transform: scale(1.1);
+        transition:.5s;
+    }
+`;
+

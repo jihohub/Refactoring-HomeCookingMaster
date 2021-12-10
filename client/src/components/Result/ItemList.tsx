@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { MdPersonSearch } from "react-icons/md";
+import { img } from '../../css/result_csst';
 
 function ItemList(){
     const dispatch = useDispatch();
@@ -113,7 +114,7 @@ function ItemList(){
                             srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.id}
                             onClick={() => navigate(`/recipe/${item.id}`)}
-                            style={{width:'100%', height:'17rem'}}
+                            css={img}
                         />
                         <ImageListItemBar 
                             title={item.name}

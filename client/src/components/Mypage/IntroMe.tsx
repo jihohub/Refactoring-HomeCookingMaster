@@ -115,7 +115,7 @@ function IntroMe() {
                             display: "flex",
                             // justifyContent: 'center',
                             flexDirection: "row",
-                            marginLeft: "25%",
+                            marginLeft: "15%",
                         }}
                     >
                         <Avatar
@@ -143,6 +143,7 @@ function IntroMe() {
                                     variant="h4"
                                     gutterBottom
                                     component="div"
+                                    sx={{fontFamily:'Elice'}}
                                 >
                                     {myInfo.data.user_info.nickname}
                                 </Typography>
@@ -166,16 +167,17 @@ function IntroMe() {
                                     variant="subtitle1"
                                     gutterBottom
                                     component="div"
+                                    sx={{fontFamily:'Elice'}}
                                 >
-                                    작성리뷰 {myInfo.data.my_post.length}
+                                    댓글작성한 레시피 {myInfo.data.my_post.length}
                                 </Typography>
                                 <Typography
                                     variant="subtitle1"
                                     gutterBottom
                                     component="div"
-                                    sx={{ pl: 2 }}
+                                    sx={{fontFamily:'Elice', pl: 2}}
                                 >
-                                    스크랩레시피{" "}
+                                    스크랩 레시피{" "}
                                     {myInfo.data.liked_recipe.length}
                                 </Typography>
                             </Box>
@@ -183,6 +185,7 @@ function IntroMe() {
                                 <OkButton
                                     variant="outlined"
                                     onClick={modifyImg}
+                                    sx={{fontFamily:'Elice'}}
                                 >
                                     프로필 사진 수정
                                 </OkButton>
