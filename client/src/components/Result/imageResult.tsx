@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from "react";
-import { useSelector, RootStateOrAny } from "react-redux";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 // import { setStatus } from "../../modules/checkImg";
 import { useNavigate } from "react-router-dom"
+import { setImgResult } from "../../modules/searchByImageSlice";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -13,6 +14,7 @@ import { styled } from '@mui/material/styles';
 
 
 function ImageResult() {
+    const dispatch = useDispatch();
     const [img, setImg] = useState(false);
     const [resultState, setResultState] = useState(false);
     const [resultImg, setResultImg] = useState<String | ArrayBuffer | null>("");
@@ -103,6 +105,7 @@ function ImageResult() {
                     // checkRate2(rateResult[1])
                     // checkRate3(rateResult[2])
                     setImg(true);
+                    dispatch(setImgResult());
                 }else{
                     // console.log('<imgResult> : 값 < 0.7')
                     // navigate('/result')
@@ -110,6 +113,7 @@ function ImageResult() {
                     checkRate2(rateResult[1])
                     checkRate3(rateResult[2])
                     setResultState(true)
+                    dispatch(setImgResult());
                 }
             }
         }

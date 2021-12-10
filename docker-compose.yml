@@ -42,9 +42,9 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./machinelearning:/opt/server
-    runtime: nvidia
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=0
+    # runtime: nvidia
+    # environment:
+    #   - NVIDIA_VISIBLE_DEVICES=0
     ports:
       - 8000:8000
 
