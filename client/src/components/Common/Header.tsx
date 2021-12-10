@@ -67,25 +67,6 @@ const notLoggedIn = [
         path: "/login",
     },
 ];
-
-// const loggedIn = [
-//     {
-//         text: "마이페이지",
-//         path: "/mypage",
-//         func: null
-//     },
-//     {
-//         text: "회원정보수정",
-//         path: "/modifyInfo",
-//         func: null
-//     },
-//     {
-//         text: "로그아웃",
-//         path: null,
-//         func: handleLog
-//     }
-// ];
-
 interface Props {
     window?: () => Window;
     children: React.ReactElement;
@@ -101,7 +82,7 @@ const Header = (props: Props) => {
     const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
     const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
     const nickname = sessionStorage.getItem("nickname"); // nickname
-    const user_img = user_info.img;
+    const user_img = sessionStorage.getItem("img"); // nickname
 
     useEffect(() => {
         if (refreshTkn) {

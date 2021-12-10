@@ -14,6 +14,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
+
 function RecipeMain(props: any) {
     const dispatch = useDispatch();
 
@@ -149,20 +150,6 @@ function RecipeMain(props: any) {
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        {/* <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "left",
-                            }}
-                        >
-                            <Typography sx={{ p: 2, fontFamily: "Elice" }}>
-                                좋아요를 취소하셨습니다.
-                            </Typography>
-                        </Popover> */}
                     </Typography>
                 )}
                 {user_id && !did_u_liked && (
@@ -175,20 +162,6 @@ function RecipeMain(props: any) {
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        {/* <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "left",
-                            }}
-                        >
-                            <Typography sx={{ p: 2, fontFamily: "Elice" }}>
-                                이 레시피에 좋아요를 누르셨습니다.
-                            </Typography>
-                        </Popover> */}
                     </Typography>
                 )}
                 {!user_id && (
@@ -201,7 +174,7 @@ function RecipeMain(props: any) {
                             />
                         </IconButton>
                         {recipe_info.likes}
-                        {/* <Popover
+                        <Popover
                             id={id}
                             open={open}
                             anchorEl={anchorEl}
@@ -214,7 +187,7 @@ function RecipeMain(props: any) {
                             <Typography sx={{ p: 2, fontFamily: "Elice" }}>
                                 로그인 후 이용해주세요.
                             </Typography>
-                        </Popover> */}
+                        </Popover>
                     </Typography>
                 )}
             </Box>
