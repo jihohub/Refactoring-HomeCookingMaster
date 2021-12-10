@@ -21,6 +21,14 @@ export const terms_title = css`
     font-size: 37px;
     font-weight: 700;
     color : #897A5F;
+    /* margin-left: 10rem; */
+`;
+
+
+export const terms_title_com = css`
+    font-size: 37px;
+    font-weight: 700;
+    color : #897A5F;
     margin-left: 10rem;
 `;
 

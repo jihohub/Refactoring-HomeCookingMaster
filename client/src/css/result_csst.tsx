@@ -84,3 +84,14 @@ export const itembtn = css`
 export const foodName = css`
     font-size: 20px;
 `;
+
+export const img = css`
+    width:100%;
+    height:17rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px gray;
+    :hover{
+        transform: scale(1.1);
+        transition:.5s;
+    }
+`;

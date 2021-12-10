@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import {Link} from 'react-router-dom';
 import { useSelector, RootStateOrAny } from "react-redux";
-import { complete, terms_title, complete_cnt, to_login, to_login_btn, userName } from "../../css/register_css";
+import { complete, complete_cnt, to_login, to_login_btn, userName, terms_title_com } from "../../css/register_css";
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
@@ -19,7 +19,7 @@ function Complete() {
 
     return (
         <div css={complete}>
-            <h2 css={terms_title}>가입완료</h2>
+            <h2 css={terms_title_com}>가입완료</h2>
             {/* <div css={line}></div> */}
             <div>
                 <p css={complete_cnt}>

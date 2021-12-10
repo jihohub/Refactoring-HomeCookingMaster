@@ -75,7 +75,7 @@ const Header = (props: Props) => {
     useEffect(() => {
         if (refreshTkn) {
             setLogCheck(true);
-            setAnchorElNav(null);
+            setAnchorElUser(null);
         } else {
             setLogCheck(false);
         }
@@ -121,11 +121,6 @@ const Header = (props: Props) => {
         {
             text: "마이페이지",
             path: "/mypage",
-            func: handleCloseNavMenu,
-        },
-        {
-            text: "회원정보수정",
-            path: "/modifyInfo",
             func: handleCloseNavMenu,
         },
         {
@@ -401,5 +396,5 @@ const Header = (props: Props) => {
             </ScrollTop>
         </>
     );
-};;
+};
 export default Header;
