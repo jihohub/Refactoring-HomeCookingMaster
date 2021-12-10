@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { useDispatch,useSelector,RootStateOrAny } from "react-redux";
-import { setStatus } from "../../modules/checkImg";
+import React, { useEffect, useState } from "react";
+import { useSelector, RootStateOrAny } from "react-redux";
+// import { setStatus } from "../../modules/checkImg";
 import { useNavigate } from "react-router-dom"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,8 +10,7 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import { useEffect, useState } from "react";
-import Avatar from '@mui/material/Avatar';
+
 
 function ImageResult() {
     const [img, setImg] = useState(false);
@@ -18,7 +18,7 @@ function ImageResult() {
     const [resultImg, setResultImg] = useState<String | ArrayBuffer | null>("");
     const [resultName, setResultName] = useState('');
     const [resultRate, setResultRate] = useState('');
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
 
 

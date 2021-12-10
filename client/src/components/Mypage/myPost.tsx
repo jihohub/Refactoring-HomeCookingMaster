@@ -1,12 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom"
@@ -18,17 +15,17 @@ function MyPost(){
     const postList = useSelector((state:RootStateOrAny) => state.getMyInfoList.list)
 
     useEffect(() => {
-        console.log("<postList> : ", postList)
+        // console.log("<postList> : ", postList)
         if(Array.isArray(postList) && postList.length === 0){
-            console.log("<postList> : postList empty", isPostList)
+            // console.log("<postList> : postList empty", isPostList)
         }else if(!postList){
-            console.log("<postList> : postList false", isPostList)
+            // console.log("<postList> : postList false", isPostList)
         }else{
             setIsPostList(true);
-            console.log("<postList> : postList true", isPostList);
+            // console.log("<postList> : postList true", isPostList);
             if(Array.isArray(postList.data.my_post) && postList.data.my_post.length === 0){
-                console.log("<postList> : real postList empty", postList.data.my_post)
-                console.log("<postList> : real post empty false", isEmpty);
+                // console.log("<postList> : real postList empty", postList.data.my_post)
+                // console.log("<postList> : real post empty false", isEmpty);
             }else{
                 setIsEmpty(true)
             }

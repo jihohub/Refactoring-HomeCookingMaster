@@ -1,12 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -19,18 +16,12 @@ function MyScrap(){
     const scarpList = useSelector((state:RootStateOrAny) => state.getMyInfoList.list)
 
     useEffect(() => {
-        console.log("<scarpList> : ", scarpList)
-        if(Array.isArray(scarpList) && scarpList.length === 0){
-            console.log("<scarpList> : scarpList empty", isScrapList)
-        }else if(!scarpList){
-            console.log("<scarpList> : scarpList false", isScrapList)
-        }else{
+        if (Array.isArray(scarpList) && scarpList.length === 0) {
+        } else if (!scarpList) {
+        } else {
             setIsScrapList(true);
-            console.log("<scarpList> : scarpList true", isScrapList);
-            if(Array.isArray(scarpList.data.liked_recipe) && scarpList.data.liked_recipe.length === 0){
-                console.log("<scarpList> : real scarpList empty", scarpList.data.liked_recipe)
-                console.log("<scarpList> : real scarpList empty false", isEmpty);
-            }else{
+            if (Array.isArray(scarpList.data.liked_recipe) && scarpList.data.liked_recipe.length === 0){
+            } else {
                 setIsEmpty(true)
             }
         }

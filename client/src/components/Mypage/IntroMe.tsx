@@ -10,13 +10,14 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { editImg } from "../../modules/mypageEditImgSlice";
 import Modal from '@mui/material/Modal';
-import { profile_img, option_box, file_select } from "../../css/register_css";
+// import { profile_img, option_box, file_select } from "../../css/register_css";
 
-import {avatar} from '../../assets/mainAvatar.png'
+// import {avatar} from '../../assets/mainAvatar.png'
 
 function IntroMe() {
     const dispatch = useDispatch();
     const refreshTkn = sessionStorage.getItem("usrRfshTkn");
+    const user_img = sessionStorage.getItem("img");
     const [isInfo, setIsInfo] = useState(false);
     const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>("");
 
@@ -26,52 +27,47 @@ function IntroMe() {
     );
 
     useEffect(() => {
-        console.log("<IntroMe> : dispatch > getMyInfo");
+        // console.log("<IntroMe> : dispatch > getMyInfo");
         dispatch(getMyInfo());
-    }, []);
+    }, [dispatch]);
 
     const myInfo = useSelector(
         (state: RootStateOrAny) => state.getMyInfoList.list
     );
 
-    const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
-
+    // const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
 
     useEffect(() => {
-        console.log("<IntroMe> : myInfo : ", myInfo);
+        // console.log("<IntroMe> : myInfo : ", myInfo);
         if (Array.isArray(myInfo) && myInfo.length === 0) {
-            console.log("<IntroMe> : myInfo empty");
+            // console.log("<IntroMe> : myInfo empty");
         } else if (!myInfo) {
-            console.log("<IntroMe> : myInfo false");
-            handleToken();
+            // console.log("<IntroMe> : myInfo false");
+            dispatch(
+                getNewAccess({
+                    refresh_token: refreshTkn,
+                })
+            );
         } else {
-            console.log("<IntroMe> : myInfo true ", myInfo.data.user_info);
+            // console.log("<IntroMe> : myInfo true ", myInfo.data.user_info);
             setIsInfo(true);
         }
-    }, [myInfo]);
-
-    const handleToken = () => {
-        dispatch(
-            getNewAccess({
-                refresh_token: refreshTkn,
-            })
-        );
-    };
+    }, [dispatch, myInfo, refreshTkn]);
 
     useEffect(() => {
-        console.log("<newToken> : ", newToken);
+        // console.log("<newToken> : ", newToken);
         if (Array.isArray(newToken) && newToken.length === 0) {
-            console.log("<newToken> : token empty");
+            // console.log("<newToken> : token empty");
         } else if (!newToken) {
-            console.log("<newToken> : token false");
+            // console.log("<newToken> : token false");
         } else {
-            console.log("<newToken> : token true ", newToken.data);
+            // console.log("<newToken> : token true ", newToken.data);
             sessionStorage.removeItem("usrAcsTkn");
             sessionStorage.setItem("usrAcsTkn", newToken.data["access_token"]);
-            console.log("<newToken> : dispatch > again");
+            // console.log("<newToken> : dispatch > again");
             dispatch(getMyInfo());
         }
-    }, [newToken]);
+    }, [dispatch, newToken]);
 
     // 프로필 사진 수정 api
     const user_id = String(sessionStorage.getItem("user_id"));
@@ -90,7 +86,7 @@ function IntroMe() {
         let reader = new FileReader();
         let file = e.target.files[0];
         formData.set("img", file);
-        console.log(file);
+        // console.log(file);
 
         reader.onloadend = () => {
             setProfileImage(reader.result);
@@ -120,7 +116,7 @@ function IntroMe() {
                     >
                         <Avatar
                             alt={myInfo.data.user_info.nickname}
-                            src={myInfo.data.user_info.img}
+                            src={typeof user_img == "string" ? user_img : ""}
                             sx={{ width: 128, height: 128 }}
                         />
                         <Box

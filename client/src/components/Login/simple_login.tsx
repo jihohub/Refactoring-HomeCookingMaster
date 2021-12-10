@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import kakaoLogin from '../../assets/kakao_login_medium.png'
-import { loign_box,simple_login } from "../../css/login_css";
+import { loign_box, simple_login } from "../../css/login_css";
 
 function SimpleLogin() {
     // const kakao = (window as any).Kakao

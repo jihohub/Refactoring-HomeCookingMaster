@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Paper, InputBase, Button } from "@mui/material";
 import { search,searchBtn,elem,intro,toImage } from "../../css/result_csst";
-import { useDispatch,useSelector, RootStateOrAny } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setWord } from "../../modules/search";
 import { useNavigate } from "react-router";
 

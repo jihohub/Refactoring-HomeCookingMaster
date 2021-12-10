@@ -1,14 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { Link, NavLink } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import ScrollTop from "./ScrollTop";
 import HideOnScroll from "./HideOnScroll";
-import mainlogo from "../../assets/hcmk_logo.png";
-import logo1line from "../../assets/logo22.png";
+// import mainlogo from "../../assets/hcmk_logo.png";
+// import logo1line from "../../assets/logo22.png";
 import logohat from "../../assets/hatYess.png";
-import logonohat from "../../assets/hatNoo.png";
+// import logonohat from "../../assets/hatNoo.png";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +22,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Fab from "@mui/material/Fab";
@@ -32,18 +30,8 @@ import background from "../../assets/bg2.jpeg";
 
 const styles = {
     "&.MuiFab-secondary": {
-        // border: "1px black solid",
         backgroundColor: "#897A5F",
     },
-    // "&.MuiButton-text": {
-    //     color: "grey",
-    // },
-    // "&.MuiButton-contained": {
-    //     color: "yellow",
-    // },
-    // "&.MuiButton-outlined": {
-    //     color: "brown",
-    // },
 };
 
 const pages = [
@@ -75,7 +63,7 @@ interface Props {
 const Header = (props: Props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
+    // const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
 
     const [logCheck, setLogCheck] = useState<boolean>(false);
 
@@ -94,17 +82,18 @@ const Header = (props: Props) => {
     }, [refreshTkn]);
 
     const handleLogout = async () => {
-        const res = await axios.delete("/api/auth/logout", {
+        // const res = await axios.delete("/api/auth/logout", {
+        await axios.delete("/api/auth/logout", {
             headers: {
                 Authorization: "Bearer " + accessTkn,
             },
         });
-        console.log("<Header>: logout delete api response", res);
+        // console.log("<Header>: logout delete api response", res);
     };
 
     const handleLog = () => {
         handleLogout();
-        console.log("<Header> : logout");
+        // console.log("<Header> : logout");
         sessionStorage.clear();
         dispatch(setUser());
         navigate("/");

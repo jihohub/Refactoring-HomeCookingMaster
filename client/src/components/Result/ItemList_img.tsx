@@ -37,7 +37,7 @@ function ItemList(){
     },[query])
 
     const resultList = useSelector((state:RootStateOrAny) => state.getSearchList.list)
-    console.log('<itemList> : resultList : ', resultList)
+    // console.log('<itemList> : resultList : ', resultList)
 
     // 음식명 랜덤으로 뽑기
     const randomProperty = function (obj:any) {

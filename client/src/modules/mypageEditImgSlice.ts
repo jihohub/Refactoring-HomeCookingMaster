@@ -1,7 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ConnectingAirportsOutlined } from "@mui/icons-material";
-
 interface EditImgState {
     img: string | null;
     loading: boolean;
@@ -22,7 +20,7 @@ export const editImg = createAsyncThunk("EDIT_IMAGE", async (formData: any) => {
             "Content-Type": "multipart/form-data"
         }
     });
-    console.log(response);
+    // console.log(response);
 
     return response.data.data.img;
 });

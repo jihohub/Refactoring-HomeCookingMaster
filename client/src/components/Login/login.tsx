@@ -29,42 +29,42 @@ function Login() {
     const token = useSelector((state:RootStateOrAny) => state.getUserInfo);
 
     useEffect(() => {
-        console.log("<login> : useEffect token : ", token)
+        // console.log("<login> : useEffect token : ", token)
 
         if (!token.refresh_token && !token.access_token) {
-            console.log("<login> : token empty");
-            // setCheck(false);
+            // console.log("<login> : token empty");
+            setCheck(false);
         } else if (!token) {
-            console.log("<login> : token false");
+            // console.log("<login> : token false");
             setCheck(false);
         } else {
-            console.log("<login> : token true");
+            // console.log("<login> : token true");
             sessionStorage.setItem("usrRfshTkn", token.refresh_token);
             sessionStorage.setItem("usrAcsTkn", token.access_token);
             sessionStorage.setItem("user_id", token.user_id);
             sessionStorage.setItem("nickname", token.nickname);
             sessionStorage.setItem("img", token.img);
-            navigate('/');
+            navigate("/");
         }
-    },[token])
+    }, [navigate, token]);
 
     const checkLogState = () => {
-        console.log("<login> : before dispatch")
+        // console.log("<login> : before dispatch")
         dispatch(getUser({
             email : id,
             password : pw
         }))
-        console.log("<login> : after dispatch")
+        // console.log("<login> : after dispatch")
     }
 
     const handleLogin = (e:any) => {
         if(id && pw){
-            console.log("<login> : 아이디, 비밀번호 모두 입력됨")
+            // console.log("<login> : 아이디, 비밀번호 모두 입력됨")
             checkLogState();
-            console.log("<login> : dispatch 함수 다음")
+            // console.log("<login> : dispatch 함수 다음")
             setCheck(true)
-            console.log("<login> : check값 true됨")
-            console.log("<login> : 받아온 token값 : ", token);
+            // console.log("<login> : check값 true됨")
+            // console.log("<login> : 받아온 token값 : ", token);
         }else{
             setCheck(false);
         }

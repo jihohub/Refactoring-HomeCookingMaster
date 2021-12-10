@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getRecipe, clearRecipe } from "../../modules/recipeSlice";
@@ -23,7 +22,7 @@ function RecipePage() {
         return () => {
             dispatch(clearRecipe());
         };
-    }, []);
+    }, [dispatch, recipe_id, user_id]);
 
     return (
         <Box sx={{backgroundColor:'#fbfbf9', width:'70vw', marginLeft:'17rem', marginTop:'10rem', marginBottom:'10rem'}} >

@@ -1,7 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ConnectingAirportsOutlined } from "@mui/icons-material";
-
 interface ImageState {
     formData: FormData | null;
     loading: boolean;
@@ -17,7 +15,7 @@ const initialState: ImageState = {
 /* 레시피 데이터 요청 */
 export const postImage = createAsyncThunk("POST_IMAGE", async (args: any, ThunkAPI: any) => {
         const { searchImageSlice } = ThunkAPI.getState();
-        console.log("args", args);
+        // console.log("args", args);
         const response = await axios.post(
             `/api/recipe/${args}/post`,
             searchImageSlice.formData, {
