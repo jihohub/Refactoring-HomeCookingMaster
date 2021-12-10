@@ -65,7 +65,6 @@ export const getUserInfo = createSlice({
         builder.addCase(
             getUser.fulfilled,
             (state, action: PayloadAction<any>) => {
-                console.log("action.payload", action.payload);
                 state.access_token = action.payload.access_token;
                 state.refresh_token = action.payload.refresh_token;
                 state.user_id = action.payload.user_id;
