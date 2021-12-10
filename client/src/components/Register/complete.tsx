@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import {Link} from 'react-router-dom';
-import { useLocation } from "react-router";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { complete, terms_title, line, complete_cnt, to_login, to_login_btn,userName,terms_title_com } from "../../css/register_css";
+import { useSelector, RootStateOrAny } from "react-redux";
+import { complete, complete_cnt, to_login, to_login_btn, userName, terms_title_com } from "../../css/register_css";
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
