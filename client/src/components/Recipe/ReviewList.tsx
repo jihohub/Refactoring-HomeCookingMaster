@@ -23,17 +23,21 @@ function Row(props: any) {
             {!open && (
                 <ListItemButton onClick={handleClick}>
                     <ListItemText
+                        sx={{ width: "15%" }}
                         primary={
-                            <Typography sx={{ fontFamily: "Elice" }}>
-                                {review.nickname}
-                            </Typography>
+                            <Box>
+                                <Typography sx={{ fontFamily: "Elice" }}>
+                                    {review.nickname}
+                                </Typography>
+                            </Box>
                         }
                     />
                     <ListItemText
+                        sx={{ width: "50%", textAlign: "left" }}
                         primary={
                             review.img ? (
                                 <Box sx={{ display: "flex" }}>
-                                    <IconButton>
+                                    <IconButton sx={{ marginLeft: -2 }} >
                                         <ImageIcon fontSize="small" />
                                     </IconButton>
                                     <Typography sx={{ fontFamily: "Elice" }}>
@@ -41,12 +45,18 @@ function Row(props: any) {
                                     </Typography>
                                 </Box>
                             ) : (
-                                <Typography sx={{ fontFamily: "Elice" }}>
-                                    {review.post}
-                                </Typography>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        width: "50%",
+                                    }}
+                                >
+                                    <Typography sx={{ fontFamily: "Elice" }}>
+                                        {review.post}
+                                    </Typography>
+                                </Box>
                             )
                         }
-                        sx={{ textAlign: "left" }}
                     />
                     <ListItemText
                         primary={
@@ -62,6 +72,7 @@ function Row(props: any) {
                 <List component="div" disablePadding onClick={handleClick}>
                     <ListItemButton sx={{ minHeight: "300px" }}>
                         <ListItemText
+                            sx={{ width: "15%" }}
                             primary={
                                 <Typography sx={{ fontFamily: "Elice" }}>
                                     {review.nickname}
@@ -69,6 +80,7 @@ function Row(props: any) {
                             }
                         />
                         <ListItemText
+                            sx={{ width: "50%", textAlign: "left" }}
                             primary={
                                 <>
                                     <Typography sx={{ fontFamily: "Elice" }}>
