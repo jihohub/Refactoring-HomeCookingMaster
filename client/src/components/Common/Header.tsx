@@ -109,11 +109,11 @@ const Header = (props: Props) => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = (page: any) => {
+    const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = (page: any) => {
+    const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
 
@@ -151,6 +151,7 @@ const Header = (props: Props) => {
                                     mr: 2,
                                     display: { xs: "none", md: "flex" },
                                 }}
+                                onClick={() => navigate("/")}
                             >
                                 <img
                                     src={logohat}
@@ -160,7 +161,6 @@ const Header = (props: Props) => {
                                         margin: "1rem",
                                         marginTop: "1rem",
                                     }}
-                                    onClick={() => navigate("/")}
                                     alt="main logo"
                                 />
                             </Typography>
@@ -201,14 +201,14 @@ const Header = (props: Props) => {
                                     {pages.map((page, index) => (
                                         <MenuItem
                                             key={index}
-                                            onClick={handleCloseNavMenu}
+                                            onClick={() => {
+                                                handleCloseNavMenu();
+                                                navigate(`${page.path}`);
+                                            }}
                                         >
                                             <Typography
                                                 textAlign="center"
                                                 sx={{ fontFamily: "Elice" }}
-                                                onClick={() =>
-                                                    navigate(`${page.path}`)
-                                                }
                                             >
                                                 {page.text}
                                             </Typography>
@@ -242,7 +242,7 @@ const Header = (props: Props) => {
                                     display: { xs: "none", md: "flex" },
                                 }}
                             >
-                                {pages.map((page, index) => (
+                                {pages.map((item, index) => (
                                     // <Button
                                     //     key={index}
                                     //     onClick={handleCloseNavMenu}
@@ -254,13 +254,13 @@ const Header = (props: Props) => {
                                     // >
                                     <MenuItem
                                         key={index}
-                                        onClick={handleCloseNavMenu}
+                                        onClick={() => {
+                                            handleCloseNavMenu();
+                                            navigate(`${item.path}`);
+                                        }}
                                     >
                                         <Typography
                                             textAlign="center"
-                                            onClick={() =>
-                                                navigate(`${page.path}`)
-                                            }
                                             sx={{
                                                 color: "#897A5F",
                                                 fontSize: "1.2em",
@@ -273,7 +273,7 @@ const Header = (props: Props) => {
                                             //     display: "block",
                                             // }}
                                         >
-                                            {page.text}
+                                            {item.text}
                                         </Typography>
                                     </MenuItem>
                                     // </Button>
@@ -335,15 +335,15 @@ const Header = (props: Props) => {
                                             {loggedIn.map((item, index) => (
                                                 <MenuItem
                                                     key={index}
-                                                    onClick={item.func}
+                                                    onClick={() => {
+                                                        item.func();
+                                                        navigate(
+                                                            `${item.path}`
+                                                        );
+                                                    }}
                                                 >
                                                     <Typography
                                                         textAlign="center"
-                                                        onClick={() =>
-                                                            navigate(
-                                                                `${item.path}`
-                                                            )
-                                                        }
                                                         sx={{
                                                             color: "#897A5F",
                                                             fontFamily: "Elice",
@@ -360,13 +360,13 @@ const Header = (props: Props) => {
                                 notLoggedIn.map((item, index) => (
                                     <MenuItem
                                         key={index}
-                                        onClick={handleCloseNavMenu}
+                                        onClick={() => {
+                                            handleCloseNavMenu();
+                                            navigate(`${item.path}`);
+                                        }}
                                     >
                                         <Typography
                                             textAlign="center"
-                                            onClick={() =>
-                                                navigate(`${item.path}`)
-                                            }
                                             sx={{
                                                 color: "#897A5F",
                                                 fontSize: "1.2rem",

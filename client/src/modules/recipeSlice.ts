@@ -40,6 +40,7 @@ interface RecipeState {
         timestamp: string;
         user_id: number;
         nickname: string;
+        profile_img: string;
         recipe_id: number;
     }>;
     other_recipes_info: Array<{

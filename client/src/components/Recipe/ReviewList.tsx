@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ImageIcon from "@mui/icons-material/Image";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Box, Typography, Divider, Collapse, IconButton, List, ListItemButton, ListItemText, Modal } from "@mui/material";
+import { Box, Typography, Divider, Collapse, IconButton, List, ListItemButton, ListItemText, Avatar, Modal } from "@mui/material";
 
 function Row(props: any) {
     const review = props.row;
@@ -23,30 +23,59 @@ function Row(props: any) {
             {!open && (
                 <ListItemButton onClick={handleClick}>
                     <ListItemText
+                        sx={{ width: "15%", margin: "auto 0" }}
                         primary={
-                            <Typography sx={{ fontFamily: "Elice" }}>
-                                {review.nickname}
-                            </Typography>
+                            <Box sx={{ display: "flex" }}>
+                                <Avatar
+                                    alt="author's profile image"
+                                    src={review.profile_img}
+                                    sx={{
+                                        width: 25,
+                                        height: 25,
+                                    }}
+                                    component="span"
+                                />
+                                <Typography
+                                    sx={{ fontFamily: "Elice", marginLeft: 1 }}
+                                >
+                                    {review.nickname}
+                                </Typography>
+                            </Box>
                         }
                     />
                     <ListItemText
+                        sx={{ width: "70%", textAlign: "left" }}
                         primary={
                             review.img ? (
-                                <Box sx={{ display: "flex" }}>
-                                    <IconButton>
-                                        <ImageIcon fontSize="small" />
-                                    </IconButton>
-                                    <Typography sx={{ fontFamily: "Elice" }}>
-                                        {review.post}
-                                    </Typography>
+                                <Box sx={{ display: "flex", width: "70%" }}>
+                                    <Box
+                                        sx={{ width: "10%", margin: "auto 0" }}
+                                    >
+                                        <IconButton>
+                                            <ImageIcon fontSize="small" />
+                                        </IconButton>
+                                    </Box>
+                                    <Box sx={{ width: "90%", margin: "auto 0" }}>
+                                        <Typography
+                                            sx={{ fontFamily: "Elice" }}
+                                        >
+                                            {review.post}
+                                        </Typography>
+                                    </Box>
                                 </Box>
                             ) : (
-                                <Typography sx={{ fontFamily: "Elice" }}>
-                                    {review.post}
-                                </Typography>
+                                <Box sx={{ display: "flex", width: "70%" }}>
+                                    <Box sx={{ width: "10%" }} />
+                                    <Box sx={{ width: "90%" }}>
+                                        <Typography
+                                            sx={{ fontFamily: "Elice" }}
+                                        >
+                                            {review.post}
+                                        </Typography>
+                                    </Box>
+                                </Box>
                             )
                         }
-                        sx={{ textAlign: "left" }}
                     />
                     <ListItemText
                         primary={
@@ -62,28 +91,51 @@ function Row(props: any) {
                 <List component="div" disablePadding onClick={handleClick}>
                     <ListItemButton sx={{ minHeight: "300px" }}>
                         <ListItemText
+                            sx={{ width: "15%", margin: "auto 0" }}
                             primary={
-                                <Typography sx={{ fontFamily: "Elice" }}>
-                                    {review.nickname}
-                                </Typography>
+                                <Box sx={{ display: "flex" }}>
+                                    <Avatar
+                                        alt="author's profile image"
+                                        src={review.profile_img}
+                                        sx={{
+                                            width: 25,
+                                            height: 25,
+                                        }}
+                                        component="span"
+                                    />
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Elice",
+                                            marginLeft: 1,
+                                        }}
+                                    >
+                                        {review.nickname}
+                                    </Typography>
+                                </Box>
                             }
                         />
                         <ListItemText
+                            sx={{ width: "70%", textAlign: "left" }}
                             primary={
-                                <>
-                                    <Typography sx={{ fontFamily: "Elice" }}>
-                                        {review.post}
-                                    </Typography>
-                                    <br />
-                                    {review.img && (
-                                        <img
-                                            src={review.img}
-                                            width="200px"
-                                            alt="big"
-                                            onClick={handleOpen}
-                                        />
-                                    )}
-                                </>
+                                <Box sx={{ display: "flex", width: "70%" }}>
+                                    <Box sx={{ width: "10%" }} />
+                                    <Box sx={{ width: "90%" }}>
+                                        <Typography
+                                            sx={{ fontFamily: "Elice" }}
+                                        >
+                                            {review.post}
+                                        </Typography>
+                                        <br />
+                                        {review.img && (
+                                            <img
+                                                src={review.img}
+                                                width="100%"
+                                                alt="big"
+                                                onClick={handleOpen}
+                                            />
+                                        )}
+                                    </Box>
+                                </Box>
                             }
                         />
                         <ListItemText
@@ -116,6 +168,7 @@ function Row(props: any) {
                         overflowY: "auto",
                     }}
                     alt="original"
+                    onClick={handleClose}
                 />
             </Modal>
         </>
