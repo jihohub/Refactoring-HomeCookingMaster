@@ -91,10 +91,24 @@ function Row(props: any) {
                 <List component="div" disablePadding onClick={handleClick}>
                     <ListItemButton sx={{ minHeight: "300px" }}>
                         <ListItemText
-                            sx={{ width: "10%" }}
+                            sx={{ width: "15%", margin: "auto 0" }}
                             primary={
-                                <Box>
-                                    <Typography sx={{ fontFamily: "Elice" }}>
+                                <Box sx={{ display: "flex" }}>
+                                    <Avatar
+                                        alt="author's profile image"
+                                        src={review.profile_img}
+                                        sx={{
+                                            width: 25,
+                                            height: 25,
+                                        }}
+                                        component="span"
+                                    />
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Elice",
+                                            marginLeft: 1,
+                                        }}
+                                    >
                                         {review.nickname}
                                     </Typography>
                                 </Box>
