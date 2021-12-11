@@ -16,6 +16,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { height } from "@mui/system";
 
 
 const mainWrapperStyle = css`
@@ -135,7 +136,7 @@ const MainRanking = () => {
                             onClick={() => navigate(`/recipe/${item.id}`)}
                             ></img>
                         <div css={top3Name}>
-                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice', width:'20rem', fontWeight: '600'}}>
+                            <Typography variant="h5" gutterBottom component="p" sx={{fontFamily:'Elice', width:'20rem', fontWeight: '600', textAlign:'center'}}>
                                     {item.name}
                             </Typography>
                         </div>
@@ -168,16 +169,7 @@ const MainRanking = () => {
                         <ImageListItemBar
                             title={item.name}
                             position="below"
-                            sx={{fontFamily:'Elice', fontWeight: '600'}}
-                            actionIcon={
-                                <IconButton
-                                    sx={{ color: 'rgba(255, 255, 255, 0.54)', cursor:'pointer' }}
-                                    aria-label={`info about ${item.name}`}
-                                    onClick={() => navigate(`/recipe/${item.id}`)}
-                                >
-                                    <ArrowForwardIcon />
-                                </IconButton>
-                            }
+                            sx={{fontFamily:'Elice', fontWeight: '600', textAlign:'center'}}
                         />
                     </ImageListItem>
                 )) : ""}

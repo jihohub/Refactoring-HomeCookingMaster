@@ -39,6 +39,13 @@ function Login() {
         } 
     }, [token]);
 
+    const handleKeyPress = (e:any) => {
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            handleLogin();
+        }
+    }
+
     const handleLogin = async () => {
         // console.log("<login> : before dispatch")
         await dispatch(getUser({
@@ -68,6 +75,7 @@ function Login() {
                     color="warning" 
                     css={input_box}
                     onChange={(e) => setPw(e.target.value)}
+                    onKeyPress={handleKeyPress}
                 />
                 {check ? "" : <p style={{ color:'#e45a41', marginBottom:'10px', fontWeight:'600'}}>아이디와 비밀번호를 확인해주세요.</p>}
                 <OkButton
