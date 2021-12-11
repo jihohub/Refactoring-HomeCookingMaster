@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ImageIcon from "@mui/icons-material/Image";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Box, Typography, Divider, Collapse, IconButton, List, ListItemButton, ListItemText, Modal } from "@mui/material";
+import { Box, Typography, Divider, Collapse, IconButton, List, ListItemButton, ListItemText, Avatar, Modal } from "@mui/material";
 
 function Row(props: any) {
     const review = props.row;
@@ -23,10 +23,21 @@ function Row(props: any) {
             {!open && (
                 <ListItemButton onClick={handleClick}>
                     <ListItemText
-                        sx={{ width: "10%" }}
+                        sx={{ width: "15%", margin: "auto 0" }}
                         primary={
-                            <Box>
-                                <Typography sx={{ fontFamily: "Elice" }}>
+                            <Box sx={{ display: "flex" }}>
+                                <Avatar
+                                    alt="author's profile image"
+                                    src={review.profile_img}
+                                    sx={{
+                                        width: 25,
+                                        height: 25,
+                                    }}
+                                    component="span"
+                                />
+                                <Typography
+                                    sx={{ fontFamily: "Elice", marginLeft: 1 }}
+                                >
                                     {review.nickname}
                                 </Typography>
                             </Box>
@@ -44,7 +55,7 @@ function Row(props: any) {
                                             <ImageIcon fontSize="small" />
                                         </IconButton>
                                     </Box>
-                                    <Box sx={{ width: "90%", margin: "auto 0" }}>
+                                    <Box sx={{ width: "90%" }}>
                                         <Typography
                                             sx={{ fontFamily: "Elice" }}
                                         >
