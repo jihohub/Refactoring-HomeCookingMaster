@@ -23,7 +23,7 @@ function Row(props: any) {
             {!open && (
                 <ListItemButton onClick={handleClick}>
                     <ListItemText
-                        sx={{ width: "15%" }}
+                        sx={{ width: "10%" }}
                         primary={
                             <Box>
                                 <Typography sx={{ fontFamily: "Elice" }}>
@@ -33,27 +33,35 @@ function Row(props: any) {
                         }
                     />
                     <ListItemText
-                        sx={{ width: "50%", textAlign: "left" }}
+                        sx={{ width: "70%", textAlign: "left" }}
                         primary={
                             review.img ? (
-                                <Box sx={{ display: "flex" }}>
-                                    <IconButton sx={{ marginLeft: -2 }} >
-                                        <ImageIcon fontSize="small" />
-                                    </IconButton>
-                                    <Typography sx={{ fontFamily: "Elice" }}>
-                                        {review.post}
-                                    </Typography>
+                                <Box sx={{ display: "flex", width: "70%" }}>
+                                    <Box
+                                        sx={{ width: "10%", margin: "auto 0" }}
+                                    >
+                                        <IconButton>
+                                            <ImageIcon fontSize="small" />
+                                        </IconButton>
+                                    </Box>
+                                    <Box sx={{ width: "90%" }}>
+                                        <Typography
+                                            sx={{ fontFamily: "Elice" }}
+                                        >
+                                            {review.post}
+                                        </Typography>
+                                    </Box>
                                 </Box>
                             ) : (
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        width: "50%",
-                                    }}
-                                >
-                                    <Typography sx={{ fontFamily: "Elice" }}>
-                                        {review.post}
-                                    </Typography>
+                                <Box sx={{ display: "flex", width: "70%" }}>
+                                    <Box sx={{ width: "10%" }} />
+                                    <Box sx={{ width: "90%" }}>
+                                        <Typography
+                                            sx={{ fontFamily: "Elice" }}
+                                        >
+                                            {review.post}
+                                        </Typography>
+                                    </Box>
                                 </Box>
                             )
                         }
@@ -72,30 +80,37 @@ function Row(props: any) {
                 <List component="div" disablePadding onClick={handleClick}>
                     <ListItemButton sx={{ minHeight: "300px" }}>
                         <ListItemText
-                            sx={{ width: "15%" }}
+                            sx={{ width: "10%" }}
                             primary={
-                                <Typography sx={{ fontFamily: "Elice" }}>
-                                    {review.nickname}
-                                </Typography>
+                                <Box>
+                                    <Typography sx={{ fontFamily: "Elice" }}>
+                                        {review.nickname}
+                                    </Typography>
+                                </Box>
                             }
                         />
                         <ListItemText
-                            sx={{ width: "50%", textAlign: "left" }}
+                            sx={{ width: "70%", textAlign: "left" }}
                             primary={
-                                <>
-                                    <Typography sx={{ fontFamily: "Elice" }}>
-                                        {review.post}
-                                    </Typography>
-                                    <br />
-                                    {review.img && (
-                                        <img
-                                            src={review.img}
-                                            width="200px"
-                                            alt="big"
-                                            onClick={handleOpen}
-                                        />
-                                    )}
-                                </>
+                                <Box sx={{ display: "flex", width: "70%" }}>
+                                    <Box sx={{ width: "10%" }} />
+                                    <Box sx={{ width: "90%" }}>
+                                        <Typography
+                                            sx={{ fontFamily: "Elice" }}
+                                        >
+                                            {review.post}
+                                        </Typography>
+                                        <br />
+                                        {review.img && (
+                                            <img
+                                                src={review.img}
+                                                width="100%"
+                                                alt="big"
+                                                onClick={handleOpen}
+                                            />
+                                        )}
+                                    </Box>
+                                </Box>
                             }
                         />
                         <ListItemText
@@ -128,6 +143,7 @@ function Row(props: any) {
                         overflowY: "auto",
                     }}
                     alt="original"
+                    onClick={handleClose}
                 />
             </Modal>
         </>
