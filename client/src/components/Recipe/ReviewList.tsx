@@ -44,7 +44,7 @@ function Row(props: any) {
                                             <ImageIcon fontSize="small" />
                                         </IconButton>
                                     </Box>
-                                    <Box sx={{ width: "90%" }}>
+                                    <Box sx={{ width: "90%", margin: "auto 0" }}>
                                         <Typography
                                             sx={{ fontFamily: "Elice" }}
                                         >
