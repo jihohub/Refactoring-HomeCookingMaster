@@ -123,7 +123,7 @@ const MainSearch = () => {
                         2. 화질이 나쁜 사진은 검색이 어렵습니다.
                     </GuideText>
                     <GuideText>
-                        3. 음식이 잘 보이는 사진으로 검색해주세요!
+                        3. 음식이 잘 보이는 사진으로 검색해주세요.
                     </GuideText>
                 </Box>
             </SearchDiv>
