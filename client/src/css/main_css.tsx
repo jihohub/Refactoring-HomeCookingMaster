@@ -1,13 +1,14 @@
 import { css } from "@emotion/react";
 
 export const imgSearch = css`
-    padding-left: 10rem;
+    padding: 0 5% 0 10%;
+    width: 50%;
 `;
 
 export const imageTitle = css`
     font-weight: 700;
-    margin-left: 10rem;
-    margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 5%;
     color:#897A5F;
 `;
 
@@ -24,8 +25,8 @@ export const btnDiv = css`
 `;
 
 export const imgGuide  = css`
-    padding-right: 10rem;
-    width:40%;
+    padding: 0 10% 0 5%;
+    width:50%;
     margin-top: 2rem;
 `;
 
@@ -33,16 +34,6 @@ export const guideTitle = css`
     text-align: center;
     margin-bottom: 2rem;
     font-weight: 700;
-`;
-
-
-export const rankingTitle = css`
-    text-align: center;
-    margin-top: 9rem;
-    margin-bottom: 6rem;
-    font-weight: 700;
-    font-size: 4rem;
-    color:#897A5F;
 `;
 
 export const rankingDiv = css`
@@ -53,6 +44,7 @@ export const rankingDiv = css`
 `;
 
 export const top3TopDiv = css`
+    width: 100%;
     display: flex;
     /* padding-left: 20%; */
     /* flex-direction: column; */
@@ -63,22 +55,22 @@ export const top3TopDiv = css`
 export const top3ItemDiv = css`
     display: flex;
     flex-direction: column;
-    margin-bottom: 5rem;
-    padding: 1rem;
+    margin-bottom: 5%;
 `;
 
 export const top3Div = css`
-    /* margin-right: 5rem; */
+    /* margin-right: 5%; */
 `;
 
 export const top3Name = css`
     /* margin-left: 5rem; */
     /* width: 20% */
+    width: 20vw;
 `;
 
 export const top3Img = css`
-    width:22rem;
-    height:22rem;
+    width: 90%;
+    height: 30vh;
     cursor: pointer;
     box-shadow: 2px 2px 6px gray;
     margin-bottom: 5%;
@@ -89,8 +81,8 @@ export const top3Img = css`
 `;
 
 export const img = css`
-    width:100%;
-    height:17rem;
+    width: 90%;
+    height: 20vh;
     cursor: pointer;
     box-shadow: 2px 2px 6px gray;
     margin-bottom: 5%;

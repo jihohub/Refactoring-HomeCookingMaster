@@ -2,11 +2,12 @@
 import { css } from "@emotion/react";
 import { useEffect } from "react";
 import Dropzone from "react-dropzone";
-import Box from "@mui/material/Box";
+import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector,RootStateOrAny } from "react-redux";
 import { getImgResult, setImgResult } from "../../modules/searchByImageSlice";
 // import { setStatus } from "../../modules/checkImg";
 import { setSearchImg } from "../../modules/userSearchImg";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { GrImage } from "react-icons/gr";
 import { btnDiv } from "../../css/main_css";
 import { useNavigate } from "react-router";
@@ -66,51 +67,46 @@ function DropZone() {
         }
     }, [imgResult]);
 
-
     return (
-        <div>
+        <Box>
             <Box
                 sx={{
                     border: "1px dashed black",
-                    width: "30rem",
-                    height: "25rem",
+                    width: "70%",
+                    height: "25vh",
                     textAlign: "center",
+                    margin: "0 auto",
+                    backgroundColor: "lightgray",
+                    opacity: 0.5,
                 }}
             >
-                <Box  sx={{ border: "1px dashed black", width: "30rem", height: "25rem", textAlign:'center' }}>
-                    <Dropzone onDrop={(acceptedFiles) => handleDrop(acceptedFiles)}>
-                        {({ getRootProps, getInputProps }) => (
-                            <section
-                                {...getRootProps()}
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    backgroundColor: "lightgray",
-                                    opacity: 0.5,
-                                }}
-                            >
-                                <input {...getInputProps()} />
-                                <div>
-                                    <GrImage css={info} size="70" />
-                                    <p>
-                                        드래그 앤 드롭으로 이미지 파일을 추가하세요.
-                                    </p>
-                                </div>
-                            </section>
-                        )}
-                    </Dropzone>
-                </Box>
-                <div css={btnDiv}>
-                    <p >이미지 업로드시 바로 검색됩니다.</p>
-                </div>
+                <Dropzone onDrop={(acceptedFiles) => handleDrop(acceptedFiles)}>
+                    {({ getRootProps, getInputProps }) => (
+                        <section {...getRootProps()} style={{ height: "100%", display: "table", margin: "auto" }}>
+                            <input {...getInputProps()} />
+                            <Box sx={{ display: "table-cell", verticalAlign: "middle" }}>
+                                <AddPhotoAlternateIcon sx={{ fontSize: "60px" }} />
+                                <Typography sx={{ fontFamily: "Elice" }}>
+                                    드래그 앤 드롭으로 이미지 파일을 추가하세요.
+                                </Typography>
+                            </Box>
+                        </section>
+                    )}
+                </Dropzone>
             </Box>
-        </div>
+            <Box
+                sx={{
+                    textAlign: "center",
+                    margin: "0 auto",
+                    marginTop: "2%",
+                }}
+            >
+                <Typography sx={{ fontFamily: "Elice" }}>
+                    이미지 업로드시 바로 검색됩니다.
+                </Typography>
+            </Box>
+        </Box>
     );
 }
 
 export default DropZone;
-
-
-const info = css`
-    margin-top: 9rem;
-`;

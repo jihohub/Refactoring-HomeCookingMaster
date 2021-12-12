@@ -59,7 +59,7 @@ function RecipeMain(props: any) {
                     width: "70vw",
                     maxWidth: "1080px",
                     margin: "0 auto",
-                    textAlign: "center",
+                    textAlign: "center"
                 }}
             >
                 <img

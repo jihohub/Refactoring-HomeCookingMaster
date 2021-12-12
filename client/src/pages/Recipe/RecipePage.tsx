@@ -25,7 +25,7 @@ function RecipePage() {
     }, [dispatch, recipe_id, user_id]);
 
     return (
-        <Box sx={{backgroundColor:'#fbfbf9', width:'70vw', marginLeft:'17rem', marginTop:'10rem', marginBottom:'10rem'}} >
+        <Box sx={{backgroundColor:'#fbfbf9', width:'80vw', margin: "10% auto", padding: "0 5%"}} >
             <RecipeMain recipe={recipe} user_id={user_id} />
             <RecipeShowOthers recipe={recipe} />
             <ReviewList post={recipe.post_info} />
