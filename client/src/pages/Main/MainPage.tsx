@@ -97,7 +97,7 @@ const MainSearch = () => {
                 <Typography
                     sx={{
                         fontFamily: "EliceBold",
-                        fontSize: "2rem",
+                        fontSize: "4rem",
                         textAlign: "center",
                         marginTop: "5%",
                         color: "#897A5F",
