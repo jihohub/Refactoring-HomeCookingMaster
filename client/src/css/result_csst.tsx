@@ -91,9 +91,10 @@ export const img = css`
     height:17rem;
     cursor: pointer;
     box-shadow: 2px 2px 6px gray;
+    opacity: 1;
     :hover{
-        transform: scale(1.1);
-        transition:.5s;
+        opacity: 0.8;
+        transition: all 0.3s ease-in-out;
     }
 `;
 
@@ -103,9 +104,10 @@ export const imgResult = css`
     cursor: pointer;
     box-shadow: 2px 2px 6px gray;
     margin-bottom: 4%;
+    opacity: 1;
     :hover{
-        transform: scale(1.1);
-        transition:.5s;
+        opacity: 0.8;
+        transition: all 0.3s ease-in-out;
     }
 `;
 

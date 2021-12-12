@@ -11,8 +11,11 @@ import background from "../../assets/main.jpg";
 import DropZone from "../../components/Main/DropZone";
 
 import MainSlide from "../../components/Main/mainSlide";
-import { top3Img, top3Name, img } from "../../css/main_css";
-import { Box, ImageList, ImageListItem, ImageListItemBar, IconButton } from "@mui/material";
+import { top3Name } from "../../css/main_css";
+import { Box, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
+import character from '../../assets/character.png'
+import avatar1 from '../../assets/avater_1.png'
+import avatar from '../../assets/avatar.png'
 
 const SearchDiv = styled("div")(({ theme }) => ({
     height: "80%",
@@ -176,7 +179,7 @@ const MainRanking = () => {
                 <Typography
                     sx={{
                         fontFamily: "EliceBold",
-                        fontSize: "2rem",
+                        fontSize: "4rem",
                         textAlign: "center",
                         marginTop: "5%",
                         color: "#897A5F",
@@ -185,7 +188,7 @@ const MainRanking = () => {
                     레시피 랭킹
                 </Typography>
             </Box>
-            <Box sx={{ width: "100%", margin: "auto 0" }}>
+            <Box sx={{ width: "100%", margin: "auto 0", textAlign:'center' }}>
                 <Box sx={{ display: "flex" }}>
                     {top3List
                         ? top3List.map((item: any, index: number) => (
@@ -203,9 +206,9 @@ const MainRanking = () => {
                                             variant="h2"
                                             gutterBottom
                                             component="p"
-                                            sx={{ fontFamily: "EliceBold" }}
+                                            sx={{ fontFamily: "EliceBold", color:'#191919', textShadow:'2px 2px 4px gray' }}
                                         >
-                                            {top3List.indexOf(item) + 1}
+                                            <img src={character} alt="character"/> {top3List.indexOf(item) + 1}위 
                                         </Typography>
                                         <Top3Image
                                             src={item.img}
@@ -249,7 +252,7 @@ const MainRanking = () => {
                         ? othersList.map((item: any) => (
                                 <ImageListItem
                                     key={item.img}
-                                    sx={{ width: "20%", height: "10rem" }}
+                                    sx={{ width: "20%", height: "10rem"}}
                                 >
                                     <TopRestImage
                                         src={`${item.img}?w=248&fit=crop&auto=format`}
