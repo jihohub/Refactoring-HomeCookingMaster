@@ -148,16 +148,34 @@ function RecipeBoard(props: any) {
                 style={{ width: "70%", marginLeft: "15%", textAlign: "right" }}
             >
                 <label htmlFor="icon-button-file">
-                    <input
-                        accept="image/*"
-                        id="icon-button-file"
-                        type="file"
-                        style={{ display: "none" }}
-                        onChange={handleUpload}
-                    />
-                    <IconButton aria-label="upload picture" component="span">
-                        <AddAPhotoRoundedIcon />
-                    </IconButton>
+                    {user_id != "null" ? (
+                        <>
+                            <input
+                                accept="image/*"
+                                id="icon-button-file"
+                                type="file"
+                                style={{ display: "none" }}
+                                onChange={handleUpload}
+                            />
+                            <IconButton aria-label="upload picture" component="span">
+                                <AddAPhotoRoundedIcon />
+                            </IconButton>
+                        </>
+                    ) : (
+                        <>
+                            <input
+                                disabled
+                                accept="image/*"
+                                id="icon-button-file"
+                                type="file"
+                                style={{ display: "none" }}
+                                onChange={handleUpload}
+                            />
+                            <IconButton disabled aria-label="disabled upload picture" component="span">
+                                <AddAPhotoRoundedIcon />
+                            </IconButton>
+                        </>
+                    )}
                 </label>
                 {user_id != "null" ? (
                     <Button
