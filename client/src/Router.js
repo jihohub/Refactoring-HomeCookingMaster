@@ -13,6 +13,7 @@ import MyPage from "./pages/Mypage/MyPage";
 import ScrollToTop from "./components/Common/ScrollToTop";
 import Footer from "./components/Common/Footer";
 import IntroPage from "./pages/About/IntroducePage";
+import NotFound from "./pages/NotFound/NotFound";
 
 function Router() {
     return (
@@ -30,6 +31,7 @@ function Router() {
                 <Route path="/register/complete" element={<RegisterCompletePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/introUs" element={<IntroPage/>} />
+                <Route path="/*" element={<NotFound />} />
             </Routes>
             <Footer/>
         </BrowserRouter>
