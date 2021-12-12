@@ -72,8 +72,8 @@ function DropZone() {
             <Box
                 sx={{
                     border: "1px dashed black",
-                    width: "70%",
-                    height: "25vh",
+                    width: "80%",
+                    height: "30vh",
                     textAlign: "center",
                     margin: "0 auto",
                     backgroundColor: "lightgray",

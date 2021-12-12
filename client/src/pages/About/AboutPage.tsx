@@ -2,9 +2,11 @@
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { aboutDiv, sectionImg,sectionOne,sectionTwo } from "../../css/about_css";
+import { aboutDiv, sectionImg,sectionOne,sectionTwo,goSearch,goSearchTitle,goSearchImg } from "../../css/about_css";
 import { Fade } from "react-awesome-reveal";
 import avatar from '../../assets/avatar.png';
+import avatar1 from '../../assets/avatar_1.png';
+import avatar2 from '../../assets/avatar_2.png';
 import logo from '../../assets/hcmk_logo.png';
 import ex11 from '../../assets/ex11.png';
 import ex12 from '../../assets/ex12.png';
@@ -12,8 +14,13 @@ import ex13 from '../../assets/ex13.png';
 import review from '../../assets/newReview.jpg';
 import mypage from '../../assets/mypage.png';
 import { SearchDiv } from '../../css/about_css';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 function AboutPage() {
+    const navigate = useNavigate();
     return (
         <div css={aboutDiv}>
             <section css={sectionImg}>
@@ -99,12 +106,62 @@ function AboutPage() {
                     </SearchDiv>
                 </Fade>
             </section>
+            <section css={sectionOne}>
+                    <h1 style={{fontFamily:'EliceBold'}}>이제 원하는 레시피를 검색해보세요!</h1>
+                    <p style={{paddingBottom:'2rem'}}>꼬꼬를 누르면 이동합니다.</p>
+                    <div css={goSearch}>
+                        <div style={{display:'flex', flexDirection:'column',paddingRight:'3rem'}}>
+                            <img 
+                                src={avatar1} 
+                                alt="avatar" 
+                                css={goSearchImg}
+                                onClick={() => navigate('/result')}></img>
+                            <Typography
+                                sx={{fontSize:'1.5rem', fontFamily:'Elice'}}
+                            >
+                                텍스트로 검색하기
+                            </Typography>
+                        </div>
+                        <div style={{display:'flex', flexDirection:'column',paddingLeft:'3rem'}}>
+                            <img 
+                                src={avatar2} 
+                                alt="avatar"
+                                css={goSearchImg}
+                                onClick={() => navigate('/')}></img>
+                            <Typography
+                                sx={{fontSize:'1.5rem', fontFamily:'Elice'}}
+                            >
+                                이미지로 검색하기
+                            </Typography>
+                        </div>
+                    </div>
+            </section>
         </div>
     );
 }
 
 export default AboutPage;
 
+{/* <Typography
+onClick={() => navigate('/')}
+>
+이미지로 검색하기
+</Typography> */}
+
+// const ItemBox = styled(Button)({
+//     borderRadius:'30px',
+//     backgroundColor: 'white',
+//     borderColor: '#897A5F',
+//     color:'#897A5F',
+//     width: 150,
+//     height: 50,
+//     margin:'5%',
+//     '&:hover': {
+//         backgroundColor: '#c7b595',
+//         borderColor: '#c7b595',
+//         color: 'white',
+//     },
+// });
 
 
 
