@@ -55,7 +55,9 @@ function Row(props: any) {
                                             <ImageIcon fontSize="small" />
                                         </IconButton>
                                     </Box>
-                                    <Box sx={{ width: "90%", margin: "auto 0" }}>
+                                    <Box
+                                        sx={{ width: "90%", margin: "auto 0" }}
+                                    >
                                         <Typography
                                             sx={{ fontFamily: "Elice" }}
                                         >
@@ -125,13 +127,13 @@ function Row(props: any) {
                                         >
                                             {review.post}
                                         </Typography>
-                                        <br />
                                         {review.img && (
                                             <img
                                                 src={review.img}
                                                 width="100%"
                                                 alt="big"
                                                 onClick={handleOpen}
+                                                style={{ marginTop: "2%" }}
                                             />
                                         )}
                                     </Box>
@@ -142,6 +144,8 @@ function Row(props: any) {
                             primary={
                                 <Typography sx={{ fontFamily: "Elice" }}>
                                     {review.timestamp.split(" ")[0]}
+                                    <br />
+                                    {review.timestamp.split(" ")[1]}
                                 </Typography>
                             }
                         />
