@@ -218,20 +218,6 @@ const MainRanking = () => {
                                             fontFamily: "Elice",
                                             fontWeight: "600",
                                         }}
-                                        actionIcon={
-                                            <IconButton
-                                                sx={{
-                                                    color: "#897A5F",
-                                                    cursor: "pointer"
-                                                }}
-                                                aria-label={`info about ${item.name}`}
-                                                onClick={() =>
-                                                    navigate(`/recipe/${item.id}`)
-                                                }
-                                            >
-                                                <ArrowForwardIcon />
-                                            </IconButton>
-                                        }
                                     />
                                 </ImageListItem>
                             ))
