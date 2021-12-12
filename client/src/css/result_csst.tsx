@@ -28,16 +28,14 @@ export const elem = css`
 export const intro = css`
     display: flex;
     justify-content: center;
-    margin-right: 21rem;
+    margin-right: 25%;
     padding-bottom: 1rem;
 `;
 
 export const toImage = css`
-    display: flex;
-    justify-content: center;
-    margin-left: 61%;
+    margin-right: 10%;
     padding-top: 1.5em;
-    width: 10%;
+    /* width: 10%; */
     cursor: pointer;
     color : #897A5F;
     font-weight: 700;

@@ -2,22 +2,23 @@
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { aboutDiv, section, sectionDiv,section1,sectionImg,sectionOne,introDiv } from "../../css/about_css";
+import { aboutDiv, sectionImg,sectionOne,sectionTwo } from "../../css/about_css";
 import { Fade } from "react-awesome-reveal";
 import avatar from '../../assets/avatar.png';
 import logo from '../../assets/hcmk_logo.png';
 import ex11 from '../../assets/ex11.png';
 import ex12 from '../../assets/ex12.png';
 import ex13 from '../../assets/ex13.png';
-import review from '../../assets/review.png';
+import review from '../../assets/newReview.jpg';
 import mypage from '../../assets/mypage.png';
+import { SearchDiv } from '../../css/about_css';
 
 function AboutPage() {
     return (
         <div css={aboutDiv}>
             <section css={sectionImg}>
-                <h1>집밥꼬꼬선생</h1>
-                <p>집밥 레시피 검색 플랫폼</p>
+                    <h1 style={{marginTop:'8%', fontWeight:'600', fontSize:'4rem'}}>집밥꼬꼬선생</h1>
+                    <p>집밥 레시피 검색 플랫폼</p>
             </section>
             <section css={sectionOne}>
                 <Fade>
@@ -35,14 +36,14 @@ function AboutPage() {
                     <p >요리에 서툰 사회 초년생을 병아리에 비유하여<br/> 꼬꼬 선생이 이들에게 레시피를 전달해주는 서비스입니다.</p>
                 </Fade>
             </section>
-            <section css={sectionOne} >
+            <section css={sectionTwo} >
                 <Fade>
-                    <div style={{display:'flex', flexDirection:'row'}}>
+                    <SearchDiv>
                         <div style={{display:'flex', flexDirection:'column', marginRight:'2.5%', marginTop:'5rem'}}>
                             <h1 style={{fontFamily:'EliceBold'}}>다양한 음식 레시피 보유</h1>
                             <p>총 400가지의 집밥 메뉴와 <br/>약 1900개의 레시피 데이터를 보유하고 있어 <br/>다양한 음식을 만들 수 있습니다.</p>
                         </div>
-                        <Box sx={{ width: 500, height: 450, marginLeft:'2.5%' }}>
+                        <Box sx={{ width: 500, height: 450, marginLeft:'8%' }}>
                             <ImageList variant="masonry" cols={3} gap={8}>
                                 <ImageListItem key={ex11}>
                                     <img
@@ -73,29 +74,29 @@ function AboutPage() {
                                 </ImageListItem>
                             </ImageList>
                             </Box>
-                    </div>
+                    </SearchDiv>
                 </Fade>
             </section>
             <section css={sectionOne}>
                 <Fade>
-                    <div style={{display:'flex', flexDirection:'row'}}>
-                        <img src={review} alt="review" style={{height:'30rem',width:'30rem', marginRight:'2.5%', borderRadius:'15px', boxShadow:'2px 2px 6px gray'}}></img>
+                    <SearchDiv>
+                        <img src={review} alt="review" style={{height:'30rem',width:'30rem', marginRight:'2.5%', borderRadius:'15px', boxShadow:'2px 2px 6px gray', marginLeft:'8%'}}></img>
                         <div style={{display:'flex', flexDirection:'column', marginTop:'5rem', marginLeft:'2.5%', width:'100%'}}>
                             <h1 style={{fontFamily:'EliceBold'}}>사용자들의 생생한 리뷰</h1>
                             <p>레시피만으로는 알 수 없는 후기와 꿀팁 공유</p>
                         </div>
-                    </div>
+                    </SearchDiv>
                 </Fade>
             </section>
             <section css={sectionOne}>
                 <Fade>
-                    <div style={{display:'flex', flexDirection:'row'}}>
-                        <div style={{display:'flex', flexDirection:'column', marginTop:'5rem', width:'100%', marginRight:'2.5%'}}>
+                    <SearchDiv>
+                        <div style={{display:'flex', flexDirection:'column', marginTop:'5rem', width:'100%', marginRight:'1.5%'}}>
                             <h1 style={{fontFamily:'EliceBold'}}>마이페이지를 활용한 리뷰 및<br/> 스크랩 레시피 관리</h1>
-                            <p>좋아요 한 레시피와 댓글을 단 레시피를<br/> 마이페이지에서 손 쉽게 확인할 수 있습니다.</p>
+                            <p>스크랩한 레시피와 댓글을 단<br/> 레시피를 마이페이지에서 손 쉽게 확인할 수 있습니다.</p>
                         </div>
-                        <img src={mypage} alt="mypage" style={{height:'30rem',width:'30rem', borderRadius:'15px', boxShadow:'2px 2px 6px gray', marginLeft:'2.5%'}}></img>
-                    </div>
+                        <img src={mypage} alt="mypage" style={{height:'30rem',width:'30rem', borderRadius:'15px', boxShadow:'2px 2px 6px gray', marginLeft:'8%'}}></img>
+                    </SearchDiv>
                 </Fade>
             </section>
         </div>

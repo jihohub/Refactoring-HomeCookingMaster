@@ -12,6 +12,7 @@ import RecipePage from "./pages/Recipe/RecipePage";
 import MyPage from "./pages/Mypage/MyPage";
 import ScrollToTop from "./components/Common/ScrollToTop";
 import Footer from "./components/Common/Footer";
+import IntroPage from "./pages/About/IntroducePage";
 
 function Router() {
     return (
@@ -28,6 +29,7 @@ function Router() {
                 <Route path="/register/userInfo" element={<RegisterUserInfoPage />} />
                 <Route path="/register/complete" element={<RegisterCompletePage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/introUs" element={<IntroPage/>} />
             </Routes>
             <Footer/>
         </BrowserRouter>

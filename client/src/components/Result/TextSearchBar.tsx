@@ -51,9 +51,11 @@ export const TextSearchBar = () => {
                     </Button>
                 </div>
                 {/* <Link to="/" style={{textDecoration:'none', color:'#897A5F', fontWeight:'700', fontSize:'16px', width:''}}> */}
-                    <p css={toImage} onClick={() => navigate('/')}>
-                        이미지로 검색하기
-                    </p>
+                    <div style={{width:'80%',display:'flex', justifyContent:'flex-end'}}>
+                        <p css={toImage} onClick={() => navigate('/')}>
+                            이미지로 검색하기
+                        </p>
+                    </div>
                 {/* </Link> */}
                 
             </div>
