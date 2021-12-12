@@ -37,3 +37,7 @@ database/
 
 #trained_model
 trained_models/
+
+# machinelearning upload images
+machinelearning/static/uploads/*
+!machinelearning/static/uploads/.keep

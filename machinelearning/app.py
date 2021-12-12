@@ -7,8 +7,11 @@ from tensorflow.keras.models import load_model
 from werkzeug.utils import secure_filename
 import json
 
+from apscheduler.schedulers.background import BackgroundScheduler
+import os
 
 
+# 모델 가져오기
 def get_model():
 	# load the pre-trained Keras model (here we are using a model
 	# pre-trained on ImageNet and provided by Keras, but you can
@@ -16,6 +19,26 @@ def get_model():
 	global model
 	model = load_model('./trained_models/InceptionResNetV2_24_float32.h5')
 
+# 업로드된 이미지 삭제
+def del_uploaded_imgs():
+    filePath = '/opt/server/static/uploads'
+    
+    if os.path.exists(filePath):
+        for file in os.scandir(filePath):
+            os.remove(file.path)
+        return 'Delete Uploaded Images'
+
+#apscheduler 선언 
+sched = BackgroundScheduler(daemon=True) 
+#apscheduler실행설정, Cron방식으로, 수요일 오전 3시에 실행
+sched.add_job(del_uploaded_imgs,'cron', day_of_week='wed', hour='3') 
+
+# 테스트용 1분마다 실행
+# sched.add_job(del_uploaded_imgs,'cron', day_of_week='sun', hour='8', minute='29') 
+# sched.add_job(del_uploaded_imgs,'interval', minutes=1) 
+
+#apscheduler실행 
+sched.start()
 
 
 app = Flask(__name__)
