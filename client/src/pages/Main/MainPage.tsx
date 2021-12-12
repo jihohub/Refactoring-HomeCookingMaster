@@ -50,7 +50,7 @@ const MainSearch = () => {
                 <Typography
                     sx={{
                         fontFamily: "EliceBold",
-                        fontSize: "2rem",
+                        fontSize: "4rem",
                         textAlign: "center",
                         marginTop: "5%",
                         color: "#897A5F",
@@ -63,18 +63,18 @@ const MainSearch = () => {
                 <DropDiv>
                     <DropZone />
                 </DropDiv>
-                <Box sx={{ width: "60%", height: "40vh", margin: "auto auto" }}>
-                    <Typography sx={{ fontFamily: "EliceBold" }}>
+                <Box sx={{ height: "40vh", margin: "auto auto" }}>
+                    <Typography sx={{ fontFamily: "EliceBold", fontSize:'3rem' }}>
                         이렇게 찍어주세요!
                     </Typography>
-                    <Typography sx={{ fontFamily: "Elice" }}>
+                    <Typography sx={{ fontFamily: "Elice", fontSize:'1.5rem' }}>
                         1. 완성된 음식 사진을 올려주세요.
                     </Typography>
-                    <Typography sx={{ fontFamily: "Elice" }}>
+                    <Typography sx={{ fontFamily: "Elice", fontSize:'1.5rem' }}>
                         2. 화질이 나쁜 사진은 검색이 어렵습니다.
                     </Typography>
-                    <Typography sx={{ fontFamily: "Elice" }}>
-                        3. 음식이 잘 보이는 사진으로 검색해주세요!
+                    <Typography sx={{ fontFamily: "Elice", fontSize:'1.5rem' }}>
+                        3. 음식이 잘 보이는 사진으로 검색해주세요.
                     </Typography>
                 </Box>
             </SearchDiv>
