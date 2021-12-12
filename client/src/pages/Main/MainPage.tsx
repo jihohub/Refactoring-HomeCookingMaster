@@ -32,12 +32,51 @@ const DropDiv = styled("div")(({ theme }) => ({
     },
 }));
 
-const GuideDiv = styled("p")(({ theme }) => ({
-    height: "80%",
-    display: "flex",
-    flexDirection: "row",
+const GuideTitleText = styled("p")(({ theme }) => ({
+    fontFamily: "EliceBold",
+    fontSize: "1.5rem",
     [theme.breakpoints.down("md")]: {
-        flexDirection: "column",
+        fontSize: "1rem",
+    },
+}));
+
+const GuideText = styled("p")(({ theme }) => ({
+    fontFamily: "Elice",
+    fontSize: "1.5rem",
+    [theme.breakpoints.down("md")]: {
+        fontSize: "1rem",
+    },
+}));
+
+const Top3Image = styled("img")(({ theme }) => ({
+    width: "90%",
+    height: "30vh",
+    cursor: "pointer",
+    boxShadow: "2px 2px 6px gray",
+    marginBottom: "5%",
+    opacity: 1,
+    "&:hover": {
+        opacity: 0.8,
+        transition: "all 0.3s ease-in-out",
+    },
+    [theme.breakpoints.down("md")]: {
+        height: "15vh",
+    },
+}));
+
+const TopRestImage = styled("img")(({ theme }) => ({
+    width: "90%",
+    height: "20vh",
+    cursor: "pointer",
+    boxShadow: "2px 2px 6px gray",
+    marginBottom: "5%",
+    opacity: 1,
+    "&:hover": {
+        opacity: 0.8,
+        transition: "all 0.3s ease-in-out",
+    },
+    [theme.breakpoints.down("md")]: {
+        height: "10vh",
     },
 }));
 
@@ -72,18 +111,18 @@ const MainSearch = () => {
                     <DropZone />
                 </DropDiv>
                 <Box sx={{ width: "60%", height: "40vh", margin: "auto auto" }}>
-                    <Typography sx={{ fontFamily: "EliceBold" }}>
+                    <GuideTitleText>
                         이렇게 찍어주세요!
-                    </Typography>
-                    <Typography sx={{ fontFamily: "Elice" }}>
+                    </GuideTitleText>
+                    <GuideText>
                         1. 완성된 음식 사진을 올려주세요.
-                    </Typography>
-                    <Typography sx={{ fontFamily: "Elice" }}>
+                    </GuideText>
+                    <GuideText>
                         2. 화질이 나쁜 사진은 검색이 어렵습니다.
-                    </Typography>
-                    <Typography sx={{ fontFamily: "Elice" }}>
+                    </GuideText>
+                    <GuideText>
                         3. 음식이 잘 보이는 사진으로 검색해주세요!
-                    </Typography>
+                    </GuideText>
                 </Box>
             </SearchDiv>
         </Box>
@@ -166,14 +205,13 @@ const MainRanking = () => {
                                         >
                                             {top3List.indexOf(item) + 1}
                                         </Typography>
-                                        <img
+                                        <Top3Image
                                             src={item.img}
-                                            css={top3Img}
                                             alt={item.name}
                                             onClick={() =>
                                                 navigate(`/recipe/${item.id}`)
                                             }
-                                        ></img>
+                                        ></Top3Image>
                                         <div css={top3Name}>
                                             <Typography
                                                 variant="h5"
@@ -211,10 +249,9 @@ const MainRanking = () => {
                                     key={item.img}
                                     sx={{ width: "20%", height: "10rem" }}
                                 >
-                                    <img
+                                    <TopRestImage
                                         src={`${item.img}?w=248&fit=crop&auto=format`}
                                         alt={item.title}
-                                        css={img}
                                         onClick={() =>
                                             navigate(`/recipe/${item.id}`)
                                         }
