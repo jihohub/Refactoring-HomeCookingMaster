@@ -111,6 +111,7 @@ function ItemList(){
             <Box component="div" sx={{width:'80%', marginLeft:'15%', marginBottom:'1rem'}}>
             {isRecipeList ? foodList.map((item:any) => (
                     <ItemBox 
+                        key={item.id}
                         variant="outlined" 
                         onClick={() => navigate(`/result?data=${item}`)}>
                         {item}
