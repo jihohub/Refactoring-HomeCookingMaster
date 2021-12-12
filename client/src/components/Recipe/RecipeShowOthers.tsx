@@ -42,7 +42,6 @@ function RecipeShowOthers(props: any) {
             <Box
                 sx={{
                     width: "70vw",
-                    maxWidth: "1080px",
                     margin: "0 auto",
                     textAlign: "center",
                 }}
@@ -53,8 +52,7 @@ function RecipeShowOthers(props: any) {
             <Box
                 sx={{
                     width: "70vw",
-                    maxWidth: "1080px",
-                    height: "160px",
+                    height: "20vh",
                     margin: "0 auto",
                 }}
             >
@@ -63,7 +61,6 @@ function RecipeShowOthers(props: any) {
                     gap={20}
                     sx={{
                         width: "70vw",
-                        maxWidth: "1080px",
                         height: "100%",
                         display: "flex",
                         flexWrap: "wrap",
@@ -77,7 +74,7 @@ function RecipeShowOthers(props: any) {
                                     key={index}
                                     sx={{
                                         width: "20%",
-                                        height: "7rem",
+                                        height: "7%",
                                         boxShadow: "5px 2px 10px gray",
                                     }}
                                     css={img}
@@ -130,8 +127,9 @@ const img = css`
     height:10rem; */
     cursor: pointer;
     /* box-shadow: 2px 2px 6px gray; */
-    :hover{
-        transform: scale(1.1);
-        transition:.5s;
+    opacity: 1;
+    :hover {
+        opacity: 0.8;
+        transition: all 0.3s ease-in-out;
     }
 `;

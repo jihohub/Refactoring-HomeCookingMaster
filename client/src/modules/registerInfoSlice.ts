@@ -24,6 +24,7 @@ export const sendRegister = createAsyncThunk(
                 "Content-Type": "multipart/form-data"
             }
         });
+        console.log(response.data.data);
 
         return response.data.data;
     }

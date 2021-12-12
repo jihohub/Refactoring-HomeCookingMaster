@@ -82,14 +82,14 @@ class Signup(Resource):
         
         try:
             img = request.files["img"]
-        except Exception:
-            pass
-        try:
-            if img.filename == "":
+            try:
+                if img.filename == "":
+                    image_url = default_profile_img()
+                else:
+                    image_url = boto3_image_upload(img)
+            except UnboundLocalError:
                 image_url = default_profile_img()
-            else:
-                image_url = boto3_image_upload(img)
-        except UnboundLocalError:
+        except Exception:
             image_url = default_profile_img()
 
         result = signup(email, password, nickname, image_url)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { Box, TextField, Button, IconButton } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
@@ -17,42 +17,45 @@ const styles = {
 
 function RecipeBoard(props: any) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const params = useParams();
     const [post, setPost] = useState<string>("");    
 
     const recipe_id = props.recipe_id;
-    // const user_id = props.user_id;
     const user_id = String(sessionStorage.getItem("user_id")); // user_id
-    const formData = new FormData();
+    const [imageFile, setImageFile] = useState<any>(null);
 
     const handleText = (e: any) => {
         setPost(e.target.value);
     };
 
     const handleUpload = (e: any) => {
-        const imageFile = e.target.files[0];
-        formData.set("img", imageFile);
+        setImageFile(e.target.files[0]);
     };
 
     useEffect(() => {
         setPost("");
     }, [params]);
 
-    const handleSubmit = async () => {
-        await formData.set("user_id", user_id);
-        await formData.set("post", post);
-        await dispatch(recipeReview({ formData, recipe_id }));
-        dispatch(getRecipe({ recipe_id, user_id }));
-        dispatch(clearPost());
-        setPost("");
+    const handleSubmit = () => {
+        const formDataPost = new FormData();
+        formDataPost.append("img", imageFile);
+        formDataPost.append("user_id", user_id);
+        formDataPost.append("post", post);
+        dispatch(recipeReview({ formDataPost, recipe_id }));
+        window.location.reload();
     };
 
+    useEffect(() => {
+        dispatch(getRecipe({ recipe_id, user_id }));
+    }, [dispatch]);
+
+
     return (
-        <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
+        <Box sx={{ width: "70vw", margin: "0 auto" }}>
             <Box
                 sx={{
                     width: "70vw",
-                    maxWidth: "1080px",
                     margin: "0 auto",
                     height: "30px",
                 }}
@@ -73,7 +76,6 @@ function RecipeBoard(props: any) {
             <Box
                 sx={{
                     width: "70vw",
-                    maxWidth: "1080px",
                     margin: "0 auto",
                     height: "10px",
                 }}
@@ -102,7 +104,6 @@ function RecipeBoard(props: any) {
             <Box
                 sx={{
                     width: "70vw",
-                    maxWidth: "1080px",
                     margin: "0 auto",
                     height: "30px",
                 }}

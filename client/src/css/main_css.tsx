@@ -74,9 +74,10 @@ export const top3Img = css`
     cursor: pointer;
     box-shadow: 2px 2px 6px gray;
     margin-bottom: 5%;
-    :hover{
-        transform: scale(1.1);
-        transition:.5s;
+    opacity: 1;
+    :hover {
+        opacity: 0.8;
+        transition: all 0.3s ease-in-out;
     }
 `;
 
@@ -86,9 +87,9 @@ export const img = css`
     cursor: pointer;
     box-shadow: 2px 2px 6px gray;
     margin-bottom: 5%;
-    :hover{
-        transform: scale(1.1);
-        transition:.5s;
+    opacity: 1;
+    :hover {
+        opacity: 0.8;
+        transition: all 0.3s ease-in-out;
     }
-    
 `;
