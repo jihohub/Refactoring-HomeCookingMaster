@@ -24,7 +24,7 @@ const SearchDiv = styled("div")(({ theme }) => ({
 }));
 
 const DropDiv = styled("div")(({ theme }) => ({
-    width: "40%",
+    width: "60%",
     height: "40vh",
     margin: "auto",
     [theme.breakpoints.down("md")]: {
@@ -34,9 +34,11 @@ const DropDiv = styled("div")(({ theme }) => ({
 
 const GuideTitleText = styled("p")(({ theme }) => ({
     fontFamily: "EliceBold",
-    fontSize: "1.5rem",
+    fontSize: "2rem",
+    marginTop:'3rem',
     [theme.breakpoints.down("md")]: {
         fontSize: "1rem",
+        margin:'0',
     },
 }));
 
@@ -110,7 +112,7 @@ const MainSearch = () => {
                 <DropDiv>
                     <DropZone />
                 </DropDiv>
-                <Box sx={{ width: "60%", height: "40vh", margin: "auto auto" }}>
+                <Box sx={{ width: "60%", height: "40vh", margin: "auto auto", textAlign:'center' }}>
                     <GuideTitleText>
                         이렇게 찍어주세요!
                     </GuideTitleText>

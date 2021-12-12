@@ -31,7 +31,7 @@ export const each = css`
     flex-direction: row;
     justify-content:center;
     /* margin-top:3%; */
-    margin-bottom:3%;
+    margin-bottom:5%;
 `;
 
 export const name = css`
