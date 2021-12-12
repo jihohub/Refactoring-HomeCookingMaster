@@ -13,7 +13,6 @@ import DropZone from "../../components/Main/DropZone";
 import MainSlide from "../../components/Main/mainSlide";
 import { top3Img, top3Name, img } from "../../css/main_css";
 import { Box, ImageList, ImageListItem, ImageListItemBar, IconButton } from "@mui/material";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const SearchDiv = styled("div")(({ theme }) => ({
     height: "80%",
@@ -30,6 +29,15 @@ const DropDiv = styled("div")(({ theme }) => ({
     margin: "auto",
     [theme.breakpoints.down("md")]: {
         width: "80%"
+    },
+}));
+
+const GuideDiv = styled("p")(({ theme }) => ({
+    height: "80%",
+    display: "flex",
+    flexDirection: "row",
+    [theme.breakpoints.down("md")]: {
+        flexDirection: "column",
     },
 }));
 

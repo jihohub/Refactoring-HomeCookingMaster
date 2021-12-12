@@ -3,10 +3,56 @@ import { useParams, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { Box, TextField, Button, IconButton } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import { clearPost, recipeReview } from "../../modules/recipeReviewSlice";
+import { recipeReview } from "../../modules/recipeReviewSlice";
 import { getRecipe } from "../../modules/recipeSlice";
 
-const styles = {
+const inputStyles = {
+    width: "70%",
+    marginLeft: "15%",
+    "& legend": { display: "none" },
+    "& fieldset": { top: 0 },
+    "& label.Mui-focused": {
+        opacity: 0,
+    },
+    "& .MuiInput-underline:after": {
+        borderBottomColor: "yellow",
+    },
+    "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+            borderColor: "#000000",
+        },
+        "&:hover fieldset": {
+            borderColor: "#897A5F",
+        },
+        "&.Mui-focused fieldset": {
+            borderColor: "#897A5F",
+        },
+    },
+};
+
+const disabledInputStyles = {
+    width: "70%",
+    marginLeft: "15%",
+    "& label.Mui-focused": {
+        opacity: 0,
+    },
+    "& .MuiInput-underline:after": {
+        borderBottomColor: "yellow",
+    },
+    "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+            borderColor: "#000000",
+        },
+        "&:hover fieldset": {
+            borderColor: "#897A5F",
+        },
+        "&.Mui-focused fieldset": {
+            borderColor: "#897A5F",
+        },
+    },
+};
+
+const buttonStyles = {
     "&.MuiButton-root": {
         backgroundColor: "#897A5F",
     },
@@ -14,6 +60,16 @@ const styles = {
         fontFamily: "Elice",
     },
 };
+
+const disabledButtonStyles = {
+    "&.MuiButton-root": {
+        backgroundColor: "#dddddd",
+    },
+    "&.MuiButton-contained": {
+        fontFamily: "Elice",
+    },
+};
+
 
 function RecipeBoard(props: any) {
     const dispatch = useDispatch();
@@ -60,19 +116,25 @@ function RecipeBoard(props: any) {
                     height: "30px",
                 }}
             />
-            <TextField
-                id="outlined-basic"
-                variant="outlined"
-                sx={{
-                    width: "100%",
-                    height: "100%",
-                    lineHeight: "100%",
-                }}
-                minRows="5"
-                multiline={true}
-                onChange={handleText}
-                value={post}
-            />
+            {user_id != "null" ? (
+                <TextField
+                    variant="outlined"
+                    sx={inputStyles}
+                    minRows="5"
+                    multiline={true}
+                    onChange={handleText}
+                    value={post}
+                />
+            ) : (
+                <TextField
+                    disabled
+                    label="로그인 후 이용해주세요."
+                    variant="outlined"
+                    sx={disabledInputStyles}
+                    minRows="5"
+                    multiline={true}
+                />
+            )}
             <Box
                 sx={{
                     width: "70vw",
@@ -83,7 +145,7 @@ function RecipeBoard(props: any) {
             <form
                 id="formElem"
                 encType="multipart/form-data"
-                style={{ textAlign: "right" }}
+                style={{ width: "70%", marginLeft: "15%", textAlign: "right" }}
             >
                 <label htmlFor="icon-button-file">
                     <input
@@ -97,9 +159,24 @@ function RecipeBoard(props: any) {
                         <AddAPhotoRoundedIcon />
                     </IconButton>
                 </label>
-                <Button variant="contained" sx={styles} onClick={handleSubmit}>
-                    등록
-                </Button>
+                {user_id != "null" ? (
+                    <Button
+                        variant="contained"
+                        sx={buttonStyles}
+                        onClick={handleSubmit}
+                    >
+                        등록
+                    </Button>
+                ) : (
+                    <Button
+                        disabled
+                        variant="contained"
+                        sx={disabledButtonStyles}
+                        onClick={handleSubmit}
+                    >
+                        등록
+                    </Button>
+                )}
             </form>
             <Box
                 sx={{
