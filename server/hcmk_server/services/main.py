@@ -37,7 +37,7 @@ def get_ranking():
 
 def get_equal_rate(image):
     #받은 파일 이름 복사
-    print(image)
+    # print(image)
     image.name = image.filename
     # 버퍼로 변환
     image = BufferedReader(image)
@@ -73,7 +73,7 @@ def get_equal_rate(image):
             for recipe in recipes:
                 recipe_dicts.append(recipe.to_dict())
             result[food.name] = recipe_dicts
-        print('type of result: ', type(result))
+        # print('type of result: ', type(result))
         return result, "Success", "검색 결과를 전달하였습니다."
 
     except Exception:

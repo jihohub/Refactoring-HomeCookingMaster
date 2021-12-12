@@ -64,7 +64,6 @@ class TodayRanking(Resource):
 class test(Resource):
     def post(self):
         """현재 가장 인기있는 음식의 레시피를 반환합니다."""
-        print('come in!!!')
         image = request.files.get('img')
         result_data, result, message = get_equal_rate(image)
         return jsonify(result=result, message=message, data=result_data)
