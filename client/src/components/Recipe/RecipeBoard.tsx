@@ -93,18 +93,18 @@ function RecipeBoard(props: any) {
         setPost("");
     }, [params]);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const formDataPost = new FormData();
         formDataPost.append("img", imageFile);
         formDataPost.append("user_id", user_id);
         formDataPost.append("post", post);
-        dispatch(recipeReview({ formDataPost, recipe_id }));
+        await dispatch(recipeReview({ formDataPost, recipe_id }));
         window.location.reload();
     };
 
     useEffect(() => {
         dispatch(getRecipe({ recipe_id, user_id }));
-    }, [dispatch]);
+    }, [dispatch, recipe_id, user_id]);
 
 
     return (
