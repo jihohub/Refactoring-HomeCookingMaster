@@ -5,13 +5,14 @@ import main3 from "../../assets/main3.png";
 import main4 from "../../assets/main4.jpg";
 import logo from "../../assets/loogo.png";
 import kkokko from "../../assets/kkokko.png";
+import finalLogo from "../../assets/finalLogo.png";
 import { Carousel, Image } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
 import { styled } from '@mui/material/styles';
 
 function MainSlide() {
     return (
-        <>
+        <div >
             <Carousel pause="hover" className="bg-light">
                 <Carousel.Item>
                     <Image
@@ -46,15 +47,13 @@ function MainSlide() {
                     />
                 </Carousel.Item>
             </Carousel>
-            <div >
-                <Carousel.Caption style={{marginBottom:'20%'}} >
-                        <img src={kkokko} alt='logo' style={{width:'40%', height:'20%'}}/><br/>
-                        {/* <h2 style={{fontSize:'5rem', textShadow:'2px 2px 6px black', color:'#524835'}}>집밥꼬꼬선생</h2>
-                        <p style={{ fontSize:'1.2rem', fontWeight:'600', color:'#191919'}}>집밥 레시피 검색 플랫폼</p> */}
-                        <OkButton onClick={() => window.scrollTo(0,1000)}>이미지 검색하기</OkButton>
-                </Carousel.Caption>
-            </div>
-        </>
+            <Carousel.Caption  style={{bottom:'40%'}}>
+                    <img src={finalLogo} alt='logo' style={{width:'40%', height:'20%'}}/><br/>
+                    {/* <h2 style={{fontSize:'5rem', textShadow:'2px 2px 6px black', color:'#524835'}}>집밥꼬꼬선생</h2>
+                    <p style={{ fontSize:'1.2rem', fontWeight:'600', color:'#191919'}}>집밥 레시피 검색 플랫폼</p> */}
+                    <OkButton onClick={() => window.scrollTo(0,1000)}>이미지 검색하기</OkButton>
+            </Carousel.Caption>
+        </div>
     );
 }
 

@@ -1,0 +1,54 @@
+
+
+
+  /* .about {
+    text-align: center;
+    height: 100vh;
+    margin-top: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+  }
+  
+  section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-size: 2rem;
+    scroll-snap-align: start;
+  }
+  
+  .one {
+    background-color: rgb(255, 136, 136);
+  }
+  
+  .two {
+    background-color: rgb(140, 218, 95);
+  }
+  
+  .three {
+    background-color: rgb(127, 245, 235);
+  }
+  
+  .four {
+    background-color: rgb(152, 118, 231);
+  }
+  
+  .five {
+    background-color: rgb(255, 109, 109);
+  }
+  
+  .six {
+    background-color: rgb(205, 207, 90);
+  }
+   */

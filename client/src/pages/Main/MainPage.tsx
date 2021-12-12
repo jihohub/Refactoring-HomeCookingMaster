@@ -14,7 +14,6 @@ import MainSlide from "../../components/Main/mainSlide";
 import { top3Img, top3Name, img } from "../../css/main_css";
 import { Box, ImageList, ImageListItem, ImageListItemBar, IconButton } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { FormatAlignJustify } from "@mui/icons-material";
 
 const SearchDiv = styled("div")(({ theme }) => ({
     height: "80%",
