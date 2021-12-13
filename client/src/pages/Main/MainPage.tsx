@@ -16,6 +16,11 @@ import { Box, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
 import character from '../../assets/character.png'
 import avatar1 from '../../assets/avater_1.png'
 import avatar from '../../assets/avatar.png'
+import kkokko1 from '../../assets/kkokko_1.png'
+import kkokko2 from '../../assets/kkokko_2.png'
+import kkokko3 from '../../assets/kkokko_3.png'
+
+const imgList = [kkokko1,kkokko2,kkokko3];
 
 const SearchDiv = styled("div")(({ theme }) => ({
     height: "80%",
@@ -206,7 +211,7 @@ const MainRanking = () => {
                                             component="p"
                                             sx={{ fontFamily: "EliceBold", color:'#191919', textShadow:'2px 2px 4px gray' }}
                                         >
-                                            <img src={character} alt="character"/> {top3List.indexOf(item) + 1}위 
+                                            <img src={imgList[top3List.indexOf(item)]} alt="kkokko"/> {top3List.indexOf(item) + 1}위 
                                         </Typography>
                                         <Top3Image
                                             src={item.img}
