@@ -109,9 +109,9 @@ function ItemList(){
                 {query ? `${query} 검색결과 입니다.` : <p><MdPersonSearch size='30'/> 추천검색어</p>}
             </Typography>
             <Box component="div" sx={{width:'80%', marginLeft:'15%', marginBottom:'1rem'}}>
-            {isRecipeList ? foodList.map((item:any) => (
-                    <ItemBox 
-                        key={item.id}
+            {isRecipeList ? foodList.map((item: any, index: number) => (
+                    <ItemBox
+                        key={index}
                         variant="outlined" 
                         onClick={() => navigate(`/result?data=${item}`)}>
                         {item}

@@ -88,35 +88,39 @@ function ImageResult() {
     }
 
     useEffect(() => {
-        if(imgResult){
-            const rateResult = imgResult['equal_rate'];
+        if (imgResult) {
+            const rateResult = imgResult["equal_rate"];
             // console.log("<검색결과페이지> : 검색결과페이지 true", rateResult)
-            if(typeof rateResult == "undefined" || rateResult == null || rateResult === ""){
+            if (
+                typeof rateResult == "undefined" ||
+                rateResult == null ||
+                rateResult === ""
+            ) {
                 // console.log("<검색결과페이지> : empty")
-            }else{
-                if(rateResult[0]['rate'] > 0.7){
-                    const name = rateResult[0]['name']
-                    const rate = rateResult[0]['rate'] * 100
-                    const rate_ = financial(rate)
+            } else {
+                if (rateResult[0]["rate"] > 0.7) {
+                    const name = rateResult[0]["name"];
+                    const rate = rateResult[0]["rate"] * 100;
+                    const rate_ = financial(rate);
                     // console.log('<검색결과페이지> : name 처리', typeof(rate))
-                    setResultName(name)
-                    setResultRate(rate_)
+                    setResultName(name);
+                    setResultRate(rate_);
                     // checkRate2(rateResult[1])
                     // checkRate3(rateResult[2])
                     setImg(true);
                     dispatch(setImgResult());
-                }else{
+                } else {
                     // console.log('<imgResult> : 값 < 0.7')
                     // navigate('/result')
-                    checkRate1(rateResult[0])
-                    checkRate2(rateResult[1])
-                    checkRate3(rateResult[2])
-                    setResultState(true)
+                    checkRate1(rateResult[0]);
+                    checkRate2(rateResult[1]);
+                    checkRate3(rateResult[2]);
+                    setResultState(true);
                     dispatch(setImgResult());
                 }
             }
         }
-    },[imgResult])
+    }, [dispatch, imgResult]);
 
     
 

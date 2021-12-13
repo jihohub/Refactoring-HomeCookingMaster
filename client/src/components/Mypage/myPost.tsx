@@ -165,8 +165,8 @@ const img = css`
 const tmp = css`
     cursor: pointer;
     /* box-shadow: 2px 2px 6px gray; */
-    :hover{
-        transform: scale(1.1);
-        transition:.5s;
+    :hover {
+        opacity: 0.8;
+        transition: all 0.3s ease-in-out;
     }
 `;

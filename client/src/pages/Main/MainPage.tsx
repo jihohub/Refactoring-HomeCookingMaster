@@ -59,7 +59,6 @@ const Top3Image = styled("img")(({ theme }) => ({
     cursor: "pointer",
     boxShadow: "2px 2px 6px gray",
     marginBottom: "5%",
-    opacity: 1,
     "&:hover": {
         opacity: 0.8,
         transition: "all 0.3s ease-in-out",
@@ -75,7 +74,6 @@ const TopRestImage = styled("img")(({ theme }) => ({
     cursor: "pointer",
     boxShadow: "2px 2px 6px gray",
     marginBottom: "5%",
-    opacity: 1,
     "&:hover": {
         opacity: 0.8,
         transition: "all 0.3s ease-in-out",
