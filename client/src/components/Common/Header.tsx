@@ -27,6 +27,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import background from "../../assets/bg2.jpeg";
+import finalLogo from "../../assets/finalLogo.png";
 
 const styles = {
     "&.MuiFab-secondary": {
@@ -216,7 +217,7 @@ const Header = (props: Props) => {
                                     ))}
                                 </Menu>
                             </Box>
-                            {/* <Typography
+                            <Typography
                                 variant="h6"
                                 noWrap
                                 component="div"
@@ -226,16 +227,15 @@ const Header = (props: Props) => {
                                 }}
                             >
                                 <img
-                                    src={mainlogo}
+                                    src={finalLogo}
                                     style={{
                                         height: "40px",
                                         cursor: "pointer",
-                                        paddingRight:'5rem'
                                     }}
                                     onClick={() => navigate("/")}
                                     alt="main logo"
                                 />
-                            </Typography> */}
+                            </Typography>
                             <Box
                                 sx={{
                                     flexGrow: 1,
