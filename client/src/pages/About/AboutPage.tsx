@@ -17,15 +17,18 @@ import { SearchDiv } from '../../css/about_css';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import scroll from '../../assets/scroll.png'
+import { IoIosArrowDown } from "react-icons/io";
 
 function AboutPage() {
     const navigate = useNavigate();
     return (
         <div css={aboutDiv}>
             <section css={sectionImg}>
-                    <h1 style={{marginTop:'8%', fontWeight:'600', fontSize:'4rem'}}>집밥꼬꼬선생</h1>
+                    <h1 style={{marginTop:'5%', fontWeight:'600', fontSize:'4rem'}}>집밥꼬꼬선생</h1>
                     <p>집밥 레시피 검색 플랫폼</p>
+                    <p style={{fontSize:'1.3rem', color:'#fdfcf7', fontWeight:'600', paddingTop:'2%'}}>스크롤을 내려보세요.</p>
+                    <IoIosArrowDown size="60"/>
             </section>
             <section css={sectionOne}>
                 <Fade>

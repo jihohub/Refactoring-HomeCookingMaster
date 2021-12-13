@@ -61,7 +61,8 @@ export const aboutDiv = css`
 `;
 
 export const sectionImg = css`
-    height: 100vh;
+    height: 95%;
+    width:100%;
     display: flex;
     /* justify-content: center; */
     align-items: center;
@@ -71,6 +72,7 @@ export const sectionImg = css`
     scroll-snap-align: start;
     background-image:url('https://hcmk-bucket.s3.ap-northeast-2.amazonaws.com/main_page_img/%EB%B6%88%EA%B3%A0%EA%B8%B0%EB%B9%84%EB%B9%94%EB%B0%A5.jfif');
     background-size : cover;
+    overflow: hidden;
 `
 
 export const sectionOne = css`
