@@ -63,3 +63,6 @@
 | 남경민 | 프론트엔드 개발 |
 | 박지호 | 프론트엔드 개발 |
 | 조승희 | 인공지능 |
+
+<br/><br/>
+[:book: More Information...](https://github.com/SeokKyunNa/HomeCookingMaster/wiki)
