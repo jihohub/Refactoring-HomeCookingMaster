@@ -1,8 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { recipeLike } from "../../modules/recipeLikeSlice";
-import { getRecipe } from "../../modules/recipeSlice";
+import React, { useState } from "react";
 import { Box, Typography, IconButton, Divider, Popover  } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import AlarmIcon from "@mui/icons-material/Alarm";
@@ -14,7 +10,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 
 function RecipeMain(props: any) {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const { did_u_liked, recipe_info, food_info, ingredient_info, process_info } = props.recipe;
     const recipe_id = recipe_info.id
@@ -26,8 +22,8 @@ function RecipeMain(props: any) {
     
     const handleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
-        await dispatch(recipeLike({ user_id, recipe_id }));
-        dispatch(getRecipe({ recipe_id, user_id }));
+        // await dispatch(recipeLike({ user_id, recipe_id }));
+        // dispatch(getRecipe({ recipe_id, user_id }));
     };
 
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);

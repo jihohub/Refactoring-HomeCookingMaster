@@ -1,115 +1,108 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { Box, TextField, Button, IconButton } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import { recipeReview } from "../../modules/recipeReviewSlice";
-import { getRecipe } from "../../modules/recipeSlice";
 
 const inputStyles = {
-    width: "70%",
-    marginLeft: "15%",
-    "& legend": { display: "none" },
-    "& fieldset": { top: 0 },
-    "& label.Mui-focused": {
-        opacity: 0,
+  width: "70%",
+  marginLeft: "15%",
+  "& legend": { display: "none" },
+  "& fieldset": { top: 0 },
+  "& label.Mui-focused": {
+    opacity: 0,
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "yellow",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#000000",
     },
-    "& .MuiInput-underline:after": {
-        borderBottomColor: "yellow",
+    "&:hover fieldset": {
+      borderColor: "#897A5F",
     },
-    "& .MuiOutlinedInput-root": {
-        "& fieldset": {
-            borderColor: "#000000",
-        },
-        "&:hover fieldset": {
-            borderColor: "#897A5F",
-        },
-        "&.Mui-focused fieldset": {
-            borderColor: "#897A5F",
-        },
+    "&.Mui-focused fieldset": {
+      borderColor: "#897A5F",
     },
+  },
 };
 
 const disabledInputStyles = {
-    width: "70%",
-    marginLeft: "15%",
-    "& label.Mui-focused": {
-        opacity: 0,
+  width: "70%",
+  marginLeft: "15%",
+  "& label.Mui-focused": {
+    opacity: 0,
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "yellow",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#000000",
     },
-    "& .MuiInput-underline:after": {
-        borderBottomColor: "yellow",
+    "&:hover fieldset": {
+      borderColor: "#897A5F",
     },
-    "& .MuiOutlinedInput-root": {
-        "& fieldset": {
-            borderColor: "#000000",
-        },
-        "&:hover fieldset": {
-            borderColor: "#897A5F",
-        },
-        "&.Mui-focused fieldset": {
-            borderColor: "#897A5F",
-        },
+    "&.Mui-focused fieldset": {
+      borderColor: "#897A5F",
     },
+  },
 };
 
 const buttonStyles = {
-    "&.MuiButton-root": {
-        backgroundColor: "#897A5F",
-    },
-    "&.MuiButton-contained": {
-        fontFamily: "Elice",
-    },
+  "&.MuiButton-root": {
+    backgroundColor: "#897A5F",
+  },
+  "&.MuiButton-contained": {
+    fontFamily: "Elice",
+  },
 };
 
 const disabledButtonStyles = {
-    "&.MuiButton-root": {
-        backgroundColor: "#dddddd",
-    },
-    "&.MuiButton-contained": {
-        fontFamily: "Elice",
-    },
+  "&.MuiButton-root": {
+    backgroundColor: "#dddddd",
+  },
+  "&.MuiButton-contained": {
+    fontFamily: "Elice",
+  },
 };
 
-
 function RecipeBoard(props: any) {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const params = useParams();
-    const [post, setPost] = useState<string>("");    
+  const router = useRouter();
+  const [post, setPost] = useState<string>("");
 
-    const recipe_id = props.recipe_id;
-    const user_id = String(sessionStorage.getItem("user_id")); // user_id
-    const [imageFile, setImageFile] = useState<any>(null);
+  const recipe_id = props.recipe_id;
+  // const user_id = String(sessionStorage.getItem("user_id")); // user_id
+  const [imageFile, setImageFile] = useState<any>(null);
 
-    const handleText = (e: any) => {
-        setPost(e.target.value);
-    };
+  const handleText = (e: any) => {
+    setPost(e.target.value);
+  };
 
-    const handleUpload = (e: any) => {
-        setImageFile(e.target.files[0]);
-    };
+  const handleUpload = (e: any) => {
+    setImageFile(e.target.files[0]);
+  };
 
-    useEffect(() => {
-        setPost("");
-    }, [params]);
+  useEffect(() => {
+    setPost("");
+  }, [router.query.id]);
 
-    const handleSubmit = async () => {
-        const formDataPost = new FormData();
-        formDataPost.append("img", imageFile);
-        formDataPost.append("user_id", user_id);
-        formDataPost.append("post", post);
-        await dispatch(recipeReview({ formDataPost, recipe_id }));
-        window.location.reload();
-    };
+  const handleSubmit = async () => {
+    const formDataPost = new FormData();
+    formDataPost.append("img", imageFile);
+    // formDataPost.append("user_id", user_id);
+    formDataPost.append("post", post);
+    // await dispatch(recipeReview({ formDataPost, recipe_id }));
+    window.location.reload();
+  };
 
-    useEffect(() => {
-        dispatch(getRecipe({ recipe_id, user_id }));
-    }, [dispatch, recipe_id, user_id]);
+  // useEffect(() => {
+  //     dispatch(getRecipe({ recipe_id, user_id }));
+  // }, [dispatch, recipe_id, user_id]);
 
-
-    return (
-        <Box sx={{ width: "70vw", margin: "0 auto" }}>
-            <Box
+  return (
+    <Box sx={{ width: "70vw", margin: "0 auto" }}>
+      {/* <Box
                 sx={{
                     width: "70vw",
                     margin: "0 auto",
@@ -202,9 +195,9 @@ function RecipeBoard(props: any) {
                     margin: "0 auto",
                     height: "30px",
                 }}
-            />
-        </Box>
-    );
+            /> */}
+    </Box>
+  );
 }
 
 export default RecipeBoard;

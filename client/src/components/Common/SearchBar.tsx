@@ -1,31 +1,30 @@
-/** @jsxImportSource @emotion/react */
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { setImageFile, setPreviewUrl } from "../../modules/searchedImageSlice";
+// import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+// import { setImageFile, setPreviewUrl } from "../../modules/searchedImageSlice";
 
 import { Paper, InputBase, IconButton, Button } from "@mui/material";
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 
 const SearchBar = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const router = useRouter();
+    // const dispatch = useDispatch();
     const [imagefile, setImagefile] = useState();
     const [prvUrl, setPrvUrl] = useState <string | ArrayBuffer
         | null>();
     
-    const handleUpload = (e: any) => {
-        e.preventDefault();
-        let reader = new FileReader();
-        let file = e.target.files[0];
-        reader.readAsDataURL(file);
+    // const handleUpload = (e: any) => {
+    //     e.preventDefault();
+    //     let reader = new FileReader();
+    //     let file = e.target.files[0];
+    //     reader.readAsDataURL(file);
 
-        reader.onload = (e: any) => {
-            dispatch(setImageFile(file));
-            dispatch(setPreviewUrl(e.target.result));
-            navigate("/result");
-        }
-    };
+    //     reader.onload = (e: any) => {
+    //         dispatch(setImageFile(file));
+    //         dispatch(setPreviewUrl(e.target.result));
+    //         router.push("/result");
+    //     }
+    // };
 
     let profile_preview: any = null;
     if(imagefile !== '' && typeof prvUrl == "string"){
@@ -48,7 +47,7 @@ const SearchBar = () => {
         />
         <label htmlFor="contained-button-file">
             <form method="post" action="result" encType="multipart/form-data">
-                <input accept="image/*" name="image" id="contained-button-file" multiple type="file" onChange={handleUpload} hidden />
+                {/* <input accept="image/*" name="image" id="contained-button-file" multiple type="file" onChange={handleUpload} hidden /> */}
                 <IconButton component="span">
                     <ImageSearchIcon />
                 </IconButton>

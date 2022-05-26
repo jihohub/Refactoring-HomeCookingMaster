@@ -1,7 +1,11 @@
 const path = require("path")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 
 module.exports = {
   mode: "development",
+  target: "node",
   devServer: {
     allowedHosts: "auto",
   },
@@ -10,23 +14,43 @@ module.exports = {
   },
   output: {
     filename: "bundle.js",
-    path: path.resolve("./dist"),
+    path: path.resolve(__dirname, "./dist"),
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    modules: ["node_modules"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css"],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    }),
+    new HTMLInlineCSSWebpackPlugin(),
+  ],
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.(jsx?|tsx?)$/,
+        exclude: /node_modules/,
         loader: "babel-loader",
-        options: { presets: ["@babel/env", "@babel/preset-react"] },
+        options: { presets: ["@babel/preset-env", "@babel/preset-react"] },
       },
       {
         test: /\.css$/,
-        // use: ["style-loader", "css-loader", "sass-loader"],
-        use: "css-loader",
+        use: [
+          MiniCssExtractPlugin.loader,
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+          "css-to-mui-loader",
+        ],
+        options: {
+          importLoaders: 1,
+          modules: true,
+        },
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,
@@ -34,16 +58,6 @@ module.exports = {
         options: {
           limit: 10000,
         },
-      },
-      {
-        test: /\.tsx?/,
-        loader: "ts-loader",
-        options: {
-          compilerOptions: {
-            noEmit: false,
-          },
-        },
-        exclude: /node_modules/,
       },
     ],
   },

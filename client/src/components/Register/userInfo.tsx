@@ -1,9 +1,8 @@
-/** @jsxImportSource @emotion/react */
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { userInfo, terms_title, input_box, check_box, profile_img, option_box, file_select, option_sub_title, rebtn } from "../../css/register_css";
-import { useDispatch } from "react-redux";
-import { sendRegister } from "../../modules/registerInfoSlice";
+// import { useDispatch } from "react-redux";
+// import { sendRegister } from "../../modules/registerInfoSlice";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -22,8 +21,8 @@ function UserInfo() {
     >("");
     
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const router = useRouter();
+    // const dispatch = useDispatch();
 
     // ====================================================================
     // 유효성검사
@@ -144,8 +143,8 @@ function UserInfo() {
         formDataRegister.append("img", imageFile);
         console.log("after", imageFile);
 
-        dispatch(sendRegister(formDataRegister));
-        navigate("/register/complete"); // 회원가입 완료시 닉네임값 전달
+        // dispatch(sendRegister(formDataRegister));
+        router.push("/register/complete"); // 회원가입 완료시 닉네임값 전달
     };
 
     return (

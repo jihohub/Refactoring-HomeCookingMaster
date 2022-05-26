@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "sourceMap": true,
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -14,11 +14,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
+    "jsx": "preserve",
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "incremental": true
   },
   "include": [
     "src"

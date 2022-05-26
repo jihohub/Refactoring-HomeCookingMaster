@@ -1,12 +1,9 @@
-/** @jsxImportSource @emotion/react */
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { RootStateOrAny } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from "next/router";
 import { loign_box, input_box } from "../../css/login_css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { getUser } from '../../modules/userLogin';
-import { useDispatch, useSelector } from 'react-redux';
+// import { getUser } from '../../modules/userLogin';
 import { styled } from '@mui/material/styles';
 
 const OkButton = styled(Button)({
@@ -19,41 +16,38 @@ const OkButton = styled(Button)({
 });
 
 function Login() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const router = useRouter();
 
     const [id, setId] = useState<string>("");
     const [pw, setPw] = useState<string>("");
     const [check, setCheck] = useState<boolean>(true) // 아이디, 비밀번호 모두 입력됐는지 확인
 
-    const token = useSelector((state:RootStateOrAny) => state.getUserInfo);
+    // useEffect(() => {
+    //     if (token.refresh_token && token.access_token) {
+    //         sessionStorage.setItem("usrRfshTkn", token.refresh_token);
+    //         sessionStorage.setItem("usrAcsTkn", token.access_token);
+    //         sessionStorage.setItem("user_id", token.user_id);
+    //         sessionStorage.setItem("nickname", token.nickname);
+    //         sessionStorage.setItem("img", token.img);
+    //         router.push("/");
+    //     } 
+    // }, [token]);
 
-    useEffect(() => {
-        if (token.refresh_token && token.access_token) {
-            sessionStorage.setItem("usrRfshTkn", token.refresh_token);
-            sessionStorage.setItem("usrAcsTkn", token.access_token);
-            sessionStorage.setItem("user_id", token.user_id);
-            sessionStorage.setItem("nickname", token.nickname);
-            sessionStorage.setItem("img", token.img);
-            navigate("/");
-        } 
-    }, [token]);
+    // const handleKeyPress = (e:any) => {
+    //     if(e.key === 'Enter'){
+    //         e.preventDefault();
+    //         handleLogin();
+    //     }
+    // }
 
-    const handleKeyPress = (e:any) => {
-        if(e.key === 'Enter'){
-            e.preventDefault();
-            handleLogin();
-        }
-    }
-
-    const handleLogin = async () => {
-        // console.log("<login> : before dispatch")
-        await dispatch(getUser({
-            email : id,
-            password : pw
-        }))
-        setCheck(false);
-    }
+    // const handleLogin = async () => {
+    //     // console.log("<login> : before dispatch")
+    //     await dispatch(getUser({
+    //         email : id,
+    //         password : pw
+    //     }))
+    //     setCheck(false);
+    // }
     
     return (
         <div >
@@ -75,16 +69,16 @@ function Login() {
                     color="warning" 
                     css={input_box}
                     onChange={(e) => setPw(e.target.value)}
-                    onKeyPress={handleKeyPress}
+                    // onKeyPress={handleKeyPress}
                 />
                 {check ? "" : <p style={{ color:'#e45a41', marginBottom:'10px', fontWeight:'600'}}>아이디와 비밀번호를 확인해주세요.</p>}
-                <OkButton
+                {/* <OkButton
                     variant="contained" 
                     onClick={handleLogin} 
                     css={input_box}
                 >
                 로그인
-                </OkButton>
+                </OkButton> */}
             </div>
         </div>
     );
