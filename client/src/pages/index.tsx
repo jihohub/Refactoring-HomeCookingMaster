@@ -11,7 +11,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "react-query";
-import { fetchRankings } from "../hooks/Ranking/useRankings";
+import fetchRankings from "../hooks/Ranking/useRankings";
 import MainSearch from "../components/Main/MainSearch";
 import MainRanking from "../components/Main/MainRanking";
 import kkokko1 from "../../public/assets/kkokko_1.png";

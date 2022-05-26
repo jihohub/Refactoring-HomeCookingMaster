@@ -28,13 +28,23 @@ const MainRanking = (props: any) => {
       {ranking.map((item: any) => (
         <>
           <p>{item.name}</p>
-          <Link href={`/recipe/${encodeURIComponent(item.id)}`}>
+          {/* <Link
+            href={`/recipe/[recipe_id]?recipe_id=${encodeURIComponent(item.id)}`} as ={`/recipe/${encodeURIComponent(item.id)}`}
+          >
+            <img src={item.img} width="200" height="100" alt={item.name}></img>
+          </Link> */}
+          <Link
+            href={{
+              pathname: "/recipe/[recipe_id]",
+              query: { recipe_id: item.id },
+            }}
+          >
             <img src={item.img} width="200" height="100" alt={item.name}></img>
           </Link>
         </>
       ))}
     </>
   );
-  }
+}
 
 export default MainRanking;
