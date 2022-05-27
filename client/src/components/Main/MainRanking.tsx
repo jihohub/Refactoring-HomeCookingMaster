@@ -21,7 +21,6 @@ const MainRanking = (props: any) => {
   
   // console.log(ranking);
   const ranking = props.ranking?.data || [];
-  console.log(ranking);
 
   return (
     <>

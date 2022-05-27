@@ -33,7 +33,7 @@ from flask_jwt_extended.utils import decode_token
 bcrypt = Bcrypt()
 
 auth_ns = Namespace(
-    name="auth",
+    name="oauth",
     description="회원정보를 관리하는 API.",
 )
 

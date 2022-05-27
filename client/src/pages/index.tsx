@@ -1,6 +1,5 @@
 import React from "react";
 import type { ReactElement } from "react";
-import Layout from "../components/Common/Layout";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import {
@@ -20,17 +19,36 @@ import kkokko3 from "../../public/assets/kkokko_3.png";
 
 import axios from "axios";
 
+import { signIn, signOut, useSession } from "next-auth/react";
+
+
 const Page = () => {
   const { data } = useQuery("rankings", fetchRankings);
   // console.log(data);
   // console.log(typeof data);
 
+  const { data: session, status } = useSession();
+  // const loading = status === "loading";
+  // const router = useRouter();
+
+  const handleSignin = (e: any): void => {
+    e.preventDefault();
+    signIn();
+  };
+  const handleSignout = (e: any): void => {
+    e.preventDefault();
+    signOut();
+  };
 
   return (
-    <Layout>
+    <>
+      <>
+        Not signed in <br />
+        <button style={{ width: 500 }} onClick={() => signIn()}>Sign in</button>
+      </>
       <MainSearch />
       <MainRanking ranking={data} />
-    </Layout>
+    </>
   );
 };
 

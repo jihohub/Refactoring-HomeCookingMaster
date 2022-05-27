@@ -33,7 +33,7 @@ const Footer = () => {
       </Foot>
       <Typography sx={{ fontFamily: "Elice" }}>{" ᛫ "}</Typography>
       <Foot>
-        <Link href="/introUs">
+        <Link href="/introduce">
           <a>팀원 소개</a>
         </Link>
       </Foot>
@@ -45,8 +45,8 @@ const Footer = () => {
       </Foot>
       <Typography sx={{ fontFamily: "Elice" }}>{" ᛫ "}</Typography>
       <Foot>
-        <Link href="https://kdt-gitlab.elice.io/002-part3-cnn/team5/project-template">
-          <a>GitLab</a>
+        <Link href="https://github.com/jihohub/Refactoring-HomeCookingMaster">
+          <a target="_blank" rel="noopener noreferrer" className='link-item'>GitHub</a>
         </Link>
       </Foot>
     </Box>

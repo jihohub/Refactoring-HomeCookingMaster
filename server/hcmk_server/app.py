@@ -54,7 +54,7 @@ def create_app():
     from .api.main_api import main_ns
     from .api.mypage_api import mypage_ns
 
-    rest_api.add_namespace(auth_ns, "/api/auth")
+    rest_api.add_namespace(auth_ns, "/api/oauth")
     rest_api.add_namespace(recipe_ns, "/api/recipe")
     rest_api.add_namespace(main_ns, "/api/main")
     rest_api.add_namespace(mypage_ns, "/api/mypage")
@@ -65,7 +65,7 @@ def create_app():
 
 application = create_app()
 
-if __name__ == "__main__":
-    HOST = "0.0.0.0"
-    PORT = 5000
-    application.run(host=HOST, port=PORT, debug=True)
+# if __name__ == "__main__":
+#     HOST = "0.0.0.0"
+#     PORT = 5000
+#     application.run(host=HOST, port=PORT, debug=True)

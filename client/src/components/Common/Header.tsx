@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
 import logohat from "../../../public/assets/hatYess.png";
@@ -55,338 +56,31 @@ const notLoggedIn = [
 // }
 
 const Header = () => {
-  // const { data: session, status } = useSession();
-  // const loading = status === "loading";
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
   // const router = useRouter();
-  // // const dispatch = useDispatch();
 
-  // const [logCheck, setLogCheck] = useState<boolean>(false);
+  const handleSignin = (e: any): void => {
+    e.preventDefault();
+    signIn();
+  };
+  const handleSignout = (e: any): void => {
+    e.preventDefault();
+    signOut();
+  };
 
-  // const refreshTkn = sessionStorage.getItem("usrRfshTkn"); // refresh_token
-  // const accessTkn = sessionStorage.getItem("usrAcsTkn"); // access_token
-  // const nickname = sessionStorage.getItem("nickname"); // nickname
-  // const user_img = sessionStorage.getItem("img"); // nickname
-
-  // useEffect(() => {
-  //   if (refreshTkn) {
-  //     setLogCheck(true);
-  //     setAnchorElUser(null);
-  //   } else {
-  //     setLogCheck(false);
-  //   }
-  // }, [refreshTkn]);
-
-  // const handleLogout = async (event: Event) => {
-  //   event.preventDefault();
-  //   signOut();
-  //   // const res = await axios.delete("/api/auth/logout", {
-  //   await axios.delete("/api/auth/logout", {
-  //     headers: {
-  //       Authorization: "Bearer " + accessTkn,
-  //     },
-  //   });
-  //   // console.log("<Header>: logout delete api response", res);
-  // };
-
-  // const handleLog = (event: Event) => {
-  //   // handleLogout();
-  //   // console.log("<Header> : logout");
-  //   sessionStorage.clear();
-  //   // dispatch(setUser());
-  //   event.preventDefault();
-  //   signOut();
-  //   router.push("/");
-  // };
-
-  // const [anchorElNav, setAnchorElNav] = useState(null);
-  // const [anchorElUser, setAnchorElUser] = useState(null);
-
-  // const handleOpenNavMenu = (event: any) => {
-  //   setAnchorElNav(event.currentTarget);
-  // };
-  // const handleOpenUserMenu = (event: any) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
-
-  // const handleCloseNavMenu = () => {
-  //   setAnchorElNav(null);
-  // };
-
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
-
-  // const loggedIn = [
-  //   {
-  //     text: "마이페이지",
-  //     path: "/mypage",
-  //     func: handleCloseUserMenu(),
-  //   },
-  //   {
-  //     text: "로그아웃",
-  //     path: "/",
-  //     // func: handleLogout(event: Event),
-  //   },
-  // ];
-
+  if (session) {
+    return (
+      <>
+        Signed in as <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    );
+  }
   return (
     <>
-      <CssBaseline />
-      <>
-        {/* <HideOnScroll {...props}> */}
-        <AppBar
-          position="fixed"
-          sx={{
-            backgroundImage: `url(${background})`,
-            height: "5rem",
-          }}
-        >
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
-              {/* <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                }}
-                onClick={() => router.push("/")}
-              >
-                <img
-                  src={logohat}
-                  style={{
-                    height: "3rem",
-                    cursor: "pointer",
-                    margin: "1rem",
-                    marginTop: "1rem",
-                  }}
-                  alt="main logo"
-                />
-              </Typography>
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "flex", md: "none" },
-                }}
-              >
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: "block", md: "none" },
-                  }}
-                >
-                  {pages.map((page, index) => (
-                    <MenuItem
-                      key={index}
-                      onClick={() => {
-                        handleCloseNavMenu();
-                        router.push(`${page.path}`);
-                      }}
-                    >
-                      <Typography
-                        textAlign="center"
-                        sx={{ fontFamily: "Elice" }}
-                      >
-                        {page.text}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "flex", md: "none" },
-                }}
-              >
-                <img
-                  src={finalLogo}
-                  style={{
-                    height: "40px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => router.push("/")}
-                  alt="main logo"
-                />
-              </Typography>
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "none", md: "flex" },
-                }}
-              >
-                {pages.map((item, index) => (
-                  // <Button
-                  //     key={index}
-                  //     onClick={handleCloseNavMenu}
-                  //     sx={{
-                  //         my: 2,
-                  //         color: "#897A5F",
-                  //         display: "block",
-                  //     }}
-                  // >
-                  <MenuItem
-                    key={index}
-                    onClick={() => {
-                      handleCloseNavMenu();
-                      router.push(`${item.path}`);
-                    }}
-                  >
-                    <Typography
-                      textAlign="center"
-                      sx={{
-                        color: "#897A5F",
-                        fontSize: "1.2em",
-                        fontFamily: "EliceBold",
-                        fontWeight: "800",
-                      }}
-                      // sx={{
-                      //     my: 2,
-                      //     color: "#897A5F",
-                      //     display: "block",
-                      // }}
-                    >
-                      {item.text}
-                    </Typography>
-                  </MenuItem>
-                  // </Button>
-                ))}
-              </Box> */}
-
-              {/* {logCheck ? (
-                <>
-                  <Box sx={{ marginRight: "20px" }}>
-                    <Typography
-                      sx={{
-                        color: "#897A5F",
-                        fontSize: "1rem",
-                        fontFamily: "EliceBold",
-                        fontWeight: "800",
-                      }}
-                    >
-                      {`${nickname}`}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ flexGrow: 0 }}>
-                    <Tooltip
-                      title={
-                        <Typography sx={{ fontFamily: "Elice" }}>
-                          {`${nickname}님 반가워요!`}
-                        </Typography>
-                      }
-                    >
-                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                        {user_img && (
-                          <Avatar
-                            alt="profile image on the header bar"
-                            src={user_img}
-                          />
-                        )}
-                      </IconButton>
-                    </Tooltip>
-                    <Menu
-                      sx={{ mt: "45px" }}
-                      id="menu-appbar"
-                      anchorEl={anchorElUser}
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      open={Boolean(anchorElUser)}
-                      onClose={handleCloseUserMenu}
-                    >
-                      {loggedIn.map((item, index) => (
-                        <MenuItem
-                          key={index}
-                          // onClick={(event: Event) => {
-                          //   item.func(event);
-                          //   router.push(`${item.path}`);
-                          // }}
-                        >
-                          <Typography
-                            textAlign="center"
-                            sx={{
-                              color: "#897A5F",
-                              fontFamily: "Elice",
-                            }}
-                          >
-                            {item.text}
-                          </Typography>
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  </Box>
-                </>
-              ) : (
-                notLoggedIn.map((item, index) => (
-                  <MenuItem
-                    key={index}
-                    onClick={() => {
-                      handleCloseNavMenu();
-                      router.push(`${item.path}`);
-                    }}
-                  >
-                    <Typography
-                      textAlign="center"
-                      sx={{
-                        color: "#897A5F",
-                        fontSize: "1.2rem",
-                        fontFamily: "EliceBold",
-                        fontWeight: "800",
-                      }}
-                    >
-                      {item.text}
-                    </Typography>
-                  </MenuItem>
-                ))
-              )} */}
-            </Toolbar>
-          </Container>
-        </AppBar>
-      </>
-      {/* </HideOnScroll> */}
-      {/* <Toolbar id="back-to-top-anchor" />
-      <ScrollTop {...props}>
-        <Fab
-          color="secondary"
-          size="small"
-          aria-label="scroll back to top"
-          sx={styles}
-        >
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop> */}
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
     </>
   );
 };
