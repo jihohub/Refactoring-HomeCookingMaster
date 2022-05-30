@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { getToken } from "next-auth/jwt";
 import logohat from "../../../public/assets/hatYess.png";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -57,8 +58,17 @@ const notLoggedIn = [
 
 const Header = () => {
   const { data: session, status } = useSession();
-  const loading = status === "loading";
+
+  // useEffect(() => {
+  //   if (session?.error === "RefreshAccessTokenError") {
+  //     signIn(); // Force sign in to hopefully resolve error
+  //   }
+  // }, [session]);
+
   // const router = useRouter();
+  console.log("status:", status);
+  console.log("session:", session);
+
 
   const handleSignin = (e: any): void => {
     e.preventDefault();
