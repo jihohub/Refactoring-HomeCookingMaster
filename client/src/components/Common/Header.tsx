@@ -65,9 +65,9 @@ const Header = () => {
   //   }
   // }, [session]);
 
-  // const router = useRouter();
-  console.log("status:", status);
+  const router = useRouter();
   console.log("session:", session);
+
 
 
   const handleSignin = (e: any): void => {
@@ -91,6 +91,7 @@ const Header = () => {
     <>
       Not signed in <br />
       <button onClick={() => signIn()}>Sign in</button>
+      <button onClick={() => router.push("/register")}>회원가입하기</button>
     </>
   );
 };

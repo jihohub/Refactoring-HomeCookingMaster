@@ -1,100 +1,8 @@
-// import type { NextApiRequest, NextApiResponse } from "next";
-// import NextAuth from "next-auth";
-// import GoogleProvider from "next-auth/providers/google";
-// import KakaoProvider from "next-auth/providers/kakao";
-
-const GOOGLE_AUTHORIZATION_URL =
-  "https://accounts.google.com/o/oauth2/v2/auth?" +
-  new URLSearchParams({
-    prompt: "consent",
-    access_type: "offline",
-    response_type: "code",
-  });
-
-// /**
-//  * Takes a token, and returns a new token with updated
-//  * `accessToken` and `accessTokenExpires`. If an error occurs,
-//  * returns the old token and an error property
-//  */
-// async function refreshAccessToken(token: any) {
-//   try {
-//     const url =
-//       "https://oauth2.googleapis.com/token?" +
-//       new URLSearchParams({
-//         client_id: process.env.GOOGLE_CLIENT_ID,
-//         client_secret: process.env.GOOGLE_CLIENT_SECRET,
-//         grant_type: "refresh_token",
-//         refresh_token: token.refreshToken,
-//       });
-
-//     const response = await fetch(url, {
-//       headers: {
-//         "Content-Type": "application/x-www-form-urlencoded",
-//       },
-//       method: "POST",
-//     });
-
-//     const refreshedTokens = await response.json();
-
-//     if (!response.ok) {
-//       throw refreshedTokens;
-//     }
-
-//     return {
-//       ...token,
-//       accessToken: refreshedTokens.access_token,
-//       accessTokenExpires: Date.now() + refreshedTokens.expires_at * 1000,
-//       refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
-//     };
-//   } catch (error) {
-//     console.log(error);
-
-//     return {
-//       ...token,
-//       error: "RefreshAccessTokenError",
-//     };
-//   }
-// }
-
-
-// export default async function auth(req: NextApiRequest, res: NextApiResponse) {
-//   return await NextAuth(req, res, {
-//     secret: process.env.SECRET,
-//     providers: [
-//       GoogleProvider({
-//         clientId: process.env.GOOGLE_CLIENT_ID,
-//         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//         authorization: GOOGLE_AUTHORIZATION_URL,
-//       }),
-//       KakaoProvider({
-//         clientId: process.env.KAKAO_ID,
-//         clientSecret: process.env.KAKAO_SECRET,
-//       }),
-//     ],
-//     callbacks: {
-//       // session(session, token) {
-//       //   return session; // The type here should match the one returned in `useSession()`
-//       // },
-//       async session({ session, token, user }) {
-//         // Send properties to the client, like an access_token from a provider.
-//         session.accessToken = token.accessToken;
-//         return session;
-//       },
-//       async jwt({ token, account }) {
-//         // Persist the OAuth access_token to the token right after signin
-//         if (account) {
-//           token.accessToken = account.access_token;
-//         }
-//         return token;
-//       },
-//     },
-//   });
-// }
-
 import type { User, NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
+import CredentialsProvider from "next-auth/providers/credentials";
 import type { NextApiHandler } from "next";
 
 type GenericObject<T = unknown> = T & {
@@ -107,6 +15,7 @@ interface AuthToken {
   accessTokenExpires?: number;
   expires_in?: number;
   refreshToken: string;
+  id_token: string;
   error?: string;
 }
 
@@ -115,6 +24,14 @@ interface JwtInterface {
   user: User;
   account: GenericObject;
 }
+
+const GOOGLE_AUTHORIZATION_URL =
+  "https://accounts.google.com/o/oauth2/v2/auth?" +
+  new URLSearchParams({
+    prompt: "consent",
+    access_type: "offline",
+    response_type: "code",
+  });
 
 /**
  * Takes a token, and returns a new token with updated
@@ -169,26 +86,50 @@ const refreshAccessToken = async (
 };
 
 const AuthHandler: NextApiHandler = (req, res) => {
-  const scopes = [
-    "https://www.googleapis.com/auth/userinfo.email",
-    "https://www.googleapis.com/auth/userinfo.profile",
-    "https://www.googleapis.com/auth/drive",
-    "https://www.googleapis.com/auth/drive.appdata",
-    "https://www.googleapis.com/auth/drive.activity",
-    "https://www.googleapis.com/auth/directory.readonly",
-  ];
   const JWT_SECRET = process.env.SECRET;
-
   const options: NextAuthOptions = {
     providers: [
+      CredentialsProvider({
+        // The name to display on the sign in form (e.g. 'Sign in with...')
+        name: "email",
+        // The credentials is used to generate a suitable form on the sign in page.
+        // You can specify whatever fields you are expecting to be submitted.
+        // e.g. domain, username, password, 2FA token, etc.
+        // You can pass any HTML attribute to the <input> tag through the object.
+        credentials: {
+          username: {
+            label: "이메일",
+            type: "mail",
+            placeholder: "abc@mail.com",
+          },
+          password: { label: "비밀번호", type: "password" },
+        },
+        async authorize(credentials, req) {
+          // You need to provide your own logic here that takes the credentials
+          // submitted and returns either a object representing a user or value
+          // that is false/null if the credentials are invalid.
+          // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
+          // You can also use the `req` object to obtain additional parameters
+          // (i.e., the request IP address)
+          const res = await fetch("/api/oauth/login", {
+            method: "POST",
+            body: JSON.stringify(credentials),
+            headers: { "Content-Type": "application/json" },
+          });
+          const user = await res.json();
+
+          // If no error and we have user data, return it
+          if (res.ok && user) {
+            return user;
+          }
+          // Return null if user data could not be retrieved
+          return null;
+        },
+      }),
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         authorization: GOOGLE_AUTHORIZATION_URL,
-      }),
-      KakaoProvider({
-        clientId: process.env.KAKAO_ID,
-        clientSecret: process.env.KAKAO_SECRET,
       }),
     ],
     secret: JWT_SECRET,
@@ -203,7 +144,7 @@ const AuthHandler: NextApiHandler = (req, res) => {
         let res: AuthToken;
 
         const now = Date.now();
-
+        
         // Signing in
         if (account && user) {
           const accessToken = account.access_token;
@@ -211,11 +152,15 @@ const AuthHandler: NextApiHandler = (req, res) => {
 
           res = {
             accessToken,
-            accessTokenExpires: account.expires_in,
+            accessTokenExpires: account.expires_at,
+            id_token: account.id_token,
             refreshToken,
             user,
           };
-        } else if (token.expires_in === null || now < token.expires_at) {
+        } else if (
+          token.accessTokenExpires === null ||
+          now < token.accessTokenExpires
+        ) {
           // Subsequent use of JWT, the user has been logged in before
           // access token has not expired yet
           res = token;

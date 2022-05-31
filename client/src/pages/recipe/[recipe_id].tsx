@@ -36,8 +36,6 @@ const getServerSideProps: GetServerSideProps = async (context) => {
     fetchRecipe(recipe_id)
   );
 
-
-
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
