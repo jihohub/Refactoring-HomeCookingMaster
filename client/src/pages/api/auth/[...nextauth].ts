@@ -97,9 +97,9 @@ const AuthHandler: NextApiHandler = (req, res) => {
         // e.g. domain, username, password, 2FA token, etc.
         // You can pass any HTML attribute to the <input> tag through the object.
         credentials: {
-          username: {
+          email: {
             label: "이메일",
-            type: "mail",
+            type: "text",
             placeholder: "abc@mail.com",
           },
           password: { label: "비밀번호", type: "password" },
@@ -111,7 +111,7 @@ const AuthHandler: NextApiHandler = (req, res) => {
           // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
           // You can also use the `req` object to obtain additional parameters
           // (i.e., the request IP address)
-          const res = await fetch("/api/oauth/login", {
+          const res = await fetch("http://localhost:3000/api/user/login", {
             method: "POST",
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" },
