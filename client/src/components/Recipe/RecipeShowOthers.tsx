@@ -16,8 +16,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 function RecipeShowOthers(props: any) {
   const router = useRouter();
 
-  const other_recipes_info = props.recipe.other_recipes_info;
-  const recipe_id = Number(router.query.id);
+  const other_recipes_info = props.data?.other_recipes_info;
+  // const recipe_id = Number(router.query.id);
   // const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
   // const { user_id } = user_info;
 

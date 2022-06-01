@@ -187,7 +187,7 @@ Row.propTypes = {
 };
 
 function ReviewList(props: any) {
-  const post = props.post;
+  const post_info = props.data?.post_info;
 
   return (
     <>
@@ -213,8 +213,8 @@ function ReviewList(props: any) {
       >
         <Divider />
       </Box>
-      {post.length > 0 ? (
-        post.map((item: any) => (
+      {post_info?.length > 0 ? (
+        post_info?.map((item: any) => (
           <>
             <Box
               sx={{

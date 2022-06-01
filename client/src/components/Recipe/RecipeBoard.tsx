@@ -72,8 +72,10 @@ function RecipeBoard(props: any) {
   const [post, setPost] = useState<string>("");
 
   const recipe_id = props.recipe_id;
+  const user_id = 31;
   // const user_id = String(sessionStorage.getItem("user_id")); // user_id
   const [imageFile, setImageFile] = useState<any>(null);
+  
 
   const handleText = (e: any) => {
     setPost(e.target.value);

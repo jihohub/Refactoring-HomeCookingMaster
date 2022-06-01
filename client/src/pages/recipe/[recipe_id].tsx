@@ -29,49 +29,9 @@ const Recipe = () => {
   return (
     <>
       <RecipeMain data={data?.data} />
-      {/* <RecipeBoard props={data} />
-      <RecipeShowOthers props={data} />
-      <ReviewList props={data} /> */}
-      <div>
-        <p>{recipe_info?.name}</p>
-        <img src={recipe_info?.img}></img>
-        <p>좋아요: {recipe_info?.likes}</p>
-        <p>조회수: {recipe_info?.views}</p>
-        <p>{recipe_info?.servings}</p>
-        <p>{recipe_info?.difficulty}</p>
-        <p>{recipe_info?.cooking_time}</p>
-      </div>
-      <div>
-        <h1>재료</h1>
-        {ingredient_info?.map((item) => (
-          <p>{item.name}</p>
-        ))}
-      </div>
-      <div>
-        <h1>조리과정</h1>
-        {process_info?.map((item) => (
-          <>
-            <h2>{item.step}</h2>
-            <img src={item.img}></img>
-            <p>{item.recipe}</p>
-          </>
-        ))}
-      </div>
-      <div>
-        <h1>댓글</h1>
-        {post_info?.map((item) => (
-          <>
-            <p>{item.nickname}</p>
-            <p>{item.timestamp}</p>
-            <img src={item.img} width="200"></img>
-          </>
-        ))}
-      </div>
-      <form>
-        <label htmlFor="post">Username:</label>
-        <input type="text" placeholder="댓글" name="post" />
-        <input type="submit" value="Submit!"></input>
-      </form>
+      <RecipeShowOthers data={data?.data} />
+      <ReviewList data={data?.data} />
+      <RecipeBoard />
     </>
   );
 };
