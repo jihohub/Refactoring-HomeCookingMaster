@@ -102,100 +102,100 @@ function RecipeBoard(props: any) {
 
   return (
     <Box sx={{ width: "70vw", margin: "0 auto" }}>
-      {/* <Box
-                sx={{
-                    width: "70vw",
-                    margin: "0 auto",
-                    height: "30px",
-                }}
-            />
-            {user_id != "null" ? (
-                <TextField
-                    variant="outlined"
-                    sx={inputStyles}
-                    minRows="5"
-                    multiline={true}
-                    onChange={handleText}
-                    value={post}
-                />
-            ) : (
-                <TextField
-                    disabled
-                    label="로그인 후 이용해주세요."
-                    variant="outlined"
-                    sx={disabledInputStyles}
-                    minRows="5"
-                    multiline={true}
-                />
-            )}
-            <Box
-                sx={{
-                    width: "70vw",
-                    margin: "0 auto",
-                    height: "10px",
-                }}
-            />
-            <form
-                id="formElem"
-                encType="multipart/form-data"
-                style={{ width: "70%", marginLeft: "15%", textAlign: "right" }}
-            >
-                <label htmlFor="icon-button-file">
-                    {user_id != "null" ? (
-                        <>
-                            <input
-                                accept="image/*"
-                                id="icon-button-file"
-                                type="file"
-                                style={{ display: "none" }}
-                                onChange={handleUpload}
-                            />
-                            <IconButton aria-label="upload picture" component="span">
-                                <AddAPhotoRoundedIcon />
-                            </IconButton>
-                        </>
-                    ) : (
-                        <>
-                            <input
-                                disabled
-                                accept="image/*"
-                                id="icon-button-file"
-                                type="file"
-                                style={{ display: "none" }}
-                                onChange={handleUpload}
-                            />
-                            <IconButton disabled aria-label="disabled upload picture" component="span">
-                                <AddAPhotoRoundedIcon />
-                            </IconButton>
-                        </>
-                    )}
-                </label>
-                {user_id != "null" ? (
-                    <Button
-                        variant="contained"
-                        sx={buttonStyles}
-                        onClick={handleSubmit}
-                    >
-                        등록
-                    </Button>
-                ) : (
-                    <Button
-                        disabled
-                        variant="contained"
-                        sx={disabledButtonStyles}
-                        onClick={handleSubmit}
-                    >
-                        등록
-                    </Button>
-                )}
-            </form>
-            <Box
-                sx={{
-                    width: "70vw",
-                    margin: "0 auto",
-                    height: "30px",
-                }}
-            /> */}
+      <Box
+        sx={{
+          width: "70vw",
+          margin: "0 auto",
+          height: "30px",
+        }}
+      />
+      {user_id != "null" ? (
+        <TextField
+          variant="outlined"
+          sx={inputStyles}
+          minRows="5"
+          multiline={true}
+          onChange={handleText}
+          value={post}
+        />
+      ) : (
+        <TextField
+          disabled
+          label="로그인 후 이용해주세요."
+          variant="outlined"
+          sx={disabledInputStyles}
+          minRows="5"
+          multiline={true}
+        />
+      )}
+      <Box
+        sx={{
+          width: "70vw",
+          margin: "0 auto",
+          height: "10px",
+        }}
+      />
+      <form
+        id="formElem"
+        encType="multipart/form-data"
+        style={{ width: "70%", marginLeft: "15%", textAlign: "right" }}
+      >
+        <label htmlFor="icon-button-file">
+          {user_id != "null" ? (
+            <>
+              <input
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                style={{ display: "none" }}
+                onChange={handleUpload}
+              />
+              <IconButton aria-label="upload picture" component="span">
+                <AddAPhotoRoundedIcon />
+              </IconButton>
+            </>
+          ) : (
+            <>
+              <input
+                disabled
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                style={{ display: "none" }}
+                onChange={handleUpload}
+              />
+              <IconButton
+                disabled
+                aria-label="disabled upload picture"
+                component="span"
+              >
+                <AddAPhotoRoundedIcon />
+              </IconButton>
+            </>
+          )}
+        </label>
+        {user_id != "null" ? (
+          <Button variant="contained" sx={buttonStyles} onClick={handleSubmit}>
+            등록
+          </Button>
+        ) : (
+          <Button
+            disabled
+            variant="contained"
+            sx={disabledButtonStyles}
+            onClick={handleSubmit}
+          >
+            등록
+          </Button>
+        )}
+      </form>
+      <Box
+        sx={{
+          width: "70vw",
+          margin: "0 auto",
+          height: "30px",
+        }}
+      />
     </Box>
   );
 }

@@ -51,24 +51,11 @@ const notLoggedIn = [
     path: "/login",
   },
 ];
-// interface Props {
-//   window?: () => Window;
-//   children: React.ReactElement;
-// }
 
 const Header = () => {
   const { data: session, status } = useSession();
-
-  // useEffect(() => {
-  //   if (session?.error === "RefreshAccessTokenError") {
-  //     signIn(); // Force sign in to hopefully resolve error
-  //   }
-  // }, [session]);
-
   const router = useRouter();
   console.log("session:", session);
-
-
 
   const handleSignin = (e: any): void => {
     e.preventDefault();
@@ -82,8 +69,9 @@ const Header = () => {
   if (session) {
     return (
       <>
-        Signed in as <br />
         <button onClick={() => signOut()}>Sign out</button>
+        <p>{session.user?.name}</p>
+        <img src={session.user?.image} />
       </>
     );
   }

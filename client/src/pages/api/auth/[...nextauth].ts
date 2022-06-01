@@ -1,9 +1,8 @@
 import type { User, NextAuthOptions } from "next-auth";
+import type { NextApiHandler } from "next";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
-import CredentialsProvider from "next-auth/providers/credentials";
-import type { NextApiHandler } from "next";
 
 type GenericObject<T = unknown> = T & {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -24,6 +23,8 @@ interface JwtInterface {
   user: User;
   account: GenericObject;
 }
+
+// const prisma = new PrismaClient();
 
 const GOOGLE_AUTHORIZATION_URL =
   "https://accounts.google.com/o/oauth2/v2/auth?" +
@@ -88,48 +89,16 @@ const refreshAccessToken = async (
 const AuthHandler: NextApiHandler = (req, res) => {
   const JWT_SECRET = process.env.SECRET;
   const options: NextAuthOptions = {
+    // adapter: PrismaAdapter(prisma),
     providers: [
-      CredentialsProvider({
-        // The name to display on the sign in form (e.g. 'Sign in with...')
-        name: "email",
-        // The credentials is used to generate a suitable form on the sign in page.
-        // You can specify whatever fields you are expecting to be submitted.
-        // e.g. domain, username, password, 2FA token, etc.
-        // You can pass any HTML attribute to the <input> tag through the object.
-        credentials: {
-          email: {
-            label: "이메일",
-            type: "text",
-            placeholder: "abc@mail.com",
-          },
-          password: { label: "비밀번호", type: "password" },
-        },
-        async authorize(credentials, req) {
-          // You need to provide your own logic here that takes the credentials
-          // submitted and returns either a object representing a user or value
-          // that is false/null if the credentials are invalid.
-          // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-          // You can also use the `req` object to obtain additional parameters
-          // (i.e., the request IP address)
-          const res = await fetch("http://localhost:3000/api/user/login", {
-            method: "POST",
-            body: JSON.stringify(credentials),
-            headers: { "Content-Type": "application/json" },
-          });
-          const user = await res.json();
-
-          // If no error and we have user data, return it
-          if (res.ok && user) {
-            return user;
-          }
-          // Return null if user data could not be retrieved
-          return null;
-        },
-      }),
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         authorization: GOOGLE_AUTHORIZATION_URL,
+      }),
+      KakaoProvider({
+        clientId: process.env.KAKAO_CLIENT_ID,
+        clientSecret: process.env.KAKAO_CLIENT_SECRET,
       }),
     ],
     secret: JWT_SECRET,
@@ -144,7 +113,7 @@ const AuthHandler: NextApiHandler = (req, res) => {
         let res: AuthToken;
 
         const now = Date.now();
-        
+
         // Signing in
         if (account && user) {
           const accessToken = account.access_token;
