@@ -24,6 +24,16 @@ const Recipe = () => {
       <div>
         <p>{recipe_info?.name}</p>
         <img src={recipe_info?.img}></img>
+        <p>좋아요: {recipe_info?.likes}</p>
+        <p>조회수: {recipe_info?.views}</p>
+        <p>{recipe_info?.servings}</p>
+        <p>{recipe_info?.difficulty}</p>
+        <p>{recipe_info?.cooking_time}</p>
+      </div>
+      <div>
+        {ingredient_info?.map((item) => (
+          <p>{item.name}</p>
+        ))}
       </div>
     </>
   );
