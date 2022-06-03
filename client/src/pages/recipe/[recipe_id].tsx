@@ -10,7 +10,7 @@ import {
   QueryClientProvider,
 } from "react-query";
 import { useSession } from "next-auth/react";
-import fetchRecipe from "../../hooks/Recipes/useRecipe";
+import useRecipe from "../../hooks/Recipes/useRecipe";
 import RecipeMain from "../../components/Recipe/RecipeMain";
 import RecipeBoard from "../../components/Recipe/RecipeBoard";
 import RecipeShowOthers from "../../components/Recipe/RecipeShowOthers";
@@ -21,10 +21,7 @@ const Recipe = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const { recipe_id } = router.query;
-  const { data } = useQuery(["recipe", recipe_id], () =>
-    fetchRecipe(recipe_id)
-  );
-  const { recipe_info, food_info, ingredient_info, process_info, post_info, other_recipes_info, did_u_liked } = data?.data || {};
+  const { data } =  useRecipe(recipe_id);
 
   return (
     <>
@@ -40,7 +37,7 @@ const getServerSideProps: GetServerSideProps = async (context) => {
   const { recipe_id } = context.query;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(["recipe", recipe_id], () =>
-    fetchRecipe(recipe_id)
+    useRecipe(recipe_id)
   );
 
   return {

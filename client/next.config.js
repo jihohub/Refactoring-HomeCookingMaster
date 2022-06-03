@@ -8,5 +8,5 @@ module.exports = {
         destination: "http://localhost:5000/api/:path*",
       },
     ];
-  }
+  },
 };

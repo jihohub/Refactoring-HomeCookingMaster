@@ -17,10 +17,10 @@ type Ranking = {
   }>;
 };
 
-export default async function fetchRankings(): Promise<Ranking> {
-  return await axios.get("api/main/ranking").then((response) => response.data);
+async function fetchRankings(): Promise<Ranking> {
+  return await axios.get("api/main/ranking").then(response => response.data);
 }
 
-function useRankings() {
-  return useQuery("rankings", fetchRankings);
+export default function useRankings() {
+  return useQuery<Ranking, Error>("rankings", fetchRankings);
 }

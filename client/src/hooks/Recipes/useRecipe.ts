@@ -61,10 +61,10 @@ type Recipe = {
   };
 };
 
-export default async function fetchRecipe(recipe_id: string | string[] | undefined): Promise<Recipe> {
+async function fetchRecipe(recipe_id: string | string[] | undefined): Promise<Recipe> {
   return await axios.post(`/api/recipe/${recipe_id}`, {"user_id": 7}).then((response) => response.data);
 }
 
-function useRecipe(recipe_id: string | string[] | undefined) {
+export default function useRecipe(recipe_id: string | string[] | undefined) {
   return useQuery<Recipe, Error>(["recipe", recipe_id], () => fetchRecipe(recipe_id));
 }

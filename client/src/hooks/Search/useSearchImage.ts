@@ -25,10 +25,16 @@ type reslutImage = {
   };
 };
 
-function searchImage(): Promise<reslutImage> {
-  return axios.post("/api/main/search/img").then((response) => response.data);
+function searchImage(imagefile: FormData): Promise<reslutImage> {
+  return axios
+    .post("/api/main/search/img", imagefile, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
 }
 
-function useSearchImage() {
-  return useQuery<reslutImage, Error>("recipe", searchImage);
+export default function useSearchImage(imagefile: FormData) {
+  return useQuery<reslutImage, Error>(["searchimage", imagefile], () => searchImage(imagefile));
 }

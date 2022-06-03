@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { getToken } from "next-auth/jwt";
 import logohat from "../../../public/assets/hatYess.png";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
+import styles from "./Header.module.css";
 // import { setUser } from "../../modules/userLogin";
 
 import AppBar from "@mui/material/AppBar";
@@ -24,11 +26,11 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import background from "../../../public/assets/bg2.jpeg";
 import finalLogo from "../../../public/assets/finalLogo.png";
 
-const styles = {
-  "&.MuiFab-secondary": {
-    backgroundColor: "#897A5F",
-  },
-};
+// const styles = {
+//   "&.MuiFab-secondary": {
+//     backgroundColor: "#897A5F",
+//   },
+// };
 
 const pages = [
   {
@@ -54,8 +56,17 @@ const notLoggedIn = [
 
 const Header = () => {
   const { data: session, status } = useSession();
-  const router = useRouter();
   console.log("session:", session);
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  const closeMenu = () => {
+    setOpen(false);
+  };
 
   const handleSignin = (e: any): void => {
     e.preventDefault();
@@ -66,21 +77,45 @@ const Header = () => {
     signOut();
   };
 
-  if (session) {
-    return (
-      <>
-        <button onClick={() => signOut()}>Sign out</button>
-        <p>{session.user?.name}</p>
-        <img src={session.user?.image} />
-      </>
-    );
-  }
   return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-      <button onClick={() => router.push("/register")}>회원가입하기</button>
-    </>
+    <nav className={styles.navbar}>
+      <Link href="/" className={styles.nav__logo}>
+        <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" />
+      </Link>
+      <div onClick={handleClick} className={styles.nav__icon}>
+        {/* {open ? <FiX /> : <FiMenu />} */}
+      </div>
+      <ul className={styles.nav__links}>
+        <li className={styles.nav__item}>
+          <Link href="/about" className={styles.nav__link}>
+            About
+          </Link>
+        </li>
+        <li className={styles.nav__item}>
+          <Link href="/shop" className={styles.nav__link}>
+            Shop
+          </Link>
+        </li>
+        <li className={styles.nav__item}>
+          <Link href="/contact" className={styles.nav__link}>
+            Contact
+          </Link>
+        </li>
+        {session ? (
+          <div className={styles.navigation__auth}>
+            <a className={styles.navigation__item} onClick={handleSignout}>
+              로그아웃
+            </a>
+            <p className={styles.navigation__item}>{session.user?.name}</p>
+            <img className={styles.nav__userimage} src={session.user?.image} />
+          </div>
+        ) : (
+          <div className={styles.navigation__auth}>
+            <a onClick={handleSignin}>로그인</a>
+          </div>
+        )}
+      </ul>
+    </nav>
   );
 };
 
