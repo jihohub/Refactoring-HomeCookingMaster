@@ -186,9 +186,8 @@ Row.propTypes = {
   }).isRequired,
 };
 
-function ReviewList(props: any) {
-  const post_info = props.data?.post_info;
-
+function ReviewList({ data }) {
+  
   return (
     <>
       <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
@@ -213,8 +212,8 @@ function ReviewList(props: any) {
       >
         <Divider />
       </Box>
-      {post_info?.length > 0 ? (
-        post_info?.map((item: any) => (
+      {data?.post_info?.length > 0 ? (
+        data?.post_info?.map((item: any) => (
           <>
             <Box
               sx={{

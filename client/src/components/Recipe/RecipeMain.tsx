@@ -8,19 +8,20 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
-function RecipeMain(props: any) {
+function RecipeMain({data}) {
   // const dispatch = useDispatch();
-    const user_id = 31;
+  const user_id = 31;
+  console.log(data?.food_info);
 
-    const {
-        did_u_liked,
-        recipe_info,
-        food_info,
-        ingredient_info,
-        process_info,
-        post_info,
-        other_recipes_info,
-    } = props.data || {};
+  const {
+    did_u_liked,
+    recipe_info,
+    food_info,
+    ingredient_info,
+    process_info,
+    post_info,
+    other_recipes_info,
+  } = data || {};
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,7 +42,7 @@ function RecipeMain(props: any) {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-    return (
+  return (
     <div>
       <Box sx={{ width: "70vw", maxWidth: "1080px", height: "50px" }} />
       <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>

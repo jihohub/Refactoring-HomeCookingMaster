@@ -11,20 +11,15 @@ import { btnDiv } from "../../css/main_css";
 // import { setImageFile,setPreviewUrl } from "../Result/searchedImageSlice";
 import useSearchImage from "../../hooks/Search/useSearchImage";
 
+import { useSetRecoilState } from "recoil";
+import { searchedImage } from "../../atom/searchedImage";
+
 function DropZone() {
   const router = useRouter();
-
-  // useEffect(() => {
-  //     dispatch(getImgResult([]));
-  // }, []);
-
-  const handleDrop = async (acceptedFiles: any) => {
-    let reader = new FileReader();
-    let file = acceptedFiles[0];
-    const tmp = reader.readAsDataURL(file);
-    const formData = new FormData();
-    formData.append("img", acceptedFiles[0]);
-    useSearchImage(formData);
+  const setImage = useSetRecoilState(searchedImage);
+  const handleDrop = (acceptedFiles: any) => {
+    setImage(acceptedFiles[0]);
+    router.push("/search/img");
   };
 
   // const imgResult = useSelector((state:RootStateOrAny) => state.getResultByImg.list)

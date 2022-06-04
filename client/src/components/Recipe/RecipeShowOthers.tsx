@@ -13,10 +13,8 @@ import {
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-function RecipeShowOthers(props: any) {
+function RecipeShowOthers({data}) {
   const router = useRouter();
-
-  const other_recipes_info = props.data?.other_recipes_info;
   // const recipe_id = Number(router.query.id);
   // const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
   // const { user_id } = user_info;
@@ -70,8 +68,8 @@ function RecipeShowOthers(props: any) {
             marginBottom: "15rem",
           }}
         >
-          {other_recipes_info
-            ? other_recipes_info.map((item: any, index: number) => (
+          {data?.other_recipes_info
+            ? data?.other_recipes_info.map((item: any, index: number) => (
                 <ImageListItem
                   key={index}
                   sx={{

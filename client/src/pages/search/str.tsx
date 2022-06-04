@@ -10,23 +10,19 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "react-query";
+import useSearchImage from "../../hooks/Search/useSearchImage";
+import useSearchText from "../../hooks/Search/useSearchText";
 import { useSession } from "next-auth/react";
 
 const Search = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const {result} = router.query;
-  // const { data } = useQuery(["recipe", recipe_id], () =>
-  //   fetchRecipe(recipe_id)
-  // );
-  const {
-    equal_rate,
-    food_0,
-    food_1,
-    food_2,
-  } = result || {};
+  const { data: food_name } = router.query;
+  const { data } = useSearchText(food_name);
+  console.log(data);
+  // const { equal_rate, food_0, food_1, food_2 } = data || {};
 
-  console.log(equal_rate, food_0, food_1, food_2);
+  // console.log(equal_rate, food_0, food_1, food_2);
 
   return (
     // <>
@@ -54,11 +50,11 @@ const Search = () => {
 };
 
 const getServerSideProps: GetServerSideProps = async (context) => {
-  const { recipe_id } = context.query;
+  const { data: food_name } = context.query;
   const queryClient = new QueryClient();
-  // await queryClient.prefetchQuery(["recipe", recipe_id], () =>
-  //   fetchRecipe(recipe_id)
-  // );
+  await queryClient.prefetchQuery(["searchtext", food_name], () =>
+    useSearchText(food_name)
+  );
 
   return {
     props: {

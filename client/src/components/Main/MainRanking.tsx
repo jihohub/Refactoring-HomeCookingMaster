@@ -10,21 +10,11 @@ import {
   ImageListItemBar,
 } from "@mui/material";
 
-const MainRanking = (props: any) => {
-  const router = useRouter();
-  // const { data, ...rest } = props.ranking;
-  // console.log(data);
-  // const [ranking, setRanking] = useState([]);
-  // useEffect(() => {
-  //   setRanking(props.ranking?.data);
-  // }, []);
-  
-  // console.log(ranking);
-  const ranking = props.ranking?.data || [];
+const MainRanking = ({ranking}) => {
 
   return (
     <>
-      {ranking.map((item: any) => (
+      {ranking?.data.map((item: any) => (
         <>
           <p>{item.name}</p>
           {/* <Link

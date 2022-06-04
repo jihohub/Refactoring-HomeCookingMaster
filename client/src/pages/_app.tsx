@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { SessionProvider } from "next-auth/react";
+import { RecoilRoot } from "recoil";
 import Layout from "../components/Common/Layout";
 
 // import "../styles.module.css";
@@ -15,9 +16,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <SessionProvider session={session}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <RecoilRoot>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </RecoilRoot>
         </SessionProvider>
       </Hydrate>
     </QueryClientProvider>
