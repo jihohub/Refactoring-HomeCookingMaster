@@ -5,6 +5,7 @@ type ReslutImage = {
   result: string;
   message: string;
   data: {
+    food_list: Array<string>;
     equal_rate: Array<{
       name: string;
       rate: number;

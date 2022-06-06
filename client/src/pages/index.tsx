@@ -51,7 +51,7 @@ const Page = () => {
   return (
     <>
       <label>
-        <input onChange={(e) => handleText(e)}></input>
+        <input onChange={(e) => handleText(e)} onKeyDown={(e) => {if (e.keyCode == 13) {handleClick(e);}}}></input>
         <button onClick={(e) => handleClick(e)}></button>
       </label>
       <MainSearch />

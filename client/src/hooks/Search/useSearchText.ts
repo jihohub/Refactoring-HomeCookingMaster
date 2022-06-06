@@ -5,6 +5,7 @@ type ResultText = {
   result: string;
   message: string;
   data: {
+    food_list: Array<string>;
     food: Array<{
       id: number;
       name: string;
