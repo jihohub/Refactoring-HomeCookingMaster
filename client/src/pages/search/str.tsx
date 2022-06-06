@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { Link } from "next/link";
+import Link from "next/link";
 import {
   dehydrate,
   useQuery,
@@ -10,50 +10,47 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "react-query";
-import useSearchImage from "../../hooks/Search/useSearchImage";
-import useSearchText from "../../hooks/Search/useSearchText";
+import useSearchImage from "../../hooks/Search/useSearchImg";
+import useSearchStr from "../../hooks/Search/useSearchStr";
 import { useSession } from "next-auth/react";
+import ItemList from "../../components/Result/ItemList";
 
-const Search = () => {
+const Str = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const { data: food_name } = router.query;
-  const { data } = useSearchText(food_name);
+  const { data } = useSearchStr(food_name);
   console.log(data);
-  // const { equal_rate, food_0, food_1, food_2 } = data || {};
+  const isNoResult = data?.data.food_list.length === 0;
+  const isMultiResult = data?.data.food_list.length > 1;
+  console.log(isNoResult, isMultiResult);
 
-  // console.log(equal_rate, food_0, food_1, food_2);
+  if (isMultiResult) {
+    return (
+        data?.data.food_list.map((item) => (
+        <Link href={`/search/str?data=${item}`}>
+          <a>{item}</a>
+        </Link>
+      ))
+    )
+  }
+
+  if (isNoResult) {
+    return <a>검색 결과가 없습니다.</a>
+  }
 
   return (
-    // <>
-    //   {food_0?.map((item: any) => (
-    //     <>
-    //       <p>{item.name}</p>
-    //       {/* <Link
-    //         href={`/recipe/[recipe_id]?recipe_id=${encodeURIComponent(item.id)}`} as ={`/recipe/${encodeURIComponent(item.id)}`}
-    //       >
-    //         <img src={item.img} width="200" height="100" alt={item.name}></img>
-    //       </Link> */}
-    //       <Link
-    //         href={{
-    //           pathname: "/recipe/[recipe_id]",
-    //           query: { recipe_id: item.id },
-    //         }}
-    //       >
-    //         <img src={item.img} width="200" height="100" alt={item.name}></img>
-    //       </Link>
-    //     </>
-    //   ))}
-    // </>
-    <></>
+    <>
+      <ItemList data={data?.data} />
+    </>
   );
 };
 
 const getServerSideProps: GetServerSideProps = async (context) => {
   const { data: food_name } = context.query;
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(["searchtext", food_name], () =>
-    useSearchText(food_name)
+  await queryClient.prefetchQuery(["searchstr", food_name], () =>
+    useSearchStr(food_name)
   );
 
   return {
@@ -63,4 +60,4 @@ const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Search;
+export default Str;

@@ -8,10 +8,12 @@ import {
   ImageListItem,
   ImageListItemBar,
 } from "@mui/material";
+import SearchBar from "../Common/SearchBar";
 
 const MainSearch = () => {
   return (
     <>
+      <SearchBar />
       <Typography
         sx={{
           fontFamily: "EliceBold",

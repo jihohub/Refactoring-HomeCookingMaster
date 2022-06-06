@@ -22,12 +22,13 @@ const MainRanking = ({ranking}) => {
           >
             <img src={item.img} width="200" height="100" alt={item.name}></img>
           </Link> */}
-          <Link
+          {/* <Link
             href={{
               pathname: "/recipe/[recipe_id]",
               query: { recipe_id: item.id },
             }}
-          >
+          > */}
+          <Link href={`/recipe/${item.id}`}>
             <img src={item.img} width="200" height="100" alt={item.name}></img>
           </Link>
         </>

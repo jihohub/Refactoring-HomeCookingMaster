@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-type ReslutImage = {
+type ReslutImg = {
   result: string;
   message: string;
   data: {
@@ -46,7 +46,7 @@ type ReslutImage = {
   };
 };
 
-async function searchImage(formData: FormData | undefined): Promise<ReslutImage> {
+async function searchImg(formData: FormData | undefined): Promise<ReslutImg> {
   return await axios
     .post("/api/main/search/img", formData, {
       headers: {
@@ -56,8 +56,8 @@ async function searchImage(formData: FormData | undefined): Promise<ReslutImage>
     .then((response) => response.data);
 }
 
-export default function useSearchImage(formData: FormData | undefined) {
-  return useQuery<ReslutImage, Error>(["searchimage", formData], () =>
-    searchImage(formData)
+export default function useSearchImg(formData: FormData | undefined) {
+  return useQuery<ReslutImg, Error>(["searchimg", formData], () =>
+    searchImg(formData)
   );
 }

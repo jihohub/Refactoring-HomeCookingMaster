@@ -11,7 +11,7 @@ import {
   QueryClientProvider,
 } from "react-query";
 import useRankings from "../hooks/Ranking/useRankings";
-import useSearchText from "../hooks/Search/useSearchText"
+import useSearchText from "../hooks/Search/useSearchStr"
 import MainSearch from "../components/Main/MainSearch";
 import MainRanking from "../components/Main/MainRanking";
 import kkokko1 from "../../public/assets/kkokko_1.png";
@@ -25,8 +25,6 @@ const Page = () => {
   const {data} = useRankings();
   console.log(data);
   console.log(typeof data);
-  const [text, setText] = useState("");
-
   const { data: session, status } = useSession();
   // const loading = status === "loading";
   const router = useRouter();
@@ -40,20 +38,10 @@ const Page = () => {
     signOut();
   };
 
-  const handleText = (e: any): void => {
-    setText(e.target.value);
-  }
-
-  const handleClick = (e: any): void => {
-    router.push(`/search/str?data=${text}`)
-  };
+  
 
   return (
     <>
-      <label>
-        <input onChange={(e) => handleText(e)} onKeyDown={(e) => {if (e.keyCode == 13) {handleClick(e);}}}></input>
-        <button onClick={(e) => handleClick(e)}></button>
-      </label>
       <MainSearch />
       <MainRanking ranking={data} />
     </>

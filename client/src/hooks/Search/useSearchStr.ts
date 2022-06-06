@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-type ResultText = {
+type ResultStr = {
   result: string;
   message: string;
   data: {
@@ -20,14 +20,14 @@ type ResultText = {
   };
 };
 
-async function searchText(text: string | string[] | undefined): Promise<ResultText> {
+async function searchStr(str: string | string[] | undefined): Promise<ResultStr> {
   return await axios
-    .get(`/api/main/search/str?data=${text}`)
+    .get(`/api/main/search/str?data=${str}`)
     .then((response) => response.data);
 }
 
-export default function useSearchText(text: string | string[] | undefined) {
-  return useQuery<ResultText, Error>(["searchtext", text], () =>
-    searchText(text)
+export default function useSearchStr(str: string | string[] | undefined) {
+  return useQuery<ResultStr, Error>(["searchstr", str], () =>
+    searchStr(str)
   );
 }
