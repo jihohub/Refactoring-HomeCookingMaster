@@ -46,7 +46,7 @@ type ReslutImg = {
   };
 };
 
-async function searchImg(formData: FormData | undefined): Promise<ReslutImg> {
+async function searchImg(formData: FormData | undefined, random_path: string | string[] | undefined): Promise<ReslutImg> {
   return await axios
     .post("/api/main/search/img", formData, {
       headers: {
@@ -56,8 +56,8 @@ async function searchImg(formData: FormData | undefined): Promise<ReslutImg> {
     .then((response) => response.data);
 }
 
-export default function useSearchImg(formData: FormData | undefined) {
-  return useQuery<ReslutImg, Error>(["searchimg", formData], () =>
-    searchImg(formData)
+export default function useSearchImg(formData: FormData | undefined, random_path: string | string[] | undefined) {
+  return useQuery<ReslutImg, Error>(["searchimg", formData, random_path], () =>
+    searchImg(formData, random_path)
   );
 }

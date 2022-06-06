@@ -59,7 +59,17 @@ const Page = () => {
 const getServerSideProps: GetServerSideProps = async (context) => {
   // const res = await fetch(`/api/main/ranking`);
   // const data = await res.json();
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1 * 60 * 1000,
+        cacheTime: 3 * 60 * 1000,
+        refetchOnWindowFocus: true,
+        refetchOnMount: false,
+        retry: true,
+      },
+    },
+  });
   await queryClient.prefetchQuery("rankings", useRankings);
 
   return {

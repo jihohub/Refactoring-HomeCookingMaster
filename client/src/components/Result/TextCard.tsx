@@ -35,7 +35,7 @@ function TextCard(props: any) {
 
   return (
     <>
-      <div style={{ width: "40vw", height: "40vh" }} onClick={handleClick}>
+      <div onClick={handleClick} style={{border: "1px solid black", margin: "10px auto", width: "300px", cursor: "pointer"}}>
         <a>{props.data}</a>
       </div>
     </>

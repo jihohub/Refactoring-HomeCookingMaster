@@ -20,49 +20,67 @@ import useSearchImg from "../../hooks/Search/useSearchImg";
 import { useSession } from "next-auth/react";
 import DropZone from "../../components/Main/DropZone";
 import SearchBar from "../../components/Common/SearchBar";
+import TextCard from "../../components/Result/TextCard";
+import loading from "../../../public/assets/loading1.gif";
+import Image from "next/image";
 
 const Img = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const { sbi: random_path } = router.query;
+  const PushToResult = () => {
+    router.push(`/search/str?data=${data?.data.equal_rate[0].name}`);
+  };
   const image = useRecoilValue(searchedImage);
   const preview = URL.createObjectURL(image);
   const formData = new FormData();
+  console.log(image);
   formData.append("img", image);
-  const { data } = useSearchImg(formData);
+  const { isLoading, data } = useSearchImg(formData, random_path);
   console.log(data);
   const isValidResult = data?.data.equal_rate[0].rate > 0.7;
-  const PushToResult = () => {
-    router.push(`/search/str?data=${data?.data.equal_rate[0].name}`);
-  }
   console.log(isValidResult);
   if (isValidResult) {
     PushToResult();
   }
 
+  if (isLoading) {
+    return (
+      <div style={{ height: "100vh", width: "100vw", backgroundColor: "#ffffff" }}>
+        <Image src={loading} style={{margin: "0 auto"}} />
+      </div>
+    )
+  }
+
   return (
     <>
-      <img src={preview} />
-      <p>최적의 검색결과를 얻지 못했습니다. 혹시 다음 중에 찾으시는 결과가 있으신가요?</p>
-      {data?.data.equal_rate?.map((item) => (
-        <Link href={`/search/str?data=${item.name}`}>
-          <a>{item.name}</a>
-        </Link>
-      ))}
-      <p>다시 검색하기</p>
-      <SearchBar />
-      <DropZone />
+      {(!isValidResult && !isLoading) && (
+        <>
+          <img src={preview} />
+          <p>
+            최적의 검색결과를 얻지 못했습니다. 혹시 다음 중에 찾으시는 결과가
+            있으신가요?
+          </p>
+          {data?.data.equal_rate?.map((item) => (
+            <TextCard data={item.name} />
+          ))}
+          <p>다시 검색하기</p>
+          <SearchBar />
+          <DropZone />
+        </>
+      )}
     </>
   );
 };
 
 const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data: food_name } = context.query;
+  const { sbi: random_path } = context.query;
   const image = useRecoilValue(searchedImage);
   const formData = new FormData();
   formData.append("img", image);
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(["searchimg", formData], () =>
-    useSearchImg(formData)
+  await queryClient.prefetchQuery(["searchimg", formData, random_path], () =>
+    useSearchImg(formData, random_path)
   );
 
   return {

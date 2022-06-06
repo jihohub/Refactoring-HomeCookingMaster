@@ -2,14 +2,9 @@ import React, { useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
-import axios from "axios";
-// import { setStatus } from "../../modules/checkImg";
-// import { setSearchImg } from "../../modules/userSearchImg";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { GrImage } from "react-icons/gr";
 import { btnDiv } from "../../css/main_css";
-// import { setImageFile,setPreviewUrl } from "../Result/searchedImageSlice";
-import useSearchImage from "../../hooks/Search/useSearchImage";
 
 import { useSetRecoilState } from "recoil";
 import { searchedImage } from "../../atom/searchedImage";
@@ -17,38 +12,11 @@ import { searchedImage } from "../../atom/searchedImage";
 function DropZone() {
   const router = useRouter();
   const setImage = useSetRecoilState(searchedImage);
+  const randomPath = new Date().getTime() + Math.random();
   const handleDrop = (acceptedFiles: any) => {
     setImage(acceptedFiles[0]);
-    router.push("/search/img");
+    router.push(`/search/img?sbi=${randomPath}`);
   };
-
-  // const imgResult = useSelector((state:RootStateOrAny) => state.getResultByImg.list)
-  // console.log('pleleeeaassseee ---- imgResult', imgResult)
-
-  // useEffect(() => {
-  //     if (imgResult) {
-  //         const rateResult = imgResult["equal_rate"];
-  //         // console.log("<imgResult> : imgResult true", rateResult)
-  //         if (
-  //             typeof rateResult == "undefined" ||
-  //             rateResult == null ||
-  //             rateResult === ""
-  //         ) {
-  //             // console.log("<rateResult> : empty")
-  //         } else {
-  //             if (rateResult[0]["rate"] > 0.7) {
-  //                 const result = rateResult[0]["name"];
-  //                 // console.log('<imgResult> : name 처리',result)
-  //                 router.push(`/result?data=${result}`);
-  //             } else {
-  //                 // console.log('<imgResult> : 값 < 0.7')
-  //                 router.push("/result");
-  //             }
-  //         }
-  //     } else {
-  //         // console.log("<imgResult> : imgResult empty")
-  //     }
-  // }, [imgResult]);
 
   return (
     <Box>
