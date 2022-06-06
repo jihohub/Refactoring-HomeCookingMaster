@@ -21,8 +21,7 @@ import { useSession } from "next-auth/react";
 import DropZone from "../../components/Main/DropZone";
 import SearchBar from "../../components/Common/SearchBar";
 import TextCard from "../../components/Result/TextCard";
-import loading from "../../../public/assets/loading1.gif";
-import Image from "next/image";
+import LoadingScreen from "../../components/Common/LoadingScreen";
 
 const Img = () => {
   const { data: session, status } = useSession();
@@ -46,9 +45,7 @@ const Img = () => {
 
   if (isLoading) {
     return (
-      <div style={{ height: "100vh", width: "100vw", backgroundColor: "#ffffff" }}>
-        <Image src={loading} style={{margin: "0 auto"}} />
-      </div>
+      <LoadingScreen />
     )
   }
 
