@@ -12,11 +12,9 @@ import {
 } from "react-query";
 import useSearchImage from "../../hooks/Search/useSearchImg";
 import useSearchStr from "../../hooks/Search/useSearchStr";
-import { useSession } from "next-auth/react";
 import ItemList from "../../components/Result/ItemList";
 
 const Str = () => {
-  const { data: session, status } = useSession();
   const router = useRouter();
   const { data: food_name } = router.query;
   const { data } = useSearchStr(food_name);

@@ -9,26 +9,29 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "react-query";
-import { useSession } from "next-auth/react";
 import useRecipe from "../../hooks/Recipes/useRecipe";
 import RecipeMain from "../../components/Recipe/RecipeMain";
-import RecipeBoard from "../../components/Recipe/RecipeBoard";
+import RecipeReviewForm from "../../components/Recipe/RecipeReviewForm";
 import RecipeShowOthers from "../../components/Recipe/RecipeShowOthers";
-import ReviewList from "../../components/Recipe/ReviewList";
+import RecipeReviews from "../../components/Recipe/RecipeReviews";
+import LoadingScreen from "../../components/Common/LoadingScreen";
 
 
 const Recipe = () => {
-  const { data: session, status } = useSession();
   const router = useRouter();
   const { recipe_id } = router.query;
-  const { data } =  useRecipe(recipe_id);
+  const { isLoading, data } = useRecipe(recipe_id);
+  
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
       <RecipeMain data={data?.data} />
       <RecipeShowOthers data={data?.data} />
-      <ReviewList data={data?.data} />
-      <RecipeBoard />
+      <RecipeReviews data={data?.data} />
+      <RecipeReviewForm />
     </>
   );
 };

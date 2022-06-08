@@ -3,7 +3,7 @@ from hcmk_server.models.user import User
 from hcmk_server.models.recipe import Recipe
 from hcmk_server.models.recipe_like import RecipeLike
 from flask_jwt_extended import get_jwt_identity, get_jwt
-from hcmk_server.services.user import get_user_by_id, validate_token
+from hcmk_server.services.auth import get_user_by_id, validate_token
 from hcmk_server.services.s3 import (
     boto3_image_upload,
     boto3_image_delete,

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { getToken } from "next-auth/jwt";
 import logohat from "../../../public/assets/hatYess.png";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -55,8 +53,6 @@ const notLoggedIn = [
 ];
 
 const Header = () => {
-  const { data: session, status } = useSession();
-  console.log("session:", session);
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -70,11 +66,9 @@ const Header = () => {
 
   const handleSignin = (e: any): void => {
     e.preventDefault();
-    signIn();
   };
   const handleSignout = (e: any): void => {
     e.preventDefault();
-    signOut();
   };
 
   return (
@@ -101,13 +95,13 @@ const Header = () => {
             Contact
           </Link>
         </li>
-        {session ? (
+        {true ? (
           <div className={styles.navigation__auth}>
             <a className={styles.navigation__item} onClick={handleSignout}>
               로그아웃
             </a>
-            <p className={styles.navigation__item}>{session.user?.name}</p>
-            <img className={styles.nav__userimage} src={session.user?.image} />
+            <p className={styles.navigation__item}>name</p>
+            <img className={styles.nav__userimage} />
           </div>
         ) : (
           <div className={styles.navigation__auth}>

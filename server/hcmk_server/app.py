@@ -5,10 +5,9 @@ from flask_restx import Api
 from flask_jwt_extended import JWTManager
 
 
-
 from hcmk_server import config
 from hcmk_server.db_connect import db
-from hcmk_server.api import user_api, recipe_api
+from hcmk_server.api import auth_api, recipe_api
 
 
 rest_api = Api(
@@ -18,6 +17,7 @@ rest_api = Api(
     terms_url="/",
     contact="elice",
 )
+
 
 def create_app():
     """
@@ -41,7 +41,7 @@ def create_app():
 
     db.init_app(app)
     Migrate().init_app(app, db)
-    
+
     print("migration added")
 
     # models import
@@ -49,16 +49,15 @@ def create_app():
 
     rest_api.init_app(app)
 
-    from .api.user_api import user_ns
+    from .api.auth_api import auth_ns
     from .api.recipe_api import recipe_ns
     from .api.main_api import main_ns
     from .api.mypage_api import mypage_ns
 
-    rest_api.add_namespace(user_ns, "/api/user")
+    rest_api.add_namespace(auth_ns, "/api/auth")
     rest_api.add_namespace(recipe_ns, "/api/recipe")
     rest_api.add_namespace(main_ns, "/api/main")
     rest_api.add_namespace(mypage_ns, "/api/mypage")
-
 
     return app
 

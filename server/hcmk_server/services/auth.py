@@ -18,9 +18,11 @@ def get_user_by_email(email):
     result = User.query.filter_by(email=email).one_or_none()
     return result
 
+
 def get_user_by_nickname(nickname):
     result = User.query.filter_by(nickname=nickname).one_or_none()
     return result
+
 
 def get_user_by_id(user_id):
     result = User.query.filter_by(id=user_id).one_or_none()
@@ -40,6 +42,7 @@ def insert_user(email, password, nickname, image_url):
         db.session.rollback()
         raise
 
+
 def validate_token(token):
     user_id = token.get('sub')
     type = token.get('type')
@@ -49,7 +52,7 @@ def validate_token(token):
             return False
         if decode_token(user.access_token) != token:
             return False
-    else :
+    else:
         if user.refresh_token == None:
             return False
         if decode_token(user.refresh_token) != token:
@@ -58,20 +61,20 @@ def validate_token(token):
 
 
 def signup(email, password, nickname, image_url):
-        # 패스워드 hash 변환
-        password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
-        # 필수 정보 db에 입력 및 현재 유저 정보 읽기
-        user = get_user_by_id(insert_user(email, password_hash, nickname, image_url))
+    # 패스워드 hash 변환
+    password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+    # 필수 정보 db에 입력 및 현재 유저 정보 읽기
+    user = get_user_by_id(insert_user(
+        email, password_hash, nickname, image_url))
 
-        return {
-            "result" : "Success",
-            "message" : "회원 정보가 DB에 저장되었습니다.",
-            'data' : {
-                'user_id': user.id,
-                'nickname': user.nickname,
-            }
-        } , 200
-
+    return {
+        "result": "Success",
+        "message": "회원 정보가 DB에 저장되었습니다.",
+        'data': {
+            'user_id': user.id,
+            'nickname': user.nickname,
+        }
+    }, 200
 
 
 def login(email, password):
@@ -83,8 +86,9 @@ def login(email, password):
         return {"result": "failed", "message": "이메일 혹은 비밀번호가 일치하지 않습니다."}, 404
 
     access_token = create_access_token(
-            identity=user.id, additional_claims={"email": user.email, "nickname": user.nickname}
-        )
+        identity=user.id, additional_claims={
+            "email": user.email, "nickname": user.nickname}
+    )
     refresh_token = create_refresh_token(identity=user.id)
 
     try:
@@ -94,49 +98,51 @@ def login(email, password):
     except Exception:
         db.session.rollback()
         raise
-    
+
     return {
-        "result": "success", 
-        "message": "로그인 되었습니다." ,
+        "result": "success",
+        "message": "로그인 되었습니다.",
         "data": {
-            "access_token" : access_token, 
-            "refresh_token" : refresh_token,
-            "user_id" : user.id,
-            "nickname" : user.nickname,
-            "img" : user.img
+            "access_token": access_token,
+            "refresh_token": refresh_token,
+            "user_id": user.id,
+            "nickname": user.nickname,
+            "img": user.img
         }
-        }, 200
+    }, 200
+
 
 def logout():
 
-    if validate_token(get_jwt())  == False:
-        return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 401
+    if validate_token(get_jwt()) == False:
+        return {'result': "fail", 'message': "유효하지 않은 토큰입니다."}, 401
 
     user_id = get_jwt_identity()
     user = get_user_by_id(user_id=user_id)
 
     if not user:
-        return {'result' :"fail", 'message':"존재하지 않는 사용자입니다."}, 404
+        return {'result': "fail", 'message': "존재하지 않는 사용자입니다."}, 404
 
     try:
         user.access_token = None
         user.refresh_token = None
         db.session.commit()
-        return {"result": "success", 'message':"로그아웃 되었습니다."}, 200
+        return {"result": "success", 'message': "로그아웃 되었습니다."}, 200
     except Exception:
         db.session.rollback()
         raise
+
 
 def refresh(refresh_token):
     post_refresh_token = decode_token(refresh_token)
     user_id = post_refresh_token.get('sub')
 
     if validate_token(post_refresh_token) == False:
-        return {'result' :"fail", 'message':"유효하지 않은 토큰입니다."}, 401
+        return {'result': "fail", 'message': "유효하지 않은 토큰입니다."}, 401
 
     user = get_user_by_id(user_id=user_id)
     if not user:
-        return {'result' :"fail", 'message':"존재하지 않는 사용자입니다."}, 404
+        return {'result': "fail", 'message': "존재하지 않는 사용자입니다."}, 404
 
     try:
         new_access_token = create_access_token(
@@ -145,12 +151,12 @@ def refresh(refresh_token):
         )
         user.access_token = new_access_token
         db.session.commit()
-        
+
         return {
-            "result": "success", 
-            "message": "access_token이 재발급 되었습니다." , 
-            "data" : {
-                "access_token" : new_access_token 
+            "result": "success",
+            "message": "access_token이 재발급 되었습니다.",
+            "data": {
+                "access_token": new_access_token
             }
         }, 200
     except Exception:
@@ -160,30 +166,29 @@ def refresh(refresh_token):
 
 def val_email(email):
     user = get_user_by_email(email)
-    
+
     if user:
         return {
-        "is_valid" : False,
-        "message" : "중복되는 email이 존재합니다."
+            "is_valid": False,
+            "message": "중복되는 email이 존재합니다."
         }, 200
-    else :
+    else:
         return {
-        "is_valid" : True,
-        "message" : "중복되는 email이 존재하지 않습니다."
+            "is_valid": True,
+            "message": "중복되는 email이 존재하지 않습니다."
         }, 200
-    
+
 
 def val_nickname(nickname):
     user = get_user_by_nickname(nickname)
-    
+
     if user:
         return {
-        "is_valid" : False,
-        "message" : "중복되는 nickname이 존재합니다."
+            "is_valid": False,
+            "message": "중복되는 nickname이 존재합니다."
         }, 200
-    else :
+    else:
         return {
-        "is_valid" : True,
-        "message" : "중복되는 nickname이 존재하지 않습니다."
+            "is_valid": True,
+            "message": "중복되는 nickname이 존재하지 않습니다."
         }, 200
-    

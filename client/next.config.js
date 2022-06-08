@@ -4,7 +4,7 @@ module.exports = {
       {
         // destination: process.env.DESTINATION_URL,
         // source: process.env.SOURCE_PATH,
-        source: "/api/:path((?!auth).*)",
+        source: "/api/:path*",
         destination: "http://localhost:5000/api/:path*",
       },
     ];

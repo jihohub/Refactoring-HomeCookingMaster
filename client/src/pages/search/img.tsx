@@ -17,14 +17,12 @@ import {
   QueryClientProvider,
 } from "react-query";
 import useSearchImg from "../../hooks/Search/useSearchImg";
-import { useSession } from "next-auth/react";
 import DropZone from "../../components/Main/DropZone";
 import SearchBar from "../../components/Common/SearchBar";
 import TextCard from "../../components/Result/TextCard";
 import LoadingScreen from "../../components/Common/LoadingScreen";
 
 const Img = () => {
-  const { data: session, status } = useSession();
   const router = useRouter();
   const { sbi: random_path } = router.query;
   const PushToResult = () => {
@@ -51,7 +49,7 @@ const Img = () => {
 
   return (
     <>
-      {(!isValidResult && !isLoading) && (
+      {!isValidResult && (
         <>
           <img src={preview} />
           <p>

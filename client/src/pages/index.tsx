@@ -18,25 +18,14 @@ import kkokko1 from "../../public/assets/kkokko_1.png";
 import kkokko2 from "../../public/assets/kkokko_2.png";
 import kkokko3 from "../../public/assets/kkokko_3.png";
 import axios from "axios";
-import { signIn, signOut, useSession } from "next-auth/react";
 
 
 const Page = () => {
   const {data} = useRankings();
   console.log(data);
   console.log(typeof data);
-  const { data: session, status } = useSession();
   // const loading = status === "loading";
   const router = useRouter();
-
-  const handleSignin = (e: any): void => {
-    e.preventDefault();
-    signIn();
-  };
-  const handleSignout = (e: any): void => {
-    e.preventDefault();
-    signOut();
-  };
 
   
 

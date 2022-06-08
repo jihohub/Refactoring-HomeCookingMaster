@@ -186,7 +186,7 @@ Row.propTypes = {
   }).isRequired,
 };
 
-function ReviewList({ data }) {
+function RecipeReviews({ data }) {
   
   return (
     <>
@@ -265,4 +265,4 @@ function ReviewList({ data }) {
   );
 }
 
-export default ReviewList;
+export default RecipeReviews;

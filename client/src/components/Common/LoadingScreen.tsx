@@ -6,9 +6,9 @@ const LoadingScreen = () => {
 
   return (
     <div
-      style={{ height: "100vh", width: "100vw", backgroundColor: "#ffffff" }}
+      style={{ height: "100vh", width: "100vw", backgroundColor: "#ffffff", textAlign: "center" }}
     >
-      <Image src={loading} style={{ margin: "0 auto" }} />
+      <Image src={loading} style={{ margin: "0px auto" }} />
     </div>
   );
 };

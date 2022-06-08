@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Button, IconButton } from "@mui/material";
+import { signIn, signOut, useSession } from "next-auth/react";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 
 const inputStyles = {
@@ -67,15 +68,11 @@ const disabledButtonStyles = {
   },
 };
 
-function RecipeBoard(props: any) {
+function RecipeReviewForm(props: any) {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [post, setPost] = useState<string>("");
-
-  const recipe_id = props.recipe_id;
-  const user_id = 31;
-  // const user_id = String(sessionStorage.getItem("user_id")); // user_id
-  const [imageFile, setImageFile] = useState<any>(null);
-  
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleText = (e: any) => {
     setPost(e.target.value);
@@ -85,22 +82,13 @@ function RecipeBoard(props: any) {
     setImageFile(e.target.files[0]);
   };
 
-  useEffect(() => {
-    setPost("");
-  }, [router.query.id]);
-
   const handleSubmit = async () => {
-    const formDataPost = new FormData();
-    formDataPost.append("img", imageFile);
-    // formDataPost.append("user_id", user_id);
-    formDataPost.append("post", post);
+    const formData = new FormData();
+    formData.append("user_id", 0);
+    formData.append("post", post);
+    formData.append("img", imageFile);
     // await dispatch(recipeReview({ formDataPost, recipe_id }));
-    window.location.reload();
   };
-
-  // useEffect(() => {
-  //     dispatch(getRecipe({ recipe_id, user_id }));
-  // }, [dispatch, recipe_id, user_id]);
 
   return (
     <Box sx={{ width: "70vw", margin: "0 auto" }}>
@@ -111,7 +99,7 @@ function RecipeBoard(props: any) {
           height: "30px",
         }}
       />
-      {user_id != "null" ? (
+      {status === "authenticated" ? (
         <TextField
           variant="outlined"
           sx={inputStyles}
@@ -143,7 +131,7 @@ function RecipeBoard(props: any) {
         style={{ width: "70%", marginLeft: "15%", textAlign: "right" }}
       >
         <label htmlFor="icon-button-file">
-          {user_id != "null" ? (
+          {status === "authenticated" ? (
             <>
               <input
                 accept="image/*"
@@ -176,7 +164,7 @@ function RecipeBoard(props: any) {
             </>
           )}
         </label>
-        {user_id != "null" ? (
+        {status === "authenticated" ? (
           <Button variant="contained" sx={buttonStyles} onClick={handleSubmit}>
             등록
           </Button>
@@ -202,4 +190,4 @@ function RecipeBoard(props: any) {
   );
 }
 
-export default RecipeBoard;
+export default RecipeReviewForm;
