@@ -1,14 +1,34 @@
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import axios from "axios";
 
-type Nickname = {
-  nickname: string;
+type SignedUp = {
+  result: string;
+  message: string;
+  data: {
+    user_id: number;
+    nickname: string;
+  }
+};
+
+function signup(formData: FormData | undefined): Promise<SignedUp> {
+  return axios
+    .post("/api/auth/signup", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
 }
 
-function signup(): Promise<Nickname> {
-  return axios.post("/api/auth/signup").then((response) => response.data);
-}
+export default function useSignup() {
+  const mutation = useMutation(signup, {
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
-function useSignup() {
-  return useQuery<Nickname, Error>("signup", signup);
+  return mutation;
 }

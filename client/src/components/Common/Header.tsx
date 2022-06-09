@@ -66,6 +66,7 @@ const Header = () => {
 
   const handleSignin = (e: any): void => {
     e.preventDefault();
+    router.push("/LoginPage");
   };
   const handleSignout = (e: any): void => {
     e.preventDefault();
@@ -95,7 +96,7 @@ const Header = () => {
             Contact
           </Link>
         </li>
-        {true ? (
+        {false ? (
           <div className={styles.navigation__auth}>
             <a className={styles.navigation__item} onClick={handleSignout}>
               로그아웃

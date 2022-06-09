@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-type ReslutImg = {
+type ResultImg = {
   result: string;
   message: string;
   data: {
@@ -46,7 +46,7 @@ type ReslutImg = {
   };
 };
 
-async function searchImg(formData: FormData | undefined, random_path: string | string[] | undefined): Promise<ReslutImg> {
+async function searchImg(formData: FormData | undefined, random_path: string | string[] | undefined): Promise<ResultImg> {
   return await axios
     .post("/api/main/search/img", formData, {
       headers: {
@@ -57,7 +57,7 @@ async function searchImg(formData: FormData | undefined, random_path: string | s
 }
 
 export default function useSearchImg(formData: FormData | undefined, random_path: string | string[] | undefined) {
-  return useQuery<ReslutImg, Error>(["searchimg", formData, random_path], () =>
+  return useQuery<ResultImg, Error>(["searchimg", formData, random_path], () =>
     searchImg(formData, random_path)
   );
 }

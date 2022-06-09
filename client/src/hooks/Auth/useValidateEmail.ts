@@ -1,14 +1,30 @@
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import axios from "axios";
 
-type Overlaps = {
-  overlaps: boolean;
+type valEmail = {
+  is_valid: boolean;
+  message: string;
+};
+
+function validateEmail(email: string): Promise<valEmail> {
+  return axios
+    .post("/api/auth/signup/val_email", { email }, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => response.data);
 }
 
-function validateEmail(): Promise<Overlaps> {
-  return axios.get("/api/auth/signup/val_email").then((response) => response.data);
-}
+export default function useValidateEmail() {
+  const mutation = useMutation(validateEmail, {
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
-function useValidateEmail() {
-  return useQuery<Overlaps, Error>("groups", validateEmail);
+  return mutation;
 }

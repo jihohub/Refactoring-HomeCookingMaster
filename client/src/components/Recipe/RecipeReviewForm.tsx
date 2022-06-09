@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Button, IconButton } from "@mui/material";
-import { signIn, signOut, useSession } from "next-auth/react";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 
 const inputStyles = {
@@ -70,7 +69,6 @@ const disabledButtonStyles = {
 
 function RecipeReviewForm(props: any) {
   const router = useRouter();
-  const { data: session, status } = useSession();
   const [post, setPost] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
 
