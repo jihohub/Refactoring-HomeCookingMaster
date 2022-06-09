@@ -23,6 +23,9 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import background from "../../../public/assets/bg2.jpeg";
 import finalLogo from "../../../public/assets/finalLogo.png";
+import { useRecoilValue, useResetRecoilState } from "recoil";
+import { loginInfo } from "../../atom/loginInfo";
+import useLogout from "../../hooks/Auth/useLogout";
 
 // const styles = {
 //   "&.MuiFab-secondary": {
@@ -54,6 +57,11 @@ const notLoggedIn = [
 
 const Header = () => {
   const router = useRouter();
+  const loggedin = useRecoilValue(loginInfo);
+  const resetLoggedin = useResetRecoilState(loginInfo);
+  const isLoggedIn = loggedin.refresh_token;
+  const { mutate: logout, isLoading: logoutLoading } = useLogout();
+
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -66,10 +74,12 @@ const Header = () => {
 
   const handleSignin = (e: any): void => {
     e.preventDefault();
-    router.push("/LoginPage");
+    router.push("/login");
   };
   const handleSignout = (e: any): void => {
     e.preventDefault();
+    logout();
+    resetLoggedin();
   };
 
   return (
@@ -96,13 +106,13 @@ const Header = () => {
             Contact
           </Link>
         </li>
-        {false ? (
+        {isLoggedIn ? (
           <div className={styles.navigation__auth}>
             <a className={styles.navigation__item} onClick={handleSignout}>
               로그아웃
             </a>
-            <p className={styles.navigation__item}>name</p>
-            <img className={styles.nav__userimage} />
+            <p className={styles.navigation__item}>{loggedin.nickname}</p>
+            <img className={styles.nav__userimage} src={loggedin.img} alt="user profile image" />
           </div>
         ) : (
           <div className={styles.navigation__auth}>

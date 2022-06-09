@@ -1,5 +1,8 @@
-import { useQuery, useMutation } from "react-query";
+import { useMutation } from "react-query";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { useSetRecoilState } from "recoil";
+import { loginInfo } from "../../atom/loginInfo";
 
 type LoggedIn = {
   result: string;
@@ -23,14 +26,13 @@ async function login(auth: {email: string, password: string}): Promise<LoggedIn>
     .then((response) => response.data);
 }
 
-// export default function useLogin(auth: {email: string, password: string}) {
-//   return useQuery<LoggedIn, Error>(["login", auth.email], () => login(auth));
-// }
-
 export default function useLogin() {
+  const router = useRouter();
+  const setLoginInfo = useSetRecoilState(loginInfo);
   const mutation = useMutation(login, {
     onSuccess: (data) => {
-      console.log(data);
+      setLoginInfo(data?.data);
+      router.push("/");
     },
     onError: (error) => {
       console.log(error);
