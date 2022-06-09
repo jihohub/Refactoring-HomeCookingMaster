@@ -73,6 +73,7 @@ export default function App() {
         })}
       />
       {errors.confirm_password && <p>{errors.confirm_password.message}</p>}
+      <button onClick={() => valNickname(nickname)}></button>
 
       <label>프로필 사진</label>
       <input type="file" accept="image/png, image/jpeg" />
