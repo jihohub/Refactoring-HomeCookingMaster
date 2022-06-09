@@ -6,6 +6,8 @@ import useValidateNickname from "../hooks/Auth/useValidateNickname";
 
 export default function App() {
   const { mutate: signup, isLoading: signupLoading } = useSignup();
+  const { mutate: valEmail, isLoading: valEmailLoading } = useValidateEmail();
+  const { mutate: valNickname, isLoading: valNicknameLoading } = useValidateNickname();
   const {
     register,
     handleSubmit,
@@ -14,6 +16,8 @@ export default function App() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => signup(data);
+  const email = watch("email");
+  const nickname = watch("nickname");
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
@@ -29,7 +33,7 @@ export default function App() {
         })}
       />
       {errors.email && <p>{errors.email.message}</p>}
-      {/* <button onClick={() => useValidateEmail(() => getValues("email"))}></button> */}
+      <button onClick={() => valEmail(email)}></button>
       <label>비밀번호</label>
       <input
         type="password"
