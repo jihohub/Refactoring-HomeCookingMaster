@@ -1,3 +1,4 @@
+import { Router } from "@mui/icons-material";
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import useSignup from "../hooks/Auth/useSignup";
@@ -19,7 +20,7 @@ export default function App() {
   const email = watch("email");
   const password = watch("password");
   const nickname = watch("nickname");
-  const img = watch("nickname");
+  const img = watch("img");
 
   const onSubmit = () => {
     const formData = new FormData();
