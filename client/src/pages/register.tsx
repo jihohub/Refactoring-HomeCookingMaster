@@ -15,9 +15,22 @@ export default function App() {
     getValues,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => signup(data);
+
   const email = watch("email");
+  const password = watch("password");
   const nickname = watch("nickname");
+  const img = watch("nickname");
+
+  const onSubmit = () => {
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("nickname", nickname);
+    img && formData.append("img", img[0]);
+    signup(formData);
+  };
+
+  
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
@@ -76,7 +89,11 @@ export default function App() {
       <button onClick={() => valNickname(nickname)}></button>
 
       <label>프로필 사진</label>
-      <input type="file" accept="image/png, image/jpeg" />
+      <input
+        type="file"
+        accept="image/png, image/jpeg"
+        {...register("img")}
+      />
 
       <input type="submit" onClick={handleSubmit(onSubmit)} />
     </form>

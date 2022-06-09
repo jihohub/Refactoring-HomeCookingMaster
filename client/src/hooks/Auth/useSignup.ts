@@ -1,5 +1,9 @@
 import { useQuery, useMutation } from "react-query";
 import axios from "axios";
+import {useRouter} from "next/router";
+import { useSetRecoilState } from "recoil";
+import { register } from "../../atom/register";
+
 
 type SignedUp = {
   result: string;
@@ -21,9 +25,12 @@ function signup(formData: FormData | undefined): Promise<SignedUp> {
 }
 
 export default function useSignup() {
+  const router = useRouter();
+  const setRegisterInfo = useSetRecoilState(register);
   const mutation = useMutation(signup, {
     onSuccess: (data) => {
-      console.log(data);
+      setRegisterInfo(data?.data);
+      router.push("/complete");
     },
     onError: (error) => {
       console.log(error);
