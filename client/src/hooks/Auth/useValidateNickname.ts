@@ -8,7 +8,7 @@ type valNickname = {
 
 function validateNickname(nickname: string): Promise<valNickname> {
   return axios
-    .post("/api/auth/signup/val_nickname", nickname, {
+    .post("/api/auth/signup/val_nickname", { nickname }, {
       headers: {
         "Content-Type": "application/json",
       },
