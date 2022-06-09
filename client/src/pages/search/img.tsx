@@ -29,10 +29,10 @@ const Img = () => {
     router.push(`/search/str?data=${data?.data.equal_rate[0].name}`);
   };
   const image = useRecoilValue(searchedImage);
-  const preview = URL.createObjectURL(image);
   const formData = new FormData();
-  console.log(image);
   formData.append("img", image);
+  const preview = URL.createObjectURL(image) || null;
+  
   const { isLoading, data } = useSearchImg(formData, random_path);
   console.log(data);
   const isValidResult = data?.data.equal_rate[0].rate > 0.7;
@@ -51,7 +51,7 @@ const Img = () => {
     <>
       {!isValidResult && (
         <>
-          <img src={preview} />
+          {preview && <img src={preview} />}
           <p>
             최적의 검색결과를 얻지 못했습니다. 혹시 다음 중에 찾으시는 결과가
             있으신가요?
