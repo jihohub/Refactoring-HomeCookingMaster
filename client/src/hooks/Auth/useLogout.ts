@@ -14,7 +14,7 @@ async function logout(): Promise<LoggedOut> {
   return await axios
     .delete("/api/auth/logout", {
       headers: {
-        Authorization: `Bearer ${loggedin.access_token}`,
+        "Authorization": `Bearer ${loggedin.access_token}`,
       },
     })
     .then((response) => response.data);

@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Button, IconButton } from "@mui/material";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
+import { useForm } from "react-hook-form";
+import useRecipePost from "../../hooks/Recipes/useRecipePost";
+import { useRecoilValue } from "recoil";
+import { loginInfo } from "../../atom/loginInfo";
 
 const inputStyles = {
   width: "70%",
@@ -67,124 +71,42 @@ const disabledButtonStyles = {
   },
 };
 
-function RecipeReviewForm(props: any) {
+interface postParameters {
+  recipe_id: number | undefined;
+  formData: FormData | undefined;
+}
+
+function RecipeReviewForm() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const router = useRouter();
-  const [post, setPost] = useState<string>("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
-
-  const handleText = (e: any) => {
-    setPost(e.target.value);
-  };
-
-  const handleUpload = (e: any) => {
-    setImageFile(e.target.files[0]);
-  };
-
-  const handleSubmit = async () => {
+  const loggedin = useRecoilValue(loginInfo);
+  const { recipe_id } = router.query;
+  const post = watch("post");
+  const img = watch("img");
+  const { mutate: recipePost, isLoading: recipePostLoading } = useRecipePost();  
+  
+  const onSubmit = () => {
     const formData = new FormData();
-    formData.append("user_id", 0);
+    formData.append("user_id", String(loggedin.user_id));
     formData.append("post", post);
-    formData.append("img", imageFile);
-    // await dispatch(recipeReview({ formDataPost, recipe_id }));
+    img && formData.append("img", img[0]);
+    const access_token = loggedin.access_token;
+    recipePost({ recipe_id, formData, access_token });
+    // recipePost({ recipe_id, user_id, post, img });
   };
 
   return (
-    <Box sx={{ width: "70vw", margin: "0 auto" }}>
-      <Box
-        sx={{
-          width: "70vw",
-          margin: "0 auto",
-          height: "30px",
-        }}
-      />
-      {status === "authenticated" ? (
-        <TextField
-          variant="outlined"
-          sx={inputStyles}
-          minRows="5"
-          multiline={true}
-          onChange={handleText}
-          value={post}
-        />
-      ) : (
-        <TextField
-          disabled
-          label="로그인 후 이용해주세요."
-          variant="outlined"
-          sx={disabledInputStyles}
-          minRows="5"
-          multiline={true}
-        />
-      )}
-      <Box
-        sx={{
-          width: "70vw",
-          margin: "0 auto",
-          height: "10px",
-        }}
-      />
-      <form
-        id="formElem"
-        encType="multipart/form-data"
-        style={{ width: "70%", marginLeft: "15%", textAlign: "right" }}
-      >
-        <label htmlFor="icon-button-file">
-          {status === "authenticated" ? (
-            <>
-              <input
-                accept="image/*"
-                id="icon-button-file"
-                type="file"
-                style={{ display: "none" }}
-                onChange={handleUpload}
-              />
-              <IconButton aria-label="upload picture" component="span">
-                <AddAPhotoRoundedIcon />
-              </IconButton>
-            </>
-          ) : (
-            <>
-              <input
-                disabled
-                accept="image/*"
-                id="icon-button-file"
-                type="file"
-                style={{ display: "none" }}
-                onChange={handleUpload}
-              />
-              <IconButton
-                disabled
-                aria-label="disabled upload picture"
-                component="span"
-              >
-                <AddAPhotoRoundedIcon />
-              </IconButton>
-            </>
-          )}
-        </label>
-        {status === "authenticated" ? (
-          <Button variant="contained" sx={buttonStyles} onClick={handleSubmit}>
-            등록
-          </Button>
-        ) : (
-          <Button
-            disabled
-            variant="contained"
-            sx={disabledButtonStyles}
-            onClick={handleSubmit}
-          >
-            등록
-          </Button>
-        )}
-      </form>
-      <Box
-        sx={{
-          width: "70vw",
-          margin: "0 auto",
-          height: "30px",
-        }}
-      />
-    </Box>
+    <form onSubmit={(e) => e.preventDefault()}>
+      <input type="text" {...register("post")} />
+      <input type="file" accept="image/png, image/jpeg" {...register("img")} />
+      <input type="submit" onClick={handleSubmit(onSubmit)} />
+    </form>
   );
 }
 

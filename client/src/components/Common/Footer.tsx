@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image"
 import { Box, Typography } from "@mui/material";
 import avatar from "../../../public/assets/avatar.png";
 import { styled } from "@mui/material/styles";
@@ -14,39 +15,15 @@ const Footer = () => {
         alignItems: "center",
       }}
     >
-      <img
-        src={avatar}
-        style={{
-          height: "4rem",
-          cursor: "pointer",
-          margin: "20px",
-        }}
-        alt="main avatar"
-      />
       <Typography sx={{ fontFamily: "EliceBold", marginRight: "5px" }}>
         {"@집밥꼬꼬선생 "}
       </Typography>
-      <Foot>
-        <Link href="/about">
-          <a>서비스 소개</a>
-        </Link>
-      </Foot>
-      <Typography sx={{ fontFamily: "Elice" }}>{" ᛫ "}</Typography>
-      <Foot>
-        <Link href="/introduce">
-          <a>팀원 소개</a>
-        </Link>
-      </Foot>
-      <Typography sx={{ fontFamily: "Elice" }}>{" ᛫ "}</Typography>
-      <Foot>
-        <Link href="/register/termsNConditions">
-          <a>이용 약관</a>
-        </Link>
-      </Foot>
       <Typography sx={{ fontFamily: "Elice" }}>{" ᛫ "}</Typography>
       <Foot>
         <Link href="https://github.com/jihohub/Refactoring-HomeCookingMaster">
-          <a target="_blank" rel="noopener noreferrer" className='link-item'>GitHub</a>
+          <a target="_blank" rel="noopener noreferrer" className="link-item">
+            GitHub
+          </a>
         </Link>
       </Foot>
     </Box>
