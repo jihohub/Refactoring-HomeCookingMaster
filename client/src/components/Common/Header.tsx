@@ -81,6 +81,7 @@ const Header = () => {
     e.preventDefault();
     logout(access_token);
     resetLoggedin();
+    router.push("/");
   };
 
   return (
