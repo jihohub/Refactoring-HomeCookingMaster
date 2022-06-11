@@ -77,8 +77,9 @@ const Header = () => {
     router.push("/login");
   };
   const handleSignout = (e: any): void => {
+    const access_token = loggedin.access_token;
     e.preventDefault();
-    logout();
+    logout(access_token);
     resetLoggedin();
   };
 
@@ -92,18 +93,18 @@ const Header = () => {
       </div>
       <ul className={styles.nav__links}>
         <li className={styles.nav__item}>
+          <Link href="/" className={styles.nav__link}>
+            Home
+          </Link>
+        </li>
+        <li className={styles.nav__item}>
           <Link href="/about" className={styles.nav__link}>
             About
           </Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="/shop" className={styles.nav__link}>
-            Shop
-          </Link>
-        </li>
-        <li className={styles.nav__item}>
-          <Link href="/contact" className={styles.nav__link}>
-            Contact
+          <Link href="/mypage" className={styles.nav__link}>
+            My Page
           </Link>
         </li>
         {isLoggedIn ? (
@@ -112,7 +113,11 @@ const Header = () => {
               로그아웃
             </a>
             <p className={styles.navigation__item}>{loggedin.nickname}</p>
-            <img className={styles.nav__userimage} src={loggedin.img} alt="user profile image" />
+            <img
+              className={styles.nav__userimage}
+              src={loggedin.img}
+              alt="user profile image"
+            />
           </div>
         ) : (
           <div className={styles.navigation__auth}>

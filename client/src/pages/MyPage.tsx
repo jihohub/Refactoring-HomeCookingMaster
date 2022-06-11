@@ -3,7 +3,7 @@ import IntroMe from "../components/Mypage/IntroMe";
 import MyPost from "../components/Mypage/myPost";
 import MyScrap from "../components/Mypage/myScrap";
 
-function MyPage() {
+function mypage() {
   return (
     <div
       style={{
@@ -17,12 +17,12 @@ function MyPage() {
       <div
         style={{ backgroundColor: "white", width: "70%", paddingTop: "5rem" }}
       >
-        {/* <IntroMe />
+        <IntroMe />
         <MyPost />
-        <MyScrap /> */}
+        <MyScrap />
       </div>
     </div>
   );
 }
 
-export default MyPage;
+export default mypage;
