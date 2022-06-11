@@ -19,7 +19,7 @@ async function recipeDelete({
 }: deleteParameters): Promise<DeleteRecipes> {
   return await axios
     .delete(`/api/recipe/${recipe_id}/del`, {
-      data: { post_id: post_id },
+      data: { post_id },
       headers: {
         Authorization: `Bearer ${access_token}`,
       },

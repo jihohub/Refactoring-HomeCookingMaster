@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import ImageIcon from "@mui/icons-material/Image";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -20,6 +21,7 @@ import { loginInfo } from "../../atom/loginInfo";
 import useRecipeDelete from "../../hooks/Recipes/useRecipeDelete";
 function Row(props: any) {
   const loggedin = useRecoilValue(loginInfo);
+  const { mutate: recipeDelete, isLoading: recipeDeleteLoading } = useRecipeDelete();  
   const review = props.row;
   const [open, setOpen] = useState<boolean>(false);
 
@@ -29,6 +31,15 @@ function Row(props: any) {
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const router = useRouter();
+  const { recipe_id } = router.query;
+
+  const onButtonClick = (e: any, post_id: number) => {
+    e.preventDefault();
+    const access_token = loggedin.access_token;
+    recipeDelete({ recipe_id, post_id, access_token });
   };
 
   return (
@@ -82,7 +93,7 @@ function Row(props: any) {
               )
             }
           />
-          {review.user_id === loggedin.user_id && <button>X</button>}
+          {review.user_id === loggedin.user_id && <button onClick={(e) => onButtonClick(e, review.id)}>X</button>}
           <ListItemText
             primary={
               <Typography sx={{ fontFamily: "Elice" }}>
@@ -142,7 +153,7 @@ function Row(props: any) {
                 </Box>
               }
             />
-            {review.user_id === loggedin.user_id && <button>X</button>}
+            {review.user_id === loggedin.user_id && <button onClick={(e) => onButtonClick(e, review.id)}>X</button>}
             <ListItemText
               primary={
                 <Typography sx={{ fontFamily: "Elice" }}>

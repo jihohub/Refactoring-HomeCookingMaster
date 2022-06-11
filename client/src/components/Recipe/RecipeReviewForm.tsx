@@ -98,7 +98,6 @@ function RecipeReviewForm() {
     img && formData.append("img", img[0]);
     const access_token = loggedin.access_token;
     recipePost({ recipe_id, formData, access_token });
-    // recipePost({ recipe_id, user_id, post, img });
   };
 
   return (
