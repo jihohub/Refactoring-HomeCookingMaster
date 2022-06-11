@@ -108,11 +108,11 @@ function IntroMe() {
               marginLeft: "15%",
             }}
           >
-            {/* <Avatar
-                            alt={myInfo.data.user_info.nickname}
-                            src={typeof user_img == "string" ? user_img : ""}
-                            sx={{ width: 128, height: 128 }}
-                        /> */}
+            <Avatar
+              alt={myInfo.data.user_info.nickname}
+              src={typeof user_img == "string" ? user_img : ""}
+              sx={{ width: 128, height: 128 }}
+            />
             <Box
               component="div"
               sx={{
@@ -129,22 +129,22 @@ function IntroMe() {
                   alignItems: "flex-end",
                 }}
               >
-                {/* <Typography
-                                    variant="h4"
-                                    gutterBottom
-                                    component="div"
-                                    sx={{ fontFamily: "Elice" }}
-                                >
-                                    {myInfo.data.user_info.nickname}
-                                </Typography> */}
-                {/* <Typography
-                                    variant="subtitle1"
-                                    gutterBottom
-                                    component="div"
-                                    sx={{ pl: 4, pb: 1 }}
-                                >
-                                    Lv. {myInfo.data.user_info.exp}
-                                </Typography> */}
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  component="div"
+                  sx={{ fontFamily: "Elice" }}
+                >
+                  {myInfo.data.user_info.nickname}
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  component="div"
+                  sx={{ pl: 4, pb: 1 }}
+                >
+                  Lv. {myInfo.data.user_info.exp}
+                </Typography>
               </Box>
               <Box
                 component="div"
@@ -153,24 +153,22 @@ function IntroMe() {
                   flexDirection: "row",
                 }}
               >
-                {/* <Typography
-                                    variant="subtitle1"
-                                    gutterBottom
-                                    component="div"
-                                    sx={{ fontFamily: "Elice" }}
-                                >
-                                    댓글작성한 레시피{" "}
-                                    {myInfo.data.my_post.length}
-                                </Typography>
-                                <Typography
-                                    variant="subtitle1"
-                                    gutterBottom
-                                    component="div"
-                                    sx={{ fontFamily: "Elice", pl: 2 }}
-                                >
-                                    스크랩 레시피{" "}
-                                    {myInfo.data.liked_recipe.length}
-                                </Typography> */}
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  component="div"
+                  sx={{ fontFamily: "Elice" }}
+                >
+                  댓글작성한 레시피 {myInfo.data.my_post.length}
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  component="div"
+                  sx={{ fontFamily: "Elice", pl: 2 }}
+                >
+                  스크랩 레시피 {myInfo.data.liked_recipe.length}
+                </Typography>
               </Box>
               <Box component="div">
                 <OkButton
@@ -195,19 +193,15 @@ function IntroMe() {
                       // onChange={handleImage}
                     />
                     <IconButton aria-label="upload picture" component="span">
-                      {/* <Avatar
-                                                alt="profile image on the header bar"
-                                                src={
-                                                    typeof user_img == "string"
-                                                        ? user_img
-                                                        : ""
-                                                }
-                                                sx={{
-                                                    width: 112,
-                                                    height: 112,
-                                                }}
-                                                component="span"
-                                            /> */}
+                      <Avatar
+                        alt="profile image on the header bar"
+                        src={typeof user_img == "string" ? user_img : ""}
+                        sx={{
+                          width: 112,
+                          height: 112,
+                        }}
+                        component="span"
+                      />
                     </IconButton>
                   </label>
                   <Typography
