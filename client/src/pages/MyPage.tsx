@@ -9,10 +9,8 @@ import { loginInfo } from "../atom/loginInfo";
 function mypage() {
   const loggedin = useRecoilValue(loginInfo);
   const { data } = useGetMypage(loggedin.access_token);
-  console.log(data?.data);
+  console.log(data);
   const { user_info, liked_recipe, my_post } = data?.data || {};
-
-
 
   return (
     <div

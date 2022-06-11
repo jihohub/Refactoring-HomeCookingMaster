@@ -1,31 +1,40 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-type Ranking = {
+type TMypage = {
   result: string;
   message: string;
-  data: Array<{
-    id: number;
-    name: string;
-    likes: number;
-    views: number;
-    img: string;
-    servings: string;
-    difficulty: string;
-    cooking_time: string;
-    food_id: number;
-  }>;
+  data: {
+    user_info: {
+      email: string;
+      exp: string;
+      img: string;
+      intro: null;
+      nickname: string;
+    };
+    liked_recipe: Array<{
+      recipe_id: number;
+      recipe_img: string;
+      recipe_name: string;
+    }>;
+    my_post: Array<{
+      recipe_id: number;
+      recipe_img: string;
+      recipe_name: string;
+    }>;
+  };
 };
 
-async function getMypage(access_token: string | null): Promise<any> {
-  return await axios.get("/api/mypage", {
+async function getMypage(access_token: string | null): Promise<TMypage> {
+  return await axios
+    .get("/api/mypage", {
       headers: {
-        "Authorization": `Bearer ${access_token}`,
+        Authorization: `Bearer ${access_token}`,
       },
     })
     .then((response) => response.data);
 }
 
 export default function useGetMypage(access_token: string | null) {
-  return useQuery<any, Error>("mypage", () => getMypage(access_token));
+  return useQuery<TMypage, Error>("mypage", () => getMypage(access_token));
 }

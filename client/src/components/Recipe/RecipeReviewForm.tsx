@@ -84,7 +84,7 @@ function RecipeReviewForm() {
   const { recipe_id } = router.query;
   const post = watch("post");
   const img = watch("img");
-  const { mutate: recipePost, isLoading: recipePostLoading } = useRecipePost();  
+  const { mutate: recipePost, isLoading: recipePostLoading } = useRecipePost();
   
   const onSubmit = () => {
     const formData = new FormData();

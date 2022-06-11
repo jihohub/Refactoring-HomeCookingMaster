@@ -13,6 +13,9 @@ import Modal from "@mui/material/Modal";
 // import { profile_img, option_box, file_select } from "../../css/register_css";
 
 // import {avatar} from '../../assets/mainAvatar.png'
+import { useRecoilValue } from "recoil";
+import { loginInfo } from "../../atom/loginInfo";
+import useEditImg from "../../hooks/Mypage/useEditimg";
 
 const Input = styled("input")({
   display: "none",
@@ -20,8 +23,8 @@ const Input = styled("input")({
 
 function IntroMe(data: any) {
   const router = useRouter();
-  // const formData = new FormData();
-
+  const loggedin = useRecoilValue(loginInfo);
+  const { mutate: editImg, isLoading: editImgLoading } = useEditImg(); 
   const [isInfo, setIsInfo] = useState(false);
 
   // 프로필 사진 수정 api
@@ -34,16 +37,15 @@ function IntroMe(data: any) {
   const handleOpen1 = () => setOpen1(true);
   const handleClose1 = () => setOpen1(false);
 
-  // const handleImage = async (e: any) => {
-  //     let file = e.target.files[0];
-
-  //     await formData.set("user_id", user_id);
-  //     await formData.set("img", file);
-
-  //     // await dispatch(editImg(formData));
-  //     handleClose1();
-  //     router.push("/mypage");
-  // };
+  const handleImage = (e: any) => {
+    const file = e.target.files[0];
+    const access_token = loggedin.access_token;
+    const formData = new FormData();
+    formData.append("user_id", String(loggedin.user_id));
+    formData.append("img", file);
+    editImg({ formData, access_token });
+    handleClose1();
+  };
 
   return (
     <>
@@ -60,7 +62,7 @@ function IntroMe(data: any) {
           >
             <Avatar
               alt={data?.data?.nickname}
-              src={typeof user_img == "string" ? user_img : ""}
+              src={data?.data?.img}
               sx={{ width: 128, height: 128 }}
             />
             <Box
@@ -140,12 +142,12 @@ function IntroMe(data: any) {
                       type="file"
                       id="icon-button-file"
                       accept="image/*"
-                      // onChange={handleImage}
+                      onChange={handleImage}
                     />
                     <IconButton aria-label="upload picture" component="span">
                       <Avatar
                         alt="profile image on the header bar"
-                        src={typeof user_img == "string" ? user_img : ""}
+                        src={data?.data?.img}
                         sx={{
                           width: 112,
                           height: 112,
