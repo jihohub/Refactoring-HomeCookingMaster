@@ -47,7 +47,7 @@ function IntroMe(data: any) {
 
   return (
     <>
-      {isInfo ? (
+      {true ? (
         <div style={{ width: "100%" }}>
           <Box
             component="div"
@@ -59,7 +59,7 @@ function IntroMe(data: any) {
             }}
           >
             <Avatar
-              alt={data.user_info.nickname}
+              alt={data?.data?.nickname}
               src={typeof user_img == "string" ? user_img : ""}
               sx={{ width: 128, height: 128 }}
             />
@@ -85,7 +85,7 @@ function IntroMe(data: any) {
                   component="div"
                   sx={{ fontFamily: "Elice" }}
                 >
-                  {data.user_info.nickname}
+                  {data?.data?.nickname}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -93,7 +93,7 @@ function IntroMe(data: any) {
                   component="div"
                   sx={{ pl: 4, pb: 1 }}
                 >
-                  Lv. {data.user_info.exp}
+                  Lv. {data?.data?.exp}
                 </Typography>
               </Box>
               <Box
@@ -109,7 +109,7 @@ function IntroMe(data: any) {
                   component="div"
                   sx={{ fontFamily: "Elice" }}
                 >
-                  댓글작성한 레시피 {data.my_post.length}
+                  댓글작성한 레시피 {0}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -117,7 +117,7 @@ function IntroMe(data: any) {
                   component="div"
                   sx={{ fontFamily: "Elice", pl: 2 }}
                 >
-                  스크랩 레시피 {data.liked_recipe.length}
+                  스크랩 레시피 {0}
                 </Typography>
               </Box>
               <Box component="div">

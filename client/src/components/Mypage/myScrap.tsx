@@ -14,64 +14,7 @@ function MyScrap(data: any) {
 
   return (
     <>
-      {isScrapList ? (
-        <ImageList
-          sx={{
-            width: "100%",
-            height: 450,
-            display: "flex",
-            marginLeft: "25%",
-            flexDirection: "column",
-            mt: 8,
-          }}
-        >
-          <ImageListItem key="Subheader" cols={2}>
-            <ListSubheader
-              component="div"
-              sx={{
-                width: "40rem",
-                backgroundColor: "#897A5F",
-                color: "white",
-              }}
-            >
-              스크랩레시피
-            </ListSubheader>
-            {isEmpty ? (
-              ""
-            ) : (
-              <Typography
-                variant="subtitle1"
-                gutterBottom
-                component="div"
-                sx={{ fontWeight: "600" }}
-              >
-                원하는 레시피를 스크랩해보세요!
-              </Typography>
-            )}
-          </ImageListItem>
-          {data.liked_recipe.map((item: any) => (
-            <ImageListItem
-              sx={{ width: "15rem", height: "10rem", cursor: "pointer" }}
-              onClick={() => router.push(`/recipe/${item.recipe_id}`)}
-            >
-              <img
-                src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.recipe_name}
-                style={{ width: "100%", height: "15rem" }}
-              />
-              <ImageListItemBar
-                title={item.recipe_name}
-                // subtitle={item.author}
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      ) : (
-        ""
-      )}
-
-      {isScrapList ? (
+      {true ? (
         <ImageList
           sx={{
             width: "100%",
@@ -110,7 +53,7 @@ function MyScrap(data: any) {
             cols={3}
             style={{ marginBottom: "10rem", width: "140%" }}
           >
-            {data.liked_recipe.map((item: any, index: number) => (
+            {data?.data?.map((item: any, index: number) => (
               <ImageListItem key={index} sx={{ width: "100" }} css={tmp}>
                 <img
                   src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
