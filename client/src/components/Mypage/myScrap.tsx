@@ -7,7 +7,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-function MyScrap() {
+function MyScrap(data: any) {
   const router = useRouter();
   const [isScrapList, setIsScrapList] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -49,10 +49,10 @@ function MyScrap() {
               </Typography>
             )}
           </ImageListItem>
-          {scarpList.data.liked_recipe.map((item: any) => (
+          {data.liked_recipe.map((item: any) => (
             <ImageListItem
               sx={{ width: "15rem", height: "10rem", cursor: "pointer" }}
-              onClick={() => navigate(`/recipe/${item.recipe_id}`)}
+              onClick={() => router.push(`/recipe/${item.recipe_id}`)}
             >
               <img
                 src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
@@ -110,7 +110,7 @@ function MyScrap() {
             cols={3}
             style={{ marginBottom: "10rem", width: "140%" }}
           >
-            {scarpList.data.liked_recipe.map((item: any, index: number) => (
+            {data.liked_recipe.map((item: any, index: number) => (
               <ImageListItem key={index} sx={{ width: "100" }} css={tmp}>
                 <img
                   src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
@@ -134,18 +134,18 @@ function MyScrap() {
 
 export default MyScrap;
 
-// const img = css`
-//   width: 100%;
-//   height: 15rem;
-//   cursor: pointer;
-//   /* box-shadow: 2px 2px 6px gray; */
-// `;
+const img = css`
+  width: 100%;
+  height: 15rem;
+  cursor: pointer;
+  /* box-shadow: 2px 2px 6px gray; */
+`;
 
-// const tmp = css`
-//   cursor: pointer;
-//   /* box-shadow: 2px 2px 6px gray; */
-//   :hover {
-//     opacity: 0.8;
-//     transition: all 0.3s ease-in-out;
-//   }
-// `;
+const tmp = css`
+  cursor: pointer;
+  /* box-shadow: 2px 2px 6px gray; */
+  :hover {
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+  }
+`;

@@ -18,61 +18,11 @@ const Input = styled("input")({
   display: "none",
 });
 
-function IntroMe() {
+function IntroMe(data: any) {
   const router = useRouter();
-  // const refreshTkn = sessionStorage.getItem("usrRfshTkn");
-  // const user_id = String(sessionStorage.getItem("user_id"));
-  // const user_img = sessionStorage.getItem("img");
-  const formData = new FormData();
+  // const formData = new FormData();
 
   const [isInfo, setIsInfo] = useState(false);
-
-  // const newToken = useSelector(
-  //     (state: RootStateOrAny) => state.getNewAccessList.list
-  // );
-
-  // useEffect(() => {
-  //     // console.log("<IntroMe> : dispatch > getMyInfo");
-  //     dispatch(getMyInfo());
-  // }, [dispatch]);
-
-  // const myInfo = useSelector(
-  //     (state: RootStateOrAny) => state.getMyInfoList.list
-  // );
-
-  // const user_info = useSelector((state: RootStateOrAny) => state.getUserInfo);
-
-  // useEffect(() => {
-  //     // console.log("<IntroMe> : myInfo : ", myInfo);
-  //     if (Array.isArray(myInfo) && myInfo.length === 0) {
-  //         // console.log("<IntroMe> : myInfo empty");
-  //     } else if (!myInfo) {
-  //         // console.log("<IntroMe> : myInfo false");
-  //         dispatch(
-  //             getNewAccess({
-  //                 refresh_token: refreshTkn,
-  //             })
-  //         );
-  //     } else {
-  //         // console.log("<IntroMe> : myInfo true ", myInfo.data.user_info);
-  //         setIsInfo(true);
-  //     }
-  // }, [dispatch, myInfo, refreshTkn]);
-
-  // useEffect(() => {
-  //     // console.log("<newToken> : ", newToken);
-  //     if (Array.isArray(newToken) && newToken.length === 0) {
-  //         // console.log("<newToken> : token empty");
-  //     } else if (!newToken) {
-  //         // console.log("<newToken> : token false");
-  //     } else {
-  //         // console.log("<newToken> : token true ", newToken.data);
-  //         sessionStorage.removeItem("usrAcsTkn");
-  //         sessionStorage.setItem("usrAcsTkn", newToken.data["access_token"]);
-  //         // console.log("<newToken> : dispatch > again");
-  //         dispatch(getMyInfo());
-  //     }
-  // }, [dispatch, newToken]);
 
   // 프로필 사진 수정 api
   // 프로필 수정 버튼 - 모달
@@ -109,7 +59,7 @@ function IntroMe() {
             }}
           >
             <Avatar
-              alt={myInfo.data.user_info.nickname}
+              alt={data.user_info.nickname}
               src={typeof user_img == "string" ? user_img : ""}
               sx={{ width: 128, height: 128 }}
             />
@@ -135,7 +85,7 @@ function IntroMe() {
                   component="div"
                   sx={{ fontFamily: "Elice" }}
                 >
-                  {myInfo.data.user_info.nickname}
+                  {data.user_info.nickname}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -143,7 +93,7 @@ function IntroMe() {
                   component="div"
                   sx={{ pl: 4, pb: 1 }}
                 >
-                  Lv. {myInfo.data.user_info.exp}
+                  Lv. {data.user_info.exp}
                 </Typography>
               </Box>
               <Box
@@ -159,7 +109,7 @@ function IntroMe() {
                   component="div"
                   sx={{ fontFamily: "Elice" }}
                 >
-                  댓글작성한 레시피 {myInfo.data.my_post.length}
+                  댓글작성한 레시피 {data.my_post.length}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -167,7 +117,7 @@ function IntroMe() {
                   component="div"
                   sx={{ fontFamily: "Elice", pl: 2 }}
                 >
-                  스크랩 레시피 {myInfo.data.liked_recipe.length}
+                  스크랩 레시피 {data.liked_recipe.length}
                 </Typography>
               </Box>
               <Box component="div">

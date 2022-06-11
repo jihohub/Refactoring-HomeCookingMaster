@@ -3,10 +3,10 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import ListSubheader from "@mui/material/ListSubheader";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-function MyPost() {
+function MyPost(data: any) {
   const router = useRouter();
   const [isPostList, setIsPostList] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -49,14 +49,14 @@ function MyPost() {
               </Typography>
             )}
           </ImageListItem>
-          {postList.data.my_post.map((item: any) => (
+          {data.my_post.map((item: any) => (
             <ImageListItem>
               <img
                 src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
                 srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.title}
                 loading="lazy"
-                onClick={() => navigate(`/recipe/${item.recipe_id}`)}
+                onClick={() => router.push(`/recipe/${item.recipe_id}`)}
                 style={{ width: "20rem", height: "10rem" }}
               />
               <ImageListItemBar title={item.recipe_name} />
@@ -106,15 +106,14 @@ function MyPost() {
             cols={3}
             style={{ marginBottom: "10rem", width: "140%" }}
           >
-            {postList.data.my_post.map((item: any, index: number) => (
-              <ImageListItem key={index} sx={{ width: "100" }} css={tmp}>
+            {data.my_post.map((item: any, index: number) => (
+              <ImageListItem key={index} sx={{ width: "100" }} >
                 <img
                   src={`${item.recipe_img}?w=248&fit=crop&auto=format`}
                   srcSet={`${item.recipe_img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   alt={item.recipe_id}
                   loading="lazy"
                   onClick={() => router.push(`/recipe/${item.recipe_id}`)}
-                  css={img}
                 />
                 <ImageListItemBar title={item.recipe_name} />
               </ImageListItem>
