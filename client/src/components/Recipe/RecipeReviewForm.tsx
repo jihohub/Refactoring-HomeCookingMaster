@@ -71,11 +71,6 @@ const disabledButtonStyles = {
   },
 };
 
-interface postParameters {
-  recipe_id: number | undefined;
-  formData: FormData | undefined;
-}
-
 function RecipeReviewForm() {
   const {
     register,

@@ -7,11 +7,18 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { useRecoilValue } from "recoil";
+import { loginInfo } from "../../atom/loginInfo";
+import useRecipeLike from "../../hooks/Recipes/useRecipeLike";
+import { useRouter } from "next/router";
 
-function RecipeMain({data}) {
-  // const dispatch = useDispatch();
-  const user_id = 31;
-  console.log(data?.food_info);
+
+function RecipeMain({ data }) {
+  const router = useRouter();
+  const { recipe_id } = router.query;
+  const loggedin = useRecoilValue(loginInfo);
+  const user_id = loggedin.user_id;
+  const { mutate: recipeLike, isLoading: recipeLikeLoading } = useRecipeLike();
 
   const {
     did_u_liked,
@@ -29,8 +36,8 @@ function RecipeMain({data}) {
 
   const handleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-    // await dispatch(recipeLike({ user_id, recipe_id }));
-    // dispatch(getRecipe({ recipe_id, user_id }));
+    const access_token = loggedin.access_token;
+    recipeLike({ recipe_id, user_id, access_token });
   };
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);

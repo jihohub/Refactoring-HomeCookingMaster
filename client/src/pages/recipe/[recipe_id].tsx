@@ -15,12 +15,15 @@ import RecipeReviewForm from "../../components/Recipe/RecipeReviewForm";
 import RecipeShowOthers from "../../components/Recipe/RecipeShowOthers";
 import RecipeReviews from "../../components/Recipe/RecipeReviews";
 import LoadingScreen from "../../components/Common/LoadingScreen";
+import { useRecoilValue } from "recoil";
+import { loginInfo } from "../../atom/loginInfo";
 
 
 const Recipe = () => {
   const router = useRouter();
   const { recipe_id } = router.query;
-  const { isLoading, data } = useRecipe(recipe_id);
+  const loggedin = useRecoilValue(loginInfo);
+  const { isLoading, data } = useRecipe(recipe_id, loggedin.user_id);
   
   if (isLoading) {
     return <LoadingScreen />;
