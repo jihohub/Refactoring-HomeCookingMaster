@@ -15,8 +15,11 @@ import {
   Avatar,
   Modal,
 } from "@mui/material";
-
+import { useRecoilValue } from "recoil";
+import { loginInfo } from "../../atom/loginInfo";
+import useRecipeDelete from "../../hooks/Recipes/useRecipeDelete";
 function Row(props: any) {
+  const loggedin = useRecoilValue(loginInfo);
   const review = props.row;
   const [open, setOpen] = useState<boolean>(false);
 
@@ -79,6 +82,7 @@ function Row(props: any) {
               )
             }
           />
+          {review.user_id === loggedin.user_id && <button>X</button>}
           <ListItemText
             primary={
               <Typography sx={{ fontFamily: "Elice" }}>
@@ -138,6 +142,7 @@ function Row(props: any) {
                 </Box>
               }
             />
+            {review.user_id === loggedin.user_id && <button>X</button>}
             <ListItemText
               primary={
                 <Typography sx={{ fontFamily: "Elice" }}>
