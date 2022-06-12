@@ -64,6 +64,12 @@ const Header = () => {
 
   const [open, setOpen] = useState(false);
 
+  const [isActive, setActive] = useState(false);
+  const handleToggle = () => {
+    setActive(!isActive);
+  };
+
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -86,13 +92,12 @@ const Header = () => {
 
   return (
     <nav className={styles.navbar}>
-      <Link href="/" className={styles.nav__logo}>
-        <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" />
-      </Link>
-      <div onClick={handleClick} className={styles.nav__icon}>
-        {/* {open ? <FiX /> : <FiMenu />} */}
+      <div className="navbar__logo">
+        <Link href="/">
+          <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" />
+        </Link>
       </div>
-      <ul className={styles.nav__links}>
+      <ul className={isActive ? `${styles.navbar__menu__active}` : `${styles.navbar__menu}`}>
         <li className={styles.nav__item}>
           <Link href="/" className={styles.nav__link}>
             Home
@@ -108,8 +113,10 @@ const Header = () => {
             My Page
           </Link>
         </li>
+      </ul>
+      <ul className={isActive ? `${styles.navbar__icons__active}` : `${styles.navbar__icons}`}>
         {isLoggedIn ? (
-          <div className={styles.navigation__auth}>
+          <li className={styles.navigation__auth}>
             <a className={styles.navigation__item} onClick={handleSignout}>
               로그아웃
             </a>
@@ -119,14 +126,59 @@ const Header = () => {
               src={loggedin.img}
               alt="user profile image"
             />
-          </div>
+          </li>
         ) : (
-          <div className={styles.navigation__auth}>
+          <li className={styles.navigation__auth}>
             <a onClick={handleSignin}>로그인</a>
-          </div>
+          </li>
         )}
       </ul>
+      <a onClick={handleToggle} className={styles.navbar__toggleBtn}>
+        햄버거
+      </a>
     </nav>
+    // <nav className={styles.navbar}>
+    //   <Link href="/" className={styles.nav__logo}>
+    //     <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" />
+    //   </Link>
+    //   <div onClick={handleClick} className={styles.nav__icon}>
+    //     {/* {open ? <FiX /> : <FiMenu />} */}
+    //   </div>
+    //   <ul className={styles.nav__links}>
+    //     <li className={styles.nav__item}>
+    //       <Link href="/" className={styles.nav__link}>
+    //         Home
+    //       </Link>
+    //     </li>
+    //     <li className={styles.nav__item}>
+    //       <Link href="/about" className={styles.nav__link}>
+    //         About
+    //       </Link>
+    //     </li>
+    //     <li className={styles.nav__item}>
+    //       <Link href="/mypage" className={styles.nav__link}>
+    //         My Page
+    //       </Link>
+    //     </li>
+    // {isLoggedIn ? (
+    //   <div className={styles.navigation__auth}>
+    //     <a className={styles.navigation__item} onClick={handleSignout}>
+    //       로그아웃
+    //     </a>
+    //     <p className={styles.navigation__item}>{loggedin.nickname}</p>
+    //     <img
+    //       className={styles.nav__userimage}
+    //       src={loggedin.img}
+    //       alt="user profile image"
+    //     />
+    //   </div>
+    // ) : (
+    //   <div className={styles.navigation__auth}>
+    //     <a onClick={handleSignin}>로그인</a>
+    //   </div>
+    // )}
+    //   </ul>
+    // </nav>
   );
 };
 
