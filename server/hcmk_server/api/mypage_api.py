@@ -5,6 +5,9 @@ from hcmk_server.services.mypage import (
     get_mypage,
     edit_img
 )
+from flask_jwt_extended import (
+    jwt_required,
+)
 
 mypage_ns = Namespace(
     name="mypage",
@@ -80,7 +83,7 @@ edit_img_fields = mypage_ns.model(
 edit_img_expect_fields = mypage_ns.model(
     "edit_img_expect",
     {
-        "user_id": fields.Integer,
+        "user_id": fields.String,
     }
 )
 
@@ -90,9 +93,10 @@ edit_img_expect_fields = mypage_ns.model(
 class EditImg(Resource):
     @mypage_ns.expect(edit_img_expect_fields)
     @mypage_ns.marshal_with(edit_img_fields)
+    @jwt_required()
     def post(self):
         """해당 레시피의 좋아요를 관리하는 api"""
-        user_id = request.form.get("user_id")
+        user_id = int(request.form.get("user_id"))
         try:
             img = request.files["img"]
         except Exception:

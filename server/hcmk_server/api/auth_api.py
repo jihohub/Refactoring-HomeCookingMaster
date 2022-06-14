@@ -43,29 +43,30 @@ auth_ns = Namespace(
 
 signin_data_fields = auth_ns.model(
     "signin_data",
-    {   
-        "user_id" : fields.Integer,
-        "nickname" : fields.String,
+    {
+        "user_id": fields.Integer,
+        "nickname": fields.String,
     }
 )
 
 signin_fields = auth_ns.model(
     "signin",
-    {   
-        "result" : fields.String,
-        "message" : fields.String,
+    {
+        "result": fields.String,
+        "message": fields.String,
         "data": fields.Nested(signin_data_fields)
     }
 )
 
 signin_expect_fields = auth_ns.model(
     "signin_expect",
-    {   
-        "email" : fields.String,
-        "password" : fields.String,
-        "nickname" : fields.String,
+    {
+        "email": fields.String,
+        "password": fields.String,
+        "nickname": fields.String,
     }
 )
+
 
 @auth_ns.route("/signup")
 @auth_ns.response(200, "success")
@@ -74,12 +75,12 @@ class Signup(Resource):
     @auth_ns.expect(signin_expect_fields)
     @auth_ns.marshal_with(signin_fields)
     def post(self):
-        """user 테이블에 회원정보를 등록합니다."""  
+        """user 테이블에 회원정보를 등록합니다."""
         user_data = request.form
         email = user_data.get("email")
-        password = user_data.get("password") 
-        nickname = user_data.get("nickname") 
-        
+        password = user_data.get("password")
+        nickname = user_data.get("nickname")
+
         try:
             img = request.files["img"]
             try:
@@ -115,6 +116,7 @@ val_email_expect_fields = auth_ns.model(
     }
 )
 
+
 @auth_ns.route("/signup/val_email")
 @auth_ns.response(200, "success")
 class ValidateEmail(Resource):
@@ -126,6 +128,7 @@ class ValidateEmail(Resource):
         email = user_data.get("email")
         result = val_email(email)
         return result
+
 
 '''
 닉네임 중복 확인 API
@@ -145,6 +148,7 @@ val_nickname_expect_fields = auth_ns.model(
         "nickname": fields.String,
     }
 )
+
 
 @auth_ns.route("/signup/val_nickname")
 @auth_ns.response(200, "success")
@@ -166,11 +170,11 @@ class ValidateEmail(Resource):
 login_data_fields = auth_ns.model(
     "data",
     {
-        "access_token" : fields.String,
-        "refresh_token" : fields.String,
-        "user_id" : fields.Integer,
-        "nickname" : fields.String,
-        "img" : fields.String,
+        "access_token": fields.String,
+        "refresh_token": fields.String,
+        "user_id": fields.Integer,
+        "nickname": fields.String,
+        "img": fields.String,
     }
 )
 
@@ -190,6 +194,7 @@ login_expect_fields = auth_ns.model(
         "password": fields.String,
     }
 )
+
 
 @auth_ns.route("/login")
 @auth_ns.response(200, "success")
@@ -213,6 +218,7 @@ logout_fields = auth_ns.model(
     }
 )
 
+
 @auth_ns.route("/logout")
 @auth_ns.response(200, "success")
 class Logout(Resource):
@@ -224,11 +230,10 @@ class Logout(Resource):
         return result
 
 
-
 refresh_data_fields = auth_ns.model(
     "data",
     {
-        "access_token" : fields.String,
+        "access_token": fields.String,
     }
 )
 
@@ -256,6 +261,7 @@ refresh_expect_fields = auth_ns.model(
     }
 )
 
+
 @auth_ns.route("/refresh")
 @auth_ns.response(200, "success")
 @auth_ns.response(404, "fail")
@@ -267,7 +273,3 @@ class Refresh(Resource):
         refresh_token = request.json.get('refresh_token')
         result = refresh(refresh_token)
         return result
-        
-
-
-

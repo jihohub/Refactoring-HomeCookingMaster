@@ -1,6 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import { useState, useRef, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { terms, terms_cnt, terms_title, service_title, service_sub_title, all_agree,btn, agree_btn, select_cnt } from "../../css/register_css";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
@@ -442,7 +441,7 @@ function TermsNConditions() {
                     </div>
                 </div>
                 <div>
-                    <Link to="/register/userInfo" css={agree_btn}>
+                    <Link href="/register/userInfo" css={agree_btn}>
                         <OkButton 
                             id="nextBtn" variant="contained" 
                             disabled={checkAll ? false : true} css={btn}

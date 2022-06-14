@@ -11,6 +11,10 @@ from hcmk_server.services.recipe import (
     add_post,
     delete_post,
 )
+from flask_jwt_extended import (
+    jwt_required,
+)
+
 recipe_ns = Namespace(
     name="recipe",
     description="레시피 페이지를 관리하는 API.",
@@ -151,9 +155,10 @@ add_like_expect_fields = recipe_ns.model(
 class AddLike(Resource):
     @recipe_ns.expect(add_like_expect_fields)
     @recipe_ns.marshal_with(add_like_fields)
+    @jwt_required()
     def post(self, recipe_id):
         """해당 레시피의 좋아요를 관리하는 api"""
-        user_id = request.json.get("user_id")
+        user_id = int(request.json.get("user_id"))
         result = check_likes(recipe_id, user_id)
         return result
 
@@ -177,7 +182,7 @@ add_post_fields = recipe_ns.model(
 add_post_expect_fields = recipe_ns.model(
     "add_post_expect",
     {
-        "user_id": fields.Integer,
+        "user_id": fields.String,
         "post": fields.String,
         "img": fields.String,
     }
@@ -189,9 +194,10 @@ add_post_expect_fields = recipe_ns.model(
 class AddPost(Resource):
     @recipe_ns.expect(add_post_expect_fields)
     @recipe_ns.marshal_with(add_post_fields)
+    @jwt_required()
     def post(self, recipe_id):
         """해당 댓글을 저장하고 댓글 리스트를 반환하는 api"""
-        user_id = request.form.get("user_id")
+        user_id = int(request.form.get("user_id"))
         post = request.form.get("post")
         try:
             img = request.files["img"]
@@ -230,6 +236,7 @@ delete_post_expect_fields = recipe_ns.model(
 class DeletePost(Resource):
     @recipe_ns.expect(delete_post_expect_fields)
     @recipe_ns.marshal_with(delete_post_fields)
+    @jwt_required()
     def delete(self, recipe_id):
         """해당 레시피의 좋아요를 관리하는 api"""
         post_id = request.json.get("post_id")
