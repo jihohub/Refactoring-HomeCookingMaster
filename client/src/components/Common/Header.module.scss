@@ -1,20 +1,20 @@
-/* :root {
-  --text-color: white;
-  --background-color: red;
-  --accent-color: yellow;
-} */
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #966e53;
   padding: 8px 12px;
+  a {
+    text-decoration: none;
+  }
 }
 
 .navbar__logo {
   font-size: 24px;
   color: white;
+  &:hover {
+    cursor: pointer;
+  }
   /* color: var(--text-color); */
 }
 
@@ -27,6 +27,7 @@
     &:hover {
       background-color: white;
       border-radius: 4px;
+      cursor: pointer;
     }
   }
 }
@@ -38,6 +39,9 @@
   padding-left: 0;
   li {
     padding: 8px 12px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -47,6 +51,9 @@
   right: 32px;
   font-size: 24px;
   color: white;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .navbar__menu--active {
@@ -58,6 +65,7 @@
     &:hover {
       background-color: white;
       border-radius: 4px;
+      cursor: pointer;
     }  
   }
 
@@ -70,6 +78,9 @@
   padding-left: 0;
   li {
     padding: 8px 12px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 

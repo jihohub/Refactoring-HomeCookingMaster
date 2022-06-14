@@ -4,29 +4,18 @@ import Image from "next/image"
 import { Box, Typography } from "@mui/material";
 import avatar from "../../../public/assets/avatar.png";
 import { styled } from "@mui/material/styles";
+import styles from "./Footer.module.scss";
 
 const Footer = () => {
   return (
-    <Box
-      sx={{
-        height: "6rem",
-        backgroundColor: "#b4a58a",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <Typography sx={{ fontFamily: "EliceBold", marginRight: "5px" }}>
-        {"@집밥꼬꼬선생 "}
-      </Typography>
-      <Typography sx={{ fontFamily: "Elice" }}>{" ᛫ "}</Typography>
-      <Foot>
-        <Link href="https://github.com/jihohub/Refactoring-HomeCookingMaster">
-          <a target="_blank" rel="noopener noreferrer" className="link-item">
-            GitHub
-          </a>
-        </Link>
-      </Foot>
-    </Box>
+    <div className={styles.footer}>
+      <a>Copyright 2022. 집밥꼬꼬선생 All right reserved.</a>
+      <Link href="https://github.com/jihohub/Refactoring-HomeCookingMaster">
+        <a>
+          GitHub
+        </a>
+      </Link>
+    </div>
   );
 };
 

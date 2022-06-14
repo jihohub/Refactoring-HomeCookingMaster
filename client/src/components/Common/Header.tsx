@@ -94,42 +94,38 @@ const Header = () => {
     <nav className={styles.navbar}>
       <div className="navbar__logo">
         <Link href="/">
-          <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" />
+          <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" cursor="pointer" />
         </Link>
       </div>
       {/* <ul className={styles.navbar__menu}> */}
       <ul className={(isActive) ? styles["navbar__menu--active"] : styles.navbar__menu}>
-        <li className={styles.nav__item}>
-          <Link href="/" className={styles.nav__link}>
+        <li>
+          <Link href="/">
             Home
           </Link>
         </li>
-        <li className={styles.nav__item}>
-          <Link href="/about" className={styles.nav__link}>
+        <li>
+          <Link href="/about">
             About
           </Link>
         </li>
-        <li className={styles.nav__item}>
-          <Link href="/mypage" className={styles.nav__link}>
+        <li>
+          <Link href="/mypage">
             My Page
           </Link>
         </li>
       </ul>
       <ul className={(isActive) ? styles["navbar__auth--active"] : styles.navbar__auth}>
         {isLoggedIn ? (
-          <li className={styles.navigation__auth}>
-            <a className={styles.navigation__item} onClick={handleSignout}>
+          <li>
+            <a>onClick={handleSignout}>
               로그아웃
             </a>
-            <p className={styles.navigation__item}>{loggedin.nickname}</p>
-            <img
-              className={styles.nav__userimage}
-              src={loggedin.img}
-              alt="user profile image"
-            />
+            <p>{loggedin.nickname}</p>
+            <img src={loggedin.img} alt="user profile image" />
           </li>
         ) : (
-          <li className={styles.navigation__auth}>
+          <li>
             <a onClick={handleSignin}>로그인</a>
           </li>
         )}
@@ -138,48 +134,6 @@ const Header = () => {
         <MenuIcon />
       </a>
     </nav>
-    // <nav className={styles.navbar}>
-    //   <Link href="/" className={styles.nav__logo}>
-    //     <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" />
-    //   </Link>
-    //   <div onClick={handleClick} className={styles.nav__icon}>
-    //     {/* {open ? <FiX /> : <FiMenu />} */}
-    //   </div>
-    //   <ul className={styles.nav__links}>
-    //     <li className={styles.nav__item}>
-    //       <Link href="/" className={styles.nav__link}>
-    //         Home
-    //       </Link>
-    //     </li>
-    //     <li className={styles.nav__item}>
-    //       <Link href="/about" className={styles.nav__link}>
-    //         About
-    //       </Link>
-    //     </li>
-    //     <li className={styles.nav__item}>
-    //       <Link href="/mypage" className={styles.nav__link}>
-    //         My Page
-    //       </Link>
-    //     </li>
-    // {isLoggedIn ? (
-    //   <div className={styles.navigation__auth}>
-    //     <a className={styles.navigation__item} onClick={handleSignout}>
-    //       로그아웃
-    //     </a>
-    //     <p className={styles.navigation__item}>{loggedin.nickname}</p>
-    //     <img
-    //       className={styles.nav__userimage}
-    //       src={loggedin.img}
-    //       alt="user profile image"
-    //     />
-    //   </div>
-    // ) : (
-    //   <div className={styles.navigation__auth}>
-    //     <a onClick={handleSignin}>로그인</a>
-    //   </div>
-    // )}
-    //   </ul>
-    // </nav>
   );
 };
 
