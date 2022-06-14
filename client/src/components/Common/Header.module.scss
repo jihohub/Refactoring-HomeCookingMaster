@@ -2,10 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #966e53;
+  background-color: #FFC300;
   padding: 8px 12px;
   a {
     text-decoration: none;
+    color: #604900;
+    &:hover {
+      color: white;
+    }
   }
 }
 
@@ -25,22 +29,29 @@
   li {
     padding: 8px 12px;
     &:hover {
-      background-color: white;
+      background-color: #604900;
       border-radius: 4px;
       cursor: pointer;
+      a {
+        color: white;
+      }
     }
   }
 }
 
 .navbar__auth {
   list-style: none;
-  color: white;
   display: flex;
   padding-left: 0;
   li {
     padding: 8px 12px;
     &:hover {
+      background-color: #604900;
+      border-radius: 4px;
       cursor: pointer;
+      a {
+        color: white;
+      }
     }
   }
 }
@@ -49,8 +60,7 @@
   display: none;
   position: absolute;
   right: 32px;
-  font-size: 24px;
-  color: white;
+  font-size: 36px;
   &:hover {
     cursor: pointer;
   }
@@ -63,9 +73,12 @@
   li {
     padding: 8px 12px;
     &:hover {
-      background-color: white;
+      background-color: #604900;
       border-radius: 4px;
       cursor: pointer;
+      a {
+        color: white;
+      }
     }  
   }
 
@@ -73,13 +86,17 @@
 }
 .navbar__auth--active {
   list-style: none;
-  color: white;
   display: flex;
   padding-left: 0;
   li {
     padding: 8px 12px;
     &:hover {
+      background-color: #604900;
+      border-radius: 4px;
       cursor: pointer;
+      a {
+        color: white;
+      }
     }
   }
 }
@@ -127,6 +144,10 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    li {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 
