@@ -1,0 +1,53 @@
+.root {
+  text-align: center;
+}
+
+.loginform__wrap {
+  width: 400px;
+  margin: 0 auto;
+  border: 1px solid #FFC300;
+  border-radius: 4px;
+}
+
+.loginform {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginform__email, .loginform__password {
+  width: 376px;
+  height: 40px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #604900;
+  border-radius: 4px;
+}
+
+.loginform__button {
+  width: 384px;
+  height: 40px;
+  background-color: #FFC300;
+  color: #604900;
+  border: 1px solid #604900;
+  border-radius: 4px;
+  margin: 30px 0 10px 0;
+  &:hover {
+    cursor: pointer;
+    background-color: #604900;
+    color: white;
+  }
+}
+
+.suggestion__text {
+  color: #604900;
+}
+
+.suggestion__anchor {
+  text-decoration: none;
+  font-size: 24px;
+  color: #DFAB00;
+  &:hover {
+    color: #FFC300;
+  }
+}

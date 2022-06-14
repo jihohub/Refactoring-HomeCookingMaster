@@ -94,7 +94,7 @@ const Header = () => {
     <nav className={styles.navbar}>
       <div className="navbar__logo">
         <Link href="/">
-          <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" cursor="pointer" />
+          <Image src={finalLogo} alt="main_logo" height="50%" width="100%" />
         </Link>
       </div>
       {/* <ul className={styles.navbar__menu}> */}
