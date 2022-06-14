@@ -5,7 +5,7 @@ import Image from "next/image";
 import logohat from "../../../public/assets/hatYess.png";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 // import { setUser } from "../../modules/userLogin";
 
 import AppBar from "@mui/material/AppBar";
