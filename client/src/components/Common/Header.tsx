@@ -97,7 +97,8 @@ const Header = () => {
           <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" />
         </Link>
       </div>
-      <ul className={isActive ? `${styles.navbar__menu__active}` : `${styles.navbar__menu}`}>
+      {/* <ul className={styles.navbar__menu}> */}
+      <ul className={(isActive) ? styles["navbar__menu--active"] : styles.navbar__menu}>
         <li className={styles.nav__item}>
           <Link href="/" className={styles.nav__link}>
             Home
@@ -114,7 +115,7 @@ const Header = () => {
           </Link>
         </li>
       </ul>
-      <ul className={isActive ? `${styles.navbar__icons__active}` : `${styles.navbar__icons}`}>
+      <ul className={(isActive) ? styles["navbar__auth--active"] : styles.navbar__auth}>
         {isLoggedIn ? (
           <li className={styles.navigation__auth}>
             <a className={styles.navigation__item} onClick={handleSignout}>
@@ -134,7 +135,7 @@ const Header = () => {
         )}
       </ul>
       <a onClick={handleToggle} className={styles.navbar__toggleBtn}>
-        햄버거
+        <MenuIcon />
       </a>
     </nav>
     // <nav className={styles.navbar}>
