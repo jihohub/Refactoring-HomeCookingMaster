@@ -34,7 +34,7 @@ function LoginForm() {
   return (
     <div className={styles.root}>
       <Link href="/">
-        <Image src={finalLogo} alt="main_logo" width="400px" height="200px" />
+        <Image src={finalLogo} alt="main_logo" width="200%" height="100%" />
       </Link>
       <div className={styles.loginform__wrap}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.loginform}>

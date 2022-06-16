@@ -1,4 +1,5 @@
 .root {
+  margin-top: 150px;
   text-align: center;
 }
 
@@ -17,7 +18,8 @@
 }
 
 .loginform__email, .loginform__password {
-  width: 376px;
+  box-sizing: border-box;
+  width: 390px;
   height: 40px;
   margin: 5px 0 5px 0;
   border: 1px solid #604900;
@@ -25,7 +27,7 @@
 }
 
 .loginform__button {
-  width: 384px;
+  width: 390px;
   height: 40px;
   background-color: #FFC300;
   color: #604900;
@@ -49,5 +51,14 @@
   color: #DFAB00;
   &:hover {
     color: #FFC300;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .loginform__wrap {
+    width: 300px;
+  }
+  .loginform__email, .loginform__password, .loginform__button {
+    width: 290px;
   }
 }
