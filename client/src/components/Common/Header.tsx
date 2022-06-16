@@ -122,7 +122,7 @@ const Header = () => {
               <p>{loggedin.nickname}</p>
             </li>
             <li>
-              <img src={loggedin.img} alt="user profile image" />
+              {loggedin.img && <img src={loggedin.img} alt="user profile image" />}
             </li>
           </>
         ) : (
