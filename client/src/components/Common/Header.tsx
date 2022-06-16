@@ -99,13 +99,14 @@ const Header = () => {
         }
       >
         <li>
-          <Link href="/">홈</Link>
+          <Link href="/">
+            <a>홈</a>
+          </Link>
         </li>
         <li>
-          <Link href="/about">어바웃</Link>
-        </li>
-        <li>
-          <Link href="/mypage">마이페이지</Link>
+          <Link href="/about">
+            <a>어바웃</a>
+          </Link>
         </li>
       </ul>
       <ul
@@ -116,13 +117,12 @@ const Header = () => {
         {isLoggedIn ? (
           <>
             <li>
-              <p onClick={handleSignout}>로그아웃</p>
+              <Link href="/mypage">
+                <a>마이페이지</a>
+              </Link>
             </li>
             <li>
-              <p>{loggedin.nickname}</p>
-            </li>
-            <li>
-              {loggedin.img && <img src={loggedin.img} alt="user profile image" className={styles.navbar__image} />}
+              <a onClick={handleSignout}>로그아웃</a>
             </li>
           </>
         ) : (
