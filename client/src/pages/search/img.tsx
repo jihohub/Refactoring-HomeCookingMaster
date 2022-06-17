@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 // import SearchedImage from "../../hooks/Search/searchedImage";
-import SearchedImage from "../../components/Main/DropZone";
+import SearchedImage from "../../components/Main/SearchImageBox";
 
 import { useRecoilValue } from "recoil";
 import { searchedImage } from "../../atom/searchedImage";
@@ -17,8 +17,6 @@ import {
   QueryClientProvider,
 } from "react-query";
 import useSearchImg from "../../hooks/Search/useSearchImg";
-import DropZone from "../../components/Main/DropZone";
-import SearchBar from "../../components/Common/SearchBar";
 import TextCard from "../../components/Result/TextCard";
 import LoadingScreen from "../../components/Common/LoadingScreen";
 
@@ -60,8 +58,6 @@ const Img = () => {
             <TextCard data={item.name} />
           ))}
           <p>다시 검색하기</p>
-          <SearchBar />
-          <DropZone />
         </>
       )}
     </>

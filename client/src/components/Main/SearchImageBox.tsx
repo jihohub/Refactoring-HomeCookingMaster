@@ -9,7 +9,7 @@ import { btnDiv } from "../../css/main_css";
 import { useSetRecoilState } from "recoil";
 import { searchedImage } from "../../atom/searchedImage";
 
-function DropZone() {
+function SearchImageBox() {
   const router = useRouter();
   const setImage = useSetRecoilState(searchedImage);
   const randomPath = new Date().getTime() + Math.random();
@@ -63,4 +63,4 @@ function DropZone() {
   );
 }
 
-export default DropZone;
+export default SearchImageBox;

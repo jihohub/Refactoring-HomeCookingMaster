@@ -100,12 +100,22 @@ const Header = () => {
       >
         <li>
           <Link href="/">
-            <a>홈</a>
+            <a>이미지로 검색</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/search">
+            <a>텍스트로 검색</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/ranking">
+            <a>오늘의 레시피 랭킹</a>
           </Link>
         </li>
         <li>
           <Link href="/about">
-            <a>어바웃</a>
+            <a>서비스 소개</a>
           </Link>
         </li>
       </ul>

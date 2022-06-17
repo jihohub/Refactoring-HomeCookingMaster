@@ -11,7 +11,7 @@ import {
   QueryClientProvider,
 } from "react-query";
 import useRankings from "../hooks/Ranking/useRankings";
-import useSearchText from "../hooks/Search/useSearchStr"
+import useSearchText from "../hooks/Search/useSearchStr";
 import MainSearch from "../components/Main/MainSearch";
 import MainRanking from "../components/Main/MainRanking";
 import kkokko1 from "../../public/assets/kkokko_1.png";
@@ -19,18 +19,18 @@ import kkokko2 from "../../public/assets/kkokko_2.png";
 import kkokko3 from "../../public/assets/kkokko_3.png";
 import axios from "axios";
 
-
 const Page = () => {
-  const {data} = useRankings();
+  const { data } = useRankings();
   console.log(data);
   console.log(typeof data);
   const router = useRouter();
 
   return (
-    <MainSearch />
+    <>
+      <MainRanking ranking={data} />
+    </>
   );
 };
-
 
 const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient({
