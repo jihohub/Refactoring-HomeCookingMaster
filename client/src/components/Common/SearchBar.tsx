@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-// import { setImageFile, setPreviewUrl } from "../../modules/searchedImageSlice";
-
-import { Paper, InputBase, IconButton, Button } from "@mui/material";
+import { useSetRecoilState } from "recoil";
+import { searchedImage } from "../../atom/searchedImage";
 import ImageSearchIcon from "@mui/icons-material/ImageSearch";
 
 const SearchBar = () => {
@@ -28,6 +26,7 @@ const SearchBar = () => {
           }
         }}
       ></input>
+      <ImageSearchIcon></ImageSearchIcon>
       <button onClick={(e) => handleClick(e)}></button>
     </label>
   );

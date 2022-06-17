@@ -2,12 +2,10 @@ import React, { useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { GrImage } from "react-icons/gr";
-import { btnDiv } from "../../css/main_css";
-
 import { useSetRecoilState } from "recoil";
 import { searchedImage } from "../../atom/searchedImage";
+import AddPhotoAlternate from "@mui/icons-material/AddPhotoAlternate";
+import styles from "./SearchImageBox.module.scss";
 
 function SearchImageBox() {
   const router = useRouter();
@@ -19,18 +17,8 @@ function SearchImageBox() {
   };
 
   return (
-    <Box>
-      <Box
-        sx={{
-          border: "1px dashed black",
-          width: "80%",
-          height: "30vh",
-          textAlign: "center",
-          margin: "0 auto",
-          backgroundColor: "lightgray",
-          opacity: 0.5,
-        }}
-      >
+    <>
+      <div className={styles.root}>
         <Dropzone onDrop={(acceptedFiles) => handleDrop(acceptedFiles)}>
           {({ getRootProps, getInputProps }) => (
             <section
@@ -38,16 +26,22 @@ function SearchImageBox() {
               style={{ height: "100%", display: "table", margin: "auto" }}
             >
               <input {...getInputProps()} />
-              <Box sx={{ display: "table-cell", verticalAlign: "middle" }}>
-                <AddPhotoAlternateIcon sx={{ fontSize: "60px" }} />
+              {/* <Box sx={{ display: "table-cell", verticalAlign: "middle" }}>
+                <AddPhotoAlternate sx={{ fontSize: "60px" }} />
                 <Typography sx={{ fontFamily: "Elice" }}>
                   드래그 앤 드롭으로 이미지 파일을 추가하세요.
                 </Typography>
-              </Box>
+              </Box> */}
+              <div className={styles.box}>
+                <AddPhotoAlternate sx={{ fontSize: "60px" }} />
+                <p>
+                  드래그 앤 드롭으로 이미지 파일을 추가하세요.
+                </p>
+              </div>
             </section>
           )}
         </Dropzone>
-      </Box>
+      </div>
       <Box
         sx={{
           textAlign: "center",
@@ -59,7 +53,7 @@ function SearchImageBox() {
           이미지 업로드시 바로 검색됩니다.
         </Typography>
       </Box>
-    </Box>
+    </>
   );
 }
 

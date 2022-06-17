@@ -18,6 +18,9 @@ import kkokko1 from "../../public/assets/kkokko_1.png";
 import kkokko2 from "../../public/assets/kkokko_2.png";
 import kkokko3 from "../../public/assets/kkokko_3.png";
 import axios from "axios";
+import main from "../../public/assets/main.png"
+import Image from "next/image";
+import styles from "./index.module.scss";
 
 
 const Page = () => {
@@ -27,7 +30,19 @@ const Page = () => {
   const router = useRouter();
 
   return (
-    <MainSearch />
+    <div className={styles.background}>
+      <div className={styles.overlay}>
+        <h1>이젠 집에서 해드세요.</h1>
+        <h2>집밥꼬꼬선생이 있습니다.</h2>
+      </div>
+      <Image
+        src={main}
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        placeholder="blur"
+      />
+    </div>
   );
 };
 
