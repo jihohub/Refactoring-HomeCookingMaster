@@ -12,9 +12,9 @@ import { styled } from '@mui/material/styles';
 import { MdPersonSearch } from "react-icons/md";
 import { imgResult, itemsTitle } from '../../css/result_csst';
 import ItemCard from "./ItemCard";
-import styles from "./ItemList.module.scss";
+import styles from "./ItemListResult.module.scss";
 
-function ItemList(props: any) {
+function ItemListResult(props: any) {
   console.log(props?.data?.food_0);
   const recipes = props?.data?.food_0 || [];
 
@@ -27,4 +27,4 @@ function ItemList(props: any) {
   );
 }
 
-export default ItemList;
+export default ItemListResult;

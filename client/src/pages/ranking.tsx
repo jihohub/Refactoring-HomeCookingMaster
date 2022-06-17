@@ -14,7 +14,7 @@ import useRankings from "../hooks/Ranking/useRankings";
 
 const Page = () => {
   const { data } = useRankings();
-  return <MainRanking ranking={data} />;
+  return <MainRanking data={data} />;
 };
 
 const getServerSideProps: GetServerSideProps = async (context) => {

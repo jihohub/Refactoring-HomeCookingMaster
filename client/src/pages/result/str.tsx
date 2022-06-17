@@ -11,7 +11,7 @@ import {
   QueryClientProvider,
 } from "react-query";
 import useSearchStr from "../../hooks/Search/useSearchStr";
-import ItemList from "../../components/Result/ItemList";
+import ItemListResult from "../../components/Result/ItemListResult";
 import TextCard from "../../components/Result/TextCard";
 
 const Str = () => {
@@ -33,9 +33,7 @@ const Str = () => {
     return <a>검색 결과가 없습니다.</a>
   }
 
-  return (
-    <ItemList data={data?.data} />
-  );
+  return <ItemListResult data={data?.data} />;
 };
 
 const getServerSideProps: GetServerSideProps = async (context) => {
