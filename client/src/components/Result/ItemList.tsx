@@ -12,33 +12,18 @@ import { styled } from '@mui/material/styles';
 import { MdPersonSearch } from "react-icons/md";
 import { imgResult, itemsTitle } from '../../css/result_csst';
 import ItemCard from "./ItemCard";
+import styles from "./ItemList.module.scss";
 
 function ItemList(props: any) {
   console.log(props?.data?.food_0);
   const recipes = props?.data?.food_0 || [];
-  
-
-  // // 음식명 랜덤으로 뽑기
-  // const randomProperty = function (obj:any) {
-  // const keys = Object.keys(obj);
-  //   return keys[keys.length * Math.random() << 0];
-  // };
-
-  // const tmpList : string[] = [];
-  // const randomList = function(){
-  //   for (let i=0;i<10;i++) {
-  //     const ran = randomProperty(resultList)
-  //     tmpList.push(ran);
-  //   }
-  // }
-  // randomList();
 
   return (
-    <>
+    <div className={styles.wrap}>
       {recipes.map((item) => (
         <ItemCard data={item} />
       ))}
-    </>
+    </div>
   );
 }
 
