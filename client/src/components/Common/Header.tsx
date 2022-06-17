@@ -99,12 +99,12 @@ const Header = () => {
         }
       >
         <li>
-          <Link href="/">
+          <Link href="/search/img">
             <a>이미지로 검색</a>
           </Link>
         </li>
         <li>
-          <Link href="/search">
+          <Link href="/search/str">
             <a>텍스트로 검색</a>
           </Link>
         </li>

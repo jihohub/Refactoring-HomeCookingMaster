@@ -13,7 +13,7 @@ function SearchImageBox() {
   const randomPath = new Date().getTime() + Math.random();
   const handleDrop = (acceptedFiles: any) => {
     setImage(acceptedFiles[0]);
-    router.push(`/search/img?sbi=${randomPath}`);
+    router.push(`/result/img?sbi=${randomPath}`);
   };
 
   return (

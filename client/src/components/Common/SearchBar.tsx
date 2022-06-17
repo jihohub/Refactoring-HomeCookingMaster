@@ -13,7 +13,7 @@ const SearchBar = () => {
   };
 
   const handleClick = (e: any): void => {
-    router.push(`/search/str?data=${text}`);
+    router.push(`/result/str?data=${text}`);
   };
 
   return (
