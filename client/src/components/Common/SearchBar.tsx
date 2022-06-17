@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useSetRecoilState } from "recoil";
-import { searchedImage } from "../../atom/searchedImage";
-import ImageSearchIcon from "@mui/icons-material/ImageSearch";
+import Link from "next/link";
+import Image from "next/image";
+import styles from "./SearchBar.module.scss";
+import finalLogo from "../../../public/assets/finallogo.png"
 
 const SearchBar = () => {
   const router = useRouter();
@@ -17,18 +18,23 @@ const SearchBar = () => {
   };
 
   return (
-    <label>
-      <input
-        onChange={(e) => handleText(e)}
-        onKeyDown={(e) => {
-          if (e.keyCode == 13) {
-            handleClick(e);
-          }
-        }}
-      ></input>
-      <ImageSearchIcon></ImageSearchIcon>
-      <button onClick={(e) => handleClick(e)}></button>
-    </label>
+    <div className={styles.root}>
+      <Link href="/">
+        <Image src={finalLogo} alt="main_logo" width="200%" height="100%" />
+      </Link>
+      <label className={styles.searchbar__wrap}>
+        <input
+          onChange={(e) => handleText(e)}
+          onKeyDown={(e) => {
+            if (e.keyCode == 13) {
+              handleClick(e);
+            }
+          }}
+          className={styles.loginform__input}
+        ></input>
+        <button onClick={(e) => handleClick(e)} className={styles.loginform__button}>검색</button>
+      </label>
+    </div>
   );
 };
 
