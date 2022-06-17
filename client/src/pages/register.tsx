@@ -1,10 +1,13 @@
 import { Router } from "@mui/icons-material";
 import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
 import useSignup from "../hooks/Auth/useSignup";
 import useValidateEmail from "../hooks/Auth/useValidateEmail";
 import useValidateNickname from "../hooks/Auth/useValidateNickname";
 import styles from "./register.module.scss";
+import finalLogo from "../../public/assets/finalLogo.png";
 
 export default function App() {
   const { mutate: signup, isLoading: signupLoading } = useSignup();
@@ -47,27 +50,31 @@ export default function App() {
 
   return (
     <div className={styles.root}>
+      <Link href="/">
+        <Image src={finalLogo} alt="main_logo" width="200%" height="100%" />
+      </Link>
       <form className={styles.register} onSubmit={(e) => e.preventDefault()}>
         <div className={styles.register__section}>
           <label className={styles.register__label}>이메일</label>
-          <input
-            type="text"
-            className={styles.register__input}
-            {...register("email", {
-              required: "이메일은 필수입니다.",
-              pattern: {
-                value: /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i,
-                message: "이메일 형식이 아닙니다.",
-              },
-            })}
-          />
-
-          <button
-            onClick={() => valEmail(email)}
-            className={styles.register__button}
-          >
-            중복확인
-          </button>
+          <div className={styles.register__inputWithButton}>
+            <input
+              type="text"
+              className={styles.register__input}
+              {...register("email", {
+                required: "이메일은 필수입니다.",
+                pattern: {
+                  value: /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i,
+                  message: "이메일 형식이 아닙니다.",
+                },
+              })}
+            />
+            <button
+              onClick={() => valEmail(email)}
+              className={styles.register__button}
+            >
+              중복확인
+            </button>
+          </div>
         </div>
         <div className={styles.register__section}>
           {errors.email && (
@@ -118,24 +125,25 @@ export default function App() {
         </div>
         <div className={styles.register__section}>
           <label className={styles.register__label}>닉네임</label>
-          <input
-            type="nickname"
-            className={styles.register__input}
-            {...register("nickname", {
-              required: "닉네임은 필수입니다.",
-              maxLength: {
-                value: 10,
-                message: "닉네임은 10자 이하로 설정해주세요.",
-              },
-            })}
-          />
-
-          <button
-            onClick={() => valNickname(nickname)}
-            className={styles.register__button}
-          >
-            중복확인
-          </button>
+          <div className={styles.register__inputWithButton}>
+            <input
+              type="nickname"
+              className={styles.register__input}
+              {...register("nickname", {
+                required: "닉네임은 필수입니다.",
+                maxLength: {
+                  value: 10,
+                  message: "닉네임은 10자 이하로 설정해주세요.",
+                },
+              })}
+            />
+            <button
+              onClick={() => valNickname(nickname)}
+              className={styles.register__button}
+            >
+              중복확인
+            </button>
+          </div>
         </div>
         <div className={styles.register__section}>
           {errors.nickname && (

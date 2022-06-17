@@ -55,6 +55,9 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .root {
+    margin-top: 75px;
+  }
   .loginform__wrap {
     width: 300px;
   }
