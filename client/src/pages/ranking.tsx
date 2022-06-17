@@ -9,7 +9,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "react-query";
-import MainRanking from "../components/Main/MainRanking";
+import MainRanking from "../components/Ranking/MainRanking";
 import useRankings from "../hooks/Ranking/useRankings";
 
 const Page = () => {

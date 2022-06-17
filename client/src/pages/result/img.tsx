@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
-// import SearchedImage from "../../hooks/Search/searchedImage";
-import SearchedImage from "../../components/Main/SearchImageBox";
-
 import { useRecoilValue } from "recoil";
 import { searchedImage } from "../../atom/searchedImage";
-
 import {
   dehydrate,
   useQuery,

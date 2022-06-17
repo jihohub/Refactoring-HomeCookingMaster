@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./MainSearch.module.css";
+import styles from "./MainSearch.module.scss";
 import SearchImageBox from "./SearchImageBox";
 import {
   Box,
@@ -8,7 +8,7 @@ import {
   ImageListItem,
   ImageListItemBar,
 } from "@mui/material";
-import SearchBar from "../Common/SearchBar";
+import SearchBar from "./SearchBar";
 
 const MainSearch = () => {
   return (

@@ -6,7 +6,7 @@ import {
   ImageListItem,
   ImageListItemBar,
 } from "@mui/material";
-import SearchBar from "../../components/Common/SearchBar";
+import SearchBar from "../../components/Search/SearchBar";
 
 const Page = () => {
   return <SearchBar />;

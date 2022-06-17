@@ -10,10 +10,9 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "react-query";
-import useSearchImage from "../../hooks/Search/useSearchImg";
 import useSearchStr from "../../hooks/Search/useSearchStr";
 import ItemList from "../../components/Result/ItemList";
-import SearchBar from "../../components/Common/SearchBar";
+import TextCard from "../../components/Result/TextCard";
 
 const Str = () => {
   const router = useRouter();
@@ -25,13 +24,9 @@ const Str = () => {
   console.log(isNoResult, isMultiResult);
 
   if (isMultiResult) {
-    return (
-        data?.data.food_list.map((item) => (
-        <Link href={`/result/str?data=${item}`}>
-          <a>{item}</a>
-        </Link>
-      ))
-    )
+    return data?.data.food_list.map((item) => (
+      <TextCard data={item} />
+    ));
   }
 
   if (isNoResult) {
@@ -39,9 +34,7 @@ const Str = () => {
   }
 
   return (
-    <>
-      <ItemList data={data?.data} />
-    </>
+    <ItemList data={data?.data} />
   );
 };
 

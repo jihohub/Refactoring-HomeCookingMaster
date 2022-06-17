@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import type { ReactElement } from "react";
-import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+import React from "react";
+import Image from "next/image";
 import {
   dehydrate,
   useQuery,
@@ -10,25 +8,10 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "react-query";
-import useRankings from "../hooks/Ranking/useRankings";
-import useSearchText from "../hooks/Search/useSearchStr"
-import MainSearch from "../components/Main/MainSearch";
-import MainRanking from "../components/Main/MainRanking";
-import kkokko1 from "../../public/assets/kkokko_1.png";
-import kkokko2 from "../../public/assets/kkokko_2.png";
-import kkokko3 from "../../public/assets/kkokko_3.png";
-import axios from "axios";
-import main from "../../public/assets/main.png"
-import Image from "next/image";
 import styles from "./index.module.scss";
-
+import main from "../../public/assets/main.png";
 
 const Page = () => {
-  const {data} = useRankings();
-  console.log(data);
-  console.log(typeof data);
-  const router = useRouter();
-
   return (
     <div className={styles.background}>
       <div className={styles.overlay}>
@@ -44,28 +27,6 @@ const Page = () => {
       />
     </div>
   );
-};
-
-
-const getServerSideProps: GetServerSideProps = async (context) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 1 * 60 * 1000,
-        cacheTime: 3 * 60 * 1000,
-        refetchOnWindowFocus: true,
-        refetchOnMount: false,
-        retry: true,
-      },
-    },
-  });
-  await queryClient.prefetchQuery("rankings", useRankings);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
 };
 
 export default Page;
