@@ -1,0 +1,63 @@
+.root {
+  margin-top: 150px;
+}
+
+.register {
+  // display: flex;
+  // flex-direction: column;
+}
+
+.register__section {
+  width: 500px;
+  display: flex;
+  margin: 10px auto;
+}
+
+.register__label {
+  min-width: 100px;
+  margin: 10px 10px;
+}
+
+.register__input {
+  width: 250px;
+}
+
+.register__error {
+  margin-left: 120px;
+  color: red;
+}
+
+.register__button {
+  width: 100px;
+  margin-left: 20px;
+  background-color: #FFC300;
+  color: #604900;
+  border: 1px solid #604900;
+  border-radius: 4px;
+  &:hover {
+    cursor: pointer;
+    background-color: #604900;
+    color: white;
+  }
+}
+
+.register__image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.register__submitButton {
+  width: 100px;
+  height: 40px;
+  margin: 0 auto;
+  background-color: #FFC300;
+  color: #604900;
+  border: 1px solid #604900;
+  border-radius: 4px;
+  &:hover {
+    cursor: pointer;
+    background-color: #604900;
+    color: white;
+  }
+}
