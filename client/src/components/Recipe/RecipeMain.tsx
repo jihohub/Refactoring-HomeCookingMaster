@@ -11,7 +11,7 @@ import { useRecoilValue } from "recoil";
 import { loginInfo } from "../../atom/loginInfo";
 import useRecipeLike from "../../hooks/Recipes/useRecipeLike";
 import { useRouter } from "next/router";
-
+import styles from "./RecipeMain.module.scss";
 
 function RecipeMain({ data }) {
   const router = useRouter();
@@ -50,133 +50,53 @@ function RecipeMain({ data }) {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div>
-      <Box sx={{ width: "70vw", maxWidth: "1080px", height: "50px" }} />
-      <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
-        <Typography
-          sx={{
-            color: "#897A5F",
-            fontSize: "1.5rem",
-            fontFamily: "Elice",
-            marginBottom: "2rem",
-          }}
-        >
-          {`${food_info?.category_l} > ${food_info?.category_m} > ${food_info?.category_s}`}
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          width: "70vw",
-          maxWidth: "1080px",
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
-        <img
-          src={recipe_info?.img}
-          style={{
-            width: "70%",
-            minWidth: "70%",
-            boxShadow: "2px 2px 10px gray",
-            borderRadius: "20px",
-            marginTop: "15px",
-          }}
-          alt="food"
-        />
-      </Box>
-      <Box
-        sx={{
-          width: "70vw",
-          maxWidth: "1080px",
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
-        <Typography sx={{ fontSize: "2rem", fontFamily: "Elice" }}>
-          {recipe_info?.name}
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          width: "70vw",
-          maxWidth: "1080px",
-          margin: "0 auto",
-          textAlign: "center",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <IconButton>
-          <RestaurantIcon sx={{ fontSize: 18 }} />
-        </IconButton>
-        <Typography sx={{ fontSize: "1.3rem", fontFamily: "Elice" }}>
-          {recipe_info?.servings}
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          width: "70vw",
-          maxWidth: "1080px",
-          margin: "0 auto",
-          textAlign: "center",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <IconButton>
-          <QuizIcon sx={{ fontSize: 18 }} />
-        </IconButton>
-        <Typography sx={{ fontSize: "1.3rem", fontFamily: "Elice" }}>
-          {recipe_info?.difficulty}
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          width: "70vw",
-          maxWidth: "1080px",
-          margin: "0 auto",
-          textAlign: "center",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <IconButton>
-          <AlarmIcon sx={{ fontSize: 18 }} />
-        </IconButton>
-        <Typography sx={{ fontSize: "1.3rem", fontFamily: "Elice" }}>
-          {recipe_info?.cooking_time}
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          width: "70vw",
-          maxWidth: "1080px",
-          margin: "0 auto",
-          textAlign: "right",
-        }}
-      >
+    <div className={styles.wrap}>
+      <p className={styles.category__text}>
+        {`${food_info?.category_l} > ${food_info?.category_m} > ${food_info?.category_s}`}
+      </p>
+      <div className={styles["wrap--center"]}>
+        <img src={recipe_info?.img} alt="food image" className={styles.image} />
+        <p className={styles.title__text}>{recipe_info?.name}</p>
+        <div className={styles.icon__wrap}>
+          <IconButton>
+            <RestaurantIcon className={styles.icon} />
+          </IconButton>
+          <p className={styles.iconButton}>{recipe_info?.servings}</p>
+        </div>
+        <div className={styles.icon__wrap}>
+          <IconButton>
+            <QuizIcon className={styles.icon} />
+          </IconButton>
+          <p className={styles.iconButton}>{recipe_info?.difficulty}</p>
+        </div>
+        <div className={styles.icon__wrap}>
+          <IconButton>
+            <AlarmIcon className={styles.icon} />
+          </IconButton>
+          <p className={styles.iconButton}>{recipe_info?.cooking_time}</p>
+        </div>
+      </div>
+      <div className={styles.like__wrap}>
         {user_id && did_u_liked && (
-          <Typography sx={{ fontSize: "2.3rem", fontFamily: "Elice" }}>
+          <p className={styles.like}>
             <IconButton onClick={handleLike}>
-              <FavoriteIcon sx={{ color: "#897A5F", fontSize: "3rem" }} />
+              <FavoriteIcon className={styles.favoriteIcon} />
             </IconButton>
             {recipe_info?.likes}
-          </Typography>
+          </p>
         )}
         {user_id && !did_u_liked && (
-          <Typography sx={{ fontSize: "2.3rem", fontFamily: "Elice" }}>
+          <p className={styles.like}>
             <IconButton onClick={handleLike}>
-              <FavoriteBorderIcon sx={{ color: "#897A5F", fontSize: "3rem" }} />
+              <FavoriteBorderIcon className={styles.favoriteIcon} />
             </IconButton>
             {recipe_info?.likes}
-          </Typography>
+          </p>
         )}
         {!user_id && (
-          <Typography sx={{ fontSize: "2.3rem", fontFamily: "Elice" }}>
+          <p className={styles.like}>
             <IconButton onClick={handleClick}>
-              <FavoriteBorderIcon
-                sx={{ color: "#897A5F", fontSize: "2.5rem" }}
-              />
+              <FavoriteBorderIcon className={styles.favoriteIcon} />
             </IconButton>
             {recipe_info?.likes}
             <Popover
@@ -189,13 +109,11 @@ function RecipeMain({ data }) {
                 horizontal: "left",
               }}
             >
-              <Typography sx={{ p: 2, fontFamily: "Elice" }}>
-                로그인 후 이용해주세요.
-              </Typography>
+              <p>로그인 후 이용해주세요.</p>
             </Popover>
-          </Typography>
+          </p>
         )}
-      </Box>
+      </div>
       <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
       <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
         <Typography
