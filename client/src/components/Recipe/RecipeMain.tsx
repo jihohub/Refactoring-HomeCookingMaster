@@ -114,112 +114,42 @@ function RecipeMain({ data }) {
           </p>
         )}
       </div>
-      <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
-      <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
-        <Typography
-          sx={{
-            fontSize: "1.75rem",
-            color: "#897A5F",
-            fontFamily: "Elice",
-          }}
-        >
-          재료 리스트
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          width: "70vw",
-          maxWidth: "1080px",
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
+      <div className={styles.title}>
+        <p>재료 리스트</p>
         <Divider />
-      </Box>
-      <Box sx={{ width: "70vw", maxWidth: "1080px", height: "10px" }} />
-      <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
+      </div>
+      <div className={styles.ingredient__text}>
         {ingredient_info?.map((item: any, index: number) => (
-          <Typography
-            key={index}
-            sx={{ fontSize: "1.25rem", fontFamily: "Elice" }}
-          >
+          <p key={index}>
             <FiberManualRecordIcon sx={{ fontSize: "0.5rem" }} />
             {` ${item.name} ${item.amount}`}
-          </Typography>
+          </p>
         ))}
-      </Box>
-      <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
-      <Box sx={{ width: "70vw", maxWidth: "1080px", margin: "0 auto" }}>
-        <Typography
-          sx={{
-            fontSize: "1.75rem",
-            color: "#897A5F",
-            fontFamily: "Elice",
-          }}
-        >
-          레시피
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          width: "70vw",
-          maxWidth: "1080px",
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
+      </div>
+      <div className={styles.title}>
+        <p>레시피</p>
         <Divider />
-      </Box>
+      </div>
       {process_info?.map((item: any, index: number) => (
-        <Box key={index}>
-          <Box
-            sx={{
-              width: "70vw",
-              maxWidth: "1080px",
-              height: "10px",
-            }}
-          />
-          <Box
-            sx={{
-              width: "70vw",
-              maxWidth: "1080px",
-              margin: "0 auto",
-            }}
-          >
-            <Typography sx={{ fontFamily: "Elice" }}>
-              <IconButton>
-                <CheckCircleIcon />
-              </IconButton>
-              {`${item.step}단계`}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              width: "70vw",
-              maxWidth: "1080px",
-              margin: "0 auto",
-              display: "flex",
-              alignItems: "flex-start",
-            }}
-          >
+        <div key={index}>
+          <p>
+            <IconButton>
+              <CheckCircleIcon />
+            </IconButton>
+            {`${item.step}단계`}
+          </p>
+          <div className={styles.progress__wrap}>
             <img
               src={item.img}
-              style={{ width: "40%", minWidth: "40%" }}
-              alt="step"
+              className={styles.progress__image}
+              alt="step image"
             />
-            <Typography
-              sx={{
-                margin: "0 3%",
-                fontSize: "1.25rem",
-                fontFamily: "Elice",
-              }}
-            >
+            <p className={styles.progress__text}>
               {`${item.recipe}`}
-            </Typography>
-          </Box>
-        </Box>
+            </p>
+          </div>
+        </div>
       ))}
-      <Box sx={{ width: "70vw", maxWidth: "1080px", height: "30px" }} />
     </div>
   );
 }
