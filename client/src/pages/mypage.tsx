@@ -7,7 +7,7 @@ import useGetMypage from "../hooks/Mypage/useMypage";
 import { useRecoilValue } from "recoil";
 import { loginInfo } from "../atom/loginInfo";
 
-function mypage() {
+function MyPage() {
   const router = useRouter();
   const loggedin = useRecoilValue(loginInfo);
   const isLoggedIn = loggedin.refresh_token !== null;
@@ -43,4 +43,4 @@ function mypage() {
   );
 }
 
-export default mypage;
+export default MyPage;

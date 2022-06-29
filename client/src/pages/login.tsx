@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginForm from "../components/Login/LoginForm";
 import { login_all, login_title } from "../css/login_css";
 
-function login() {
+function LoginPage() {
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
         <LoginForm />
@@ -10,4 +10,4 @@ function login() {
   );
 }
 
-export default login;
+export default LoginPage;

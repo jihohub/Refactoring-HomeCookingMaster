@@ -11,7 +11,7 @@ import {
 import styles from "./index.module.scss";
 import main from "../../public/assets/main.png";
 
-const Page = () => {
+const IndexPage = () => {
   return (
     <div className={styles.background}>
       <div className={styles.overlay}>
@@ -29,4 +29,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default IndexPage;

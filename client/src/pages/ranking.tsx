@@ -12,7 +12,7 @@ import {
 import MainRanking from "../components/Ranking/MainRanking";
 import useRankings from "../hooks/Ranking/useRankings";
 
-const Page = () => {
+const RankingPage = () => {
   const { data } = useRankings();
   return <MainRanking data={data} />;
 };
@@ -38,4 +38,4 @@ const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Page;
+export default RankingPage;

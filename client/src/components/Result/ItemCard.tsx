@@ -14,12 +14,14 @@ function ItemCard(props: any) {
   return (
     <div onClick={handleClick} className={styles.wrap}>
       <img src={img} className={styles.image} />
-      <div className={styles.title}>
-        <p className={styles.title__text}>{name}</p>
-      </div>
-      <div className={styles.description}>
-        <p className={styles.description__text}>좋아요 : {likes}</p>
-        <p className={styles.description__text}>조회수 : {views}</p>
+      <div className={styles.panel}>
+        <div className={styles.title}>
+          <p className={styles.title__text}>{name}</p>
+        </div>
+        <div className={styles.description}>
+          <p className={styles.description__text}>좋아요 : {likes}</p>
+          <p className={styles.description__text}>조회수 : {views}</p>
+        </div>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import useValidateNickname from "../hooks/Auth/useValidateNickname";
 import styles from "./register.module.scss";
 import finalLogo from "../../public/assets/finalLogo.png";
 
-export default function App() {
+const RegisterPage = () => {
   const { mutate: signup, isLoading: signupLoading } = useSignup();
   const { mutate: valEmail, isLoading: valEmailLoading } = useValidateEmail();
   const { mutate: valNickname, isLoading: valNicknameLoading } = useValidateNickname();
@@ -179,3 +179,5 @@ export default function App() {
     </div>
   );
 }
+
+export default RegisterPage;
