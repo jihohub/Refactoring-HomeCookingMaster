@@ -32,9 +32,9 @@ const Recipe = () => {
   return (
     <>
       <RecipeMain data={data?.data} />
-      <RecipeShowOthers data={data?.data} />
       <RecipeReviews data={data?.data} />
       <RecipeReviewForm />
+      <RecipeShowOthers data={data?.data} />
     </>
   );
 };
