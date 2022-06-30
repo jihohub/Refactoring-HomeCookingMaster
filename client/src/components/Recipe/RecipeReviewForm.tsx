@@ -6,70 +6,7 @@ import { useForm } from "react-hook-form";
 import useRecipePost from "../../hooks/Recipes/useRecipePost";
 import { useRecoilValue } from "recoil";
 import { loginInfo } from "../../atom/loginInfo";
-
-const inputStyles = {
-  width: "70%",
-  marginLeft: "15%",
-  "& legend": { display: "none" },
-  "& fieldset": { top: 0 },
-  "& label.Mui-focused": {
-    opacity: 0,
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: "yellow",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#000000",
-    },
-    "&:hover fieldset": {
-      borderColor: "#897A5F",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#897A5F",
-    },
-  },
-};
-
-const disabledInputStyles = {
-  width: "70%",
-  marginLeft: "15%",
-  "& label.Mui-focused": {
-    opacity: 0,
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: "yellow",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#000000",
-    },
-    "&:hover fieldset": {
-      borderColor: "#897A5F",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#897A5F",
-    },
-  },
-};
-
-const buttonStyles = {
-  "&.MuiButton-root": {
-    backgroundColor: "#897A5F",
-  },
-  "&.MuiButton-contained": {
-    fontFamily: "Elice",
-  },
-};
-
-const disabledButtonStyles = {
-  "&.MuiButton-root": {
-    backgroundColor: "#dddddd",
-  },
-  "&.MuiButton-contained": {
-    fontFamily: "Elice",
-  },
-};
+import styles from "./RecipeReviewForm.module.scss";
 
 function RecipeReviewForm() {
   const {
@@ -96,11 +33,31 @@ function RecipeReviewForm() {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <input type="text" {...register("post")} />
-      <input type="file" accept="image/png, image/jpeg" {...register("img")} />
-      <input type="submit" onClick={handleSubmit(onSubmit)} />
-    </form>
+    <div className={styles.wrap}>
+      <p>{loggedin.user_id}</p>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <input
+          className={styles.input}
+          type="text"
+          {...register("post")}
+          placeholder="댓글을 남겨보세요"
+        />
+        <div className={styles.image}></div>
+        <div className={styles.attach}>
+          <input
+            className={styles.attach__buttonUpload}
+            type="file"
+            accept="image/png, image/jpeg"
+            {...register("img")}
+          />
+          <input
+            className={styles.attach__buttonSubmit}
+            type="submit"
+            onClick={handleSubmit(onSubmit)}
+          />
+        </div>
+      </form>
+    </div>
   );
 }
 
