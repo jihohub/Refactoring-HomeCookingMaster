@@ -20,6 +20,7 @@ import {
 import { useRecoilValue } from "recoil";
 import { loginInfo } from "../../atom/loginInfo";
 import useRecipeDelete from "../../hooks/Recipes/useRecipeDelete";
+import styles from "./RecipeReviews.module.scss";
 function Row(props: any) {
   const loggedin = useRecoilValue(loginInfo);
   const { mutate: recipeDelete, isLoading: recipeDeleteLoading } = useRecipeDelete();  
@@ -284,13 +285,15 @@ function RecipeReviews({ data }) {
           </Box>
         </>
       )}
-      {length > 0 && (
-        <Pagination
-          count={Math.ceil(length / 10)}
-          page={page}
-          onChange={handleChange}
-        />
-      )}
+      <div className={styles.pagination}>
+        {length > 0 && (
+          <Pagination
+            count={Math.ceil(length / 10)}
+            page={page}
+            onChange={handleChange}
+          />
+        )}
+      </div>
     </>
   );
 }
