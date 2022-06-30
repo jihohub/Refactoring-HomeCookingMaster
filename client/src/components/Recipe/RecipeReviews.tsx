@@ -15,6 +15,7 @@ import {
   ListItemText,
   Avatar,
   Modal,
+  Pagination,
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { loginInfo } from "../../atom/loginInfo";
@@ -203,6 +204,12 @@ Row.propTypes = {
 };
 
 function RecipeReviews({ data }) {
+  const [page, setPage] = useState(1);
+  const post = data?.post_info;
+  const length = data?.post_info?.length;
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
   
   return (
     <>
@@ -228,8 +235,8 @@ function RecipeReviews({ data }) {
       >
         <Divider />
       </Box>
-      {data?.post_info?.length > 0 ? (
-        data?.post_info?.map((item: any) => (
+      {length > 0 ? (
+        post.slice(10 * (page - 1), 10 * page).map((item: any) => (
           <>
             <Box
               sx={{
@@ -276,6 +283,13 @@ function RecipeReviews({ data }) {
             </List>
           </Box>
         </>
+      )}
+      {length > 0 && (
+        <Pagination
+          count={Math.ceil(length / 10)}
+          page={page}
+          onChange={handleChange}
+        />
       )}
     </>
   );
