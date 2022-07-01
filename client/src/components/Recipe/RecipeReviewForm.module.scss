@@ -47,13 +47,34 @@
 }
 
 .attachbox {
-
+  position: relative;
 }
 
 .attachbox__buttonUpload {
   display: none;
 }
 
+.attachbox__submit {
+  float: right;
+}
+
 .attachbox__buttonSubmit {
-  
+  display: inline-block;
+  min-width: 46px;
+  height: 34px;
+  line-height: 36px;
+  font-size: 13px;
+  background-color: #FFC300;
+  color: #604900;
+  border-width: 0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: top;
+  &:hover {
+    cursor: pointer;
+    background-color: #604900;
+    color: white;
+  }
 }

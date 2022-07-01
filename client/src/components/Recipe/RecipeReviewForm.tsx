@@ -83,12 +83,14 @@ function RecipeReviewForm() {
             />
             <AddAPhotoRoundedIcon />
           </IconButton>
-          <button
-            className={styles.attachbox__buttonSubmit}
-            onClick={handleSubmit(onSubmit)}
-          >
-            등록
-          </button>
+          <div className={styles.attachbox__submit}>
+            <button
+              className={styles.attachbox__buttonSubmit}
+              onClick={handleSubmit(onSubmit)}
+            >
+              등록
+            </button>
+          </div>
         </div>
       </form>
     </div>
