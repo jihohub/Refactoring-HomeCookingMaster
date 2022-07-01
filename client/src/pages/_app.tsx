@@ -12,15 +12,22 @@ import type { AppProps } from "next/app";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <RecoilRoot>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </RecoilRoot>
-      </Hydrate>
-    </QueryClientProvider>
+    <>
+      <meta
+        charSet="utf-8"
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+      />
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <RecoilRoot>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </RecoilRoot>
+        </Hydrate>
+      </QueryClientProvider>
+    </>
   );
 }
 

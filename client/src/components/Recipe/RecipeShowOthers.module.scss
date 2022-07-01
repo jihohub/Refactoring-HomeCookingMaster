@@ -1,0 +1,25 @@
+.wrap {
+  width: 70vw;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.box {
+  width: 70vw;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.75rem;
+  color: #897A5F;
+}
+
+.image {
+  max-height: 400px;
+}
+
+@media screen and (max-width: 1024px) {
+  .image {
+    max-height: 200px;
+  }
+}

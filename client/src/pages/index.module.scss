@@ -1,0 +1,23 @@
+.background {
+  position: relative;
+  min-height: 900px;
+}
+
+.overlay {
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 320px;
+  color: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+  .background {
+    min-height: 768px;
+  }
+}

@@ -15,10 +15,12 @@ import {
   ListItemText,
   Avatar,
   Modal,
+  Pagination,
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { loginInfo } from "../../atom/loginInfo";
 import useRecipeDelete from "../../hooks/Recipes/useRecipeDelete";
+import styles from "./RecipeReviews.module.scss";
 function Row(props: any) {
   const loggedin = useRecoilValue(loginInfo);
   const { mutate: recipeDelete, isLoading: recipeDeleteLoading } = useRecipeDelete();  
@@ -77,7 +79,7 @@ function Row(props: any) {
                   </Box>
                   <Box sx={{ width: "90%", margin: "auto 0" }}>
                     <Typography sx={{ fontFamily: "Elice" }}>
-                      {review.post}
+                      <pre>{review.post}</pre>
                     </Typography>
                   </Box>
                 </Box>
@@ -86,14 +88,16 @@ function Row(props: any) {
                   <Box sx={{ width: "10%" }} />
                   <Box sx={{ width: "90%" }}>
                     <Typography sx={{ fontFamily: "Elice" }}>
-                      {review.post}
+                      <pre>{review.post}</pre>
                     </Typography>
                   </Box>
                 </Box>
               )
             }
           />
-          {review.user_id === loggedin.user_id && <button onClick={(e) => onButtonClick(e, review.id)}>X</button>}
+          {review.user_id === loggedin.user_id && (
+            <button onClick={(e) => onButtonClick(e, review.id)}>X</button>
+          )}
           <ListItemText
             primary={
               <Typography sx={{ fontFamily: "Elice" }}>
@@ -138,7 +142,7 @@ function Row(props: any) {
                   <Box sx={{ width: "10%" }} />
                   <Box sx={{ width: "90%" }}>
                     <Typography sx={{ fontFamily: "Elice" }}>
-                      {review.post}
+                      <pre>{review.post}</pre>
                     </Typography>
                     {review.img && (
                       <img
@@ -153,7 +157,9 @@ function Row(props: any) {
                 </Box>
               }
             />
-            {review.user_id === loggedin.user_id && <button onClick={(e) => onButtonClick(e, review.id)}>X</button>}
+            {review.user_id === loggedin.user_id && (
+              <button onClick={(e) => onButtonClick(e, review.id)}>X</button>
+            )}
             <ListItemText
               primary={
                 <Typography sx={{ fontFamily: "Elice" }}>
@@ -203,6 +209,12 @@ Row.propTypes = {
 };
 
 function RecipeReviews({ data }) {
+  const [page, setPage] = useState(1);
+  const post = data?.post_info;
+  const length = data?.post_info?.length;
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
   
   return (
     <>
@@ -228,8 +240,8 @@ function RecipeReviews({ data }) {
       >
         <Divider />
       </Box>
-      {data?.post_info?.length > 0 ? (
-        data?.post_info?.map((item: any) => (
+      {length > 0 ? (
+        post.slice(10 * (page - 1), 10 * page).map((item: any) => (
           <>
             <Box
               sx={{
@@ -277,6 +289,15 @@ function RecipeReviews({ data }) {
           </Box>
         </>
       )}
+      <div className={styles.pagination}>
+        {length > 0 && (
+          <Pagination
+            count={Math.ceil(length / 10)}
+            page={page}
+            onChange={handleChange}
+          />
+        )}
+      </div>
     </>
   );
 }

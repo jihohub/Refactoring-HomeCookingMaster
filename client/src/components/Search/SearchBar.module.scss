@@ -1,0 +1,49 @@
+.root {
+  margin-top: 150px;
+  text-align: center;
+}
+
+.searchbar__wrap {
+  width: 800px;
+  margin: 0 auto;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.loginform__input {
+  box-sizing: border-box;
+  width: 700px;
+  height: 40px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #604900;
+  border-radius: 4px 0 0 4px;
+}
+
+.loginform__button {
+  width: 100px;
+  height: 40px;
+  background-color: #FFC300;
+  color: #604900;
+  border: 1px solid #604900;
+  border-radius: 0 4px 4px 0;
+  &:hover {
+    cursor: pointer;
+    background-color: #604900;
+    color: white;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .searchbar__wrap {
+    width: 400px;
+  }
+
+  .loginform__input {
+    width: 300px;
+  }
+
+  .loginform__button {
+    width: 100px;
+  }
+}

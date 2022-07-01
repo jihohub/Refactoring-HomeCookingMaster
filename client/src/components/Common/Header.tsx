@@ -78,10 +78,6 @@ const Header = () => {
     setOpen(false);
   };
 
-  const handleSignin = (e: any): void => {
-    e.preventDefault();
-    router.push("/login");
-  };
   const handleSignout = (e: any): void => {
     const access_token = loggedin.access_token;
     e.preventDefault();
@@ -94,40 +90,64 @@ const Header = () => {
     <nav className={styles.navbar}>
       <div className="navbar__logo">
         <Link href="/">
-          <Image src={finalLogo} alt="mainlogo" height="50%" width="100%" cursor="pointer" />
+          <Image src={finalLogo} alt="main_logo" height="50%" width="100%" />
         </Link>
       </div>
-      {/* <ul className={styles.navbar__menu}> */}
-      <ul className={(isActive) ? styles["navbar__menu--active"] : styles.navbar__menu}>
+      <ul
+        className={
+          isActive ? styles["navbar__menu--active"] : styles.navbar__menu
+        }
+      >
         <li>
-          <Link href="/">
-            Home
+          <Link href="/search/img">
+            <a>이미지로 검색</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/search/str">
+            <a>텍스트로 검색</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/ranking">
+            <a>오늘의 레시피 랭킹</a>
           </Link>
         </li>
         <li>
           <Link href="/about">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link href="/mypage">
-            My Page
+            <a>서비스 소개</a>
           </Link>
         </li>
       </ul>
-      <ul className={(isActive) ? styles["navbar__auth--active"] : styles.navbar__auth}>
+      <ul
+        className={
+          isActive ? styles["navbar__auth--active"] : styles.navbar__auth
+        }
+      >
         {isLoggedIn ? (
-          <li>
-            <a>onClick={handleSignout}>
-              로그아웃
-            </a>
-            <p>{loggedin.nickname}</p>
-            <img src={loggedin.img} alt="user profile image" />
-          </li>
+          <>
+            <li>
+              <Link href="/mypage">
+                <a>마이페이지</a>
+              </Link>
+            </li>
+            <li>
+              <a onClick={handleSignout}>로그아웃</a>
+            </li>
+          </>
         ) : (
-          <li>
-            <a onClick={handleSignin}>로그인</a>
-          </li>
+          <>
+            <li>
+              <Link href="/login">
+                <a>로그인</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/register">
+                <a>회원가입</a>
+              </Link>
+            </li>
+          </>
         )}
       </ul>
       <a onClick={handleToggle} className={styles.navbar__toggleBtn}>
