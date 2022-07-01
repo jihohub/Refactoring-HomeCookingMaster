@@ -79,7 +79,7 @@ function Row(props: any) {
                   </Box>
                   <Box sx={{ width: "90%", margin: "auto 0" }}>
                     <Typography sx={{ fontFamily: "Elice" }}>
-                      {review.post}
+                      <pre>{review.post}</pre>
                     </Typography>
                   </Box>
                 </Box>
@@ -88,14 +88,16 @@ function Row(props: any) {
                   <Box sx={{ width: "10%" }} />
                   <Box sx={{ width: "90%" }}>
                     <Typography sx={{ fontFamily: "Elice" }}>
-                      {review.post}
+                      <pre>{review.post}</pre>
                     </Typography>
                   </Box>
                 </Box>
               )
             }
           />
-          {review.user_id === loggedin.user_id && <button onClick={(e) => onButtonClick(e, review.id)}>X</button>}
+          {review.user_id === loggedin.user_id && (
+            <button onClick={(e) => onButtonClick(e, review.id)}>X</button>
+          )}
           <ListItemText
             primary={
               <Typography sx={{ fontFamily: "Elice" }}>
@@ -140,7 +142,7 @@ function Row(props: any) {
                   <Box sx={{ width: "10%" }} />
                   <Box sx={{ width: "90%" }}>
                     <Typography sx={{ fontFamily: "Elice" }}>
-                      {review.post}
+                      <pre>{review.post}</pre>
                     </Typography>
                     {review.img && (
                       <img
@@ -155,7 +157,9 @@ function Row(props: any) {
                 </Box>
               }
             />
-            {review.user_id === loggedin.user_id && <button onClick={(e) => onButtonClick(e, review.id)}>X</button>}
+            {review.user_id === loggedin.user_id && (
+              <button onClick={(e) => onButtonClick(e, review.id)}>X</button>
+            )}
             <ListItemText
               primary={
                 <Typography sx={{ fontFamily: "Elice" }}>

@@ -3,13 +3,24 @@
   margin: 20px auto;
   padding: 16px 10px 10px 18px;
   border: 2px solid #aaaaaa;
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.input {
+.nicknamebox {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.nicknamebox__text {
+  margin: 0;
+}
+
+.textbox {
   width: 100%;
   min-height: 17px;
   padding-right: 1px;
@@ -21,20 +32,28 @@
   background: transparent;
   color: var(--skinTextColor);
   outline: 0;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  height: 17px;
 }
 
-.image {
-
-}
-
-.attach {
-
-}
-
-.attach__buttonUpload {
+.imagebox {
 
 }
 
-.attach__buttonSubmit {
+.imagebox__image {
+  width: 100px;
+  height: 100px;
+}
 
+.attachbox {
+
+}
+
+.attachbox__buttonUpload {
+  display: none;
+}
+
+.attachbox__buttonSubmit {
+  
 }

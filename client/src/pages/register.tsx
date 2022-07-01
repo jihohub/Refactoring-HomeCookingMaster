@@ -24,19 +24,20 @@ const RegisterPage = () => {
   const email = watch("email");
   const password = watch("password");
   const nickname = watch("nickname");
-  const img = watch("img");
-  const [profileImage, setProfileImage] = useState<String | ArrayBuffer | null>(
+  const [previewImage, setPreviewImage] = useState<String | ArrayBuffer | null>(
     ""
+  );
+  const [profileImage, setProfileImage] = useState<Blob | null>(
+    null
   );
 
   const onUploadImage = (e: any) => {
     let reader = new FileReader();
     setProfileImage(e.target.files[0]);
-    const previewImage = e.target.files[0];
     reader.onloadend = () => {
-      setProfileImage(reader.result);
+      setPreviewImage(reader.result);
     };
-    reader.readAsDataURL(previewImage);
+    reader.readAsDataURL(e.target.files[0]);
   }
 
   const onSubmit = () => {
@@ -44,7 +45,7 @@ const RegisterPage = () => {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("nickname", nickname);
-    img && formData.append("img", img[0]);
+    profileImage && formData.append("img", profileImage);
     signup(formData);
   };
 
@@ -156,12 +157,11 @@ const RegisterPage = () => {
             type="file"
             accept="image/png, image/jpeg"
             className={styles.root}
-            {...register("img")}
             onChange={(e) => onUploadImage(e)}
           />
-          {profileImage && (
+          {previewImage && (
             <img
-              src={profileImage}
+              src={previewImage}
               alt="profile image"
               className={styles.register__image}
             />
