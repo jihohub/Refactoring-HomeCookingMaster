@@ -21,7 +21,7 @@ async function login(auth: {email: string, password: string}): Promise<LoggedIn>
     .post("/api/proxy/login", auth, {
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Accept": "application/json",
       },
       withCredentials: true,
     })

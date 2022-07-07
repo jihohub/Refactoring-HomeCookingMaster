@@ -17,7 +17,6 @@ function MyPage() {
   }
 
   const { data } = useGetMypage(loggedin.access_token);
-  console.log(data);
   const { user_info, liked_recipe, my_post } = data?.data || {};
 
   return (
