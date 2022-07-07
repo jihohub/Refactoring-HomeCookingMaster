@@ -18,10 +18,12 @@ type LoggedIn = {
 
 async function login(auth: {email: string, password: string}): Promise<LoggedIn> {
   return await axios
-    .post("/api/auth/login", auth, {
+    .post("/api/proxy/login", auth, {
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
+      withCredentials: true,
     })
     .then((response) => response.data);
 }

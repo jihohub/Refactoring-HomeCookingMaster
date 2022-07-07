@@ -3,10 +3,13 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
+    set_access_cookies,
+    set_refresh_cookies,
     get_jwt_identity,
     jwt_required,
     get_jwt,
     decode_token,
+    unset_jwt_cookies,
 )
 from flask_jwt_extended.utils import decode_token
 
@@ -99,7 +102,7 @@ def login(email, password):
         db.session.rollback()
         raise
 
-    return {
+    response = {
         "result": "success",
         "message": "로그인 되었습니다.",
         "data": {
@@ -109,7 +112,11 @@ def login(email, password):
             "nickname": user.nickname,
             "img": user.img
         }
-    }, 200
+    }
+    # set_access_cookies(response, access_token)
+    # set_refresh_cookies(response, refresh_token)
+
+    return response, 200
 
 
 def logout():
@@ -127,7 +134,9 @@ def logout():
         user.access_token = None
         user.refresh_token = None
         db.session.commit()
-        return {"result": "success", 'message': "로그아웃 되었습니다."}, 200
+        resp = {"result": "success", 'message': "로그아웃 되었습니다."}
+        unset_jwt_cookies(resp)
+        return resp, 200
     except Exception:
         db.session.rollback()
         raise
@@ -152,13 +161,15 @@ def refresh(refresh_token):
         user.access_token = new_access_token
         db.session.commit()
 
-        return {
+        response = {
             "result": "success",
             "message": "access_token이 재발급 되었습니다.",
             "data": {
                 "access_token": new_access_token
             }
-        }, 200
+        }
+        set_access_cookies(response, new_access_token)
+        return response, 200
     except Exception:
         db.session.rollback()
         raise

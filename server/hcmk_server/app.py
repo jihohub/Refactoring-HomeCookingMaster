@@ -26,7 +26,7 @@ def create_app():
     output: app
     """
     app = Flask(__name__)
-    CORS(app, supports_credentials=True)
+    CORS(app, supports_credentials=True, resources={r'*': {'origins': 'http://127.0.0.1:3000'}})
 
     # Configure Database
     app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
@@ -36,6 +36,14 @@ def create_app():
     app.config["JWT_SECRET_KEY"] = config.key
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = config.access
     app.config["JWT_REFRESH_TOKEN_EXPIRES"] = config.refresh
+
+    app.config["JWT_COOKIE_SECURE"] = False # https를 통해서만 cookie가 갈 수 있는지 (production 에선 True)
+    app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
+    app.config["JWT_ACCESS_COOKIE_PATH"] = "/" # access cookie를 보관할 url (Frontend 기준)
+    app.config["JWT_REFRESH_COOKIE_PATH"] = "/api/auth/refresh" # refresh cookie를 보관할 url (Frontend 기준)
+    # CSRF 토큰 역시 생성해서 쿠키에 저장할지 
+    # (이 경우엔 프론트에서 접근해야하기 때문에 httponly가 아님)
+    app.config["JWT_COOKIE_CSRF_PROTECT"] = False
 
     jwt = JWTManager(app)
 
