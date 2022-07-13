@@ -11,9 +11,18 @@ import {
 } from "react-query";
 import MainRanking from "../components/Ranking/MainRanking";
 import useRankings from "../hooks/Ranking/useRankings";
+import LoadingScreen from "../components/Common/LoadingScreen";
 
 const RankingPage = () => {
-  const { data } = useRankings();
+  const { data, error, isLoading } = useRankings();
+  const Router = useRouter();
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+  if (error) {
+    alert(error.message);
+    Router.push("/");
+  }
   return <MainRanking data={data} />;
 };
 
