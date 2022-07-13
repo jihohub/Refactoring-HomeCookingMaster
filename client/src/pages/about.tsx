@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image"
 import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -7,14 +8,9 @@ import {
   sectionImg,
   sectionOne,
   sectionTwo,
-  goSearch,
-  goSearchTitle,
-  goSearchImg,
 } from "../css/about_css";
 import { Fade } from "react-awesome-reveal";
 import avatar from "../../public/assets/avatar.png";
-import avatar1 from "../../public/assets/avatar_1.png";
-import avatar2 from "../../public/assets/avatar_2.png";
 import logo from "../../public/assets/hcmk_logo.png";
 import ex11 from "../../public/assets/ex11.png";
 import ex12 from "../../public/assets/ex12.png";
@@ -51,7 +47,7 @@ function AboutPage() {
       </section>
       <section css={sectionOne}>
         <Fade>
-          <img src={logo} alt="logo" width="400"></img>
+          <Image src={logo} alt="logo" width="400"></Image>
           <p>
             AI 이미지 처리 기능을 활용해
             <br /> 이미지로 집밥 레시피를 검색할 수 있는 웹 서비스
@@ -68,7 +64,11 @@ function AboutPage() {
       </section>
       <section css={sectionOne}>
         <Fade>
-          <img src={avatar} alt="avatar" style={{ marginTop: "2rem" }}></img>
+          <Image
+            src={avatar}
+            alt="avatar"
+            style={{ marginTop: "2rem" }}
+          ></Image>
           <h2 style={{ fontFamily: "EliceBold" }}>왜 집밥 꼬꼬 선생인가요?</h2>
           <p>
             요리에 서툰 사회 초년생을 병아리에 비유하여
@@ -99,9 +99,8 @@ function AboutPage() {
             <Box sx={{ width: 500, height: 450, marginLeft: "8%" }}>
               <ImageList variant="masonry" cols={3} gap={8}>
                 <ImageListItem key={ex11}>
-                  <img
-                    src={`${ex11}?w=248&fit=crop&auto=format`}
-                    srcSet={`${ex11}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  <Image
+                    src={ex11}
                     alt="ex11"
                     loading="lazy"
                     style={{
@@ -113,10 +112,9 @@ function AboutPage() {
                   />
                 </ImageListItem>
                 <ImageListItem key={ex12}>
-                  <img
-                    src={`${ex12}?w=248&fit=crop&auto=format`}
-                    srcSet={`${ex12}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                    alt="ex11"
+                  <Image
+                    src={ex12}
+                    alt="ex12"
                     loading="lazy"
                     style={{
                       height: "15rem",
@@ -127,10 +125,9 @@ function AboutPage() {
                   />
                 </ImageListItem>
                 <ImageListItem key={ex13}>
-                  <img
-                    src={`${ex13}?w=248&fit=crop&auto=format`}
-                    srcSet={`${ex13}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                    alt="ex11"
+                  <Image
+                    src={ex13}
+                    alt="ex13"
                     loading="lazy"
                     style={{
                       height: "20rem",
@@ -150,7 +147,7 @@ function AboutPage() {
       <section css={sectionOne}>
         <Fade>
           <SearchDiv>
-            <img
+            <Image
               src={review}
               alt="review"
               style={{
@@ -161,7 +158,7 @@ function AboutPage() {
                 boxShadow: "2px 2px 6px gray",
                 marginLeft: "8%",
               }}
-            ></img>
+            ></Image>
             <div
               style={{
                 display: "flex",
@@ -199,7 +196,7 @@ function AboutPage() {
                 쉽게 확인할 수 있습니다.
               </p>
             </div>
-            <img
+            <Image
               src={mypage}
               alt="mypage"
               style={{
@@ -209,92 +206,12 @@ function AboutPage() {
                 boxShadow: "2px 2px 6px gray",
                 marginLeft: "8%",
               }}
-            ></img>
+            ></Image>
           </SearchDiv>
         </Fade>
-      </section>
-      <section css={sectionOne}>
-        <h1 style={{ fontFamily: "EliceBold" }}>
-          이제 원하는 레시피를 검색해보세요!
-        </h1>
-        <p style={{ paddingBottom: "2rem" }}>꼬꼬를 누르면 이동합니다.</p>
-        <div css={goSearch}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              paddingRight: "3rem",
-            }}
-          >
-            <img
-              src={avatar1}
-              alt="avatar"
-              css={goSearchImg}
-              onClick={() => router.push("/result")}
-            ></img>
-            <Typography sx={{ fontSize: "1.5rem", fontFamily: "Elice" }}>
-              텍스트로 검색하기
-            </Typography>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              paddingLeft: "3rem",
-            }}
-          >
-            <img
-              src={avatar2}
-              alt="avatar"
-              css={goSearchImg}
-              onClick={() => router.push("/")}
-            ></img>
-            <Typography sx={{ fontSize: "1.5rem", fontFamily: "Elice" }}>
-              이미지로 검색하기
-            </Typography>
-          </div>
-        </div>
       </section>
     </div>
   );
 }
 
 export default AboutPage;
-
-{
-  /* <Typography
-onClick={() => navigate('/')}
->
-이미지로 검색하기
-</Typography> */
-}
-
-// const ItemBox = styled(Button)({
-//     borderRadius:'30px',
-//     backgroundColor: 'white',
-//     borderColor: '#897A5F',
-//     color:'#897A5F',
-//     width: 150,
-//     height: 50,
-//     margin:'5%',
-//     '&:hover': {
-//         backgroundColor: '#c7b595',
-//         borderColor: '#c7b595',
-//         color: 'white',
-//     },
-// });
-
-// style={{width:'30%', height:'40%'}}
-// {/* <Box sx={{ width: "100vw", margin: "auto 0" }}>
-//                 <Typography
-//                     sx={{
-//                         fontSize: "1.75rem",
-//                         color: "#897A5F",
-//                         fontFamily: "Elice",
-//                         textAlign: "center",
-//                         padding: "35% 0"
-//                     }}
-//                 >
-//                     준비중입니다!
-//                 </Typography>
-//             </Box>   */}
