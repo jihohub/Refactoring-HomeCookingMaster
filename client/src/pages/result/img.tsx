@@ -27,7 +27,7 @@ const Img = () => {
   formData.append("img", image);
   const preview = URL.createObjectURL(image) || null;
   
-  const { isLoading, data } = useSearchImg(formData, random_path);
+  const { data, error, isLoading } = useSearchImg(formData, random_path);
   console.log(data);
   const isValidResult = data?.data.equal_rate[0].rate > 0.7;
   console.log(isValidResult);
@@ -40,6 +40,11 @@ const Img = () => {
     return (
       <LoadingScreen />
     )
+  }
+
+  if (error) {
+    alert(error.message);
+    router.push("/");
   }
 
   return (

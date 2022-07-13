@@ -15,14 +15,17 @@ import LoadingScreen from "../components/Common/LoadingScreen";
 
 const RankingPage = () => {
   const { data, error, isLoading } = useRankings();
-  const Router = useRouter();
+  const router = useRouter();
+
   if (isLoading) {
     return <LoadingScreen />;
   }
+
   if (error) {
     alert(error.message);
-    Router.push("/");
+    router.push("/");
   }
+
   return <MainRanking data={data} />;
 };
 

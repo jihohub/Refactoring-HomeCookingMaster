@@ -13,15 +13,23 @@ import {
 import useSearchStr from "../../hooks/Search/useSearchStr";
 import ItemListResult from "../../components/Result/ItemListResult";
 import TextCard from "../../components/Result/TextCard";
+import LoadingScreen from "../../components/Common/LoadingScreen";
 
 const Str = () => {
   const router = useRouter();
   const { data: food_name } = router.query;
-  const { data } = useSearchStr(food_name);
-  console.log(data);
+  const { data, error, isLoading } = useSearchStr(food_name);
   const isNoResult = data?.data.food_list.length === 0;
   const isMultiResult = data?.data.food_list.length > 1;
-  console.log(isNoResult, isMultiResult);
+  
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
+  if (error) {
+    alert(error.message);
+    router.push("/");
+  }
 
   if (isMultiResult) {
     return data?.data.food_list.map((item) => (
