@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Head from "next/head";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import Layout from "../components/Common/Layout";

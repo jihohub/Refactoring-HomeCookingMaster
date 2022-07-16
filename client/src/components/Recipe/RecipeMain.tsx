@@ -13,7 +13,65 @@ import useRecipeLike from "../../hooks/Recipes/useRecipeLike";
 import { useRouter } from "next/router";
 import styles from "./RecipeMain.module.scss";
 
-function RecipeMain({ data }) {
+type RecipeProps = {
+  data: {
+    recipe_info: {
+      id: number;
+      name: string;
+      likes: number;
+      views: number;
+      img: string;
+      servings: string;
+      difficulty: string;
+      cooking_time: string;
+      food_id: number;
+    };
+    food_info: {
+      id: number;
+      name: string;
+      category_l: string;
+      category_m: string;
+      category_s: string;
+    };
+    ingredient_info: Array<{
+      id: number;
+      name: string;
+      amount: string;
+      recipe_id: number;
+    }>;
+    process_info: Array<{
+      id: number;
+      recipe: string;
+      step: number;
+      img: string;
+      recipe_id: number;
+    }>;
+    post_info: Array<{
+      id: number;
+      post: string;
+      img: string;
+      timestamp: string;
+      user_id: number;
+      nickname: string;
+      profile_img: string;
+      recipe_id: number;
+    }>;
+    other_recipes_info: Array<{
+      id: number;
+      name: string;
+      img: string;
+      views: number;
+      likes: number;
+      servings: string;
+      difficulty: string;
+      cooking_time: string;
+      food_id: number;
+    }>;
+    did_u_liked: boolean;
+  } | undefined;
+};
+
+function RecipeMain({ data }: RecipeProps) {
   const router = useRouter();
   const { recipe_id } = router.query;
   const loggedin = useRecoilValue(loginInfo);
@@ -144,9 +202,7 @@ function RecipeMain({ data }) {
               className={styles.progress__image}
               alt="step image"
             />
-            <p className={styles.progress__text}>
-              {`${item.recipe}`}
-            </p>
+            <p className={styles.progress__text}>{`${item.recipe}`}</p>
           </div>
         </div>
       ))}

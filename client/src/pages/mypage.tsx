@@ -6,6 +6,7 @@ import MyScrap from "../components/Mypage/myScrap";
 import useGetMypage from "../hooks/Mypage/useMypage";
 import { useRecoilValue } from "recoil";
 import { loginInfo } from "../atom/loginInfo";
+import HeadMeta from "../components/Common/HeadMeta";
 
 function MyPage() {
   const router = useRouter();
@@ -20,25 +21,35 @@ function MyPage() {
   const { user_info, liked_recipe, my_post } = data?.data || {};
 
   return (
-    isLoggedIn && 
-      <div
-        style={{
-          marginTop: "10rem",
-          display: "flex",
-          alignContent: "center",
-          justifyContent: "center",
-          marginBottom: "10rem",
-        }}
-      >
+    isLoggedIn && (
+      <>
+        <HeadMeta
+          title="마이페이지"
+          url="http://www.hcmk.com/mypage"
+        />
         <div
-          style={{ backgroundColor: "white", width: "70%", paddingTop: "5rem" }}
+          style={{
+            marginTop: "10rem",
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "center",
+            marginBottom: "10rem",
+          }}
         >
-          <IntroMe data={user_info} />
-          <MyPost data={my_post} />
-          <MyScrap data={liked_recipe} />
+          <div
+            style={{
+              backgroundColor: "white",
+              width: "70%",
+              paddingTop: "5rem",
+            }}
+          >
+            <IntroMe data={user_info} />
+            <MyPost data={my_post} />
+            <MyScrap data={liked_recipe} />
+          </div>
         </div>
-      </div>
-    
+      </>
+    )
   );
 }
 

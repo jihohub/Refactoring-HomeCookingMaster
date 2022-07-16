@@ -17,20 +17,26 @@ import RecipeReviews from "../../components/Recipe/RecipeReviews";
 import LoadingScreen from "../../components/Common/LoadingScreen";
 import { useRecoilValue } from "recoil";
 import { loginInfo } from "../../atom/loginInfo";
-
+import HeadMeta from "../../components/Common/HeadMeta";
 
 const Recipe = () => {
   const router = useRouter();
   const { recipe_id } = router.query;
   const loggedin = useRecoilValue(loginInfo);
   const { isLoading, data } = useRecipe(recipe_id, loggedin.user_id);
-  
+
   if (isLoading) {
     return <LoadingScreen />;
   }
 
   return (
     <>
+      <HeadMeta
+        title={data?.data.recipe_info?.name}
+        description={data?.data.recipe_info?.name}
+        url={`http://www.hcmk.com/recipe/${recipe_id}`}
+        image={data?.data.recipe_info?.img}
+      />
       <RecipeMain data={data?.data} />
       <RecipeReviews data={data?.data} />
       <RecipeReviewForm />

@@ -15,6 +15,7 @@ import {
 import useSearchImg from "../../hooks/Search/useSearchImg";
 import TextCard from "../../components/Result/TextCard";
 import LoadingScreen from "../../components/Common/LoadingScreen";
+import HeadMeta from "../../components/Common/HeadMeta";
 
 const Img = () => {
   const router = useRouter();
@@ -49,6 +50,10 @@ const Img = () => {
 
   return (
     <>
+      <HeadMeta
+        title="이미지 검색결과"
+        url={`http://www.hcmk.com/result/img`}
+      />
       {!isValidResult && (
         <>
           {preview && <img src={preview} />}

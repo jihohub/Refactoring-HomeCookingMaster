@@ -12,6 +12,7 @@ import {
 import MainRanking from "../components/Ranking/MainRanking";
 import useRankings from "../hooks/Ranking/useRankings";
 import LoadingScreen from "../components/Common/LoadingScreen";
+import HeadMeta from "../components/Common/HeadMeta";
 
 const RankingPage = () => {
   const { data, error, isLoading } = useRankings();
@@ -26,7 +27,16 @@ const RankingPage = () => {
     router.push("/");
   }
 
-  return <MainRanking data={data} />;
+  return (
+    <>
+      <HeadMeta
+        title="오늘의 레시피 랭킹"
+        description="오늘 가장 인기 많은 레시피들을 확인해보세요."
+        url="http://www.hcmk.com/ranking"
+      />
+      <MainRanking data={data} />
+    </>
+  )
 };
 
 const getServerSideProps: GetServerSideProps = async (context) => {

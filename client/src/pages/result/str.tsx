@@ -14,6 +14,7 @@ import useSearchStr from "../../hooks/Search/useSearchStr";
 import ItemListResult from "../../components/Result/ItemListResult";
 import TextCard from "../../components/Result/TextCard";
 import LoadingScreen from "../../components/Common/LoadingScreen";
+import HeadMeta from "../../components/Common/HeadMeta";
 
 const Str = () => {
   const router = useRouter();
@@ -33,15 +34,37 @@ const Str = () => {
 
   if (isMultiResult) {
     return data?.data.food_list.map((item) => (
-      <TextCard data={item} />
+      <>
+        <HeadMeta
+          title={`${food_name} 검색결과`}
+          url={`http://www.hcmk.com/result/str?data=${food_name}`}
+        />
+        <TextCard data={item} />
+      </>
     ));
   }
 
   if (isNoResult) {
-    return <a>검색 결과가 없습니다.</a>
+    return (
+      <>
+        <HeadMeta
+          title={`${food_name} 검색결과`}
+          url={`http://www.hcmk.com/result/str?data=${food_name}`}
+        />
+        <a>검색 결과가 없습니다.</a>
+      </>
+    )
   }
 
-  return <ItemListResult data={data?.data} />;
+  return (
+    <>
+      <HeadMeta
+        title={`${food_name} 검색결과`}
+        url={`http://www.hcmk.com/result/str?data=${food_name}`}
+      />
+      <ItemListResult data={data?.data} />
+    </>
+  );
 };
 
 const getServerSideProps: GetServerSideProps = async (context) => {

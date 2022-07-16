@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "../components/Login/LoginForm";
-import { login_all, login_title } from "../css/login_css";
+import HeadMeta from "../components/Common/HeadMeta";
 
 function LoginPage() {
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <>
+      <HeadMeta title="로그인" url="http://www.hcmk.com/login" />
+      <div style={{ width: "100vw", height: "100vh" }}>
         <LoginForm />
-    </div>
+      </div>
+    </>
   );
 }
 

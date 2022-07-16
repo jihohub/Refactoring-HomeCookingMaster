@@ -11,7 +11,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <title>집밥꼬꼬선생</title>
           <meta charSet="utf-8" />
         </Head>
         <body>
