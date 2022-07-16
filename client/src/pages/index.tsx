@@ -23,6 +23,7 @@ const IndexPage = () => {
         </div>
         <Image
           src={main}
+          alt="background image"
           layout="fill"
           objectFit="cover"
           objectPosition="center"

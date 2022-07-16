@@ -27,34 +27,6 @@ import { useRecoilValue, useResetRecoilState } from "recoil";
 import { loginInfo } from "../../atom/loginInfo";
 import useLogout from "../../hooks/Auth/useLogout";
 
-// const styles = {
-//   "&.MuiFab-secondary": {
-//     backgroundColor: "#897A5F",
-//   },
-// };
-
-const pages = [
-  {
-    text: "텍스트검색",
-    path: "/result",
-  },
-  {
-    text: "어바웃",
-    path: "/about",
-  },
-];
-
-const notLoggedIn = [
-  {
-    text: "회원가입",
-    path: "register/termsNConditions",
-  },
-  {
-    text: "로그인",
-    path: "/login",
-  },
-];
-
 const Header = () => {
   const router = useRouter();
   const loggedin = useRecoilValue(loginInfo);
@@ -69,15 +41,6 @@ const Header = () => {
     setActive(!isActive);
   };
 
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
-  const closeMenu = () => {
-    setOpen(false);
-  };
-
   const handleSignout = (e: any): void => {
     const access_token = loggedin.access_token;
     e.preventDefault();
@@ -90,7 +53,7 @@ const Header = () => {
     <nav className={styles.navbar}>
       <div className="navbar__logo">
         <Link href="/">
-          <Image src={finalLogo} alt="main_logo" height="50%" width="100%" />
+          <Image src={finalLogo} alt="main_logo" height={50} width={100} />
         </Link>
       </div>
       <ul
