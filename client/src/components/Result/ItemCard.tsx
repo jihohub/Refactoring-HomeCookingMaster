@@ -1,11 +1,9 @@
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./ItemCard.module.scss";
 
 function ItemCard(props: any) {
   const router = useRouter();
-  console.log(props);
   const { cooking_time, difficulty, food_id, id, img, likes, name, servings, views } = props?.data || {};
   const handleClick = (): void => {
     router.push(`/recipe/${id}`);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, IconButton, Divider, Popover } from "@mui/material";
+import { IconButton, Divider, Popover } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import AlarmIcon from "@mui/icons-material/Alarm";
 import QuizIcon from "@mui/icons-material/Quiz";

@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-// import { getMyInfo } from "../../modules/myInfo";
-// import { getNewAccess } from "../../modules/newToken";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
-// import { editImg } from "../../modules/mypageEditImgSlice";
 import Modal from "@mui/material/Modal";
-// import { profile_img, option_box, file_select } from "../../css/register_css";
-
-// import {avatar} from '../../assets/mainAvatar.png'
 import { useRecoilValue } from "recoil";
 import { loginInfo } from "../../atom/loginInfo";
 import useEditImg from "../../hooks/Mypage/useEditimg";

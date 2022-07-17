@@ -1,13 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import {
-  dehydrate,
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
 import styles from "./index.module.scss";
 import main from "../../public/assets/main.png";
 import HeadMeta from "../components/Common/HeadMeta";

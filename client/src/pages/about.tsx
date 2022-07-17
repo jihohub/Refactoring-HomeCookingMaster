@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image"
 import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
@@ -18,10 +18,7 @@ import ex13 from "../../public/assets/ex13.png";
 import review from "../../public/assets/newReview.jpg";
 import mypage from "../../public/assets/mypage.png";
 import { SearchDiv } from "../css/about_css";
-import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
-import scroll from "../../../public/assets/scroll.png";
 import { IoIosArrowDown } from "react-icons/io";
 
 function AboutPage() {

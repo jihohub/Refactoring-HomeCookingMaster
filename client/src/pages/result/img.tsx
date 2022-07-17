@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import { searchedImage } from "../../atom/searchedImage";
 import {

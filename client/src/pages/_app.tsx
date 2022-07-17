@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import Head from "next/head";
+import React from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import Layout from "../components/Common/Layout";
-
-// import "../styles.module.css";
-
-import type { ReactElement, ReactNode } from "react";
-import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import "./styles.scss";
 

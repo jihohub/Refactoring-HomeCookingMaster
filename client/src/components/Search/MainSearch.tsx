@@ -1,14 +1,7 @@
 import React from "react";
 import styles from "./MainSearch.module.scss";
 import SearchImageBox from "./SearchImageBox";
-import {
-  Box,
-  Typography,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-} from "@mui/material";
-import SearchBar from "./SearchBar";
+import { Typography } from "@mui/material";
 
 const MainSearch = () => {
   return (

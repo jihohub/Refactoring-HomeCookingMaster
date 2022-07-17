@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Dropzone from "react-dropzone";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
@@ -26,12 +26,6 @@ function SearchImageBox() {
               style={{ height: "100%", display: "table", margin: "auto" }}
             >
               <input {...getInputProps()} />
-              {/* <Box sx={{ display: "table-cell", verticalAlign: "middle" }}>
-                <AddPhotoAlternate sx={{ fontSize: "60px" }} />
-                <Typography sx={{ fontFamily: "Elice" }}>
-                  드래그 앤 드롭으로 이미지 파일을 추가하세요.
-                </Typography>
-              </Box> */}
               <div className={styles.box}>
                 <AddPhotoAlternate sx={{ fontSize: "60px" }} />
                 <p>

@@ -1,11 +1,4 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-} from "@mui/material";
 import SearchBar from "../../components/Search/SearchBar";
 import HeadMeta from "../../components/Common/HeadMeta";
 
