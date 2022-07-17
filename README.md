@@ -6,8 +6,8 @@
     - [wiki 페이지 바로가기 (링크)](https://github.com/jihohub/Refactoring-HomeCookingMaster/wiki)  
 - 진행상황
     - Next.JS 도입  
-    SEO 개선 (구글 라이트하우스 SEO 점수 70 -> 91 지속적 개선 중)  
-    초기 렌더링속도 개선 (FCP 2.0s -> 0.3s, LCP 4.1s -> 3.1s, Speed Index 2.0s -> 0.7s)  
+    SEO 개선 (크롬 라이트하우스 SEO 점수 70 -> 91 지속적 개선 중)  
+    초기 렌더링속도 개선 (크롬 라이트하우스 FCP 2.0s -> 0.3s, LCP 4.1s -> 3.1s, Speed Index 2.0s -> 0.7s)  
     각 페이지에 적절한 SSR과 SSG 적용  
     - React-Query 도입  
     비동기통신을 위해 비대해진 Redux-toolkit에서 탈피  
