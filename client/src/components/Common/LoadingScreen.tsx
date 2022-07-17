@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import loading from "../../../public/assets/loading2.gif";
+import loading from "../../../public/assets/loading.gif";
 
 const LoadingScreen = () => {
 

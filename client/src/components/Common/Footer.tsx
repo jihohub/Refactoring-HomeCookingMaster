@@ -1,8 +1,4 @@
-import React, { useState } from "react";
-import Image from "next/image"
-import { Box, Typography } from "@mui/material";
-import avatar from "../../../public/assets/avatar.png";
-import { styled } from "@mui/material/styles";
+import React from "react";
 import styles from "./Footer.module.scss";
 
 const Footer = () => {

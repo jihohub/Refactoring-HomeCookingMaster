@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { loign_box, input_box } from "../../css/login_css";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import useLogin from "../../hooks/Auth/useLogin";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
 import Link from "next/link";
 import finalLogo from "../../../public/assets/finalLogo.png";
 import styles from "./LoginForm.module.scss";
-
-const OkButton = styled(Button)({
-  backgroundColor: "#897A5F",
-  borderColor: "#897A5F",
-  "&:hover": {
-    backgroundColor: "#c7b595",
-    borderColor: "#c7b595",
-  },
-});
 
 function LoginForm() {
   const { mutate: login, isLoading: loginLoading } = useLogin();
@@ -41,19 +28,21 @@ function LoginForm() {
           <input
             type="text"
             placeholder="이메일주소"
-            {...register("email")}
+            {...register("email", { required: "이메일은 필수입니다." })}
             className={styles.loginform__email}
           />
-
+          {errors.email && (
+            <p className={styles.loginform__error}>{errors.email.message}</p>
+          )}
           <input
             type="password"
             placeholder="비밀번호"
-            {...register("password", { required: true })}
+            {...register("password", { required: "비밀번호는 필수입니다." })}
             className={styles.loginform__password}
           />
-          {/* {errors.exampleRequired && (
-        <span css={styles.loginform__errormessage}>This field is required</span>
-      )} */}
+          {errors.password && (
+            <p className={styles.loginform__error}>{errors.password.message}</p>
+          )}
 
           <input
             type="submit"
