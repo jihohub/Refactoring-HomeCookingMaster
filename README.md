@@ -6,23 +6,26 @@
     - [wiki 페이지 바로가기 (링크)](https://github.com/jihohub/Refactoring-HomeCookingMaster/wiki)  
 - 진행상황
     - Next.JS 도입  
-    SEO 개선 (크롬 라이트하우스 SEO 점수 70 -> 91 지속적 개선 중)  
-    초기 렌더링속도 개선 (크롬 라이트하우스 FCP 2.0s -> 0.3s, LCP 4.1s -> 3.1s, Speed Index 2.0s -> 0.7s)  
-    각 페이지에 적절한 SSR과 SSG 적용  
+        - SEO 개선  
+        크롬 라이트하우스 SEO 점수 70 -> 91 지속적 개선 중  
+        - 초기 렌더링속도 개선  
+        크롬 라이트하우스 First Contentful Paint 2.0s -> 0.3s  
+        Largest Contentful Paint 4.1s -> 3.1s, Speed Index 2.0s -> 0.7s
+        - 각 페이지의 성격별 적절한 SSR, SSG 적용  
     - React-Query 도입  
-    비동기통신을 위해 비대해진 Redux-toolkit에서 탈피  
-    전역상태관리에서 비동기통신 분리  
-    적절한 Caching과 Refetching으로 최신 데이터 유지  
+        - 비동기통신을 위해 비대해진 Redux-toolkit에서 탈피  
+        - 전역상태관리에서 비동기통신 분리  
+        - 적절한 Caching과 Refetching으로 최신 데이터 유지  
     - Recoil 도입  
-    기존 프로젝트에 도입했었던 Redux-toolkit에 비해 적은 보일러플레이트  
-    추후 전역관리할 상태가 늘어날 때에도 적은 코드만 추가 가능  
+        - 기존 프로젝트에 도입했었던 Redux-toolkit에 비해 적은 보일러플레이트  
+        - 추후 전역관리할 상태 추가시 적은 코드만 추가 가능  
     - SASS Module 적용  
-    CSS-in-JS에 비해 렌더링 속도가 빠른 CSS-in-CSS 적용  
-    FOUC (Flash of unstyled content) 방지  
-    Module을 통해 CSS 클래스 중첩 방지  
-    - 반응형 디자인 강화  
-    Media Query 사용  
-    
+        - CSS-in-JS에 비해 렌더링 속도가 빠른 CSS-in-CSS 적용  
+        - FOUC (Flash of unstyled content) 방지  
+        - Module을 통해 CSS 클래스 중첩 방지  
+    - MISC  
+         - 웹팩, 바벨 설정  
+         - 미흡했던 반응형 디자인 강화    
 - 계획
     - 웹팩과 바벨 설정
     - 코딩 인벤션 : Airbnb 스타일 가이드
