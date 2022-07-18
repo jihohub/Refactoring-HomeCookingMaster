@@ -19,10 +19,10 @@
     - Recoil 도입  
         - 기존 프로젝트에 도입했었던 Redux-toolkit에 비해 적은 보일러플레이트  
         - 추후 전역관리할 상태 추가시 적은 코드만 추가 가능  
-    - SASS Module 적용  
+    - SASS with CSS Module 적용  
         - CSS-in-JS에 비해 렌더링 속도가 빠른 CSS-in-CSS 적용  
         - FOUC (Flash of unstyled content) 방지  
-        - Module을 통해 CSS 클래스 중첩 방지  
+        - CSS Module을 통해 CSS 클래스 중첩 방지  
     - MISC  
          - 웹팩, 바벨 설정  
          - 미흡했던 반응형 디자인 강화    
