@@ -11,7 +11,7 @@
         - 초기 렌더링속도 개선  
         크롬 라이트하우스 First Contentful Paint 2.0s -> 0.3s  
         Largest Contentful Paint 4.1s -> 3.1s, Speed Index 2.0s -> 0.7s
-        - 각 페이지의 성격별 적절한 SSR, SSG 적용  
+        - 각 페이지의 성격별로 적절한 SSR, SSG 적용  
     - React-Query 도입  
         - 비동기통신을 위해 비대해진 Redux-toolkit에서 탈피  
         - 전역상태관리에서 비동기통신 분리  
